@@ -1,0 +1,341 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useNavigate } from 'react-router';
+import { ChevronDown, X, MessageCircle, Menu } from 'lucide-react';
+import svgPaths from "../imports/svg-o5h25uox4w";
+import imgImageDumriCollege from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
+
+interface CarouselHeaderProps {
+  onMenuClick?: () => void;
+}
+
+interface MenuItem {
+  label: string;
+  href?: string;
+  submenu?: { label: string; href: string }[];
+  highlight?: boolean;
+}
+
+const menuItems: MenuItem[] = [
+  {
+    label: 'About Us',
+    submenu: [
+      { label: 'History', href: '/history' },
+      { label: 'Administration', href: '/administration' },
+      { label: 'Campus Life', href: '/campus-life' },
+    ],
+  },
+  {
+    label: 'Academics',
+    submenu: [
+      { label: 'Programs', href: '/programs' },
+      { label: 'All Faculties', href: '/faculty' },
+      { label: 'Academic Calendar', href: '/academic-calendar' },
+      { label: 'Course Catalog', href: '/course-catalog' },
+    ],
+  },
+  {
+    label: 'Research',
+    href: '/research',
+  },
+  {
+    label: 'Library',
+    submenu: [
+      { label: 'Central Library', href: '/library' },
+      { label: 'Digital Library Portal', href: '/student/library' },
+    ],
+  },
+  {
+    label: 'Student Life',
+    submenu: [
+      { label: 'Campus Life', href: '/campus-life' },
+      { label: 'Student Portal', href: '/student/dashboard' },
+      { label: 'Scholarships', href: '/scholarships' },
+    ],
+  },
+  {
+    label: 'E - Services',
+    submenu: [
+      { label: 'Student Login', href: '/studentlogin' },
+      { label: 'Staff Login', href: '/stafflogin' },
+      { label: 'Track Application', href: '/student/track-application' },
+      { label: 'Fee Payment', href: '/student/fees' },
+    ],
+  },
+  {
+    label: 'Campuses',
+    highlight: true,
+    submenu: [
+      { label: 'About Dumri College', href: '/about' },
+      { label: 'Gallery', href: '/gallery' },
+    ],
+  },
+  {
+    label: 'Visitors',
+    submenu: [
+      { label: 'Contact Us', href: '/contact' },
+      { label: 'FAQ', href: '/faq' },
+      { label: 'International Students', href: '/international-students' },
+    ],
+  },
+];
+
+function HamburgerIcon() {
+  return (
+    <div className="h-[19px] overflow-clip relative shrink-0 w-full">
+      <div className="absolute inset-[0_0_1.75%_0]">
+        <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 21 18.6667">
+          <path d={svgPaths.pbe6f180} fill="#030303" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+    onMenuClick?.();
+  };
+
+  const handleNavigation = (href: string) => {
+    navigate(href);
+    setIsMenuOpen(false);
+    setExpandedItem(null);
+  };
+
+  const toggleExpand = (label: string) => {
+    setExpandedItem(expandedItem === label ? null : label);
+  };
+
+  return (
+    <>
+      {/* Header overlay on carousel - Hidden when scrolled */}
+      {!isScrolled && (
+        <div className="absolute top-0 left-0 right-0 z-30 pointer-events-none">
+          {/* White diagonal background on left */}
+          <div className="absolute h-[108px] left-0 top-0 w-[354px] pointer-events-auto">
+            <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 354 108">
+              <path d="M0 108V0H354L265.57 108H0Z" fill="white" />
+            </svg>
+          </div>
+
+          {/* College Logo */}
+          <div 
+            className="absolute left-0 size-[90px] top-[11px] pointer-events-auto cursor-pointer"
+            onClick={() => navigate('/')}
+          >
+            <img 
+              alt="Dumri College Logo" 
+              className="absolute inset-0 max-w-none object-cover size-full" 
+              src={imgImageDumriCollege} 
+            />
+          </div>
+
+          {/* College Name */}
+          <div 
+            className="absolute font-['Alice',serif] h-[84px] leading-[20px] left-[107px] not-italic text-[40px] text-black top-[17px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
+            onClick={() => navigate('/')}
+          >
+            <p className="mb-0">Dumri </p>
+            <p>
+              <br aria-hidden="true" />
+              College
+            </p>
+          </div>
+
+          {/* Menu Button - Top Right */}
+          <div className="absolute right-8 top-[22px] pointer-events-auto">
+            <motion.button
+              onClick={handleMenuClick}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white h-[39px] rounded-[7px] w-[145px] flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-shadow"
+            >
+              <div className="w-[21px]">
+                <HamburgerIcon />
+              </div>
+              <span className="font-['Alice',serif] text-[24px] text-black">Menu</span>
+            </motion.button>
+          </div>
+        </div>
+      )}
+
+      {/* Fixed Header - Shown when scrolled */}
+      <AnimatePresence>
+        {isScrolled && (
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -100, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md"
+          >
+            <div className="max-w-[1920px] mx-auto px-8 py-3 flex items-center justify-between">
+              {/* Logo */}
+              <div 
+                className="flex items-center cursor-pointer"
+                onClick={() => navigate('/')}
+              >
+                <img 
+                  alt="Dumri College Logo" 
+                  className="w-14 h-14 object-cover" 
+                  src={imgImageDumriCollege} 
+                />
+              </div>
+
+              {/* Menu Button */}
+              <motion.button
+                onClick={handleMenuClick}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center gap-3 px-5 py-2 rounded-md border border-gray-300 hover:border-[#C9962B] transition-colors"
+              >
+                <span className="text-[#C9962B] font-semibold tracking-wide uppercase">Menu</span>
+                <Menu className="w-5 h-5 text-gray-700" />
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-[100]"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="absolute right-0 top-0 h-full w-[438px] bg-white shadow-2xl overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center px-8 pt-8 pb-6">
+                <h2 className="text-2xl font-normal text-black tracking-wide">MAIN MENU</h2>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-gray-600 hover:text-black transition-colors"
+                >
+                  <X className="w-7 h-7" />
+                </button>
+              </div>
+
+              {/* Top Buttons */}
+              <div className="px-7 mb-6">
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => handleNavigation('/studentlogin')}
+                    className="bg-[#0E4C8F] hover:bg-[#0d4280] text-white py-4 px-4 rounded-lg font-medium text-sm tracking-wide transition-colors"
+                  >
+                    STUDENT LOGIN
+                  </button>
+                  <button
+                    onClick={() => handleNavigation('/stafflogin')}
+                    className="bg-[#2B9EF6] hover:bg-[#1e8fe6] text-white py-4 px-4 rounded-lg font-medium text-sm tracking-wide transition-colors"
+                  >
+                    STAFF LOGIN
+                  </button>
+                </div>
+              </div>
+
+              {/* Menu Items */}
+              <nav className="px-7">
+                {menuItems.map((item, index) => (
+                  <div key={index} className="border-b border-gray-200 last:border-b-0">
+                    <div className="flex items-center justify-between py-4">
+                      <button
+                        onClick={() => {
+                          if (item.submenu) {
+                            toggleExpand(item.label);
+                          } else if (item.href) {
+                            handleNavigation(item.href);
+                          }
+                        }}
+                        className={`flex-1 text-left text-lg ${
+                          item.highlight ? 'text-[#C9962B]' : 'text-black'
+                        }`}
+                      >
+                        {item.label}
+                      </button>
+                      {item.submenu && (
+                        <motion.button
+                          onClick={() => toggleExpand(item.label)}
+                          animate={{ rotate: expandedItem === item.label ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="w-10 h-10 flex items-center justify-center bg-[#C9962B] rounded-md hover:bg-[#b58525] transition-colors"
+                        >
+                          <ChevronDown className="w-5 h-5 text-white" />
+                        </motion.button>
+                      )}
+                    </div>
+                    
+                    {/* Submenu */}
+                    <AnimatePresence>
+                      {item.submenu && expandedItem === item.label && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pb-3 pl-4 space-y-2">
+                            {item.submenu.map((subitem, subindex) => (
+                              <button
+                                key={subindex}
+                                onClick={() => handleNavigation(subitem.href)}
+                                className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#2563EB] hover:bg-gray-50 rounded transition-colors"
+                              >
+                                {subitem.label}
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </nav>
+
+              {/* Chat Widget */}
+              <div className="fixed bottom-8 right-[470px] z-[110]">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-[#2B9EF6] text-white rounded-full p-4 shadow-lg relative"
+                >
+                  <MessageCircle className="w-8 h-8" />
+                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    1
+                  </span>
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

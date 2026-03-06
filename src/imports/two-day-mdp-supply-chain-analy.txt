@@ -1,0 +1,548 @@
+// +91 123 456 7890
+color: 'white', fontSize: 14, fontFamily: 'Inter', fontWeight: '400', lineHeight: 20, wordWrap: 'break-word'
+---
+// info@dumricollege.edu
+color: 'white', fontSize: 14, fontFamily: 'Inter', fontWeight: '400', lineHeight: 20, wordWrap: 'break-word'
+---
+// Login
+color: 'white', fontSize: 14, fontFamily: 'Inter', fontWeight: '400', lineHeight: 20, wordWrap: 'break-word'
+---
+// Apply Now
+color: 'white', fontSize: 14, fontFamily: 'Inter', fontWeight: '400', lineHeight: 20, wordWrap: 'break-word'
+---
+// Dumri College
+color: '#0F172B', fontSize: 20, fontFamily: 'Inter', fontWeight: '700', lineHeight: 28, wordWrap: 'break-word'
+---
+// Excellence in Education
+color: '#45556C', fontSize: 12, fontFamily: 'Inter', fontWeight: '400', lineHeight: 16, wordWrap: 'break-word'
+---
+// Home
+color: '#314158', fontSize: 16, fontFamily: 'Inter', fontWeight: '500', lineHeight: 24, wordWrap: 'break-word'
+---
+// About
+color: '#314158', fontSize: 16, fontFamily: 'Inter', fontWeight: '500', lineHeight: 24, wordWrap: 'break-word'
+---
+// Academics
+color: '#314158', fontSize: 16, fontFamily: 'Inter', fontWeight: '500', lineHeight: 24, wordWrap: 'break-word'
+---
+// Gallery
+color: '#314158', fontSize: 16, fontFamily: 'Inter', fontWeight: '500', lineHeight: 24, wordWrap: 'break-word'
+---
+// Contact
+color: '#314158', fontSize: 16, fontFamily: 'Inter', fontWeight: '500', lineHeight: 24, wordWrap: 'break-word'
+---
+// Register Now:<br/>Christ University Online Programmes
+color: 'var(--color-white-solid, white)', fontSize: 21, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Know More
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Find your Degree
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// CHRIST University offers rigorous<br/>programs, valuable resources, and<br/>countless opportunities that will enable<br/>you to pursue your desired course of<br/>study..
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// DOCTORAL (PhD)
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// POSTGRADUATE
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// UNDERGRADUATE
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// ONLINE DEGREE
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// Search by:  Keyword  course
+color: 'var(--color-grey-20, #333333)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', wordWrap: 'break-word'
+---
+// Campus 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Life
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Placements
+color: 'var(--color-black-solid, black)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Christ<br/>Consulting
+color: 'var(--color-black-solid, black)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Admissions
+color: 'var(--color-black-solid, black)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Health<br/>Services
+color: 'var(--color-black-solid, black)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Examinations
+color: 'var(--color-black-solid, black)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Student<br/>Council
+color: 'var(--color-black-solid, black)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Centres &amp;<br/>Cells
+color: 'var(--color-black-solid, black)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Campus 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Events
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Two-day MDP on Supply<br/>Chain Analytics
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// 12 Mar - 13 Mar
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// 09:00 AM - 05:00 AM
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Bangalore Central<br/>Campus
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Mar 12 2026
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Online Public Lecture
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// 02 Mar
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// 05:00 AM - 06:30 AM
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Bangalore Central<br/>Campus
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Mar 02 2026
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Expert Session on The Art of<br/>Global Luxury Event<br/>Management
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// 02 Mar
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// 08:00 AM - 09:00 AM
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Bangalore Central<br/>Campus
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Mar 02 2026
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// View All Events
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Vignette 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Windows
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Tell a Tale
+color: 'var(--color-orange-38, #C07E02)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// Metamorphosis
+color: 'var(--color-orange-38, #C07E02)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// Raconteur
+color: 'var(--color-orange-38, #C07E02)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// Lore to Lure
+color: 'var(--color-orange-38, #C07E02)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// Fame to Frame
+color: 'var(--color-orange-38, #C07E02)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 20.40, wordWrap: 'break-word'
+---
+// University 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Ranking
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// The WORLD<br/>UNIVERSITY<br/>RANKINGS for<br/>INNOVATION
+color: 'var(--color-black-solid, black)', fontSize: 22, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 31, wordWrap: 'break-word'
+---
+// View More
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// ‹
+color: 'var(--color-black-solid, black)', fontSize: 35, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// ›
+color: 'var(--color-black-solid, black)', fontSize: 35, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// University 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Achievements
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Faculty
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Student
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// University
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Distinguished Service Award
+color: 'var(--color-black-solid, black)', fontSize: 21, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 28, wordWrap: 'break-word'
+---
+// Dr. Fr Joseph C C, Vice Chancellor<br/>Distinguished Service Award during the 55th Annual<br/>Family Day 2025 - “A Day to Reunite, Reflect, and<br/>Reignite”
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// ‹
+color: 'var(--color-white-solid, white)', fontSize: 33, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// ›
+color: 'var(--color-white-solid, white)', fontSize: 33, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// View All
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Resource 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Facilities
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Journals
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Learning Environmen
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Hostel and Dinin
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Research Facilitie
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Newsletters
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Accolade Chronicles
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Library
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Magazines
+color: 'var(--color-black-solid, black)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Careers 
+color: 'var(--color-white-solid, white)', fontSize: 19, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 28.50, wordWrap: 'break-word'
+---
+// (Job Openings) 
+color: 'var(--color-white-solid, white)', fontSize: 16.60, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24.94, wordWrap: 'break-word'
+---
+// Campus 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// News
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Call for Field Investigator Position in ICSSR<br/>Funded Project
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 33, wordWrap: 'break-word'
+---
+// Call for Field Investigator Position in ICSSR<br/>Funded Project
+color: 'var(--color-grey-40, #666666)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 30, wordWrap: 'break-word'
+---
+// Call for Field Investigator Position in ICSSR<br/>Funded Project
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 33, wordWrap: 'break-word'
+---
+// Call for Field Investigator Position in ICSSR<br/>Funded Project
+color: 'var(--color-grey-40, #666666)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 30, wordWrap: 'break-word'
+---
+// View All
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Eminent<br/>
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Visitors
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Christ University hosts<br/>distinguished guests from<br/>academia, industry, and the arts,<br/>inspiring students and faculty<br/>through insightful interactions and<br/>discussions.
+color: 'var(--color-black-solid, black)', fontSize: 15, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 26, wordWrap: 'break-word'
+---
+// His Holiness the<br/>Dalai Lama
+color: 'var(--color-white-solid, white)', fontSize: 20, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Awarded the Nobel<br/>Peace Prize
+color: 'var(--color-white-solid, white)', fontSize: 15, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Spiritual Leader of<br/>Tibetan Buddhism
+color: 'var(--color-white-solid, white)', fontSize: 15, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Sadhguru
+color: 'var(--color-black-solid, black)', fontSize: 20, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Padma Vibhushan |<br/>Indira Gandhi<br/>Paryavaran Puraskar
+color: 'var(--color-black-solid, black)', fontSize: 15, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Indian Spiritual Guru<br/>and Founder of the<br/>Isha Foundation
+color: 'var(--color-black-solid, black)', fontSize: 15, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// S. S. Rajamouli
+color: 'var(--color-white-solid, white)', fontSize: 20, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Padma Shri
+color: 'var(--color-white-solid, white)', fontSize: 15, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Indian Filmmaker
+color: 'var(--color-white-solid, white)', fontSize: 15, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// ‹
+color: 'var(--color-white-solid, white)', fontSize: 35, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// ›
+color: 'var(--color-white-solid, white)', fontSize: 35, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Where Ideas Ignite 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// : Christ<br/>Labs
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// There are multiple labs affiliated to Schools on each campus of CHRIST. There are<br/>science labs, computer labs, engineering labs, language labs, performance<br/>studios, Media labs, incubation and innovation Centres to fortify the research<br/>culture.
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// View All
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Recognitions 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Accreditations
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// QS World University<br/>Rankings
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// QS World<br/>Sustainability<br/>Rankings
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// THE Subject<br/>Rankings 2026
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// World University<br/>Rankings Asia 2026
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// The World<br/>University Ranking<br/>for Innovation 2025
+color: 'var(--color-black-solid, black)', fontSize: 17, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Panoramic 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Galleria
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// View All Photos
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// |  NURTURING EXCELLENCE<br/>
+color: '#F0FFF0', fontSize: 23.80, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 38, wordWrap: 'break-word'
+---
+// |  ENRICHING LIVES<br/>
+color: '#FFD700', fontSize: 23.80, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 38, wordWrap: 'break-word'
+---
+// |  TRANSFORMING FUTURE
+color: '#DDA0DD', fontSize: 23.80, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 38, wordWrap: 'break-word'
+---
+// Experience Christ...
+color: 'var(--color-white-solid, white)', fontSize: 38.90, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 46.66, wordWrap: 'break-word'
+---
+// School of Architecture
+color: 'var(--color-white-solid, white)', fontSize: 29, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 34.80, wordWrap: 'break-word'
+---
+// The programmes offer deep insight into the built environment<br/>through ecological, social, artistic, and technological lenses.
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Explore
+color: 'var(--color-white-solid, white)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', textTransform: 'uppercase', lineHeight: 24, letterSpacing: 1, wordWrap: 'break-word'
+---
+// International Students
+color: 'var(--color-white-solid, white)', fontSize: 28, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 33.60, wordWrap: 'break-word'
+---
+// The University welcomes students from all over the<br/>world to a vibrant environment of religious and racial<br/>harmony, secularism and cultural diversity
+color: 'var(--color-white--80%, rgba(255, 255, 255, 0.80))', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Know mor
+color: 'var(--color-orange-43, #886E53)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Our Proud 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Alumni
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// SHWETA SASTRI
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 21.60, wordWrap: 'break-word'
+---
+// Managing Director<br/>
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 28, wordWrap: 'break-word'
+---
+// Canadian International School<br/>Bangalore
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Bachelor of Business<br/>Management (BBM - (2004)
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// MADONNA SEBASTIAN
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 18, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 21.60, wordWrap: 'break-word'
+---
+// Indian Actress<br/>
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 28, wordWrap: 'break-word'
+---
+// Tamil/Malayalam
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// Bachelor of Commerce<br/>Tourism (2013)
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// ‹
+color: 'var(--color-white-solid, white)', fontSize: 35, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// ›
+color: 'var(--color-white-solid, white)', fontSize: 35, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 28, wordWrap: 'break-word'
+---
+// View All
+color: 'var(--color-black-solid, black)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Socialize
+color: 'var(--color-azure-59, #4594E8)', fontSize: 35, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 42, wordWrap: 'break-word'
+---
+// with wide 
+color: 'var(--color-orange-43, #886E53)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Numbers
+color: 'var(--color-azure-30, #0C4D8B)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// C
+color: 'var(--color-white-solid, white)', fontSize: 21, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 25.20, wordWrap: 'break-word'
+---
+// 2/7/2026
+color: 'var(--color-orange-43, #886E53)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Applications are now open<br/>for MBA – Session 2 (2026)<br/>at CHRI...
+color: 'var(--color-black-solid, black)', fontSize: 13, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 20, wordWrap: 'break-word'
+---
+// C
+color: 'var(--color-white-solid, white)', fontSize: 21, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 25.20, wordWrap: 'break-word'
+---
+// 2/4/2026
+color: 'var(--color-orange-43, #886E53)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Proud moment for CHRIST<br/>(Deemed to be University)<br/>✨ Our NCC ...
+color: 'var(--color-black-solid, black)', fontSize: 13, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 20, wordWrap: 'break-word'
+---
+// C
+color: 'var(--color-white-solid, white)', fontSize: 21, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 25.20, wordWrap: 'break-word'
+---
+// 2/17/2026
+color: 'var(--color-orange-43, #886E53)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Admissions Open 2026 MSc<br/>Mathematics at CHRIST —<br/>where pure...
+color: 'var(--color-black-solid, black)', fontSize: 13, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 20, wordWrap: 'break-word'
+---
+// C
+color: 'var(--color-white-solid, white)', fontSize: 21, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 25.20, wordWrap: 'break-word'
+---
+// 2/12/2026
+color: 'var(--color-orange-43, #886E53)', fontSize: 14, fontFamily: 'Heebo', fontWeight: '500', lineHeight: 16.80, wordWrap: 'break-word'
+---
+// Where curiosity meets<br/>innovation. MSc Physics –<br/>Admissions O...
+color: 'var(--color-black-solid, black)', fontSize: 13, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 20, wordWrap: 'break-word'
+---
+// 38+
+color: 'var(--color-azure-29, #005596)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Countries
+color: 'var(--color-azure-29, #005596)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 19.20, wordWrap: 'break-word'
+---
+// 40+
+color: 'var(--color-azure-29, #005596)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Academic<br/>Departments
+color: 'var(--color-azure-29, #005596)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 19.20, wordWrap: 'break-word'
+---
+// 520+
+color: 'var(--color-azure-29, #005596)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// International<br/>Students
+color: 'var(--color-azure-29, #005596)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 19.20, wordWrap: 'break-word'
+---
+// 339053+
+color: 'var(--color-azure-29, #005596)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Library Books
+color: 'var(--color-azure-29, #005596)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 19.20, wordWrap: 'break-word'
+---
+// 90,000+
+color: 'var(--color-azure-29, #005596)', fontSize: 45, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 54, wordWrap: 'break-word'
+---
+// Alumni
+color: 'var(--color-azure-29, #005596)', fontSize: 16, fontFamily: 'Heebo', fontWeight: '300', lineHeight: 19.20, wordWrap: 'break-word'
+---
+// EduManage Pro
+color: 'white', fontSize: 20, fontFamily: 'Inter', fontWeight: '600', lineHeight: 28, wordWrap: 'break-word'
+---
+// Empowering education through digital innovation and excellence.
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Estd. 1980
+color: '#90A1B9', fontSize: 14, fontFamily: 'Inter', fontWeight: '400', lineHeight: 20, wordWrap: 'break-word'
+---
+// Quick Links
+color: 'white', fontSize: 16, fontFamily: 'Poppins', fontWeight: '600', lineHeight: 24, wordWrap: 'break-word'
+---
+// About Us
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Admissions
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Gallery
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Contact
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Academics
+color: 'white', fontSize: 16, fontFamily: 'Poppins', fontWeight: '600', lineHeight: 24, wordWrap: 'break-word'
+---
+// Programs
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Research
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Faculty
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Library
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// Contact Info
+color: 'white', fontSize: 16, fontFamily: 'Poppins', fontWeight: '600', lineHeight: 24, wordWrap: 'break-word'
+---
+// +91 123 456 7890
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// admissions@edumanagepro.edu
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// New Delhi, India 110001
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
+---
+// © 2026 EduManage Pro. All rights reserved.
+color: '#90A1B9', fontSize: 16, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'
