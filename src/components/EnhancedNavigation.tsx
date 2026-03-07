@@ -388,8 +388,8 @@ export function EnhancedNavigation() {
                                   <Link to="/research" className="block text-sm text-gray-600 hover:text-[#2563EB] transition-colors py-1">
                                     Research Programs
                                   </Link>
-                                  <Link to="/international-students" className="block text-sm text-gray-600 hover:text-[#2563EB] transition-colors py-1">
-                                    International Students
+                                  <Link to="/how-to-apply" className="block text-sm text-gray-600 hover:text-[#2563EB] transition-colors py-1">
+                                    How to Apply
                                   </Link>
                                   <Link to="/apply-now" className="block text-sm text-gray-600 hover:text-[#2563EB] transition-colors py-1">
                                     Apply Now

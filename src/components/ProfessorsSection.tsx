@@ -156,7 +156,7 @@ export function ProfessorsSection() {
                   onMouseLeave={() => setHoveredCard(null)}
                 >
                   <div
-                    className={`rounded-2xl overflow-hidden shadow-lg transition-all duration-500 ${
+                    className={`rounded-xl overflow-hidden shadow-lg transition-all duration-500 ${
                       isHovered
                         ? 'bg-[#1a7a8f]'
                         : 'bg-white'
@@ -164,7 +164,7 @@ export function ProfessorsSection() {
                   >
                     {/* Image Container */}
                     <div className="relative">
-                      <div className="relative overflow-hidden aspect-[3/4]">
+                      <div className="relative overflow-hidden aspect-[4/3.5]">
                         <motion.img
                           src={professor.image}
                           alt={professor.name}
@@ -196,9 +196,9 @@ export function ProfessorsSection() {
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.1 }}
                             whileHover={{ scale: 1.15 }}
-                            className="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#0077B5] hover:text-white transition-colors"
+                            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#0077B5] hover:text-white transition-colors"
                           >
-                            <Linkedin className="w-4 h-4" />
+                            <Linkedin className="w-3.5 h-3.5" />
                           </motion.a>
                           <motion.a
                             href="#"
@@ -206,9 +206,9 @@ export function ProfessorsSection() {
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.15 }}
                             whileHover={{ scale: 1.15 }}
-                            className="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#E4405F] hover:text-white transition-colors"
+                            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#E4405F] hover:text-white transition-colors"
                           >
-                            <Instagram className="w-4 h-4" />
+                            <Instagram className="w-3.5 h-3.5" />
                           </motion.a>
                           <motion.a
                             href="#"
@@ -216,9 +216,9 @@ export function ProfessorsSection() {
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.2 }}
                             whileHover={{ scale: 1.15 }}
-                            className="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#000000] hover:text-white transition-colors"
+                            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#000000] hover:text-white transition-colors"
                           >
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                             </svg>
                           </motion.a>
@@ -228,29 +228,29 @@ export function ProfessorsSection() {
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.25 }}
                             whileHover={{ scale: 1.15 }}
-                            className="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#1877F2] hover:text-white transition-colors"
+                            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#1877F2] hover:text-white transition-colors"
                           >
-                            <Facebook className="w-4 h-4" />
+                            <Facebook className="w-3.5 h-3.5" />
                           </motion.a>
                         </motion.div>
                       )}
 
                       {/* Share Icon */}
-                      <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-10">
+                      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-10">
                         <motion.button
                           whileHover={{ scale: 1.1, rotate: 15 }}
-                          className="w-8 h-8 bg-[#00ADE2] rounded-full flex items-center justify-center shadow-lg"
+                          className="w-7 h-7 bg-[#00ADE2] rounded-full flex items-center justify-center shadow-lg"
                         >
-                          <Share2 className="w-4 h-4 text-white" />
+                          <Share2 className="w-3.5 h-3.5 text-white" />
                         </motion.button>
                       </div>
                     </div>
 
                     {/* Professor Info */}
-                    <div className={`p-4 pt-8  text-center transition-colors duration-500 ${
+                    <div className={`p-3 pt-6 h-30 text-center transition-colors duration-500 ${
                       isHovered ? 'text-white' : 'text-gray-900'
                     }`}>
-                      <h3 className="text-lg font-serif mb-1">
+                      <h3 className="text-base font-serif mb-0.5">
                         {professor.name}
                       </h3>
                       <p className={`text-xs transition-colors duration-500 ${

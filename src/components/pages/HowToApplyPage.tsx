@@ -2,74 +2,80 @@ import { useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import {
   ChevronRight,
-  Globe,
   FileText,
-  Home,
-  Heart,
-  DollarSign,
-  Plane,
-  GraduationCap,
-  Users,
   CheckCircle,
   Calendar,
   Mail,
   Phone,
+  ClipboardCheck,
+  UserCheck,
+  BookOpen,
+  Award,
+  Upload,
+  CreditCard,
+  GraduationCap,
+  FileBadge,
 } from 'lucide-react';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
 import { Button } from '../ui/button';
 import { Card } from '../ui/card';
 
-export function InternationalStudentsPage() {
+export function HowToApplyPage() {
   const navigate = useNavigate();
 
   const steps = [
     {
       icon: FileText,
-      title: 'Application',
-      description: 'Submit online application with required documents',
+      title: 'Online Application',
+      description: 'Complete and submit the online admission form with accurate details',
+    },
+    {
+      icon: Upload,
+      title: 'Document Upload',
+      description: 'Upload required academic and personal documents',
+    },
+    {
+      icon: UserCheck,
+      title: 'Verification',
+      description: 'Our team reviews and verifies your application',
+    },
+    {
+      icon: CreditCard,
+      title: 'Fee Payment',
+      description: 'Pay admission fee after receiving acceptance letter',
     },
     {
       icon: GraduationCap,
-      title: 'Acceptance',
-      description: 'Receive admission offer letter within 2-3 weeks',
-    },
-    {
-      icon: Plane,
-      title: 'Visa',
-      description: 'Apply for student visa with our support',
-    },
-    {
-      icon: Home,
-      title: 'Arrival',
-      description: 'Airport pickup and campus orientation',
+      title: 'Enrollment',
+      description: 'Complete enrollment process and begin your journey',
     },
   ];
 
-  const services = [
+  const programs = [
     {
-      icon: Home,
-      title: 'Housing Assistance',
-      description: 'On-campus and off-campus accommodation options',
-      features: ['Furnished rooms', 'Wifi & utilities', '24/7 security', 'Meal plans available'],
+      icon: BookOpen,
+      title: 'Undergraduate Programs',
+      description: 'Bachelor degrees in Arts, Science, Commerce & more',
+      features: ['3-4 year programs', 'Various specializations', 'Industry-aligned curriculum', 'Practical training'],
     },
     {
-      icon: Heart,
-      title: 'Student Support',
-      description: 'Dedicated international student office',
-      features: ['Academic counseling', 'Career guidance', 'Health insurance', 'Cultural events'],
+      icon: Award,
+      title: 'Postgraduate Programs',
+      description: 'Master degrees with advanced specializations',
+      features: ['2 year programs', 'Research opportunities', 'Expert faculty', 'Career advancement'],
     },
     {
-      icon: Globe,
-      title: 'Cultural Integration',
-      description: 'Programs to help you settle in',
-      features: ['Buddy program', 'Language classes', 'Cultural festivals', 'Student clubs'],
+      icon: FileBadge,
+      title: 'Diploma Courses',
+      description: 'Short-term professional courses',
+      features: ['6-12 month duration', 'Skill-focused', 'Certificate programs', 'Flexible schedules'],
     },
     {
-      icon: DollarSign,
-      title: 'Financial Aid',
-      description: 'Scholarships and financial support',
-      features: ['Merit scholarships', 'Need-based aid', 'Work opportunities', 'Payment plans'],
+      icon: ClipboardCheck,
+      title: 'Certificate Courses',
+      description: 'Specialized certificate programs',
+      features: ['3-6 month duration', 'Professional skills', 'Industry recognition', 'Quick completion'],
     },
   ];
 
@@ -77,30 +83,39 @@ export function InternationalStudentsPage() {
     {
       category: 'Academic Documents',
       items: [
-        'Official transcripts (English translation)',
-        'Degree certificates',
-        'English proficiency test (IELTS/TOEFL)',
-        'Statement of Purpose',
-        'Letters of Recommendation (2)',
+        'Previous academic transcripts and mark sheets',
+        'Transfer certificate from last institution',
+        'Character certificate',
+        'Migration certificate (if applicable)',
+        'Caste/Category certificate (if applicable)',
       ],
     },
     {
-      category: 'Visa Documents',
+      category: 'Personal Documents',
       items: [
-        'Valid passport',
-        'Admission offer letter',
-        'Proof of financial support',
-        'Health insurance',
-        'Police clearance certificate',
+        'Recent passport-size photographs (4 copies)',
+        'Aadhaar card copy',
+        'Date of birth certificate',
+        'Address proof',
+        'Guardian/Parent ID proof',
       ],
     },
   ];
 
   const statistics = [
-    { number: '85+', label: 'Countries Represented' },
-    { number: '1,200+', label: 'International Students' },
-    { number: '15%', label: 'International Student Ratio' },
-    { number: '95%', label: 'Visa Success Rate' },
+    { number: '50+', label: 'Programs Offered' },
+    { number: '5,000+', label: 'Students Enrolled' },
+    { number: '98%', label: 'Admission Success Rate' },
+    { number: '100+', label: 'Expert Faculty' },
+  ];
+
+  const importantDates = [
+    { event: 'Application Opens', date: 'May 1, 2026' },
+    { event: 'Application Deadline', date: 'July 15, 2026' },
+    { event: 'Document Verification', date: 'July 20-25, 2026' },
+    { event: 'Merit List Release', date: 'July 30, 2026' },
+    { event: 'Admission & Fee Payment', date: 'August 1-10, 2026' },
+    { event: 'Classes Commence', date: 'August 15, 2026' },
   ];
 
   return (
@@ -112,7 +127,7 @@ export function InternationalStudentsPage() {
       <section
         className="relative h-[385px] bg-cover bg-center"
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1724018305000-616597f21304?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbnRlcm5hdGlvbmFsJTIwc3R1ZGVudHMlMjBkaXZlcnNpdHl8ZW58MXx8fHwxNzcyNTQ4MTA5fDA&ixlib=rb-4.1.0&q=80&w=1080)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1523050854058-8df90110c9f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwYWRtaXNzaW9uJTIwYXBwbGljYXRpb258ZW58MXx8fHwxNzQxMDI0MDAwfDA&ixlib=rb-4.1.0&q=80&w=1080)',
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#2F584F]/80 to-[#00192C]/90"></div>
@@ -127,11 +142,11 @@ export function InternationalStudentsPage() {
               Academics
             </button>
             <ChevronRight className="w-4 h-4 text-white" />
-            <span className="text-white text-base">International Students</span>
+            <span className="text-white text-base">How to Apply</span>
           </div>
 
           <h1 className="text-5xl font-light text-white mb-5 font-serif">
-            International Students
+            How to Apply
           </h1>
 
           <div className="relative w-full max-w-[480px] h-[1px] bg-white/15 mb-5">
@@ -139,7 +154,7 @@ export function InternationalStudentsPage() {
           </div>
 
           <p className="text-white/90 text-lg max-w-2xl leading-relaxed">
-            Welcome to Dumri College - Your gateway to world-class education in India
+            Your journey to excellence begins here - Simple steps to join Dumri College
           </p>
         </div>
       </section>
@@ -175,15 +190,15 @@ export function InternationalStudentsPage() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              How to Apply
+              Application Process
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Simple four-step process to begin your journey at Dumri College
+              Follow these simple steps to complete your admission to Dumri College
             </p>
             <div className="w-24 h-1 bg-[#2563EB] mx-auto mt-6"></div>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-5 gap-6 max-w-6xl mx-auto">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -200,11 +215,11 @@ export function InternationalStudentsPage() {
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-[#FDC72F] rounded-full flex items-center justify-center text-sm font-bold text-slate-900">
                     {index + 1}
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
-                  <p className="text-slate-600">{step.description}</p>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
+                  <p className="text-sm text-slate-600">{step.description}</p>
                 </Card>
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-10 -right-4 w-8 h-0.5 bg-slate-200" />
+                  <div className="hidden md:block absolute top-10 -right-3 w-6 h-0.5 bg-slate-200" />
                 )}
               </motion.div>
             ))}
@@ -212,7 +227,7 @@ export function InternationalStudentsPage() {
         </div>
       </section>
 
-      {/* Student Services */}
+      {/* Programs Available */}
       <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -222,16 +237,16 @@ export function InternationalStudentsPage() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Student Services
+              Programs Available
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Comprehensive support to ensure your success and well-being
+              Choose from a wide range of programs to match your career goals
             </p>
             <div className="w-24 h-1 bg-[#2563EB] mx-auto mt-6"></div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {services.map((service, index) => (
+            {programs.map((program, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -242,16 +257,16 @@ export function InternationalStudentsPage() {
                 <Card className="p-8 hover:shadow-xl transition-all border-0 bg-white h-full">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <service.icon className="w-6 h-6 text-[#2563EB]" />
+                      <program.icon className="w-6 h-6 text-[#2563EB]" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-                      <p className="text-slate-600 mb-4">{service.description}</p>
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">{program.title}</h3>
+                      <p className="text-slate-600 mb-4">{program.description}</p>
                     </div>
                   </div>
 
                   <div className="space-y-2 pl-16">
-                    {service.features.map((feature, idx) => (
+                    {program.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                         <span className="text-slate-600">{feature}</span>
@@ -261,6 +276,15 @@ export function InternationalStudentsPage() {
                 </Card>
               </motion.div>
             ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button
+              onClick={() => navigate('/programs')}
+              className="bg-[#2563EB] hover:bg-[#1e40af] text-white px-8 py-6 text-lg"
+            >
+              View All Programs
+            </Button>
           </div>
         </div>
       </section>
@@ -275,10 +299,10 @@ export function InternationalStudentsPage() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Document Requirements
+              Required Documents
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Essential documents needed for admission and visa application
+              Essential documents needed for admission application
             </p>
             <div className="w-24 h-1 bg-[#2563EB] mx-auto mt-6"></div>
           </motion.div>
@@ -313,6 +337,51 @@ export function InternationalStudentsPage() {
         </div>
       </section>
 
+      {/* Important Dates */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+              Important Dates
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Mark your calendar with these key admission dates
+            </p>
+            <div className="w-24 h-1 bg-[#2563EB] mx-auto mt-6"></div>
+          </motion.div>
+
+          <div className="max-w-3xl mx-auto">
+            <Card className="p-8 border-0 shadow-lg bg-white">
+              <div className="space-y-4">
+                {importantDates.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center justify-between py-4 border-b border-slate-200 last:border-0"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <Calendar className="w-5 h-5 text-[#2563EB]" />
+                      </div>
+                      <span className="text-slate-900 font-semibold">{item.event}</span>
+                    </div>
+                    <span className="text-slate-600 font-medium">{item.date}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section className="py-20 bg-gradient-to-br from-[#2563EB] to-[#1e40af] text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -324,7 +393,7 @@ export function InternationalStudentsPage() {
               className="text-center mb-12"
             >
               <h2 className="text-4xl font-bold mb-4">
-                International Admissions Office
+                Admissions Office
               </h2>
               <p className="text-lg text-blue-100">
                 Our team is here to assist you throughout your application journey
@@ -335,8 +404,8 @@ export function InternationalStudentsPage() {
               <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center">
                 <Mail className="w-8 h-8 text-white mx-auto mb-3" />
                 <h3 className="font-semibold text-white mb-2">Email</h3>
-                <a href="mailto:international@dumri.edu" className="text-blue-100 hover:text-white text-sm">
-                  international@dumri.edu
+                <a href="mailto:admissions@dumri.edu" className="text-blue-100 hover:text-white text-sm">
+                  admissions@dumri.edu
                 </a>
               </Card>
 
@@ -350,9 +419,9 @@ export function InternationalStudentsPage() {
 
               <Card className="p-6 bg-white/10 backdrop-blur-sm border-white/20 text-center">
                 <Calendar className="w-8 h-8 text-white mx-auto mb-3" />
-                <h3 className="font-semibold text-white mb-2">Schedule</h3>
+                <h3 className="font-semibold text-white mb-2">Office Hours</h3>
                 <p className="text-blue-100 text-sm">
-                  Mon-Fri: 9AM - 5PM IST
+                  Mon-Sat: 9AM - 5PM
                 </p>
               </Card>
             </div>

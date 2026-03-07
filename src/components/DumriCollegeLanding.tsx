@@ -6,7 +6,15 @@ import { CarouselHeader } from "./CarouselHeader";
 import { ProgramsSection } from "./ProgramsSection";
 import { Footer } from "./Footer";
 import { ProfessorsSection } from "./ProfessorsSection";
-import { Briefcase, UserCheck, GraduationCap, Heart, ClipboardCheck, Users, Building2 } from "lucide-react";
+import {
+  Briefcase,
+  UserCheck,
+  GraduationCap,
+  Heart,
+  ClipboardCheck,
+  Users,
+  Building2,
+} from "lucide-react";
 import svgPaths from "../imports/svg-x8yhpltdsp";
 import imgImg from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
 import img23714285420260224035427Jpg from "figma:asset/9411083632a695a2b9b96381c339905746b585c3.png";
@@ -74,7 +82,9 @@ function NewsItem({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3">
       <div className="w-1.5 h-1.5 bg-white rounded-full" />
-      <span className="text-white text-sm font-medium">{text}</span>
+      <span className="text-white text-sm font-medium">
+        {text}
+      </span>
     </div>
   );
 }
@@ -86,62 +96,76 @@ const carouselImages = [
     title: "Welcome to Dumri College",
     subtitle: "Excellence in Education Since 1950",
     cta: "Explore Programs",
-    ctaLink: "/academics"
+    ctaLink: "/academics",
   },
   {
     url: "https://images.unsplash.com/photo-1722248540590-ba8b7af1d7b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwbGlicmFyeSUyMHN0dWRlbnRzJTIwc3R1ZHlpbmd8ZW58MXx8fHwxNzcyMzU5MjQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
     title: "State-of-the-Art Facilities",
     subtitle: "Modern Libraries & Research Centers",
     cta: "View Gallery",
-    ctaLink: "/gallery"
+    ctaLink: "/gallery",
   },
   {
     url: "https://images.unsplash.com/photo-1667564790635-0f560121359e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwZ3JhZHVhdGlvbiUyMGNlcmVtb255JTIwaW5kaWF8ZW58MXx8fHwxNzcyMzU5MjQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
     title: "Shape Your Future",
     subtitle: "Join Our Legacy of Success",
     cta: "Apply Now",
-    ctaLink: "/apply"
-  }
+    ctaLink: "/apply",
+  },
 ];
 
 export default function DumriCollegeLanding() {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [achievementTab, setAchievementTab] = useState<'faculty' | 'student' | 'university'>('faculty');
+  const [achievementTab, setAchievementTab] = useState<
+    "faculty" | "student" | "university"
+  >("faculty");
   const [achievementIndex, setAchievementIndex] = useState(0);
   const [alumniIndex, setAlumniIndex] = useState(0);
   // Mobile carousel states
-  const [eventsCarouselIndex, setEventsCarouselIndex] = useState(0);
+  const [eventsCarouselIndex, setEventsCarouselIndex] =
+    useState(0);
   const [accrCarouselIndex, setAccrCarouselIndex] = useState(0);
-  const [galleryCarouselIndex, setGalleryCarouselIndex] = useState(0);
+  const [galleryCarouselIndex, setGalleryCarouselIndex] =
+    useState(0);
   const [achievCardIndex, setAchievCardIndex] = useState(0);
 
   // Auto-rotate carousel - increased to 6 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+      setCurrentSlide(
+        (prev) => (prev + 1) % carouselImages.length,
+      );
     }, 6000);
     return () => clearInterval(interval);
   }, []);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    setCurrentSlide(
+      (prev) => (prev + 1) % carouselImages.length,
+    );
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+    setCurrentSlide(
+      (prev) =>
+        (prev - 1 + carouselImages.length) %
+        carouselImages.length,
+    );
   };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Carousel Section */}
-      <section className="relative h-[420px] sm:h-[520px] md:h-[620px] lg:h-[680px] overflow-hidden">
+      <section className="relative h-[440px] sm:h-[520px] md:h-[620px] lg:h-[630px] overflow-hidden">
         {/* Background Images with fade transition */}
         {carouselImages.map((image, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0 }}
-            animate={{ opacity: index === currentSlide ? 1 : 0 }}
+            animate={{
+              opacity: index === currentSlide ? 1 : 0,
+            }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
             className="absolute inset-0"
             style={{ zIndex: index === currentSlide ? 1 : 0 }}
@@ -160,7 +184,7 @@ export default function DumriCollegeLanding() {
         <CarouselHeader />
 
         {/* Announcement Box - Bottom Right */}
-        <motion.div 
+        {/* <motion.div 
           className="hidden md:block absolute bottom-28 md:bottom-36 right-4 md:right-16 z-20 bg-black/70 backdrop-blur-sm rounded-t-lg w-[280px] md:w-[420px] lg:w-[500px] p-4 md:p-6"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -182,7 +206,7 @@ export default function DumriCollegeLanding() {
               Know More
             </button>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Navigation Arrows */}
         <button
@@ -190,7 +214,11 @@ export default function DumriCollegeLanding() {
           className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 transition-all duration-300"
           aria-label="Previous slide"
         >
-          <svg className="w-8 h-8" fill="white" viewBox="0 0 14 26">
+          <svg
+            className="w-8 h-8"
+            fill="white"
+            viewBox="0 0 14 26"
+          >
             <path d="M13.7098 0.293788C13.8029 0.386679 13.8768 0.49703 13.9272 0.61852C13.9776 0.740011 14.0036 0.870253 14.0036 1.00179C14.0036 1.13332 13.9776 1.26356 13.9272 1.38506C13.8768 1.50655 13.8029 1.6169 13.7098 1.70979L2.41579 13.0018L13.7098 24.2938C13.8976 24.4816 14.003 24.7362 14.003 25.0018C14.003 25.2673 13.8976 25.522 13.7098 25.7098C13.522 25.8976 13.2673 26.003 13.0018 26.003C12.7362 26.003 12.4816 25.8976 12.2938 25.7098L0.293787 13.7098C0.200661 13.6169 0.126775 13.5065 0.0763617 13.3851C0.0259488 13.2636 0 13.1333 0 13.0018C0 12.8703 0.0259488 12.74 0.0763617 12.6185C0.126775 12.497 0.200661 12.3867 0.293787 12.2938L12.2938 0.293788C12.3867 0.200661 12.497 0.126776 12.6185 0.0763626C12.74 0.0259497 12.8703 0 13.0018 0C13.1333 0 13.2636 0.0259497 13.3851 0.0763626C13.5065 0.126776 13.6169 0.200661 13.7098 0.293788Z" />
           </svg>
         </button>
@@ -199,7 +227,11 @@ export default function DumriCollegeLanding() {
           className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 transition-all duration-300"
           aria-label="Next slide"
         >
-          <svg className="w-8 h-8" fill="white" viewBox="0 0 14 26">
+          <svg
+            className="w-8 h-8"
+            fill="white"
+            viewBox="0 0 14 26"
+          >
             <path d="M0.293787 0.293788C0.386678 0.200661 0.49703 0.126776 0.61852 0.0763626C0.74001 0.0259497 0.870253 0 1.00179 0C1.13332 0 1.26356 0.0259497 1.38505 0.0763626C1.50654 0.126776 1.6169 0.200661 1.70979 0.293788L13.7098 12.2938C13.8029 12.3867 13.8768 12.497 13.9272 12.6185C13.9776 12.74 14.0036 12.8703 14.0036 13.0018C14.0036 13.1333 13.9776 13.2636 13.9272 13.3851C13.8768 13.5065 13.8029 13.6169 13.7098 13.7098L1.70979 25.7098C1.52201 25.8976 1.26734 26.003 1.00179 26.003C0.736236 26.003 0.48156 25.8976 0.293787 25.7098C0.106014 25.522 0.000523567 25.2673 0.000523567 25.0018C0.000523567 24.7362 0.106014 24.4816 0.293787 24.2938L11.5878 13.0018L0.293787 1.70979C0.200661 1.6169 0.126775 1.50655 0.0763617 1.38506C0.0259488 1.26356 0 1.13332 0 0.870253C0 0.740011 0.0259488 0.61852 0.0763617 0.49703C0.126775 0.386679 0.200661 0.293788 0.293787 0.293788Z" />
           </svg>
         </button>
@@ -213,138 +245,203 @@ export default function DumriCollegeLanding() {
               className="p-1.5"
               aria-label={`Go to slide ${index + 1}`}
             >
-              <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                index === currentSlide
-                  ? "bg-[#869791]"
-                  : "bg-[#d6d6d6]"
-              }`} />
+              <div
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  index === currentSlide
+                    ? "bg-[#869791]"
+                    : "bg-[#d6d6d6]"
+                }`}
+              />
             </button>
           ))}
         </div>
       </section>
 
       {/* Action Buttons Bar */}
-      <motion.section 
-        className="relative overflow-hidden" 
-        style={{ background: 'linear-gradient(90deg, #0C4D8B 14%, #126DC4 31%, #0C4D8B 53%)' }}
+      <motion.section
+        className="relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(90deg, #0C4D8B 14%, #126DC4 31%, #0C4D8B 53%)",
+        }}
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex justify-between items-stretch h-12 md:h-14 overflow-x-auto scrollbar-hide">
+        <div className="flex items-stretch h-12 md:h-14 overflow-x-auto scrollbar-hide">
           {/* Quick Links Label - Orange Tab */}
-          <motion.div 
-            className="bg-[#DDAE68] flex items-center justify-center flex-shrink-0" 
-            style={{ minWidth: '120px', paddingLeft: '16px', paddingRight: '16px' }}
+          <motion.div
+            className="bg-[#DDAE68] flex items-center justify-center flex-shrink-0"
+            style={{
+              minWidth: "120px",
+              paddingLeft: "16px",
+              paddingRight: "16px",
+            }}
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-center text-black text-[13px] md:text-[17px] font-normal leading-[20.4px] whitespace-nowrap">Quick Links</div>
+            <div className="text-center text-black text-[13px] md:text-[17px] font-normal leading-[20.4px] whitespace-nowrap">
+              Quick Links
+            </div>
           </motion.div>
-          
+
           {/* Apply Now */}
           <motion.button
-            onClick={() => navigate('/apply')}
+            onClick={() => navigate("/apply")}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
             whileTap={{ scale: 0.95 }}
             className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
           >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">Apply Now</span>
-            <div className="absolute w-px h-9 right-0" style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)' }} />
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Apply Now
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </motion.button>
-          
+
           {/* Admission */}
           <motion.button
-            onClick={() => navigate('/apply')}
+            onClick={() => navigate("/apply")}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
             whileTap={{ scale: 0.95 }}
             className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
           >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">Admission</span>
-            <div className="absolute w-px h-9 right-0" style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)' }} />
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Admission
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </motion.button>
-          
+
           {/* Gallery */}
           <motion.button
-            onClick={() => navigate('/gallery')}
+            onClick={() => navigate("/gallery")}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
             whileTap={{ scale: 0.95 }}
             className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
           >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">Gallery</span>
-            <div className="absolute w-px h-9 right-0" style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)' }} />
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Gallery
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </motion.button>
-          
+
           {/* Contact Us */}
           <motion.button
-            onClick={() => navigate('/contact')}
+            onClick={() => navigate("/contact")}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
             whileTap={{ scale: 0.95 }}
             className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
           >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">Contact Us</span>
-            <div className="absolute w-px h-9 right-0" style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)' }} />
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Contact Us
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </motion.button>
-          
+
           {/* About Us */}
           <motion.button
-            onClick={() => navigate('/about')}
+            onClick={() => navigate("/about")}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
             whileTap={{ scale: 0.95 }}
             className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
           >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">About Us</span>
-            <div className="absolute w-px h-9 right-0" style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)' }} />
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              About Us
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
           </motion.button>
-          
+
           {/* Programs */}
           <motion.button
-            onClick={() => navigate('/programs')}
+            onClick={() => navigate("/programs")}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
             whileTap={{ scale: 0.95 }}
             className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
           >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">Programs</span>
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Programs
+            </span>
           </motion.button>
         </div>
       </motion.section>
-      
+
       {/* Find Your Degree Section */}
-      <section 
+      <section
         className="py-12 md:py-20 relative"
         style={{
           backgroundImage: `url(https://images.unsplash.com/photo-1766339162142-699904b3cf82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdWJ0bGUlMjB3aGl0ZSUyMGdlb21ldHJpYyUyMHBhdHRlcm4lMjBiYWNrZ3JvdW5kfGVufDF8fHx8MTc3MjM4NDE4MHww&ixlib=rb-4.1.0&q=80&w=1080)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50/90 to-white/90" />
@@ -358,18 +455,21 @@ export default function DumriCollegeLanding() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6">
-                <span className="text-[#886E53]">Find your </span>
+                <span className="text-[#886E53]">
+                  Find your{" "}
+                </span>
                 <span className="text-[#0C4D8B]">Degree</span>
               </h2>
               <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
-                Dumri College offers rigorous programs, valuable resources, and 
-                countless opportunities that will enable you to pursue your desired 
-                course of study.
+                Dumri College offers rigorous programs, valuable
+                resources, and countless opportunities that will
+                enable you to pursue your desired course of
+                study.
               </p>
-              
+
               {/* Read More Button */}
               <motion.button
-                onClick={() => navigate('/programs')}
+                onClick={() => navigate("/programs")}
                 whileHover={{ scale: 1.05, x: 5 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
@@ -403,7 +503,7 @@ export default function DumriCollegeLanding() {
                 { title: "DOCTORAL (PhD)", link: "/academics" },
                 { title: "POSTGRADUATE", link: "/academics" },
                 { title: "UNDERGRADUATE", link: "/academics" },
-                { title: "DIPLOMA", link: "/academics" }
+                { title: "DIPLOMA", link: "/academics" },
               ].map((program, idx) => (
                 <motion.button
                   key={idx}
@@ -411,12 +511,15 @@ export default function DumriCollegeLanding() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: idx * 0.1,
+                  }}
                   className="group relative bg-white rounded-lg p-10 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
                   whileHover={{ scale: 1.08, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="relative z-10"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
@@ -426,11 +529,14 @@ export default function DumriCollegeLanding() {
                     </h3>
                   </motion.div>
                   {/* Gradient Bottom Border */}
-                  <motion.div 
+                  <motion.div
                     className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0099D0] to-[#FFD288]"
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
-                    transition={{ duration: 0.6, delay: idx * 0.1 + 0.3 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: idx * 0.1 + 0.3,
+                    }}
                   />
                 </motion.button>
               ))}
@@ -442,35 +548,39 @@ export default function DumriCollegeLanding() {
       <ProgramsSection />
 
       {/* Campus Life Section */}
-      <section 
+      <section
         className="py-12 md:py-20 relative bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{
           backgroundImage: `linear-gradient(135deg, rgba(12, 77, 139, 0.95) 0%, rgba(37, 99, 235, 0.9) 50%, rgba(136, 110, 83, 0.85) 100%), url(https://images.unsplash.com/photo-1769699369445-263a7a365df7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwY2FtcHVzJTIwYWVyaWFsJTIwdmlld3xlbnwxfHx8fDE3NzIzNzk5Mzd8MA&ixlib=rb-4.1.0&q=80&w=1080)`,
-          backgroundBlendMode: 'multiply'
+          backgroundBlendMode: "multiply",
         }}
       >
         {/* Animated gradient overlay */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-amber-600/20"
           animate={{
-            backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+            backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
         />
-        
+
         {/* Decorative pattern overlay */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }} />
-        
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+
         {/* Light overlay for readability */}
         <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px]" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -484,7 +594,8 @@ export default function DumriCollegeLanding() {
               <span className="text-white">Life</span>
             </h2>
             <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-              Explore the vibrant campus life at Dumri College with various facilities and services
+              Explore the vibrant campus life at Dumri College
+              with various facilities and services
             </p>
           </motion.div>
 
@@ -496,23 +607,35 @@ export default function DumriCollegeLanding() {
               { name: "Health Services", icon: Heart },
               { name: "Examinations", icon: ClipboardCheck },
               { name: "Student Council", icon: Users },
-              { name: "Centres & Cells", icon: Building2 }
+              { name: "Centres & Cells", icon: Building2 },
             ].map((item, idx) => {
               const IconComponent = item.icon;
               return (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  initial={{
+                    opacity: 0,
+                    scale: 0.8,
+                    rotateY: -90,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                    rotateY: 0,
+                  }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: idx * 0.1,
+                  }}
                   whileHover={{ scale: 1.08, y: -8 }}
                   className="group cursor-pointer"
                 >
-                  <motion.div 
+                  <motion.div
                     className="relative aspect-square bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-white/60 hover:border-amber-300"
-                    whileHover={{ 
-                      background: "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(251, 191, 36, 0.2) 100%)"
+                    whileHover={{
+                      background:
+                        "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(251, 191, 36, 0.2) 100%)",
                     }}
                   >
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-4 gap-2">
@@ -521,12 +644,12 @@ export default function DumriCollegeLanding() {
                         transition={{ duration: 0.5 }}
                         className="mb-1"
                       >
-                        <IconComponent 
-                          className="w-8 h-8 text-[#0C4D8B] group-hover:text-white transition-colors" 
+                        <IconComponent
+                          className="w-8 h-8 text-[#0C4D8B] group-hover:text-white transition-colors"
                           strokeWidth={2}
                         />
                       </motion.div>
-                      <motion.p 
+                      <motion.p
                         className="text-center text-xs font-medium text-[#0C4D8B] group-hover:text-white transition-colors leading-tight"
                         whileHover={{ scale: 1.1 }}
                         transition={{ duration: 0.3 }}
@@ -534,7 +657,7 @@ export default function DumriCollegeLanding() {
                         {item.name}
                       </motion.p>
                     </div>
-                    
+
                     {/* Shine effect on hover */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000" />
@@ -548,18 +671,18 @@ export default function DumriCollegeLanding() {
       </section>
 
       {/* Campus Events Section */}
-      <section 
+      <section
         className="py-12 md:py-20 relative overflow-hidden"
         style={{
           backgroundImage: `url(${imgSectionEventsCampusW})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-white/70" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -583,7 +706,8 @@ export default function DumriCollegeLanding() {
                 time: "09:00 AM - 05:00 PM",
                 location: "Main Auditorium",
                 dateLabel: "Mar 15 2026",
-                image: "https://images.unsplash.com/photo-1762497403897-c105a5bc61e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwc2VtaW5hciUyMGNvbmZlcmVuY2UlMjBoYWxsfGVufDF8fHx8MTc3MjM4MDQ2MHww&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1762497403897-c105a5bc61e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwc2VtaW5hciUyMGNvbmZlcmVuY2UlMjBoYWxsfGVufDF8fHx8MTc3MjM4MDQ2MHww&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 title: "Career Development Workshop",
@@ -591,7 +715,8 @@ export default function DumriCollegeLanding() {
                 time: "10:00 AM - 04:00 PM",
                 location: "Seminar Hall",
                 dateLabel: "Mar 20 2026",
-                image: "https://images.unsplash.com/photo-1762158007836-25d13ab34c1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwd29ya3Nob3AlMjBzdHVkZW50c3xlbnwxfHx8fDE3NzIzODA0NjF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1762158007836-25d13ab34c1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwd29ya3Nob3AlMjBzdHVkZW50c3xlbnwxfHx8fDE3NzIzODA0NjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 title: "Guest Lecture on Innovation",
@@ -599,7 +724,8 @@ export default function DumriCollegeLanding() {
                 time: "02:00 PM - 04:00 PM",
                 location: "Conference Room",
                 dateLabel: "Mar 25 2026",
-                image: "https://images.unsplash.com/photo-1759922378100-89dca9fe3c98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2FkZW1pYyUyMGV2ZW50JTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc3MjM4MDQ2MXww&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1759922378100-89dca9fe3c98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2FkZW1pYyUyMGV2ZW50JTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc3MjM4MDQ2MXww&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 title: "Cultural Fest 2026",
@@ -607,31 +733,80 @@ export default function DumriCollegeLanding() {
                 time: "All Day",
                 location: "College Campus",
                 dateLabel: "Mar 28 2026",
-                image: "https://images.unsplash.com/photo-1762497403897-c105a5bc61e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwc2VtaW5hciUyMGNvbmZlcmVuY2UlMjBoYWxsfGVufDF8fHx8MTc3MjM4MDQ2MHww&ixlib=rb-4.1.0&q=80&w=1080"
-              }
+                image:
+                  "https://images.unsplash.com/photo-1762497403897-c105a5bc61e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwc2VtaW5hciUyMGNvbmZlcmVuY2UlMjBoYWxsfGVufDF8fHx8MTc3MjM4MDQ2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+              },
             ];
-            const EventCard = ({ event }: { event: typeof events[0] }) => (
+            const EventCard = ({
+              event,
+            }: {
+              event: (typeof events)[0];
+            }) => (
               <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-[#C07E02]/20 hover:border-[#C07E02] h-[380px] md:h-[420px]">
                 <div className="relative h-44 md:h-48 overflow-hidden">
-                  <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute top-4 left-4 bg-[#0C4D8B] text-white px-3 py-1.5 rounded-lg shadow-lg">
-                    <p className="text-xs md:text-sm font-light">{event.dateLabel}</p>
+                    <p className="text-xs md:text-sm font-light">
+                      {event.dateLabel}
+                    </p>
                   </div>
                 </div>
                 <div className="p-4 md:p-6 space-y-3">
-                  <h3 className="text-base md:text-lg font-normal text-black leading-relaxed min-h-[48px]">{event.title}</h3>
+                  <h3 className="text-base md:text-lg font-normal text-black leading-relaxed min-h-[48px]">
+                    {event.title}
+                  </h3>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-[#0C4D8B] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
-                      <p className="text-xs md:text-sm text-gray-700">{event.date}</p>
+                      <svg
+                        className="w-4 h-4 text-[#0C4D8B] flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <p className="text-xs md:text-sm text-gray-700">
+                        {event.date}
+                      </p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-[#0C4D8B] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
-                      <p className="text-xs md:text-sm text-gray-700">{event.time}</p>
+                      <svg
+                        className="w-4 h-4 text-[#0C4D8B] flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <p className="text-xs md:text-sm text-gray-700">
+                        {event.time}
+                      </p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-[#0C4D8B] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
-                      <p className="text-xs md:text-sm text-gray-700">{event.location}</p>
+                      <svg
+                        className="w-4 h-4 text-[#0C4D8B] flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <p className="text-xs md:text-sm text-gray-700">
+                        {event.location}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -649,27 +824,48 @@ export default function DumriCollegeLanding() {
                       exit={{ opacity: 0, x: -40 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <EventCard event={events[eventsCarouselIndex]} />
+                      <EventCard
+                        event={events[eventsCarouselIndex]}
+                      />
                     </motion.div>
                   </div>
                   <div className="flex items-center justify-center gap-4 mt-4">
                     <button
-                      onClick={() => setEventsCarouselIndex(i => Math.max(0, i - 1))}
+                      onClick={() =>
+                        setEventsCarouselIndex((i) =>
+                          Math.max(0, i - 1),
+                        )
+                      }
                       disabled={eventsCarouselIndex === 0}
                       className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow transition-all"
-                    >‹</button>
+                    >
+                      ‹
+                    </button>
                     <div className="flex gap-2">
                       {events.map((_, i) => (
-                        <button key={i} onClick={() => setEventsCarouselIndex(i)}
-                          className={`w-2 h-2 rounded-full transition-all ${i === eventsCarouselIndex ? 'bg-[#0C4D8B] w-5' : 'bg-gray-300'}`}
+                        <button
+                          key={i}
+                          onClick={() =>
+                            setEventsCarouselIndex(i)
+                          }
+                          className={`w-2 h-2 rounded-full transition-all ${i === eventsCarouselIndex ? "bg-[#0C4D8B] w-5" : "bg-gray-300"}`}
                         />
                       ))}
                     </div>
                     <button
-                      onClick={() => setEventsCarouselIndex(i => Math.min(events.length - 1, i + 1))}
-                      disabled={eventsCarouselIndex === events.length - 1}
+                      onClick={() =>
+                        setEventsCarouselIndex((i) =>
+                          Math.min(events.length - 1, i + 1),
+                        )
+                      }
+                      disabled={
+                        eventsCarouselIndex ===
+                        events.length - 1
+                      }
                       className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow transition-all"
-                    >›</button>
+                    >
+                      ›
+                    </button>
                   </div>
                 </div>
                 {/* Desktop Grid */}
@@ -680,7 +876,10 @@ export default function DumriCollegeLanding() {
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: idx * 0.1,
+                      }}
                       whileHover={{ y: -8 }}
                     >
                       <EventCard event={event} />
@@ -696,8 +895,18 @@ export default function DumriCollegeLanding() {
                     whileTap={{ scale: 0.95 }}
                   >
                     View All Events
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </motion.button>
                 </div>
@@ -801,7 +1010,9 @@ export default function DumriCollegeLanding() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-              <span className="text-[#FFD700]">Excellence </span>
+              <span className="text-[#FFD700]">
+                Excellence{" "}
+              </span>
               <span>in Numbers</span>
             </h2>
           </motion.div>
@@ -812,35 +1023,41 @@ export default function DumriCollegeLanding() {
               { value: "5000+", label: "Students" },
               { value: "200+", label: "Faculty Members" },
               { value: "50,000+", label: "Library Books" },
-              { value: "10,000+", label: "Alumni" }
+              { value: "10,000+", label: "Alumni" },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, scale: 0.5, y: 30 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.6, 
+                transition={{
+                  duration: 0.6,
                   delay: idx * 0.1,
                   type: "spring",
-                  stiffness: 100
+                  stiffness: 100,
                 }}
                 whileHover={{ scale: 1.1, y: -5 }}
                 className="text-center"
               >
-                <motion.div 
+                <motion.div
                   className="text-4xl lg:text-5xl font-light text-white mb-2"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: idx * 0.1 + 0.3 }}
+                  transition={{
+                    duration: 1,
+                    delay: idx * 0.1 + 0.3,
+                  }}
                 >
                   {stat.value}
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="text-white/90"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: idx * 0.1 + 0.5 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: idx * 0.1 + 0.5,
+                  }}
                 >
                   {stat.label}
                 </motion.div>
@@ -851,13 +1068,13 @@ export default function DumriCollegeLanding() {
       </section>
 
       {/* Achievements Section */}
-      <section 
+      <section
         className="py-12 md:py-20 relative"
         style={{
           backgroundImage: `url(https://images.unsplash.com/photo-1762174092777-a73b122249cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwbGlnaHQlMjBibHVlJTIwcGF0dGVybiUyMHRleHR1cmV8ZW58MXx8fHwxNzcyMzg0MTgwfDA&ixlib=rb-4.1.0&q=80&w=1080)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <div className="absolute inset-0 bg-slate-50/90" />
@@ -871,7 +1088,9 @@ export default function DumriCollegeLanding() {
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl">
               <span className="text-[#886E53]">College </span>
-              <span className="text-[#0C4D8B]">Achievements</span>
+              <span className="text-[#0C4D8B]">
+                Achievements
+              </span>
             </h2>
           </motion.div>
 
@@ -879,41 +1098,86 @@ export default function DumriCollegeLanding() {
             const achievements = [
               {
                 title: "NAAC A+ Accreditation",
-                description: "Recognized for excellence in higher education with the highest grade"
+                description:
+                  "Recognized for excellence in higher education with the highest grade",
               },
               {
                 title: "100% Placement Rate",
-                description: "Our students are recruited by top companies across various industries"
+                description:
+                  "Our students are recruited by top companies across various industries",
               },
               {
                 title: "State-of-the-Art Infrastructure",
-                description: "Modern classrooms, labs, library, and sports facilities"
-              }
+                description:
+                  "Modern classrooms, labs, library, and sports facilities",
+              },
             ];
-            const AchievCard = ({ item }: { item: typeof achievements[0] }) => (
+            const AchievCard = ({
+              item,
+            }: {
+              item: (typeof achievements)[0];
+            }) => (
               <div className="bg-white rounded-xl p-6 md:p-8 shadow-lg h-full">
-                <h3 className="text-lg md:text-xl font-semibold text-[#0C4D8B] mb-3 md:mb-4">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm md:text-base">{item.description}</p>
+                <h3 className="text-lg md:text-xl font-semibold text-[#0C4D8B] mb-3 md:mb-4">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                  {item.description}
+                </p>
               </div>
             );
             return (
               <>
                 {/* Mobile Carousel */}
                 <div className="md:hidden">
-                  <motion.div key={achievCardIndex} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
-                    <AchievCard item={achievements[achievCardIndex]} />
+                  <motion.div
+                    key={achievCardIndex}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <AchievCard
+                      item={achievements[achievCardIndex]}
+                    />
                   </motion.div>
                   <div className="flex items-center justify-center gap-4 mt-4">
-                    <button onClick={() => setAchievCardIndex(i => Math.max(0, i - 1))} disabled={achievCardIndex === 0}
-                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow">‹</button>
+                    <button
+                      onClick={() =>
+                        setAchievCardIndex((i) =>
+                          Math.max(0, i - 1),
+                        )
+                      }
+                      disabled={achievCardIndex === 0}
+                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ‹
+                    </button>
                     <div className="flex gap-2">
                       {achievements.map((_, i) => (
-                        <button key={i} onClick={() => setAchievCardIndex(i)}
-                          className={`h-2 rounded-full transition-all ${i === achievCardIndex ? 'bg-[#0C4D8B] w-5' : 'bg-gray-300 w-2'}`} />
+                        <button
+                          key={i}
+                          onClick={() => setAchievCardIndex(i)}
+                          className={`h-2 rounded-full transition-all ${i === achievCardIndex ? "bg-[#0C4D8B] w-5" : "bg-gray-300 w-2"}`}
+                        />
                       ))}
                     </div>
-                    <button onClick={() => setAchievCardIndex(i => Math.min(achievements.length - 1, i + 1))} disabled={achievCardIndex === achievements.length - 1}
-                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow">›</button>
+                    <button
+                      onClick={() =>
+                        setAchievCardIndex((i) =>
+                          Math.min(
+                            achievements.length - 1,
+                            i + 1,
+                          ),
+                        )
+                      }
+                      disabled={
+                        achievCardIndex ===
+                        achievements.length - 1
+                      }
+                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ›
+                    </button>
                   </div>
                 </div>
                 {/* Desktop Grid */}
@@ -924,7 +1188,10 @@ export default function DumriCollegeLanding() {
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: idx * 0.2 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: idx * 0.2,
+                      }}
                       whileHover={{ scale: 1.05, y: -10 }}
                     >
                       <AchievCard item={achievement} />
@@ -938,13 +1205,13 @@ export default function DumriCollegeLanding() {
       </section>
 
       {/* University Achievements Section */}
-      <section 
+      <section
         className="py-12 md:py-20 relative"
         style={{
           backgroundImage: `url(https://images.unsplash.com/photo-1763275469812-c807e3b4a4af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0JTIwYmVpZ2UlMjBhY2FkZW1pYyUyMHRleHR1cmV8ZW58MXx8fHwxNzcyMzg0MTgxfDA&ixlib=rb-4.1.0&q=80&w=1080)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <div className="absolute inset-0 bg-white/85" />
@@ -957,8 +1224,12 @@ export default function DumriCollegeLanding() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6 md:mb-8">
-              <span className="text-[#886E53]">University </span>
-              <span className="text-[#0C4D8B]">Achievements</span>
+              <span className="text-[#886E53]">
+                University{" "}
+              </span>
+              <span className="text-[#0C4D8B]">
+                Achievements
+              </span>
             </h2>
           </motion.div>
 
@@ -966,9 +1237,12 @@ export default function DumriCollegeLanding() {
           <div className="flex justify-center mb-8">
             <div className="inline-flex rounded-t-lg overflow-hidden shadow-md">
               {[
-                { key: 'faculty' as const, label: 'Faculty' },
-                { key: 'student' as const, label: 'Student' },
-                { key: 'university' as const, label: 'University' }
+                { key: "faculty" as const, label: "Faculty" },
+                { key: "student" as const, label: "Student" },
+                {
+                  key: "university" as const,
+                  label: "University",
+                },
               ].map((tab) => (
                 <motion.button
                   key={tab.key}
@@ -980,8 +1254,8 @@ export default function DumriCollegeLanding() {
                   whileTap={{ scale: 0.95 }}
                   className={`px-6 py-3 font-light transition-all duration-300 ${
                     achievementTab === tab.key
-                      ? 'bg-[#D98600] text-white'
-                      : 'bg-[#0C4D8B] text-white hover:bg-[#0C4D8B]/80'
+                      ? "bg-[#D98600] text-white"
+                      : "bg-[#0C4D8B] text-white hover:bg-[#0C4D8B]/80"
                   }`}
                 >
                   {tab.label}
@@ -1021,36 +1295,42 @@ export default function DumriCollegeLanding() {
                   transition={{ duration: 0.5 }}
                   className="flex-1"
                 >
-                  {achievementTab === 'faculty' && (
+                  {achievementTab === "faculty" && (
                     <>
                       <h3 className="text-2xl font-medium text-black mb-4">
                         Distinguished Service Award
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Dr. Joseph C C, Vice Chancellor received the Distinguished Service Award 
-                        during the 55th Annual Family Day 2025 - "A Day to Reunite, Reflect, and Reignite"
+                        Dr. Joseph C C, Vice Chancellor received
+                        the Distinguished Service Award during
+                        the 55th Annual Family Day 2025 - "A Day
+                        to Reunite, Reflect, and Reignite"
                       </p>
                     </>
                   )}
-                  {achievementTab === 'student' && (
+                  {achievementTab === "student" && (
                     <>
                       <h3 className="text-2xl font-medium text-black mb-4">
                         National Merit Scholarship
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Students from Dumri College received National Merit Scholarships for outstanding 
-                        academic performance and leadership in extracurricular activities
+                        Students from Dumri College received
+                        National Merit Scholarships for
+                        outstanding academic performance and
+                        leadership in extracurricular activities
                       </p>
                     </>
                   )}
-                  {achievementTab === 'university' && (
+                  {achievementTab === "university" && (
                     <>
                       <h3 className="text-2xl font-medium text-black mb-4">
                         Excellence in Research
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Dumri College recognized as a center of excellence for research and innovation, 
-                        contributing significantly to academic publications and patents
+                        Dumri College recognized as a center of
+                        excellence for research and innovation,
+                        contributing significantly to academic
+                        publications and patents
                       </p>
                     </>
                   )}
@@ -1059,18 +1339,28 @@ export default function DumriCollegeLanding() {
 
               {/* Navigation Arrows */}
               <button
-                onClick={() => setAchievementIndex(Math.max(0, achievementIndex - 1))}
+                onClick={() =>
+                  setAchievementIndex(
+                    Math.max(0, achievementIndex - 1),
+                  )
+                }
                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 md:-translate-x-4 bg-[#0C4D8B] text-white px-2 md:px-3 py-4 md:py-6 hover:bg-[#0C4D8B]/80 transition-colors rounded-l"
                 aria-label="Previous achievement"
               >
-                <span className="text-2xl md:text-3xl font-light">‹</span>
+                <span className="text-2xl md:text-3xl font-light">
+                  ‹
+                </span>
               </button>
               <button
-                onClick={() => setAchievementIndex(achievementIndex + 1)}
+                onClick={() =>
+                  setAchievementIndex(achievementIndex + 1)
+                }
                 className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 md:translate-x-4 bg-[#0C4D8B] text-white px-2 md:px-3 py-4 md:py-6 hover:bg-[#0C4D8B]/80 transition-colors rounded-r"
                 aria-label="Next achievement"
               >
-                <span className="text-2xl md:text-3xl font-light">›</span>
+                <span className="text-2xl md:text-3xl font-light">
+                  ›
+                </span>
               </button>
             </div>
 
@@ -1172,8 +1462,12 @@ export default function DumriCollegeLanding() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl">
-              <span className="text-[#886E53]">Recognitions </span>
-              <span className="text-[#0C4D8B]">Accreditations</span>
+              <span className="text-[#886E53]">
+                Recognitions{" "}
+              </span>
+              <span className="text-[#0C4D8B]">
+                Accreditations
+              </span>
             </h2>
           </motion.div>
 
@@ -1182,62 +1476,133 @@ export default function DumriCollegeLanding() {
             const accreditations = [
               {
                 title: "QS World University Rankings",
-                image: "https://images.unsplash.com/photo-1587567867628-9df136e92128?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwcmFua2luZyUyMGF3YXJkJTIwYmFkZ2V8ZW58MXx8fHwxNzcyMzgxMzM1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1587567867628-9df136e92128?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwcmFua2luZyUyMGF3YXJkJTIwYmFkZ2V8ZW58MXx8fHwxNzcyMzgxMzM1fDA&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 title: "QS World Sustainability Rankings",
-                image: "https://images.unsplash.com/photo-1594080051162-74b97d619668?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJpbGl0eSUyMGdyZWVuJTIwY2VydGlmaWNhdGlvbnxlbnwxfHx8fDE3NzIzODEzMzZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1594080051162-74b97d619668?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJpbGl0eSUyMGdyZWVuJTIwY2VydGlmaWNhdGlvbnxlbnwxfHx8fDE3NzIzODEzMzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 title: "THE Subject Rankings 2026",
-                image: "https://images.unsplash.com/photo-1715173679369-18006e84d6a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NyZWRpdGF0aW9uJTIwY2VydGlmaWNhdGUlMjBzZWFsfGVufDF8fHx8MTc3MjM4MTMzNXww&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1715173679369-18006e84d6a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NyZWRpdGF0aW9uJTIwY2VydGlmaWNhdGUlMjBzZWFsfGVufDF8fHx8MTc3MjM4MTMzNXww&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 title: "World University Rankings Asia 2026",
-                image: "https://images.unsplash.com/photo-1628927013432-99ae87d89cb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBhd2FyZCUyMHRyb3BoeSUyMGVtYmxlbXxlbnwxfHx8fDE3NzIzODEzMzZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1628927013432-99ae87d89cb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBhd2FyZCUyMHRyb3BoeSUyMGVtYmxlbXxlbnwxfHx8fDE3NzIzODEzMzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
-                title: "The World University Ranking for Innovation 2025",
-                image: "https://images.unsplash.com/photo-1764872140075-525326e20e75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbm5vdmF0aW9uJTIwZXhjZWxsZW5jZSUyMGJhZGdlfGVufDF8fHx8MTc3MjM4MTMzNnww&ixlib=rb-4.1.0&q=80&w=1080"
-              }
+                title:
+                  "The World University Ranking for Innovation 2025",
+                image:
+                  "https://images.unsplash.com/photo-1764872140075-525326e20e75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbm5vdmF0aW9uJTIwZXhjZWxsZW5jZSUyMGJhZGdlfGVufDF8fHx8MTc3MjM4MTMzNnww&ixlib=rb-4.1.0&q=80&w=1080",
+              },
             ];
-            const AccrCard = ({ item }: { item: typeof accreditations[0] }) => (
+            const AccrCard = ({
+              item,
+            }: {
+              item: (typeof accreditations)[0];
+            }) => (
               <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-4 cursor-pointer group">
                 <div className="mb-3 overflow-hidden rounded-md">
-                  <img src={item.image} alt={item.title} className="w-full h-24 md:h-28 object-cover group-hover:scale-110 transition-transform duration-300" />
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-24 md:h-28 object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
-                <p className="text-black font-light text-xs md:text-sm leading-relaxed text-center">{item.title}</p>
+                <p className="text-black font-light text-xs md:text-sm leading-relaxed text-center">
+                  {item.title}
+                </p>
               </div>
             );
             return (
               <div className="max-w-6xl mx-auto">
                 {/* Mobile Carousel */}
                 <div className="md:hidden">
-                  <motion.div key={accrCarouselIndex} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
+                  <motion.div
+                    key={accrCarouselIndex}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <div className="grid grid-cols-2 gap-4">
-                      {[accreditations[accrCarouselIndex * 2], accreditations[accrCarouselIndex * 2 + 1]].filter(Boolean).map((item, i) => (
-                        <AccrCard key={i} item={item} />
-                      ))}
+                      {[
+                        accreditations[accrCarouselIndex * 2],
+                        accreditations[
+                          accrCarouselIndex * 2 + 1
+                        ],
+                      ]
+                        .filter(Boolean)
+                        .map((item, i) => (
+                          <AccrCard key={i} item={item} />
+                        ))}
                     </div>
                   </motion.div>
                   <div className="flex items-center justify-center gap-4 mt-4">
-                    <button onClick={() => setAccrCarouselIndex(i => Math.max(0, i - 1))} disabled={accrCarouselIndex === 0}
-                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow">‹</button>
+                    <button
+                      onClick={() =>
+                        setAccrCarouselIndex((i) =>
+                          Math.max(0, i - 1),
+                        )
+                      }
+                      disabled={accrCarouselIndex === 0}
+                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ‹
+                    </button>
                     <div className="flex gap-2">
-                      {Array.from({ length: Math.ceil(accreditations.length / 2) }).map((_, i) => (
-                        <button key={i} onClick={() => setAccrCarouselIndex(i)}
-                          className={`h-2 rounded-full transition-all ${i === accrCarouselIndex ? 'bg-[#0C4D8B] w-5' : 'bg-gray-300 w-2'}`} />
+                      {Array.from({
+                        length: Math.ceil(
+                          accreditations.length / 2,
+                        ),
+                      }).map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() =>
+                            setAccrCarouselIndex(i)
+                          }
+                          className={`h-2 rounded-full transition-all ${i === accrCarouselIndex ? "bg-[#0C4D8B] w-5" : "bg-gray-300 w-2"}`}
+                        />
                       ))}
                     </div>
-                    <button onClick={() => setAccrCarouselIndex(i => Math.min(Math.ceil(accreditations.length / 2) - 1, i + 1))}
-                      disabled={accrCarouselIndex === Math.ceil(accreditations.length / 2) - 1}
-                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow">›</button>
+                    <button
+                      onClick={() =>
+                        setAccrCarouselIndex((i) =>
+                          Math.min(
+                            Math.ceil(
+                              accreditations.length / 2,
+                            ) - 1,
+                            i + 1,
+                          ),
+                        )
+                      }
+                      disabled={
+                        accrCarouselIndex ===
+                        Math.ceil(accreditations.length / 2) - 1
+                      }
+                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ›
+                    </button>
                   </div>
                 </div>
                 {/* Desktop Grid */}
                 <div className="hidden md:grid grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
                   {accreditations.map((accreditation, idx) => (
-                    <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: idx * 0.1 }}>
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.5,
+                        delay: idx * 0.1,
+                      }}
+                    >
                       <AccrCard item={accreditation} />
                     </motion.div>
                   ))}
@@ -1245,7 +1610,10 @@ export default function DumriCollegeLanding() {
                 {/* Pagination Dots (desktop) */}
                 <div className="hidden md:flex justify-center gap-3 mt-4">
                   {[0, 1, 2].map((_, idx) => (
-                    <div key={idx} className={`w-3 h-3 rounded-full ${idx === 2 ? 'bg-[#869791]' : 'bg-gray-300'}`} />
+                    <div
+                      key={idx}
+                      className={`w-3 h-3 rounded-full ${idx === 2 ? "bg-[#869791]" : "bg-gray-300"}`}
+                    />
                   ))}
                 </div>
               </div>
@@ -1255,13 +1623,13 @@ export default function DumriCollegeLanding() {
       </section>
 
       {/* Our Proud Alumni Section */}
-      <section 
+      <section
         className="py-12 md:py-20 relative"
         style={{
           backgroundImage: `url(https://images.unsplash.com/photo-1766339162142-699904b3cf82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdWJ0bGUlMjB3aGl0ZSUyMGdlb21ldHJpYyUyMHBhdHRlcm4lMjBiYWNrZ3JvdW5kfGVufDF8fHx8MTc3MjM4NDE4MHww&ixlib=rb-4.1.0&q=80&w=1080)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50/90 to-white/90" />
@@ -1285,10 +1653,12 @@ export default function DumriCollegeLanding() {
               {
                 name: "SHWETA SASTRI",
                 position: "Managing Director",
-                organization: "Canadian International School Bangalore",
+                organization:
+                  "Canadian International School Bangalore",
                 degree: "Bachelor of Business Management (BBM)",
                 year: "2004",
-                image: "https://images.unsplash.com/photo-1770364019741-3518f4f05513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGJ1c2luZXNzJTIwbGVhZGVyfGVufDF8fHx8MTc3MjI3OTc5MXww&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1770364019741-3518f4f05513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGJ1c2luZXNzJTIwbGVhZGVyfGVufDF8fHx8MTc3MjI3OTc5MXww&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 name: "MADONNA SEBASTIAN",
@@ -1296,7 +1666,8 @@ export default function DumriCollegeLanding() {
                 organization: "Tamil/Malayalam",
                 degree: "Bachelor of Commerce Tourism",
                 year: "2013",
-                image: "https://images.unsplash.com/photo-1669829528850-959d7b08278b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBhY3RyZXNzJTIwcG9ydHJhaXQlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzcyMzgxMjA0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1669829528850-959d7b08278b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBhY3RyZXNzJTIwcG9ydHJhaXQlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzcyMzgxMjA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 name: "RAJESH KUMAR",
@@ -1304,7 +1675,8 @@ export default function DumriCollegeLanding() {
                 organization: "Tech Giants Inc.",
                 degree: "Bachelor of Computer Applications",
                 year: "2015",
-                image: "https://images.unsplash.com/photo-1770922808954-fb01766b1571?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdWNjZXNzZnVsJTIwcHJvZmVzc2lvbmFsJTIwZ3JhZHVhdGUlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzIzODEyMDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                image:
+                  "https://images.unsplash.com/photo-1770922808954-fb01766b1571?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdWNjZXNzZnVsJTIwcHJvZmVzc2lvbmFsJTIwZ3JhZHVhdGUlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzIzODEyMDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
               },
               {
                 name: "PRIYA SHARMA",
@@ -1312,20 +1684,37 @@ export default function DumriCollegeLanding() {
                 organization: "Innovation Labs",
                 degree: "Master of Business Administration",
                 year: "2010",
-                image: "https://images.unsplash.com/photo-1562935345-5080389daccd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGV4ZWN1dGl2ZSUyMGVudHJlcHJlbmV1cnxlbnwxfHx8fDE3NzIzODEyMDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-              }
+                image:
+                  "https://images.unsplash.com/photo-1562935345-5080389daccd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGV4ZWN1dGl2ZSUyMGVudHJlcHJlbmV1cnxlbnwxfHx8fDE3NzIzODEyMDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+              },
             ];
-            const AlumniCard = ({ alumni }: { alumni: typeof alumniList[0] }) => (
+            const AlumniCard = ({
+              alumni,
+            }: {
+              alumni: (typeof alumniList)[0];
+            }) => (
               <div className="bg-white rounded-lg shadow-lg overflow-hidden flex h-[180px] md:h-[240px]">
                 <div className="w-[130px] md:w-[180px] flex-shrink-0 overflow-hidden">
-                  <img src={alumni.image} alt={alumni.name} className="w-full h-full object-cover" />
+                  <img
+                    src={alumni.image}
+                    alt={alumni.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex-1 p-4 md:p-6 flex flex-col justify-center bg-gradient-to-br from-white to-blue-50/30">
-                  <h3 className="text-[#0C4D8B] font-semibold text-sm md:text-lg mb-1 md:mb-3">{alumni.name}</h3>
+                  <h3 className="text-[#0C4D8B] font-semibold text-sm md:text-lg mb-1 md:mb-3">
+                    {alumni.name}
+                  </h3>
                   <div className="space-y-0.5 md:space-y-2">
-                    <p className="text-[#0C4D8B] font-normal text-xs md:text-base">{alumni.position}</p>
-                    <p className="text-[#0C4D8B] font-light text-xs md:text-base">{alumni.organization}</p>
-                    <p className="text-[#0C4D8B] font-light text-xs md:text-sm">{alumni.degree} ({alumni.year})</p>
+                    <p className="text-[#0C4D8B] font-normal text-xs md:text-base">
+                      {alumni.position}
+                    </p>
+                    <p className="text-[#0C4D8B] font-light text-xs md:text-base">
+                      {alumni.organization}
+                    </p>
+                    <p className="text-[#0C4D8B] font-light text-xs md:text-sm">
+                      {alumni.degree} ({alumni.year})
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1334,20 +1723,53 @@ export default function DumriCollegeLanding() {
               <>
                 {/* Mobile Carousel */}
                 <div className="md:hidden">
-                  <motion.div key={alumniIndex} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
-                    <AlumniCard alumni={alumniList[alumniIndex]} />
+                  <motion.div
+                    key={alumniIndex}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <AlumniCard
+                      alumni={alumniList[alumniIndex]}
+                    />
                   </motion.div>
                   <div className="flex items-center justify-center gap-4 mt-4">
-                    <button onClick={() => setAlumniIndex(i => Math.max(0, i - 1))} disabled={alumniIndex === 0}
-                      className="w-9 h-9 rounded-full bg-[#D98600] disabled:bg-gray-300 text-white flex items-center justify-center shadow">‹</button>
+                    <button
+                      onClick={() =>
+                        setAlumniIndex((i) =>
+                          Math.max(0, i - 1),
+                        )
+                      }
+                      disabled={alumniIndex === 0}
+                      className="w-9 h-9 rounded-full bg-[#D98600] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ‹
+                    </button>
                     <div className="flex gap-2">
                       {alumniList.map((_, i) => (
-                        <button key={i} onClick={() => setAlumniIndex(i)}
-                          className={`h-2 rounded-full transition-all ${i === alumniIndex ? 'bg-[#D98600] w-5' : 'bg-gray-300 w-2'}`} />
+                        <button
+                          key={i}
+                          onClick={() => setAlumniIndex(i)}
+                          className={`h-2 rounded-full transition-all ${i === alumniIndex ? "bg-[#D98600] w-5" : "bg-gray-300 w-2"}`}
+                        />
                       ))}
                     </div>
-                    <button onClick={() => setAlumniIndex(i => Math.min(alumniList.length - 1, i + 1))} disabled={alumniIndex === alumniList.length - 1}
-                      className="w-9 h-9 rounded-full bg-[#D98600] disabled:bg-gray-300 text-white flex items-center justify-center shadow">›</button>
+                    <button
+                      onClick={() =>
+                        setAlumniIndex((i) =>
+                          Math.min(
+                            alumniList.length - 1,
+                            i + 1,
+                          ),
+                        )
+                      }
+                      disabled={
+                        alumniIndex === alumniList.length - 1
+                      }
+                      className="w-9 h-9 rounded-full bg-[#D98600] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ›
+                    </button>
                   </div>
                 </div>
                 {/* Desktop: 2-column grid with nav arrows */}
@@ -1359,7 +1781,10 @@ export default function DumriCollegeLanding() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: idx * 0.1 }}
+                        transition={{
+                          duration: 0.6,
+                          delay: idx * 0.1,
+                        }}
                         whileHover={{ y: -10, scale: 1.02 }}
                       >
                         <AlumniCard alumni={alumni} />
@@ -1403,12 +1828,30 @@ export default function DumriCollegeLanding() {
           {/* Gallery — Mobile Carousel / Desktop Grid */}
           {(() => {
             const galleryImages = [
-              { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80", alt: "Classroom Learning" },
-              { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80", alt: "Students Celebrating" },
-              { src: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80", alt: "Campus Building" },
-              { src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80", alt: "Students Studying" },
-              { src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=80", alt: "Sports Activities" },
-              { src: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80", alt: "Campus Event" },
+              {
+                src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+                alt: "Classroom Learning",
+              },
+              {
+                src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80",
+                alt: "Students Celebrating",
+              },
+              {
+                src: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80",
+                alt: "Campus Building",
+              },
+              {
+                src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+                alt: "Students Studying",
+              },
+              {
+                src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=80",
+                alt: "Sports Activities",
+              },
+              {
+                src: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80",
+                alt: "Campus Event",
+              },
             ];
             return (
               <>
@@ -1424,23 +1867,58 @@ export default function DumriCollegeLanding() {
                   >
                     <div className="relative overflow-hidden rounded-xl aspect-[4/3] shadow-md">
                       <img
-                        src={galleryImages[galleryCarouselIndex].src}
-                        alt={galleryImages[galleryCarouselIndex].alt}
+                        src={
+                          galleryImages[galleryCarouselIndex]
+                            .src
+                        }
+                        alt={
+                          galleryImages[galleryCarouselIndex]
+                            .alt
+                        }
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
                   </motion.div>
                   <div className="flex items-center justify-center gap-4 mt-4">
-                    <button onClick={() => setGalleryCarouselIndex(i => Math.max(0, i - 1))} disabled={galleryCarouselIndex === 0}
-                      className="w-9 h-9 rounded-full bg-[#2563EB] disabled:bg-gray-300 text-white flex items-center justify-center shadow">‹</button>
+                    <button
+                      onClick={() =>
+                        setGalleryCarouselIndex((i) =>
+                          Math.max(0, i - 1),
+                        )
+                      }
+                      disabled={galleryCarouselIndex === 0}
+                      className="w-9 h-9 rounded-full bg-[#2563EB] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ‹
+                    </button>
                     <div className="flex gap-1.5">
                       {galleryImages.map((_, i) => (
-                        <button key={i} onClick={() => setGalleryCarouselIndex(i)}
-                          className={`h-2 rounded-full transition-all ${i === galleryCarouselIndex ? 'bg-[#2563EB] w-5' : 'bg-gray-300 w-2'}`} />
+                        <button
+                          key={i}
+                          onClick={() =>
+                            setGalleryCarouselIndex(i)
+                          }
+                          className={`h-2 rounded-full transition-all ${i === galleryCarouselIndex ? "bg-[#2563EB] w-5" : "bg-gray-300 w-2"}`}
+                        />
                       ))}
                     </div>
-                    <button onClick={() => setGalleryCarouselIndex(i => Math.min(galleryImages.length - 1, i + 1))} disabled={galleryCarouselIndex === galleryImages.length - 1}
-                      className="w-9 h-9 rounded-full bg-[#2563EB] disabled:bg-gray-300 text-white flex items-center justify-center shadow">›</button>
+                    <button
+                      onClick={() =>
+                        setGalleryCarouselIndex((i) =>
+                          Math.min(
+                            galleryImages.length - 1,
+                            i + 1,
+                          ),
+                        )
+                      }
+                      disabled={
+                        galleryCarouselIndex ===
+                        galleryImages.length - 1
+                      }
+                      className="w-9 h-9 rounded-full bg-[#2563EB] disabled:bg-gray-300 text-white flex items-center justify-center shadow"
+                    >
+                      ›
+                    </button>
                   </div>
                 </div>
                 {/* Desktop Grid */}
@@ -1451,12 +1929,19 @@ export default function DumriCollegeLanding() {
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: idx * 0.1,
+                      }}
                       className="group cursor-pointer"
                       onClick={() => navigate("/gallery")}
                     >
                       <div className="relative overflow-hidden rounded-xl aspect-[4/3] shadow-md hover:shadow-2xl transition-all duration-300">
-                        <img src={img.src} alt={img.alt} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
                       </div>
                     </motion.div>
                   ))}
@@ -1489,11 +1974,15 @@ export default function DumriCollegeLanding() {
               "radial-gradient(circle at 20% 50%, white 0%, transparent 50%)",
               "radial-gradient(circle at 80% 50%, white 0%, transparent 50%)",
               "radial-gradient(circle at 20% 50%, white 0%, transparent 50%)",
-            ]
+            ],
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
         />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1501,7 +1990,7 @@ export default function DumriCollegeLanding() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, type: "spring" }}
           >
-            <motion.h2 
+            <motion.h2
               className="text-2xl md:text-3xl lg:text-4xl text-white font-semibold mb-4 md:mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1509,15 +1998,16 @@ export default function DumriCollegeLanding() {
             >
               Ready to Begin Your Journey?
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-xl text-white/90 mb-8 max-w-2xl mx-auto"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Join Dumri College and be part of a legacy of excellence, innovation, and success.
+              Join Dumri College and be part of a legacy of
+              excellence, innovation, and success.
             </motion.p>
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1526,7 +2016,10 @@ export default function DumriCollegeLanding() {
               <motion.button
                 onClick={() => navigate("/apply")}
                 className="bg-white text-[#2563EB] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-xl"
-                whileHover={{ scale: 1.1, boxShadow: "0 25px 50px rgba(0,0,0,0.3)" }}
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0 25px 50px rgba(0,0,0,0.3)",
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 Apply Now

@@ -97,14 +97,14 @@ const CourseCatalogPage = lazy(() =>
     default: m.CourseCatalogPage,
   }))
 );
-const InternationalStudentsPage = lazy(() =>
-  import("./components/pages/InternationalStudentsPage").then((m) => ({
-    default: m.InternationalStudentsPage,
+const HowToApplyPage = lazy(() =>
+  import("./components/pages/HowToApplyPage").then((m) => ({
+    default: m.HowToApplyPage,
   }))
 );
-const SignupPage = lazy(() =>
-  import("./components/pages/SignupPage").then((m) => ({
-    default: m.SignupPage,
+const ProgramsPage = lazy(() =>
+  import("./components/pages/ProgramsPage").then((m) => ({
+    default: m.ProgramsPage,
   }))
 );
 const FacultyOverviewPage = lazy(() =>
@@ -117,6 +117,11 @@ const LibraryPage = lazy(() =>
     default: m.LibraryPage,
   }))
 );
+const SignupPage = lazy(() =>
+  import("./components/pages/SignupPage").then((m) => ({
+    default: m.SignupPage,
+  }))
+);
 
 // Shared pages
 const Academics = lazy(() =>
@@ -127,11 +132,6 @@ const Gallery = lazy(() =>
 );
 const Contact = lazy(() =>
   import("./components/Contact").then((m) => ({ default: m.Contact }))
-);
-const ProgramsPage = lazy(() =>
-  import("./components/ProgramsPage").then((m) => ({
-    default: m.ProgramsPage,
-  }))
 );
 
 // Auth
@@ -450,14 +450,14 @@ export const router = createBrowserRouter([
       { path: "/faculty/education",     Component: FacultyEducationPage },
       { path: "/academic-calendar",     Component: AcademicCalendarPage },
       { path: "/course-catalog",        Component: CourseCatalogPage },
-      { path: "/international-students",Component: InternationalStudentsPage },
+      { path: "/how-to-apply",          Component: HowToApplyPage },
       { path: "/programs",              Component: ProgramsPage },
       { path: "/faculty",               Component: FacultyOverviewPage },
       { path: "/library",               Component: LibraryPage },
+      { path: "/signup",                Component: SignupPage },
       { path: "/academics",             Component: Academics },
       { path: "/gallery",               Component: Gallery },
       { path: "/contact",               Component: Contact },
-      { path: "/signup",                Component: SignupPage },
 
       // ── Auth ──────────────────────────────────────────────────────────────
       { path: "/studentlogin", Component: StudentLoginPage },

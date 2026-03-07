@@ -7,7 +7,6 @@ import {
   Smartphone,
   KeyRound,
   ChevronRight,
-  Sparkles,
   Check,
 } from "lucide-react";
 import { Button } from "./ui/button";
@@ -16,6 +15,7 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { CarouselHeader } from "./CarouselHeader";
 import { Footer } from "./Footer";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function StudentLoginPage() {
   const [step, setStep] = useState<"mobile" | "otp">("mobile");
@@ -79,101 +79,91 @@ export function StudentLoginPage() {
   return (
     <>
       <CarouselHeader />
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50 relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
+      <div className="min-h-screen bg-slate-50">
+        {/* Banner Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative h-64 md:h-80 overflow-hidden"
+        >
+          <ImageWithFallback
+            src="https://images.unsplash.com/photo-1760111085279-6c4b6d831acc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50JTIwY29sbGVnZSUyMGNhbXB1cyUyMGVkdWNhdGlvbnxlbnwxfHx8fDE3NzI4OTY5ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Campus Banner"
+            className="w-full h-full object-cover"
           />
-          <motion.div
-            animate={{
-              scale: [1, 1.3, 1],
-              rotate: [0, -90, 0],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-orange-400/20 to-yellow-400/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              y: [0, 50, 0],
-              x: [0, 30, 0],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-purple-400/20 to-blue-400/20 rounded-full blur-3xl"
-          />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/85 via-blue-800/80 to-blue-900/85" />
+          
+          {/* Banner Content */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 flex items-center justify-center mb-4"
+            >
+              <GraduationCap className="w-8 h-8 md:w-10 md:h-10 text-white" />
+            </motion.div>
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-center"
+            >
+              Dumri College
+            </motion.h1>
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-lg md:text-xl text-blue-100"
+            >
+              Student Portal Login
+            </motion.p>
+          </div>
+        </motion.div>
 
-        {/* Content */}
-        <div className="relative z-10 min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
-          <div className="w-full max-w-6xl">
+        {/* Login Form Section */}
+        <div className="flex items-center justify-center py-12 px-4">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="w-full max-w-md"
+          >
             <AnimatePresence mode="wait">
               {/* Step 1: Mobile Number Entry */}
               {step === "mobile" && (
                 <motion.div
                   key="mobile"
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <Card className="max-w-md mx-auto p-8 md:p-10 shadow-2xl border-0 backdrop-blur-sm bg-white/80">
-                    <div className="text-center mb-8">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 200,
-                        }}
-                        className="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 items-center justify-center mb-4 shadow-lg"
-                      >
-                        <GraduationCap className="w-8 h-8 text-white" />
-                      </motion.div>
-                      <Badge className="bg-gradient-to-r from-blue-50 to-blue-100 border-0 mb-4 px-4 py-2">
-                        <KeyRound className="w-4 h-4 mr-2" />
+                  <Card className="p-8 shadow-xl bg-white border-0">
+                    <div className="text-center mb-6">
+                      <Badge className="bg-blue-100 text-blue-700 border-0 mb-3 px-3 py-1">
                         Step 1 of 2
                       </Badge>
                       <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                        Student Login
+                        Welcome Back!
                       </h2>
-                      <p className="text-gray-600">
-                        Enter your registered mobile number
+                      <p className="text-gray-600 text-sm">
+                        Enter your mobile number to continue
                       </p>
                     </div>
 
-                    <form
-                      onSubmit={handleSendOTP}
-                      className="space-y-6"
-                    >
+                    <form onSubmit={handleSendOTP} className="space-y-5">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                           Mobile Number
                         </label>
                         <div className="relative">
-                          <Smartphone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                          <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                           <Input
                             type="tel"
-                            placeholder="Enter 10-digit mobile number"
+                            placeholder="Enter 10-digit number"
                             value={mobile}
                             onChange={(e) =>
                               setMobile(
@@ -182,56 +172,37 @@ export function StudentLoginPage() {
                                   .slice(0, 10),
                               )
                             }
-                            className="pl-12 h-14 text-lg border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                            className="pl-11 h-12"
                             required
                             maxLength={10}
                           />
                         </div>
-                        {mobile.length > 0 &&
-                          mobile.length < 10 && (
-                            <p className="text-sm text-red-500 mt-2">
-                              Please enter a valid 10-digit number
-                            </p>
-                          )}
+                        {mobile.length > 0 && mobile.length < 10 && (
+                          <p className="text-xs text-red-500 mt-1">
+                            Please enter a valid 10-digit number
+                          </p>
+                        )}
                       </div>
 
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                      <Button
+                        type="submit"
+                        disabled={mobile.length !== 10 || isLoading}
+                        className="w-full h-12 bg-blue-600 hover:bg-blue-700 cursor-pointer"
                       >
-                        <Button
-                          type="submit"
-                          disabled={
-                            mobile.length !== 10 || isLoading
-                          }
-                          className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-blue-500 to-blue-600 hover:opacity-90 shadow-lg"
-                        >
-                          {isLoading ? (
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                ease: "linear",
-                              }}
-                              className="w-6 h-6 border-3 border-white border-t-transparent rounded-full"
-                            />
-                          ) : (
-                            <>
-                              Send OTP
-                              <ChevronRight className="w-5 h-5 ml-2" />
-                            </>
-                          )}
-                        </Button>
-                      </motion.div>
+                        {isLoading ? (
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <>
+                            Send OTP
+                            <ChevronRight className="w-5 h-5 ml-1" />
+                          </>
+                        )}
+                      </Button>
                     </form>
 
-                    <div className="mt-6 p-4 bg-blue-50 rounded-xl">
-                      <p className="text-sm text-blue-800">
-                        <span className="font-semibold">
-                          🔒 Secure Login:
-                        </span>{" "}
-                        An OTP will be sent to your registered mobile number
+                    <div className="mt-6 p-3 bg-blue-50 rounded-lg">
+                      <p className="text-xs text-blue-800 text-center">
+                        🔒 An OTP will be sent to your registered mobile
                       </p>
                     </div>
                   </Card>
@@ -242,58 +213,42 @@ export function StudentLoginPage() {
               {step === "otp" && (
                 <motion.div
                   key="otp"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.4 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <Card className="max-w-md mx-auto p-8 md:p-10 shadow-2xl border-0 backdrop-blur-sm bg-white/80">
+                  <Card className="p-8 shadow-xl bg-white border-0">
                     <button
                       onClick={handleBack}
-                      className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+                      className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors text-sm cursor-pointer"
                     >
-                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      <ArrowLeft className="w-4 h-4 mr-1" />
                       Back
                     </button>
 
-                    <div className="text-center mb-8">
-                      <motion.div
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                        }}
-                        className="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 items-center justify-center mb-4 shadow-lg"
-                      >
-                        <Smartphone className="w-8 h-8 text-white" />
-                      </motion.div>
-                      <Badge className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 border-0 mb-4 px-4 py-2">
-                        <Check className="w-4 h-4 mr-2" />
+                    <div className="text-center mb-6">
+                      <Badge className="bg-green-100 text-green-700 border-0 mb-3 px-3 py-1">
+                        <Check className="w-3 h-3 mr-1" />
                         Step 2 of 2
                       </Badge>
                       <h2 className="text-2xl font-bold text-gray-900 mb-2">
                         Verify OTP
                       </h2>
-                      <p className="text-gray-600">
-                        Enter the 6-digit code sent to
-                        <br />
-                        <span className="font-semibold text-gray-900">
-                          +91 {mobile}
-                        </span>
+                      <p className="text-gray-600 text-sm">
+                        Code sent to{" "}
+                        <span className="font-semibold">+91 {mobile}</span>
                       </p>
                     </div>
 
-                    <form
-                      onSubmit={handleVerifyOTP}
-                      className="space-y-6"
-                    >
+                    <form onSubmit={handleVerifyOTP} className="space-y-5">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-4 text-center">
-                          Enter OTP
+                        <label className="block text-sm font-medium text-gray-700 mb-3 text-center">
+                          Enter 6-digit OTP
                         </label>
                         <div className="flex gap-2 justify-center">
                           {otp.map((digit, index) => (
-                            <motion.input
+                            <input
                               key={index}
                               id={`otp-${index}`}
                               type="text"
@@ -301,10 +256,7 @@ export function StudentLoginPage() {
                               maxLength={1}
                               value={digit}
                               onChange={(e) =>
-                                handleOtpChange(
-                                  index,
-                                  e.target.value,
-                                )
+                                handleOtpChange(index, e.target.value)
                               }
                               onKeyDown={(e) => {
                                 if (
@@ -319,8 +271,7 @@ export function StudentLoginPage() {
                                   prevInput?.focus();
                                 }
                               }}
-                              whileFocus={{ scale: 1.1 }}
-                              className="w-12 h-14 text-center text-2xl font-bold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                              className="w-11 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none cursor-pointer"
                             />
                           ))}
                         </div>
@@ -333,57 +284,38 @@ export function StudentLoginPage() {
                             setStep("mobile");
                             setOtp(["", "", "", "", "", ""]);
                           }}
-                          className="text-sm text-blue-600 hover:text-blue-700 hover:underline font-semibold"
+                          className="text-sm text-blue-600 hover:text-blue-700 hover:underline cursor-pointer"
                         >
                           Resend OTP
                         </button>
                       </div>
 
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                      <Button
+                        type="submit"
+                        disabled={otp.join("").length !== 6 || isLoading}
+                        className="w-full h-12 bg-blue-600 hover:bg-blue-700 cursor-pointer"
                       >
-                        <Button
-                          type="submit"
-                          disabled={
-                            otp.join("").length !== 6 ||
-                            isLoading
-                          }
-                          className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-blue-500 to-blue-600 hover:opacity-90 shadow-lg"
-                        >
-                          {isLoading ? (
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                ease: "linear",
-                              }}
-                              className="w-6 h-6 border-3 border-white border-t-transparent rounded-full"
-                            />
-                          ) : (
-                            <>
-                              Verify & Login
-                              <ChevronRight className="w-5 h-5 ml-2" />
-                            </>
-                          )}
-                        </Button>
-                      </motion.div>
+                        {isLoading ? (
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <>
+                            Verify & Login
+                            <ChevronRight className="w-5 h-5 ml-1" />
+                          </>
+                        )}
+                      </Button>
                     </form>
 
-                    <div className="mt-6 p-4 bg-blue-50 rounded-xl">
-                      <p className="text-sm text-blue-800">
-                        <span className="font-semibold">
-                          🔒 Secure Login:
-                        </span>{" "}
-                        Your OTP is valid for 10 minutes
+                    <div className="mt-6 p-3 bg-blue-50 rounded-lg">
+                      <p className="text-xs text-blue-800 text-center">
+                        🔒 OTP is valid for 10 minutes
                       </p>
                     </div>
                   </Card>
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
       </div>
       <Footer />

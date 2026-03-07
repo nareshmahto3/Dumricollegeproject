@@ -34,17 +34,17 @@ const menuItems: MenuItem[] = [
       { label: 'Course Catalog', href: '/course-catalog' },
     ],
   },
-  {
-    label: 'Research',
-    href: '/research',
-  },
-  {
-    label: 'Library',
-    submenu: [
-      { label: 'Central Library', href: '/library' },
-      { label: 'Digital Library Portal', href: '/student/library' },
-    ],
-  },
+  // {
+  //   label: 'Research',
+  //   href: '/research',
+  // },
+  // {
+  //   label: 'Library',
+  //   submenu: [
+  //     { label: 'Central Library', href: '/library' },
+  //     { label: 'Digital Library Portal', href: '/student/library' },
+  //   ],
+  // },
   {
     label: 'Student Life',
     submenu: [
@@ -64,7 +64,6 @@ const menuItems: MenuItem[] = [
   },
   {
     label: 'Campuses',
-    highlight: true,
     submenu: [
       { label: 'About Dumri College', href: '/about' },
       { label: 'Gallery', href: '/gallery' },
@@ -75,7 +74,7 @@ const menuItems: MenuItem[] = [
     submenu: [
       { label: 'Contact Us', href: '/contact' },
       { label: 'FAQ', href: '/faq' },
-      { label: 'International Students', href: '/international-students' },
+      { label: 'How to Apply', href: '/how-to-apply' },
     ],
   },
 ];
@@ -148,13 +147,13 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
 
           {/* College Name */}
           <div 
-            className="absolute font-['Alice',serif] h-[84px] leading-[20px] left-[107px] not-italic text-[40px] text-black top-[17px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
+            className="absolute font-['Alice',serif] h-[84px] leading-[20px] left-[107px] not-italic text-[25px] text-black top-[17px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <p className="mb-0">Dumri </p>
+            <p className="mb-0 ">Dumri Commerce</p>
             <p>
               <br aria-hidden="true" />
-              College
+              Inter College
             </p>
           </div>
 
@@ -164,12 +163,14 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
               onClick={handleMenuClick}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-white h-[39px] rounded-[7px] w-[145px] flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-shadow"
+              className="bg-white/95 backdrop-blur-sm h-[42px] rounded-lg w-[130px] flex items-center justify-center gap-3 px-4 border-2 border-[#2563EB] shadow-md hover:shadow-lg transition-all cursor-pointer"
             >
-              <div className="w-[21px]">
-                <HamburgerIcon />
+              <span className="font-semibold text-[16px] text-[#2563EB] tracking-wide">MENU</span>
+              <div className="flex flex-col gap-1.5">
+                <div className="w-6 h-0.5 bg-[#2563EB] rounded-full"></div>
+                <div className="w-6 h-0.5 bg-[#2563EB] rounded-full"></div>
+                <div className="w-6 h-0.5 bg-[#2563EB] rounded-full"></div>
               </div>
-              <span className="font-['Alice',serif] text-[24px] text-black">Menu</span>
             </motion.button>
           </div>
         </div>
@@ -203,10 +204,14 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                 onClick={handleMenuClick}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-3 px-5 py-2 rounded-md border border-gray-300 hover:border-[#C9962B] transition-colors"
+                className="bg-white h-[42px] rounded-lg w-[130px] flex items-center justify-center gap-3 px-4 border-2 border-[#2563EB] shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
-                <span className="text-[#C9962B] font-semibold tracking-wide uppercase">Menu</span>
-                <Menu className="w-5 h-5 text-gray-700" />
+                <span className="font-semibold text-[16px] text-[#2563EB] tracking-wide">MENU</span>
+                <div className="flex flex-col gap-1.5">
+                  <div className="w-6 h-0.5 bg-[#2563EB] rounded-full"></div>
+                  <div className="w-6 h-0.5 bg-[#2563EB] rounded-full"></div>
+                  <div className="w-6 h-0.5 bg-[#2563EB] rounded-full"></div>
+                </div>
               </motion.button>
             </div>
           </motion.div>
@@ -236,7 +241,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                 <h2 className="text-2xl font-normal text-black tracking-wide">MAIN MENU</h2>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-gray-600 hover:text-black transition-colors"
+                  className="text-gray-600 hover:text-black transition-colors cursor-pointer"
                 >
                   <X className="w-7 h-7" />
                 </button>
@@ -247,13 +252,13 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => handleNavigation('/studentlogin')}
-                    className="bg-[#0E4C8F] hover:bg-[#0d4280] text-white py-4 px-4 rounded-lg font-medium text-sm tracking-wide transition-colors"
+                    className="bg-[#0E4C8F] hover:bg-[#0d4280] text-white py-4 px-4 rounded-lg font-medium text-sm tracking-wide transition-colors cursor-pointer"
                   >
                     STUDENT LOGIN
                   </button>
                   <button
                     onClick={() => handleNavigation('/stafflogin')}
-                    className="bg-[#2B9EF6] hover:bg-[#1e8fe6] text-white py-4 px-4 rounded-lg font-medium text-sm tracking-wide transition-colors"
+                    className="bg-[#2B9EF6] hover:bg-[#1e8fe6] text-white py-4 px-4 rounded-lg font-medium text-sm tracking-wide transition-colors cursor-pointer"
                   >
                     STAFF LOGIN
                   </button>
@@ -264,7 +269,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
               <nav className="px-7">
                 {menuItems.map((item, index) => (
                   <div key={index} className="border-b border-gray-200 last:border-b-0">
-                    <div className="flex items-center justify-between py-4">
+                    <div className="flex items-center justify-between py-1.5">
                       <button
                         onClick={() => {
                           if (item.submenu) {
@@ -273,9 +278,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                             handleNavigation(item.href);
                           }
                         }}
-                        className={`flex-1 text-left text-lg ${
-                          item.highlight ? 'text-[#C9962B]' : 'text-black'
-                        }`}
+                        className="flex-1 text-left text-lg font-normal text-black cursor-pointer"
                       >
                         {item.label}
                       </button>
@@ -284,9 +287,9 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                           onClick={() => toggleExpand(item.label)}
                           animate={{ rotate: expandedItem === item.label ? 180 : 0 }}
                           transition={{ duration: 0.2 }}
-                          className="w-10 h-10 flex items-center justify-center bg-[#C9962B] rounded-md hover:bg-[#b58525] transition-colors"
+                          className="w-8 h-8 flex items-center justify-center bg-[#C9962B] rounded-md hover:bg-[#b58525] transition-colors cursor-pointer"
                         >
-                          <ChevronDown className="w-5 h-5 text-white" />
+                          <ChevronDown className="w-4 h-4 text-white" />
                         </motion.button>
                       )}
                     </div>
@@ -301,15 +304,19 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                           transition={{ duration: 0.2 }}
                           className="overflow-hidden"
                         >
-                          <div className="pb-3 pl-4 space-y-2">
+                          <div className="pb-3 pl-4 space-y-0">
                             {item.submenu.map((subitem, subindex) => (
-                              <button
-                                key={subindex}
-                                onClick={() => handleNavigation(subitem.href)}
-                                className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#2563EB] hover:bg-gray-50 rounded transition-colors"
-                              >
-                                {subitem.label}
-                              </button>
+                              <div key={subindex}>
+                                <button
+                                  onClick={() => handleNavigation(subitem.href)}
+                                  className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#2563EB] hover:bg-gray-50 rounded transition-colors cursor-pointer"
+                                >
+                                  {subitem.label}
+                                </button>
+                                {subindex < item.submenu!.length - 1 && (
+                                  <div className="mx-3 border-t border-gray-200" />
+                                )}
+                              </div>
                             ))}
                           </div>
                         </motion.div>
