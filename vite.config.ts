@@ -3,8 +3,21 @@
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
 
+  function figmaAssetPlugin() {
+    return {
+      name: 'figma-asset-resolver',
+      resolveId(source) {
+        if (source.startsWith('figma:asset/')) {
+          const relativePath = source.slice('figma:asset/'.length);
+          return path.resolve(__dirname, 'src/assets', relativePath);
+        }
+        return null;
+      },
+    };
+  }
+
   export default defineConfig({
-    plugins: [react()],
+    plugins: [react(), figmaAssetPlugin()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
