@@ -22,14 +22,6 @@ import { toast } from "sonner";
 
 const roles = [
   {
-    id: "teacher",
-    label: "Teacher",
-    icon: BookOpen,
-    gradient: "from-emerald-500 to-emerald-600",
-    bgGradient: "from-emerald-50 to-emerald-100",
-    description: "Manage classes, assignments, and student progress",
-  },
-  {
     id: "admin",
     label: "Admin",
     icon: Shield,
@@ -37,6 +29,15 @@ const roles = [
     bgGradient: "from-purple-50 to-purple-100",
     description: "Full system access and administrative controls",
   },
+  {
+    id: "teacher",
+    label: "Teacher",
+    icon: BookOpen,
+    gradient: "from-emerald-500 to-emerald-600",
+    bgGradient: "from-emerald-50 to-emerald-100",
+    description: "Manage classes, assignments, and student progress",
+  },
+  
 ];
 
 export function StaffLoginPage() {
@@ -139,7 +140,7 @@ export function StaffLoginPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-center"
             >
-              Dumri College
+                Jharkhand Commerce Inter College
             </motion.h1>
             <motion.p
               initial={{ y: 20, opacity: 0 }}
@@ -161,80 +162,7 @@ export function StaffLoginPage() {
             className="w-full max-w-3xl"
           >
             <AnimatePresence mode="wait">
-              {/* Step 1: Role Selection */}
-              {step === "role" && (
-                <motion.div
-                  key="role"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Card className="p-8 md:p-12 shadow-xl bg-white border-0">
-                    <div className="text-center mb-8">
-                      <Badge className="bg-blue-100 text-blue-700 border-0 mb-3 px-4 py-2">
-                        Step 1 of 2
-                      </Badge>
-                      <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                        Select Your Role
-                      </h2>
-                      <p className="text-gray-600">
-                        Choose how you want to login
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {roles.map((role, index) => (
-                        <motion.div
-                          key={role.id}
-                          initial={{ opacity: 0, y: 50 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            delay: index * 0.15,
-                            duration: 0.5,
-                          }}
-                          whileHover={{ 
-                            y: -8,
-                            transition: { duration: 0.2 }
-                          }}
-                        >
-                          <button
-                            onClick={() =>
-                              handleRoleSelect(role.id as "teacher" | "admin")
-                            }
-                            className="w-full p-6 rounded-xl border-2 border-gray-200 hover:border-transparent hover:shadow-xl transition-all text-left relative overflow-hidden group cursor-pointer"
-                          >
-                            {/* Background gradient on hover */}
-                            <div
-                              className={`absolute inset-0 bg-gradient-to-br ${role.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                            />
-
-                            <div className="relative z-10">
-                              <div
-                                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${role.gradient} flex items-center justify-center mb-4 shadow-lg`}
-                              >
-                                <role.icon className="w-7 h-7 text-white" />
-                              </div>
-                              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                                {role.label}
-                              </h3>
-                              <p className="text-sm text-gray-600 mb-4">
-                                {role.description}
-                              </p>
-                              <div className="flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-700">
-                                Continue
-                                <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                              </div>
-                            </div>
-                          </button>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </Card>
-                </motion.div>
-              )}
-
-              {/* Step 2: Username/Password Login */}
+                {/* Step 2: Username/Password Login */}
               {step === "credentials" && selectedRoleData && (
                 <motion.div
                   key="credentials"
@@ -352,6 +280,80 @@ export function StaffLoginPage() {
                   </Card>
                 </motion.div>
               )}
+              {/* Step 1: Role Selection */}
+              {step === "role" && (
+                <motion.div
+                  key="role"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Card className="p-8 md:p-12 shadow-xl bg-white border-0">
+                    <div className="text-center mb-8">
+                      <Badge className="bg-blue-100 text-blue-700 border-0 mb-3 px-4 py-2">
+                        Step 1 of 2
+                      </Badge>
+                      <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                        Select Your Role
+                      </h2>
+                      <p className="text-gray-600">
+                        Choose how you want to login
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {roles.map((role, index) => (
+                        <motion.div
+                          key={role.id}
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            delay: index * 0.15,
+                            duration: 0.5,
+                          }}
+                          whileHover={{ 
+                            y: -8,
+                            transition: { duration: 0.2 }
+                          }}
+                        >
+                          <button
+                            onClick={() =>
+                              handleRoleSelect(role.id as "teacher" | "admin")
+                            }
+                            className="w-full p-6 rounded-xl border-2 border-gray-200 hover:border-transparent hover:shadow-xl transition-all text-left relative overflow-hidden group cursor-pointer"
+                          >
+                            {/* Background gradient on hover */}
+                            <div
+                              className={`absolute inset-0 bg-gradient-to-br ${role.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                            />
+
+                            <div className="relative z-10">
+                              <div
+                                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${role.gradient} flex items-center justify-center mb-4 shadow-lg`}
+                              >
+                                <role.icon className="w-7 h-7 text-white" />
+                              </div>
+                              <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                {role.label}
+                              </h3>
+                              <p className="text-sm text-gray-600 mb-4">
+                                {role.description}
+                              </p>
+                              <div className="flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-700">
+                                Continue
+                                <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                              </div>
+                            </div>
+                          </button>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </Card>
+                </motion.div>
+              )}
+
+            
             </AnimatePresence>
           </motion.div>
         </div>

@@ -21,18 +21,23 @@ const menuItems: MenuItem[] = [
   {
     label: 'About Us',
     submenu: [
-      { label: 'History', href: '/history' },
-      { label: 'Administration', href: '/administration' },
-      { label: 'Campus Life', href: '/campus-life' },
+      { label: 'About Jharkhand Commerce Inter College', href: '/about' },
+      { label: 'Vision and  Mission', href: '/administration' },
+      { label: 'Founder', href: '/campus-life' },
+      { label: 'Administration', href: '/campus-life' },
+       { label: 'Principal Message', href: '/campus-life' },
+       { label: 'Our Alumini', href: '/course-catalog' },
     ],
   },
   {
     label: 'Academics',
     submenu: [
       { label: 'Programs', href: '/programs' },
-      { label: 'All Faculties', href: '/faculty' },
-      { label: 'Academic Calendar', href: '/academic-calendar' },
-      { label: 'Course Catalog', href: '/course-catalog' },
+      { label: 'Admissions', href: '/apply' },
+      { label: 'Faculty', href: '/academic-calendar' },      
+       { label: 'Admission Requirements', href: '/how-to-apply' },
+        { label: 'Fee Structure', href: '/course-catalog' },
+
     ],
   },
   // {
@@ -47,35 +52,37 @@ const menuItems: MenuItem[] = [
   //   ],
   // },
   {
-    label: 'Student Life',
-    submenu: [
-      { label: 'Campus Life', href: '/campus-life' },
-      { label: 'Student Portal', href: '/student/dashboard' },
-      { label: 'Scholarships', href: '/scholarships' },
+    label: 'Students',
+    submenu: [      
+        { label: 'Student Login', href: '/studentlogin' },
+      { label: 'Admissions', href: '/apply' },
+     { label: 'Notices', href: '/studentlogin' },      
+      { label: 'Scholarships', href: '/scholarships' },      
+      { label: 'Holiday List', href: '/how-to-apply' },
+        { label: 'How to Apply (Admissions)', href: '/how-to-apply' },
     ],
   },
   {
     label: 'E - Services',
     submenu: [
       { label: 'Student Login', href: '/studentlogin' },
-      { label: 'Staff Login', href: '/stafflogin' },
-      { label: 'Track Application', href: '/student/track-application' },
-      { label: 'Fee Payment', href: '/student/fees' },
+      { label: 'Staff Login', href: '/stafflogin' },    
+      { label: 'Fee Payment', href: '/studentlogin' },
     ],
   },
-  {
-    label: 'Campuses',
-    submenu: [
-      { label: 'About Dumri College', href: '/about' },
-      { label: 'Gallery', href: '/gallery' },
-    ],
-  },
+  // {
+  //   label: 'Campuses',
+  //   submenu: [
+  //     { label: 'About Dumri College', href: '/about' },
+  //     { label: 'Gallery', href: '/gallery' },
+  //   ],
+  // },
   {
     label: 'Visitors',
     submenu: [
       { label: 'Contact Us', href: '/contact' },
+      { label: 'Gallery', href: '/gallery' },
       { label: 'FAQ', href: '/faq' },
-      { label: 'How to Apply', href: '/how-to-apply' },
     ],
   },
 ];
@@ -151,7 +158,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
             className="absolute font-['Alice',serif] h-[84px] leading-[20px] left-[107px] not-italic text-[25px] text-black top-[17px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <p className="mb-0 ">Dumri Commerce</p>
+            <p className="mb-0 ">Jharkhand Commerce </p>
             <p>
               <br aria-hidden="true" />
               Inter College

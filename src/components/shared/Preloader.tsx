@@ -123,7 +123,7 @@ export function Preloader() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h1 className="text-4xl font-bold text-white mb-2">Dumri College</h1>
+              <h1 className="text-4xl font-bold text-white mb-2">Jharkhand Commerce Inter College</h1>
               <p className="text-blue-200 text-lg mb-8 font-medium">Empowering Minds, Shaping Futures</p>
             </motion.div>
 

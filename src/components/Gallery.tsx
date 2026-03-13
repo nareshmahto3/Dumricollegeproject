@@ -109,19 +109,19 @@ export function Gallery() {
                 transition={{ duration: 0.8 }}
                 className="text-center text-white"
               >
-                <Badge className="bg-blue-500/30 text-blue-100 border-blue-400/50 backdrop-blur-md mb-6 md:mb-8 px-4 md:px-8 py-2 md:py-4 text-sm md:text-lg">
+                {/* <Badge className="bg-blue-500/30 text-blue-100 border-blue-400/50 backdrop-blur-md mb-6 md:mb-8 px-4 md:px-8 py-2 md:py-4 text-sm md:text-lg">
                   <Camera className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
                   <span className="hidden sm:inline">1000+ Photos • 50+ Events</span>
                   <span className="sm:hidden">Campus Moments</span>
-                </Badge>
+                </Badge> */}
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-8 leading-tight px-4">
                   Campus Gallery
                 </h1>
                 <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-blue-100 mb-4 md:mb-6 max-w-4xl mx-auto font-light px-4">
-                  Moments That Define Our Community
+              Explore life at our college through images and memories.
                 </p>
                 <p className="text-base md:text-xl text-blue-200 max-w-3xl mx-auto leading-relaxed px-4">
-                  Explore the vibrant life, culture, and achievements at Dumri College
+                     Moments That Define Our Community, Explore the vibrant life, culture, and achievements at  Jharkhand Commerce Inter College
                 </p>
               </motion.div>
             </div>
@@ -129,36 +129,7 @@ export function Gallery() {
           <div className="absolute bottom-0 left-0 right-0 h-20 md:h-32 bg-gradient-to-t from-white to-transparent" />
         </section>
 
-        {/* Gallery Categories */}
-        <section className="py-16 bg-white -mt-20 relative z-10">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { icon: Calendar, label: 'Events', count: '50+', color: 'blue' },
-                { icon: Building, label: 'Campus', count: '200+', color: 'indigo' },
-                { icon: Users, label: 'Student Life', count: '300+', color: 'cyan' },
-                { icon: Palette, label: 'Cultural', count: '100+', color: 'purple' },
-              ].map((cat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="p-6 text-center border-0 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:-translate-y-2">
-                    <div className={`w-14 h-14 bg-${cat.color}-100 rounded-full flex items-center justify-center mx-auto mb-3`}>
-                      <cat.icon className={`w-7 h-7 text-${cat.color}-600`} />
-                    </div>
-                    <div className={`text-3xl font-black text-${cat.color}-600 mb-1`}>{cat.count}</div>
-                    <div className="text-slate-600 text-sm font-medium">{cat.label}</div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
+    
         {/* Recent Events */}
         <section className="py-24 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -217,62 +188,7 @@ export function Gallery() {
           </div>
         </section>
 
-        {/* Campus Infrastructure */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <Badge className="bg-indigo-100 text-indigo-700 border-0 mb-4 px-4 py-2">
-                <Building className="w-4 h-4 mr-2" />
-                Infrastructure
-              </Badge>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6">
-                Campus Infrastructure
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                World-class facilities spread across 200 acres
-              </p>
-              <div className="w-24 h-2 bg-indigo-600 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {campusImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
-                  whileHover={{ y: -10 }}
-                  className="group cursor-pointer"
-                  onClick={() => openLightbox(index, 'campus')}
-                >
-                  <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all rounded-2xl">
-                    <div className="relative h-72 overflow-hidden rounded-2xl">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-full group-hover:translate-y-0 transition-transform">
-                        <Badge className="bg-indigo-600 text-white border-0 mb-3 text-xs">
-                          {image.category}
-                        </Badge>
-                        <h3 className="text-xl font-bold">{image.title}</h3>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
+      
         {/* Student Life */}
         <section className="py-24 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -523,7 +439,7 @@ export function Gallery() {
                   size="lg"
                   variant="outline"
                   onClick={() => navigate('/apply')}
-                  className="border-3 border-white text-white hover:bg-white/10 px-12 py-8 text-xl font-bold"
+                  className="bg-white text-blue-600 hover:bg-blue-50 px-12 py-8 text-xl font-bold shadow-2xl"
                 >
                   Apply Now
                 </Button>

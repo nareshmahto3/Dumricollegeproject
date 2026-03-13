@@ -12,10 +12,11 @@ import {
 } from 'lucide-react';
 
 const sidebarMenuItems = [
-  { id: 'who-we-are', label: 'Who We Are', active: true },
-  { id: 'history', label: 'History', active: false },
+  { id: 'who-we-are', label: 'About Us', active: true },
+  { id: 'history', label: 'Vision and Mission', active: false },
   { id: 'administration', label: 'Administration', active: false },
-  { id: 'campus-map', label: 'Campus Map', active: false },
+  { id: 'campus-map', label: 'Founder', active: false },
+  { id: 'campus-map', label: 'Principal Message', active: false },
 ];
 
 export function AboutPage() {
@@ -53,7 +54,7 @@ export function AboutPage() {
 
           {/* Title */}
           <h1 className="text-5xl font-light text-white mb-5 font-serif">
-            About Dumri College
+            About Jharkhand Commerce Inter College
           </h1>
 
           {/* Decorative Line */}
@@ -82,7 +83,7 @@ export function AboutPage() {
               <div className="bg-white rounded-xl p-8 shadow-sm">
                 {/* Sidebar Title */}
                 <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">
-                  Dumri Inside
+                  Jharkhand Commerce Inter College Inside
                 </h3>
 
                 {/* Decorative Line */}
@@ -124,10 +125,10 @@ export function AboutPage() {
               {/* Main Title and Description */}
               <div className="mb-8">
                 <h2 className="text-3xl font-light text-gray-900 mb-5 font-serif leading-tight">
-                  About Dumri College
+                  About Jharkhand Commerce Inter College
                 </h2>
                 <p className="text-gray-600 text-base leading-7">
-                  At Dumri College, education goes beyond textbooks and classrooms. We believe in empowering
+                  At Jharkhand Commerce Inter College, education goes beyond textbooks and classrooms. We believe in empowering
                   <br className="hidden lg:block" />
                   students to explore their passions, challenge conventions, and discover their potential through
                   <br className="hidden lg:block" />
