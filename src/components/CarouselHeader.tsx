@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { ChevronDown, X, MessageCircle, Menu } from 'lucide-react';
 import svgPaths from "../imports/svg-o5h25uox4w";
 import imgImageDumriCollege from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
+import { LanguageSelector } from './LanguageSelector';
 
 interface CarouselHeaderProps {
   onMenuClick?: () => void;
@@ -262,6 +263,10 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                   >
                     STAFF LOGIN
                   </button>
+                </div>
+                {/* Language Selector */}
+                <div className="mt-4">
+                  <LanguageSelector variant="simple" />
                 </div>
               </div>
 

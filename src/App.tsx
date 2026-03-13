@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import { RouterProvider } from "react-router";
 import { router } from "./routes";
 import { SidebarProvider } from "./contexts/SidebarContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { Toaster } from "./components/ui/sonner";
 
 function GlobalLoader() {
   return (
@@ -18,10 +20,13 @@ function GlobalLoader() {
 
 export default function App() {
   return (
-    <SidebarProvider>
-      <Suspense fallback={<GlobalLoader />}>
-        <RouterProvider router={router} />
-      </Suspense>
-    </SidebarProvider>
+    <LanguageProvider>
+      <SidebarProvider>
+        <Suspense fallback={<GlobalLoader />}>
+          <RouterProvider router={router} />
+          <Toaster />
+        </Suspense>
+      </SidebarProvider>
+    </LanguageProvider>
   );
 }

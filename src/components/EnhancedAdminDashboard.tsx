@@ -198,11 +198,11 @@ export function EnhancedAdminDashboard() {
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={admissionData}>
                 <defs>
-                  <linearGradient id="colorStudents" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="colorStudents-admin-dashboard" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
                   </linearGradient>
-                  <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                  <linearGradient id="colorRevenue-admin-dashboard" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
                     <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
                   </linearGradient>
@@ -211,8 +211,8 @@ export function EnhancedAdminDashboard() {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Area type="monotone" dataKey="students" stroke="#10b981" fillOpacity={1} fill="url(#colorStudents)" />
-                <Area type="monotone" dataKey="revenue" stroke="#3b82f6" fillOpacity={1} fill="url(#colorRevenue)" />
+                <Area key="area-students-admin-dashboard" type="monotone" dataKey="students" stroke="#10b981" fillOpacity={1} fill="url(#colorStudents-admin-dashboard)" />
+                <Area key="area-revenue-admin-dashboard" type="monotone" dataKey="revenue" stroke="#3b82f6" fillOpacity={1} fill="url(#colorRevenue-admin-dashboard)" />
               </AreaChart>
             </ResponsiveContainer>
           </Card>
@@ -235,8 +235,8 @@ export function EnhancedAdminDashboard() {
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {pieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  {pieData.map((entry) => (
+                    <Cell key={`pie-cell-${entry.name}`} fill={entry.color} />
                   ))}
                 </Pie>
                 <Tooltip />

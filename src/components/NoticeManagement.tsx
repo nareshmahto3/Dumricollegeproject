@@ -21,6 +21,7 @@ import { PortalLayout } from './PortalLayout';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
+import { useNavigate } from 'react-router';
 
 interface Notice {
   id: string;
@@ -170,6 +171,8 @@ export function NoticeManagement() {
     );
   };
 
+  const navigate = useNavigate();
+
   return (
     <PortalLayout
       role="admin"
@@ -190,7 +193,10 @@ export function NoticeManagement() {
               <h1 className="text-3xl font-bold text-black mb-2">Notice Management</h1>
               <p className="text-slate-600">Create and manage school notices and announcements</p>
             </div>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white">
+            <Button 
+              onClick={() => navigate('/admin/create-notice')}
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+            >
               <Plus className="w-4 h-4 mr-2" />
               Create Notice
             </Button>

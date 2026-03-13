@@ -6,6 +6,7 @@ import { Badge } from './ui/badge';
 import { PortalLayout } from './PortalLayout';
 import { motion } from 'motion/react';
 import { Plus, Search, Filter, Download, Edit, Trash2, Eye, Calendar, FileText, Award, TrendingUp, ClipboardList, CheckCircle, FileUp, ChevronUp, ChevronDown } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 interface Exam {
   id: string;
@@ -253,6 +254,8 @@ export function ExamManagement() {
     currentPage * rowsPerPage
   );
 
+  const navigate = useNavigate();
+
   return (
     <PortalLayout
       role="admin"
@@ -278,7 +281,10 @@ export function ExamManagement() {
                 <Download className="w-4 h-4 mr-2" />
                 Export
               </Button>
-              <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
+              <Button 
+                onClick={() => navigate('/admin/schedule-exam')}
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
+              >
                 <Plus className="w-4 h-4 mr-2" />
                 Schedule New Exam
               </Button>

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { useSidebar } from "../contexts/SidebarContext";
+import { LanguageSelector } from "./LanguageSelector";
 
 interface PortalHeaderProps {
   userName?: string;
@@ -54,6 +55,11 @@ export function PortalHeader({
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
       <div className={`flex items-center justify-between px-4 sm:px-6 py-2 sm:py-3 transition-all ${isCollapsed ? 'lg:pl-20' : ''}`}>
+        {/* Language Selector - Prominent position */}
+        <div className="flex-shrink-0 mr-3 sm:mr-4">
+          <LanguageSelector variant="compact" />
+        </div>
+
         {/* Search Bar - Hidden on mobile */}
         <div className="hidden md:flex flex-1 max-w-md">
           <div className="relative w-full">
@@ -73,11 +79,6 @@ export function PortalHeader({
 
         {/* Right Section */}
         <div className="flex items-center gap-2 sm:gap-4">
-          {/* Language Selector - Hidden on mobile */}
-         
-
-
-
           {/* Notifications */}
           <div className="relative">
             <button

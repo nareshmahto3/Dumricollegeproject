@@ -164,9 +164,9 @@ export function StudentAttendance() {
                   <YAxis stroke="#64748b" />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" dataKey="present" stroke="#10b981" strokeWidth={2} name="Present" />
-                  <Line type="monotone" dataKey="absent" stroke="#ef4444" strokeWidth={2} name="Absent" />
-                  <Line type="monotone" dataKey="late" stroke="#f59e0b" strokeWidth={2} name="Late" />
+                  <Line key="line-present-student" type="monotone" dataKey="present" stroke="#10b981" strokeWidth={2} name="Present" />
+                  <Line key="line-absent-student" type="monotone" dataKey="absent" stroke="#ef4444" strokeWidth={2} name="Absent" />
+                  <Line key="line-late-student" type="monotone" dataKey="late" stroke="#f59e0b" strokeWidth={2} name="Late" />
                 </LineChart>
               </ResponsiveContainer>
             </Card>

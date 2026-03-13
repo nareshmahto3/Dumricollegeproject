@@ -5,6 +5,7 @@ import { Badge } from './ui/badge';
 import { PortalLayout } from './PortalLayout';
 import { motion } from 'motion/react';
 import { Plus, Search, Edit, Eye, BookOpen, Clock, Download, GraduationCap, FileText, Users } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 interface Subject {
   id: string;
@@ -131,6 +132,8 @@ export function SubjectManagement() {
     );
   };
 
+  const navigate = useNavigate();
+
   return (
     <PortalLayout
       role="admin"
@@ -149,7 +152,10 @@ export function SubjectManagement() {
             <div>
               <p className="text-blue-600 text-sm">Manage subjects, syllabus, and teacher assignments</p>
             </div>
-            <Button className="gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/20">
+            <Button 
+              onClick={() => navigate('/admin/add-subject')}
+              className="gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/20"
+            >
               <Plus className="w-4 h-4" />
               Add New Subject
             </Button>
@@ -279,7 +285,7 @@ export function SubjectManagement() {
                   </div>
 
                   {/* Action Button */}
-                  <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
+                  <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white" onClick={() => navigate(`/subjects/${subject.id}`)}>
                     View Details
                   </Button>
                 </div>

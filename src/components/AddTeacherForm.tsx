@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
-import { Upload, Save, RotateCcw, User, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Upload, X, User, Save, RotateCcw } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { PortalLayout } from './PortalLayout';
 import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
 export function AddTeacherForm() {
   const navigate = useNavigate();
@@ -55,9 +55,16 @@ export function AddTeacherForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Teacher form submitted:', formData);
-    // Add your form submission logic here
-    // After successful submission, navigate back to teachers list
-    // navigate('/admin/teachers');
+    
+    // Show success toast
+    toast.success('Teacher Added Successfully!', {
+      description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
+    });
+    
+    // Navigate back to teachers list
+    setTimeout(() => {
+      navigate('/admin/teachers');
+    }, 1000);
   };
 
   const handleReset = () => {
@@ -307,15 +314,27 @@ export function AddTeacherForm() {
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Qualification <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="text"
+                    <select
                       name="qualification"
                       value={formData.qualification}
                       onChange={handleInputChange}
                       required
-                      placeholder="e.g., M.Ed, B.Ed"
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    />
+                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
+                    >
+                      <option value="">Select Qualification *</option>
+                      <option value="phd">Ph.D.</option>
+                      <option value="m.ed">M.Ed.</option>
+                      <option value="b.ed">B.Ed.</option>
+                      <option value="ma">M.A.</option>
+                      <option value="msc">M.Sc.</option>
+                      <option value="mba">MBA</option>
+                      <option value="ba">B.A.</option>
+                      <option value="bsc">B.Sc.</option>
+                      <option value="btech">B.Tech.</option>
+                      <option value="mtech">M.Tech.</option>
+                      <option value="diploma">Diploma</option>
+                      <option value="other">Other</option>
+                    </select>
                   </div>
                 </div>
 
@@ -364,14 +383,32 @@ export function AddTeacherForm() {
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Subjects Teaching
                     </label>
-                    <input
-                      type="text"
+                    <select
                       name="subjects"
                       value={formData.subjects}
                       onChange={handleInputChange}
-                      placeholder="e.g., Math, Physics"
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    />
+                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
+                    >
+                      <option value="">Select Subject</option>
+                      <option value="mathematics">Mathematics</option>
+                      <option value="physics">Physics</option>
+                      <option value="chemistry">Chemistry</option>
+                      <option value="biology">Biology</option>
+                      <option value="english">English</option>
+                      <option value="hindi">Hindi</option>
+                      <option value="history">History</option>
+                      <option value="geography">Geography</option>
+                      <option value="economics">Economics</option>
+                      <option value="political-science">Political Science</option>
+                      <option value="computer-science">Computer Science</option>
+                      <option value="physical-education">Physical Education</option>
+                      <option value="art">Art & Craft</option>
+                      <option value="music">Music</option>
+                      <option value="commerce">Commerce</option>
+                      <option value="accountancy">Accountancy</option>
+                      <option value="business-studies">Business Studies</option>
+                      <option value="other">Other</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -384,25 +421,27 @@ export function AddTeacherForm() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
-                      Address
+                      Address <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       name="address"
                       value={formData.address}
                       onChange={handleInputChange}
+                      required
                       className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
-                      Emergency Contact
+                      Emergency Contact <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="tel"
                       name="emergencyContact"
                       value={formData.emergencyContact}
                       onChange={handleInputChange}
+                      required
                       className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     />
                   </div>
@@ -410,33 +449,74 @@ export function AddTeacherForm() {
 
                 {/* Row 6 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
+                 
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">City</label>
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">State <span className="text-red-500">*</span></label>
+                    <select
+                      name="state"
+                      value={formData.state}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
+                    >
+                      <option value="">Select State *</option>
+                      <option value="andhra-pradesh">Andhra Pradesh</option>
+                      <option value="arunachal-pradesh">Arunachal Pradesh</option>
+                      <option value="assam">Assam</option>
+                      <option value="bihar">Bihar</option>
+                      <option value="chhattisgarh">Chhattisgarh</option>
+                      <option value="goa">Goa</option>
+                      <option value="gujarat">Gujarat</option>
+                      <option value="haryana">Haryana</option>
+                      <option value="himachal-pradesh">Himachal Pradesh</option>
+                      <option value="jharkhand">Jharkhand</option>
+                      <option value="karnataka">Karnataka</option>
+                      <option value="kerala">Kerala</option>
+                      <option value="madhya-pradesh">Madhya Pradesh</option>
+                      <option value="maharashtra">Maharashtra</option>
+                      <option value="manipur">Manipur</option>
+                      <option value="meghalaya">Meghalaya</option>
+                      <option value="mizoram">Mizoram</option>
+                      <option value="nagaland">Nagaland</option>
+                      <option value="odisha">Odisha</option>
+                      <option value="punjab">Punjab</option>
+                      <option value="rajasthan">Rajasthan</option>
+                      <option value="sikkim">Sikkim</option>
+                      <option value="tamil-nadu">Tamil Nadu</option>
+                      <option value="telangana">Telangana</option>
+                      <option value="tripura">Tripura</option>
+                      <option value="uttar-pradesh">Uttar Pradesh</option>
+                      <option value="uttarakhand">Uttarakhand</option>
+                      <option value="west-bengal">West Bengal</option>
+                      <option value="andaman-nicobar">Andaman and Nicobar Islands</option>
+                      <option value="chandigarh">Chandigarh</option>
+                      <option value="dadra-nagar-haveli-daman-diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                      <option value="delhi">Delhi</option>
+                      <option value="jammu-kashmir">Jammu and Kashmir</option>
+                      <option value="ladakh">Ladakh</option>
+                      <option value="lakshadweep">Lakshadweep</option>
+                      <option value="puducherry">Puducherry</option>
+                    </select>
+                  </div>
+                   <div>
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">District <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
+                      required
                       className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">State</label>
-                    <input
-                      type="text"
-                      name="state"
-                      value={formData.state}
-                      onChange={handleInputChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">Zip Code</label>
+                    <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">Zip Code <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       name="zipCode"
                       value={formData.zipCode}
                       onChange={handleInputChange}
+                      required
                       className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     />
                   </div>

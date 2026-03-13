@@ -8,6 +8,7 @@ import { motion } from 'motion/react';
 import { Search, Filter, Calendar, Download, UserCheck, UserX, Clock, Plus, CheckCircle, AlertCircle, ClipboardCheck, TrendingUp, ChevronUp, ChevronDown } from 'lucide-react';
 import { TablePagination } from './ui/table-pagination';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useNavigate } from 'react-router';
 
 interface AttendanceRecord {
   id: string;
@@ -92,6 +93,7 @@ const monthlyData = [
 ];
 
 export function AttendanceManagement() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('records');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
@@ -167,7 +169,10 @@ export function AttendanceManagement() {
                 <Download className="w-4 h-4 mr-2" />
                 Export Report
               </Button>
-              <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
+              <Button 
+                onClick={() => navigate('/admin/mark-attendance')}
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
+              >
                 <Plus className="w-4 h-4 mr-2" />
                 Mark Attendance
               </Button>
@@ -389,9 +394,9 @@ export function AttendanceManagement() {
                     }}
                   />
                   <Legend />
-                  <Bar dataKey="present" fill="#10b981" name="Present" />
-                  <Bar dataKey="absent" fill="#ef4444" name="Absent" />
-                  <Bar dataKey="late" fill="#f59e0b" name="Late" />
+                  <Bar key="bar-present-attendance" dataKey="present" fill="#10b981" name="Present" />
+                  <Bar key="bar-absent-attendance" dataKey="absent" fill="#ef4444" name="Absent" />
+                  <Bar key="bar-late-attendance" dataKey="late" fill="#f59e0b" name="Late" />
                 </BarChart>
               </ResponsiveContainer>
             </Card>

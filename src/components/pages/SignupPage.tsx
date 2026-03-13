@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import { motion } from 'motion/react';
-import { GraduationCap, Mail, Lock, User, ArrowRight, Phone } from 'lucide-react';
+import { GraduationCap, Mail, Phone, Lock, User, ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '../ui/button';
-import { Card } from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { SharedNavbar } from '../SharedNavbar';
+import { Card } from '../ui/card';
+import { SharedNavigation } from '../shared/SharedNavigation';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { toast } from 'sonner';
 
 export function SignupPage() {
   const navigate = useNavigate();
@@ -21,16 +22,33 @@ export function SignupPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match', {
+        description: 'Please make sure both passwords are identical.',
+      });
+      return;
+    }
+    
     // Handle signup logic here
     console.log('Signup attempted with:', formData);
+    
+    // Show success toast
+    toast.success('Account Created Successfully!', {
+      description: 'You can now login with your credentials.',
+    });
+    
     // Redirect to login after successful signup
-    navigate('/studentlogin');
+    setTimeout(() => {
+      navigate('/studentlogin');
+    }, 1000);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
       {/* Navbar */}
-      <SharedNavbar />
+      <SharedNavigation />
 
       {/* Signup Content */}
       <div className="flex flex-col lg:flex-row min-h-[calc(100vh-106px)] md:min-h-[calc(100vh-110px)]">

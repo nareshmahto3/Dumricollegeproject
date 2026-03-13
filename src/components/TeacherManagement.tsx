@@ -3,32 +3,24 @@ import { useNavigate } from 'react-router';
 import {
   UserPlus,
   Search,
-  Filter,
-  Download,
   Edit,
   Trash2,
   Eye,
   Mail,
   Phone,
-  Calendar,
   BookOpen,
   Award,
   Clock,
   Users,
-  MoreVertical,
-  X,
-  Save,
-  Upload,
   ChevronUp,
   ChevronDown,
 } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Label } from './ui/label';
 import { Badge } from './ui/badge';
 import { PortalLayout } from './PortalLayout';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { toast } from 'sonner@2.0.3';
 import { TablePagination } from './ui/table-pagination';
 
@@ -53,10 +45,6 @@ export function TeacherManagement() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterSubject, setFilterSubject] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -163,18 +151,6 @@ export function TeacherManagement() {
     },
   ]);
 
-  const [newTeacher, setNewTeacher] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    qualification: '',
-    experience: '',
-    joiningDate: '',
-    classes: '',
-    salary: '',
-  });
-
   const subjects = ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'English', 'History', 'Geography', 'Computer Science', 'Physical Education'];
 
   const filteredTeachers = teachers.filter((teacher) => {
@@ -209,52 +185,6 @@ export function TeacherManagement() {
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
-
-  const handleAddTeacher = () => {
-    if (!newTeacher.name || !newTeacher.email || !newTeacher.phone || !newTeacher.subject) {
-      toast.error('Please fill all required fields');
-      return;
-    }
-
-    const teacher: Teacher = {
-      id: Date.now().toString(),
-      name: newTeacher.name,
-      email: newTeacher.email,
-      phone: newTeacher.phone,
-      subject: newTeacher.subject,
-      qualification: newTeacher.qualification,
-      experience: newTeacher.experience,
-      joiningDate: newTeacher.joiningDate,
-      classes: newTeacher.classes ? newTeacher.classes.split(',').map(c => c.trim()) : [],
-      status: 'active',
-      salary: newTeacher.salary,
-      employeeId: `TCH${(teachers.length + 1).toString().padStart(3, '0')}`,
-    };
-
-    setTeachers([...teachers, teacher]);
-    setShowAddModal(false);
-    setNewTeacher({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      qualification: '',
-      experience: '',
-      joiningDate: '',
-      classes: '',
-      salary: '',
-    });
-    toast.success('Teacher added successfully!');
-  };
-
-  const handleEditTeacher = () => {
-    if (!selectedTeacher) return;
-
-    setTeachers(teachers.map((t) => (t.id === selectedTeacher.id ? selectedTeacher : t)));
-    setShowEditModal(false);
-    setSelectedTeacher(null);
-    toast.success('Teacher updated successfully!');
-  };
 
   const handleDeleteTeacher = (id: string) => {
     if (confirm('Are you sure you want to delete this teacher?')) {
@@ -550,10 +480,7 @@ export function TeacherManagement() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => {
-                              setSelectedTeacher(teacher);
-                              setShowDetailsModal(true);
-                            }}
+                            onClick={() => navigate(`/admin/teacher-details/${teacher.id}`)}
                             className="hover:bg-amber-50 hover:text-amber-700 text-slate-600"
                           >
                             <Eye className="w-4 h-4" />
@@ -561,10 +488,7 @@ export function TeacherManagement() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => {
-                              setSelectedTeacher(teacher);
-                              setShowEditModal(true);
-                            }}
+                            onClick={() => navigate(`/admin/edit-teacher/${teacher.id}`)}
                             className="hover:bg-amber-50 hover:text-amber-700 text-slate-600"
                           >
                             <Edit className="w-4 h-4" />
@@ -603,441 +527,6 @@ export function TeacherManagement() {
           onRowsPerPageChange={handleRowsPerPageChange}
         />
       </div>
-
-      {/* Add Teacher Modal */}
-      <AnimatePresence>
-        {showAddModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setShowAddModal(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            >
-              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 flex items-center justify-between rounded-t-2xl">
-                <h3 className="text-xl font-bold text-white">Add New Teacher</h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowAddModal(false)}
-                  className="text-white hover:bg-white/20"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-
-              <div className="p-6 space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="name" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Full Name <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="name"
-                      value={newTeacher.name}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, name: e.target.value })}
-                      placeholder="Enter full name"
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="email" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Email Address <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={newTeacher.email}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, email: e.target.value })}
-                      placeholder="email@school.com"
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="phone" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Phone Number <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={newTeacher.phone}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, phone: e.target.value })}
-                      placeholder="+91 98765 43210"
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="subject" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Subject <span className="text-red-500">*</span>
-                    </Label>
-                    <select
-                      id="subject"
-                      value={newTeacher.subject}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, subject: e.target.value })}
-                      className="w-full h-12 px-4 border-2 border-gray-200 rounded-lg bg-white outline-none"
-                    >
-                      <option value="">Select Subject</option>
-                      {subjects.map((subject) => (
-                        <option key={subject} value={subject}>
-                          {subject}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="qualification" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Qualification
-                    </Label>
-                    <Input
-                      id="qualification"
-                      value={newTeacher.qualification}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, qualification: e.target.value })}
-                      placeholder="e.g., M.Sc, B.Ed"
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="experience" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Experience
-                    </Label>
-                    <Input
-                      id="experience"
-                      value={newTeacher.experience}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, experience: e.target.value })}
-                      placeholder="e.g., 5 years"
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="joiningDate" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Joining Date
-                    </Label>
-                    <Input
-                      id="joiningDate"
-                      type="date"
-                      value={newTeacher.joiningDate}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, joiningDate: e.target.value })}
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="salary" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Salary
-                    </Label>
-                    <Input
-                      id="salary"
-                      value={newTeacher.salary}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, salary: e.target.value })}
-                      placeholder="e.g., ₹50,000"
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <Label htmlFor="classes" className="text-sm font-medium text-gray-700 mb-2 block">
-                      Classes (comma-separated)
-                    </Label>
-                    <Input
-                      id="classes"
-                      value={newTeacher.classes}
-                      onChange={(e) => setNewTeacher({ ...newTeacher, classes: e.target.value })}
-                      placeholder="e.g., Class 10A, Class 10B"
-                      className="h-12 border-2"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex justify-end gap-3 pt-4 border-t">
-                  <Button variant="outline" onClick={() => setShowAddModal(false)}>
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={handleAddTeacher}
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                  >
-                    <Save className="w-4 h-4 mr-2" />
-                    Add Teacher
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Edit Teacher Modal */}
-      <AnimatePresence>
-        {showEditModal && selectedTeacher && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setShowEditModal(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            >
-              <div className="sticky top-0 bg-gradient-to-r from-yellow-600 to-yellow-700 px-6 py-4 flex items-center justify-between rounded-t-2xl">
-                <h3 className="text-xl font-bold text-white">Edit Teacher</h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowEditModal(false)}
-                  className="text-white hover:bg-white/20"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-
-              <div className="p-6 space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Full Name <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      value={selectedTeacher.name}
-                      onChange={(e) =>
-                        setSelectedTeacher({ ...selectedTeacher, name: e.target.value })
-                      }
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Email Address <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      type="email"
-                      value={selectedTeacher.email}
-                      onChange={(e) =>
-                        setSelectedTeacher({ ...selectedTeacher, email: e.target.value })
-                      }
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Phone Number <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      type="tel"
-                      value={selectedTeacher.phone}
-                      onChange={(e) =>
-                        setSelectedTeacher({ ...selectedTeacher, phone: e.target.value })
-                      }
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Subject <span className="text-red-500">*</span>
-                    </Label>
-                    <select
-                      value={selectedTeacher.subject}
-                      onChange={(e) =>
-                        setSelectedTeacher({ ...selectedTeacher, subject: e.target.value })
-                      }
-                      className="w-full h-12 px-4 border-2 border-gray-200 rounded-lg bg-white outline-none"
-                    >
-                      {subjects.map((subject) => (
-                        <option key={subject} value={subject}>
-                          {subject}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Qualification
-                    </Label>
-                    <Input
-                      value={selectedTeacher.qualification}
-                      onChange={(e) =>
-                        setSelectedTeacher({ ...selectedTeacher, qualification: e.target.value })
-                      }
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Experience
-                    </Label>
-                    <Input
-                      value={selectedTeacher.experience}
-                      onChange={(e) =>
-                        setSelectedTeacher({ ...selectedTeacher, experience: e.target.value })
-                      }
-                      className="h-12 border-2"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Status
-                    </Label>
-                    <select
-                      value={selectedTeacher.status}
-                      onChange={(e) =>
-                        setSelectedTeacher({
-                          ...selectedTeacher,
-                          status: e.target.value as 'active' | 'inactive' | 'on-leave',
-                        })
-                      }
-                      className="w-full h-12 px-4 border-2 border-gray-200 rounded-lg bg-white outline-none"
-                    >
-                      <option value="active">Active</option>
-                      <option value="on-leave">On Leave</option>
-                      <option value="inactive">Inactive</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm font-medium text-gray-700 mb-2 block">
-                      Salary
-                    </Label>
-                    <Input
-                      value={selectedTeacher.salary}
-                      onChange={(e) =>
-                        setSelectedTeacher({ ...selectedTeacher, salary: e.target.value })
-                      }
-                      className="h-12 border-2"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex justify-end gap-3 pt-4 border-t">
-                  <Button variant="outline" onClick={() => setShowEditModal(false)}>
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={handleEditTeacher}
-                    className="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800"
-                  >
-                    <Save className="w-4 h-4 mr-2" />
-                    Update Teacher
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* View Details Modal */}
-      <AnimatePresence>
-        {showDetailsModal && selectedTeacher && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setShowDetailsModal(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full"
-            >
-              <div className="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-4 flex items-center justify-between rounded-t-2xl">
-                <h3 className="text-xl font-bold text-white">Teacher Details</h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowDetailsModal(false)}
-                  className="text-white hover:bg-white/20"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-
-              <div className="p-6 space-y-6">
-                <div className="flex items-center gap-4 pb-6 border-b">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                    {selectedTeacher.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="text-2xl font-bold text-gray-900">{selectedTeacher.name}</h4>
-                    <p className="text-gray-600">{selectedTeacher.subject}</p>
-                    <Badge className={`${getStatusColor(selectedTeacher.status)} border capitalize mt-2`}>
-                      {selectedTeacher.status}
-                    </Badge>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-6">
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Employee ID</p>
-                    <p className="text-base font-semibold text-gray-900">{selectedTeacher.employeeId}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Qualification</p>
-                    <p className="text-base font-semibold text-gray-900">{selectedTeacher.qualification}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Experience</p>
-                    <p className="text-base font-semibold text-gray-900">{selectedTeacher.experience}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Joining Date</p>
-                    <p className="text-base font-semibold text-gray-900">
-                      {new Date(selectedTeacher.joiningDate).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Email</p>
-                    <p className="text-base font-semibold text-gray-900">{selectedTeacher.email}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Phone</p>
-                    <p className="text-base font-semibold text-gray-900">{selectedTeacher.phone}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Salary</p>
-                    <p className="text-base font-semibold text-gray-900">{selectedTeacher.salary}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500 mb-1">Classes Assigned</p>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {selectedTeacher.classes.map((cls) => (
-                        <Badge key={cls} variant="outline" className="text-xs">
-                          {cls}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </PortalLayout>
   );
 }

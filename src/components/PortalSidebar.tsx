@@ -105,17 +105,6 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
 
   return (
     <>
-      {/* Desktop Hamburger Menu Button - Only visible when sidebar is collapsed */}
-      {isCollapsed && (
-        <button
-          onClick={toggleSidebar}
-          className="hidden lg:flex fixed top-[14px] left-6 z-50 p-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg shadow-lg transition-all items-center justify-center"
-          aria-label="Open sidebar"
-        >
-          <Menu className="w-5 h-5" />
-        </button>
-      )}
-
       {/* Mobile Menu Button - Always visible on mobile */}
       <button
         onClick={toggleSidebar}
@@ -125,7 +114,56 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
         {isCollapsed ? <Menu className="w-5 h-5" /> : <X className="w-5 h-5" />}
       </button>
 
-      {/* Sidebar */}
+      {/* Collapsed Sidebar - Desktop Only (Icons Only) */}
+      {isCollapsed && (
+        <motion.div
+          initial={{ x: -80 }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", damping: 25 }}
+          className="hidden lg:block fixed left-0 top-0 h-screen w-[70px] bg-[#0d2b4e] z-40 shadow-2xl"
+        >
+          {/* Collapsed Header with Toggle */}
+          <div className="bg-gradient-to-r from-amber-500 to-amber-600 h-[60px] flex items-center justify-center flex-shrink-0">
+            <button
+              onClick={toggleSidebar}
+              className="text-white hover:bg-amber-600/50 p-1.5 rounded transition-colors"
+              aria-label="Open sidebar"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Navigation Icons */}
+          <nav className="h-[calc(100vh-60px)] flex flex-col py-2">
+            {links.map((link) => {
+              const isActive = location.pathname === link.path;
+              const Icon = link.icon;
+
+              return (
+                <motion.button
+                  key={link.path}
+                  onClick={() => handleNavigation(link.path)}
+                  whileHover={{ scale: 1.05 }}
+                  className={`w-full flex items-center justify-center py-2.5 transition-all flex-shrink-0 ${
+                    isActive
+                      ? "bg-amber-500/10 border-l-4 border-amber-500"
+                      : "hover:bg-slate-800/50 border-l-4 border-transparent"
+                  }`}
+                  title={link.label}
+                >
+                  <Icon
+                    className={`w-5 h-5 ${
+                      isActive ? "text-amber-400" : "text-amber-500"
+                    }`}
+                  />
+                </motion.button>
+              );
+            })}
+          </nav>
+        </motion.div>
+      )}
+
+      {/* Expanded Sidebar */}
       <AnimatePresence>
         {!isCollapsed && (
           <>
@@ -204,11 +242,6 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
                           {link.label}
                         </span>
                       </div>
-                      {/* <ChevronRight
-                        className={`w-4 h-4 ${
-                          isActive ? "text-amber-400" : "text-slate-500"
-                        }`}
-                      /> */}
                     </motion.button>
                   );
                 })}

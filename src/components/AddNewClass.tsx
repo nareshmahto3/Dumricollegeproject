@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
 export function AddNewClass() {
   const navigate = useNavigate();
@@ -22,8 +23,16 @@ export function AddNewClass() {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', formData);
+    
+    // Show success toast
+    toast.success('Class Added Successfully!', {
+      description: `${formData.className} - Section ${formData.section} has been added to the system.`,
+    });
+    
     // Navigate back to classes page
-    navigate('/admin/classes');
+    setTimeout(() => {
+      navigate('/admin/classes');
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

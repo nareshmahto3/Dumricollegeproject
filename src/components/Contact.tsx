@@ -617,7 +617,7 @@ export function Contact() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-3 border-white text-white hover:bg-white/10 px-12 py-8 text-xl font-bold"
+                  className="border-4 border-white text-white hover:bg-white hover:text-blue-600 hover:border-white hover:shadow-2xl px-12 py-8 text-xl font-bold transition-all duration-300 transform hover:scale-105"
                 >
                   <Phone className="mr-3 w-6 h-6" />
                   Call Us Now

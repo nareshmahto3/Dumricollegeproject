@@ -26,13 +26,20 @@ import {
   Mail,
   User,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Plus,
+  Edit,
+  Save,
+  Settings,
+  Book,
+  GraduationCap
 } from 'lucide-react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { PortalLayout } from './PortalLayout';
+import { toast } from 'sonner@2.0.3';
 
 interface PendingFee {
   id: number;
@@ -60,17 +67,18 @@ interface StudentPendingFees {
   pendingMonths: PendingFee[];
 }
 
-interface TeacherSalary {
-  id: number;
-  teacherId: string;
-  teacherName: string;
-  department: string;
-  designation: string;
-  monthlySalary: number;
-  paidAmount: number;
-  pendingAmount: number;
-  lastPaid: string;
-  status: 'paid' | 'pending' | 'partial';
+interface FeeComponent {
+  id: string;
+  name: string;
+  amount: number;
+  category: 'college' | 'misc' | 'council';
+}
+
+interface ClassFeeStructure {
+  className: string;
+  feeComponents: FeeComponent[];
+  totalFee: number;
+  lastUpdated: string;
 }
 
 interface FeeCollection {
@@ -78,6 +86,51 @@ interface FeeCollection {
   collected: number;
   pending: number;
 }
+
+// Standardized Fee Structure Components - Based on Jharkhand Commerce Inter College Format
+const standardFeeComponents: Omit<FeeComponent, 'amount'>[] = [
+  // (I) College Dues
+  { id: 'tuition', name: 'Tuition Fee', category: 'college' },
+  { id: 'admission', name: 'Admission Fee/Re-Admission Fee', category: 'college' },
+  { id: 'transfer', name: 'Transfer Fee', category: 'college' },
+  { id: 'fine', name: 'Fine', category: 'college' },
+  { id: 'session', name: 'Session Fee', category: 'college' },
+  { id: 'other_college', name: 'Other Fee', category: 'college' },
+  { id: 'teacher_welfare', name: 'Teacher Welfare Fund', category: 'college' },
+  
+  // (II) Misc. Dues
+  { id: 'magazine', name: 'Magazine', category: 'misc' },
+  { id: 'college_development', name: 'College Development', category: 'misc' },
+  { id: 'college_examination', name: 'College Examination Fee', category: 'misc' },
+  { id: 'game', name: 'Game', category: 'misc' },
+  { id: 'college_directory', name: 'College Directory Fee', category: 'misc' },
+  { id: 'college_leaving', name: 'College Leaving Charge', category: 'misc' },
+  { id: 'library_caution', name: 'Library Caution Money', category: 'misc' },
+  { id: 'library_charge', name: 'Library Charge', category: 'misc' },
+  { id: 'identity_card', name: 'Identity Card', category: 'misc' },
+  { id: 'vehicle', name: 'Vehicle Fee', category: 'misc' },
+  { id: 'ncc', name: 'N.C.C. Fee', category: 'misc' },
+  { id: 'nss', name: 'N.S.S. Fee', category: 'misc' },
+  { id: 'poor_boys_fund', name: "Poor Boy's Fund", category: 'misc' },
+  { id: 'caution_money', name: 'Caution Money', category: 'misc' },
+  { id: 'bonafide', name: 'Bonafide', category: 'misc' },
+  { id: 'other_misc', name: 'Other Dues (Misc)', category: 'misc' },
+  
+  // (III) Council
+  { id: 'migration', name: 'Migration Fee', category: 'council' },
+  { id: 'registration', name: 'Registration Fee', category: 'council' },
+  { id: 'jiec_examination', name: 'J.I.E.C. Examination Fee', category: 'council' },
+  { id: 'marks_fee', name: 'Marks Fee', category: 'council' },
+  { id: 'local_levy', name: 'Local Levy', category: 'council' },
+  { id: 'other_council', name: 'Other Dues (Council)', category: 'council' },
+];
+
+// Available Classes
+const availableClasses = [
+  'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5',
+  'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10',
+  'Grade 11', 'Grade 12'
+];
 
 const pendingFees: PendingFee[] = [
   // Aarav Sharma - Multiple months pending
@@ -241,69 +294,6 @@ const pendingFees: PendingFee[] = [
   },
 ];
 
-const teacherSalaries: TeacherSalary[] = [
-  {
-    id: 1,
-    teacherId: 'TCH2023001',
-    teacherName: 'Dr. Anjali Verma',
-    department: 'Mathematics',
-    designation: 'Senior Professor',
-    monthlySalary: 85000,
-    paidAmount: 85000,
-    pendingAmount: 0,
-    lastPaid: '2026-02-01',
-    status: 'paid',
-  },
-  {
-    id: 2,
-    teacherId: 'TCH2023002',
-    teacherName: 'Prof. Rahul Mehta',
-    department: 'Physics',
-    designation: 'Associate Professor',
-    monthlySalary: 75000,
-    paidAmount: 75000,
-    pendingAmount: 0,
-    lastPaid: '2026-02-01',
-    status: 'paid',
-  },
-  {
-    id: 3,
-    teacherId: 'TCH2023003',
-    teacherName: 'Mrs. Sneha Kapoor',
-    department: 'English',
-    designation: 'Assistant Professor',
-    monthlySalary: 65000,
-    paidAmount: 40000,
-    pendingAmount: 25000,
-    lastPaid: '2026-01-15',
-    status: 'partial',
-  },
-  {
-    id: 4,
-    teacherId: 'TCH2023004',
-    teacherName: 'Mr. Arjun Desai',
-    department: 'Chemistry',
-    designation: 'Lecturer',
-    monthlySalary: 55000,
-    paidAmount: 0,
-    pendingAmount: 55000,
-    lastPaid: '2026-01-01',
-    status: 'pending',
-  },
-  {
-    id: 5,
-    teacherId: 'TCH2023005',
-    teacherName: 'Ms. Priya Nair',
-    department: 'Computer Science',
-    designation: 'Assistant Professor',
-    monthlySalary: 70000,
-    paidAmount: 70000,
-    pendingAmount: 0,
-    lastPaid: '2026-02-01',
-    status: 'paid',
-  },
-];
-
 const monthlyCollections: FeeCollection[] = [
   { month: 'Jan', collected: 2850000, pending: 450000 },
   { month: 'Feb', collected: 2950000, pending: 380000 },
@@ -313,13 +303,34 @@ const monthlyCollections: FeeCollection[] = [
   { month: 'Jun', collected: 3050000, pending: 350000 },
 ];
 
+// Initial class fee structures with sample data
+const initialClassFeeStructures: ClassFeeStructure[] = [
+  {
+    className: 'Grade 12',
+    totalFee: 0,
+    lastUpdated: '2026-03-01',
+    feeComponents: standardFeeComponents.map(comp => ({
+      ...comp,
+      amount: 0
+    }))
+  },
+  {
+    className: 'Grade 10',
+    totalFee: 0,
+    lastUpdated: '2026-03-01',
+    feeComponents: standardFeeComponents.map(comp => ({
+      ...comp,
+      amount: 0
+    }))
+  },
+];
+
 export function FeeManagement() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [feeFilter, setFeeFilter] = useState<string>('all');
-  const [salaryFilter, setSalaryFilter] = useState<string>('all');
   const [selectedStudent, setSelectedStudent] = useState<StudentPendingFees | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'pending' | 'salaries'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'pending' | 'feeDetails'>('overview');
   const [expandedStudents, setExpandedStudents] = useState<Set<string>>(new Set());
   const [showPaymentDetailsModal, setShowPaymentDetailsModal] = useState(false);
   const [selectedPaymentStudent, setSelectedPaymentStudent] = useState<StudentPendingFees | null>(null);
@@ -327,10 +338,15 @@ export function FeeManagement() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [salarySortField, setSalarySortField] = useState<string>('');
-  const [salarySortDirection, setSalarySortDirection] = useState<'asc' | 'desc'>('asc');
-  const [salaryCurrentPage, setSalaryCurrentPage] = useState(1);
-  const [salaryRowsPerPage, setSalaryRowsPerPage] = useState(10);
+  
+  // Fee Details states
+  const [classFeeStructures, setClassFeeStructures] = useState<ClassFeeStructure[]>(initialClassFeeStructures);
+  const [selectedClass, setSelectedClass] = useState<string>('');
+  const [editingClass, setEditingClass] = useState<string | null>(null);
+  const [editingFees, setEditingFees] = useState<FeeComponent[]>([]);
+  const [showNewClassForm, setShowNewClassForm] = useState(false);
+  const [newClassName, setNewClassName] = useState('');
+  const [appliedClasses, setAppliedClasses] = useState<Set<string>>(new Set());
   
   // Payment states
   const [selectedMonths, setSelectedMonths] = useState<number[]>([]);
@@ -348,20 +364,6 @@ export function FeeManagement() {
   const handleRowsPerPageChange = (value: number) => {
     setRowsPerPage(value);
     setCurrentPage(1);
-  };
-
-  const handleSalarySort = (field: string) => {
-    if (salarySortField === field) {
-      setSalarySortDirection(salarySortDirection === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSalarySortField(field);
-      setSalarySortDirection('asc');
-    }
-  };
-
-  const handleSalaryRowsPerPageChange = (value: number) => {
-    setSalaryRowsPerPage(value);
-    setSalaryCurrentPage(1);
   };
 
   // Group pending fees by student
@@ -421,33 +423,13 @@ export function FeeManagement() {
     });
   };
 
-  const filteredSalaries = teacherSalaries.filter((salary) => {
-    const matchesFilter = salaryFilter === 'all' || salary.status === salaryFilter;
-    return matchesFilter;
-  });
-
-  // Apply salary sorting
-  const sortedSalaries = [...filteredSalaries].sort((a, b) => {
-    if (!salarySortField) return 0;
-
-    let aValue: any = a[salarySortField as keyof TeacherSalary];
-    let bValue: any = b[salarySortField as keyof TeacherSalary];
-
-    if (typeof aValue === 'string' && typeof bValue === 'string') {
-      aValue = aValue.toLowerCase();
-      bValue = bValue.toLowerCase();
-    }
-
-    if (aValue < bValue) return salarySortDirection === 'asc' ? -1 : 1;
-    if (aValue > bValue) return salarySortDirection === 'asc' ? 1 : -1;
-    return 0;
-  });
-
   // Calculate statistics
   const totalPendingFees = pendingFees.reduce((sum, fee) => sum + fee.amount, 0);
   const totalRevenue = monthlyCollections.reduce((sum, month) => sum + month.collected, 0);
-  const totalSalaryExpense = teacherSalaries.reduce((sum, t) => sum + t.monthlySalary, 0);
-  const pendingSalaries = teacherSalaries.reduce((sum, t) => sum + t.pendingAmount, 0);
+  const totalConfiguredClasses = classFeeStructures.length;
+  const avgFeePerClass = totalConfiguredClasses > 0 
+    ? classFeeStructures.reduce((sum, cls) => sum + cls.totalFee, 0) / totalConfiguredClasses 
+    : 0;
 
   const getDaysOverdueColor = (days: number) => {
     if (days < 15) return 'text-yellow-600 bg-yellow-100';
@@ -455,17 +437,97 @@ export function FeeManagement() {
     return 'text-red-600 bg-red-100';
   };
 
-  const getSalaryStatusColor = (status: string) => {
-    switch (status) {
-      case 'paid':
-        return 'bg-green-100 text-green-700 border-green-200';
-      case 'partial':
-        return 'bg-orange-100 text-orange-700 border-orange-200';
-      case 'pending':
-        return 'bg-red-100 text-red-700 border-red-200';
-      default:
-        return 'bg-gray-100 text-gray-700 border-gray-200';
+  // Fee Details functions
+  const handleEditClass = (className: string) => {
+    const structure = classFeeStructures.find(s => s.className === className);
+    if (structure) {
+      setEditingClass(className);
+      setEditingFees([...structure.feeComponents]);
+      // Remove from applied classes when editing
+      setAppliedClasses(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(className);
+        return newSet;
+      });
     }
+  };
+
+  const handleSaveFeeStructure = () => {
+    if (!editingClass) return;
+    
+    const totalFee = editingFees.reduce((sum, fee) => sum + fee.amount, 0);
+    
+    setClassFeeStructures(prev => {
+      const existing = prev.find(s => s.className === editingClass);
+      if (existing) {
+        return prev.map(s => 
+          s.className === editingClass 
+            ? { 
+                ...s, 
+                feeComponents: editingFees, 
+                totalFee,
+                lastUpdated: new Date().toISOString().split('T')[0]
+              }
+            : s
+        );
+      }
+      return prev;
+    });
+    
+    setEditingClass(null);
+    setEditingFees([]);
+    toast.success(`Fee structure for ${editingClass} updated successfully!`);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingClass(null);
+    setEditingFees([]);
+  };
+
+  const handleFeeAmountChange = (feeId: string, amount: string) => {
+    const numAmount = parseInt(amount) || 0;
+    setEditingFees(prev => 
+      prev.map(fee => 
+        fee.id === feeId ? { ...fee, amount: numAmount } : fee
+      )
+    );
+  };
+
+  const handleCreateNewClass = () => {
+    if (!newClassName || classFeeStructures.some(s => s.className === newClassName)) {
+      toast.error('Please select a valid class that has not been configured yet.');
+      return;
+    }
+
+    const newStructure: ClassFeeStructure = {
+      className: newClassName,
+      totalFee: 0,
+      lastUpdated: new Date().toISOString().split('T')[0],
+      feeComponents: standardFeeComponents.map(comp => ({
+        ...comp,
+        amount: 0
+      }))
+    };
+
+    setClassFeeStructures(prev => [...prev, newStructure]);
+    setShowNewClassForm(false);
+    setNewClassName('');
+    setEditingClass(newClassName);
+    setEditingFees(newStructure.feeComponents);
+    toast.success(`New fee structure created for ${newClassName}. Please set the amounts.`);
+  };
+
+  const handleApplyToStudents = (className: string) => {
+    const structure = classFeeStructures.find(s => s.className === className);
+    if (structure) {
+      setAppliedClasses(prev => new Set(prev).add(className));
+      toast.success(`Fee structure applied to all students in ${className}!`);
+    }
+  };
+
+  const getUnconfiguredClasses = () => {
+    const configured = classFeeStructures.map(s => s.className);
+    return availableClasses.filter(cls => !configured.includes(cls));
   };
 
   return (
@@ -528,18 +590,18 @@ export function FeeManagement() {
                 transition={{ delay: 0.3 }}
                 whileHover={{ scale: 1.05, y: -5 }}
               >
-                <Card className="p-6 border-2 border-orange-100 bg-gradient-to-br from-white to-orange-50 hover:shadow-xl transition-all">
+                <Card className="p-6 border-2 border-blue-100 bg-gradient-to-br from-white to-blue-50 hover:shadow-xl transition-all">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <Wallet className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <GraduationCap className="w-6 h-6 text-white" />
                     </div>
-                    <Badge className="bg-orange-100 text-orange-700 border-0">
-                      Monthly
+                    <Badge className="bg-blue-100 text-blue-700 border-0">
+                      Configured
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-1">Salary Expenses</p>
-                  <h3 className="text-orange-700">₹{(totalSalaryExpense / 100000).toFixed(2)}L</h3>
-                  <p className="text-xs text-muted-foreground mt-2">{teacherSalaries.length} teachers</p>
+                  <p className="text-sm text-muted-foreground mb-1">Class Structures</p>
+                  <h3 className="text-blue-700">{totalConfiguredClasses}</h3>
+                  <p className="text-xs text-muted-foreground mt-2">Fee structures active</p>
                 </Card>
               </motion.div>
 
@@ -552,15 +614,15 @@ export function FeeManagement() {
                 <Card className="p-6 border-2 border-purple-100 bg-gradient-to-br from-white to-purple-50 hover:shadow-xl transition-all">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <PiggyBank className="w-6 h-6 text-white" />
+                      <DollarSign className="w-6 h-6 text-white" />
                     </div>
                     <Badge className="bg-purple-100 text-purple-700 border-0">
-                      Net
+                      Average
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-1">Net Revenue</p>
-                  <h3 className="text-purple-700">₹{((totalRevenue - (totalSalaryExpense * 6)) / 100000).toFixed(2)}L</h3>
-                  <p className="text-xs text-muted-foreground mt-2">After expenses</p>
+                  <p className="text-sm text-muted-foreground mb-1">Avg Fee/Class</p>
+                  <h3 className="text-purple-700">₹{(avgFeePerClass / 1000).toFixed(0)}K</h3>
+                  <p className="text-xs text-muted-foreground mt-2">Per month</p>
                 </Card>
               </motion.div>
             </div>
@@ -575,7 +637,7 @@ export function FeeManagement() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setActiveTab('overview')}
-                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all cursor-pointer ${
                       activeTab === 'overview'
                         ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg'
                         : 'text-gray-600 hover:bg-gray-100'
@@ -586,7 +648,7 @@ export function FeeManagement() {
                   </button>
                   <button
                     onClick={() => setActiveTab('pending')}
-                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all cursor-pointer ${
                       activeTab === 'pending'
                         ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg'
                         : 'text-gray-600 hover:bg-gray-100'
@@ -596,15 +658,15 @@ export function FeeManagement() {
                     Pending Fees ({pendingFees.length})
                   </button>
                   <button
-                    onClick={() => setActiveTab('salaries')}
-                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
-                      activeTab === 'salaries'
-                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg'
+                    onClick={() => setActiveTab('feeDetails')}
+                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all cursor-pointer ${
+                      activeTab === 'feeDetails'
+                        ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-lg'
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                   >
-                    <Users className="w-4 h-4 inline mr-2" />
-                    Salaries
+                    <Settings className="w-4 h-4 inline mr-2" />
+                    Fee Details
                   </button>
                 </div>
               </Card>
@@ -625,7 +687,7 @@ export function FeeManagement() {
                       <h3 className="mb-1">Monthly Fee Collection</h3>
                       <p className="text-sm text-muted-foreground">Last 6 months performance</p>
                     </div>
-                    <Button variant="outline" size="sm" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200">
+                    <Button variant="outline" size="sm" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200 cursor-pointer">
                       <Download className="w-4 h-4 mr-2" />
                       Export Report
                     </Button>
@@ -670,7 +732,7 @@ export function FeeManagement() {
                       </div>
                       <h4 className="font-semibold mb-2">Generate Fee Report</h4>
                       <p className="text-sm text-muted-foreground mb-4">Create detailed fee collection reports</p>
-                      <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700">
+                      <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer">
                         Generate
                       </Button>
                     </Card>
@@ -683,7 +745,7 @@ export function FeeManagement() {
                       </div>
                       <h4 className="font-semibold mb-2">Send Reminders</h4>
                       <p className="text-sm text-muted-foreground mb-4">Send payment reminders to parents</p>
-                      <Button size="sm" className="w-full bg-orange-600 hover:bg-orange-700">
+                      <Button size="sm" className="w-full bg-orange-600 hover:bg-orange-700 cursor-pointer">
                         Send All
                       </Button>
                     </Card>
@@ -696,7 +758,7 @@ export function FeeManagement() {
                       </div>
                       <h4 className="font-semibold mb-2">Schedule Payments</h4>
                       <p className="text-sm text-muted-foreground mb-4">Set up installment schedules</p>
-                      <Button size="sm" className="w-full bg-purple-600 hover:bg-purple-700">
+                      <Button size="sm" className="w-full bg-purple-600 hover:bg-purple-700 cursor-pointer">
                         Schedule
                       </Button>
                     </Card>
@@ -732,7 +794,7 @@ export function FeeManagement() {
                       <select
                         value={feeFilter}
                         onChange={(e) => setFeeFilter(e.target.value)}
-                        className="w-full h-10 pl-10 pr-4 border border-border rounded-lg bg-white appearance-none cursor-pointer"
+                        className="w-full h-10 pl-10 pr-4 border-2 border-slate-300 rounded-lg bg-white appearance-none cursor-pointer"
                       >
                         <option value="all">All Fee Types</option>
                         <option value="Tuition Fee">Tuition Fee</option>
@@ -742,7 +804,7 @@ export function FeeManagement() {
                       </select>
                     </div>
 
-                    <Button className="gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
+                    <Button className="gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 cursor-pointer">
                       <Send className="w-4 h-4" />
                       Send Bulk Reminders
                     </Button>
@@ -834,17 +896,9 @@ export function FeeManagement() {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    console.log('=== PAY NOW BUTTON CLICKED ===');
-                                    console.log('Student data:', student);
-                                    console.log('Navigating to: /admin/admin-fee-payment');
-                                    try {
-                                      navigate('/admin/admin-fee-payment', { state: { student } });
-                                      console.log('Navigation called successfully');
-                                    } catch (error) {
-                                      console.error('Navigation error:', error);
-                                    }
+                                    navigate('/admin/admin-fee-payment', { state: { student } });
                                   }}
-                                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 cursor-pointer"
                                 >
                                   <CreditCard className="w-4 h-4 mr-1" />
                                   Pay Now
@@ -858,7 +912,7 @@ export function FeeManagement() {
                                     e.stopPropagation();
                                     setSelectedStudent(student);
                                   }}
-                                  className="text-slate-600 hover:text-slate-700 hover:bg-slate-50"
+                                  className="text-slate-600 hover:text-slate-700 hover:bg-slate-50 cursor-pointer"
                                 >
                                   <Eye className="w-4 h-4 mr-1" />
                                   View
@@ -871,7 +925,7 @@ export function FeeManagement() {
                                     e.preventDefault();
                                     e.stopPropagation();
                                   }}
-                                  className="text-orange-600 hover:text-orange-700 hover:bg-orange-50"
+                                  className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 cursor-pointer"
                                 >
                                   <Send className="w-4 h-4 mr-1" />
                                   Remind
@@ -909,7 +963,7 @@ export function FeeManagement() {
                           size="sm"
                           onClick={() => setCurrentPage(1)}
                           disabled={currentPage === 1}
-                          className="border-blue-300"
+                          className="border-blue-300 cursor-pointer"
                         >
                           First
                         </Button>
@@ -918,7 +972,7 @@ export function FeeManagement() {
                           size="sm"
                           onClick={() => setCurrentPage(currentPage - 1)}
                           disabled={currentPage === 1}
-                          className="border-blue-300"
+                          className="border-blue-300 cursor-pointer"
                         >
                           Previous
                         </Button>
@@ -927,7 +981,7 @@ export function FeeManagement() {
                           size="sm"
                           onClick={() => setCurrentPage(currentPage + 1)}
                           disabled={currentPage === Math.ceil(sortedGroupedFees.length / rowsPerPage)}
-                          className="border-blue-300"
+                          className="border-blue-300 cursor-pointer"
                         >
                           Next
                         </Button>
@@ -936,7 +990,7 @@ export function FeeManagement() {
                           size="sm"
                           onClick={() => setCurrentPage(Math.ceil(sortedGroupedFees.length / rowsPerPage))}
                           disabled={currentPage === Math.ceil(sortedGroupedFees.length / rowsPerPage)}
-                          className="border-blue-300"
+                          className="border-blue-300 cursor-pointer"
                         >
                           Last
                         </Button>
@@ -947,257 +1001,314 @@ export function FeeManagement() {
               </motion.div>
             )}
 
-            {/* Salaries Tab */}
-            {activeTab === 'salaries' && (
+            {/* Fee Details Tab */}
+            {activeTab === 'feeDetails' && (
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 className="space-y-6"
               >
-                {/* Salary Summary */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="p-6 border-2 border-blue-100 bg-gradient-to-br from-white to-blue-50">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                        <DollarSign className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Total Monthly</p>
-                        <h3 className="text-blue-700">₹{(totalSalaryExpense / 100000).toFixed(2)}L</h3>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="p-6 border-2 border-green-100 bg-gradient-to-br from-white to-green-50">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                        <CheckCircle2 className="w-6 h-6 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Paid This Month</p>
-                        <h3 className="text-green-700">
-                          ₹{((totalSalaryExpense - pendingSalaries) / 100000).toFixed(2)}L
-                        </h3>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="p-6 border-2 border-red-100 bg-gradient-to-br from-white to-red-50">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                        <AlertCircle className="w-6 h-6 text-red-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Pending Payment</p>
-                        <h3 className="text-red-700">₹{(pendingSalaries / 1000).toFixed(0)}K</h3>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-
-                {/* Filter */}
+                {/* Header with Add New Class Button */}
                 <Card className="p-6">
-                  <div className="flex items-center gap-4">
-                    <Filter className="w-5 h-5 text-muted-foreground" />
-                    <select
-                      value={salaryFilter}
-                      onChange={(e) => setSalaryFilter(e.target.value)}
-                      className="flex-1 h-10 px-4 border border-border rounded-lg bg-white appearance-none cursor-pointer"
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="mb-1">Class Fee Structures</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Manage standardized fee structures for each class
+                      </p>
+                    </div>
+                    <Button 
+                      onClick={() => setShowNewClassForm(true)}
+                      className="gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 cursor-pointer"
                     >
-                      <option value="all">All Status</option>
-                      <option value="paid">Paid</option>
-                      <option value="partial">Partial</option>
-                      <option value="pending">Pending</option>
-                    </select>
-                    <Button className="gap-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600">
-                      <CheckCircle2 className="w-4 h-4" />
-                      Process Payments
+                      <Plus className="w-4 h-4" />
+                      Add New Class
                     </Button>
                   </div>
                 </Card>
 
-                {/* Teacher Salary Table */}
-                <Card className="bg-white border-slate-200 overflow-hidden shadow-lg">
-                  <div className="overflow-x-auto table-scroll">
-                    <table className="w-full min-w-max">
-                      <thead>
-                        <tr className="border-b-2 border-slate-200 bg-slate-100">
-                          <th 
-                            className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
-                            onClick={() => handleSalarySort('teacherName')}
-                          >
-                            <div className="flex items-center gap-2">
-                              Teacher Details
-                              {salarySortField === 'teacherName' && (
-                                salarySortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                              )}
-                            </div>
-                          </th>
-                          <th 
-                            className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
-                            onClick={() => handleSalarySort('department')}
-                          >
-                            <div className="flex items-center gap-2">
-                              Department
-                              {salarySortField === 'department' && (
-                                salarySortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                              )}
-                            </div>
-                          </th>
-                          <th 
-                            className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
-                            onClick={() => handleSalarySort('monthlySalary')}
-                          >
-                            <div className="flex items-center gap-2">
-                              Monthly Salary
-                              {salarySortField === 'monthlySalary' && (
-                                salarySortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                              )}
-                            </div>
-                          </th>
-                          <th className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap">Paid</th>
-                          <th className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap">Pending</th>
-                          <th 
-                            className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
-                            onClick={() => handleSalarySort('status')}
-                          >
-                            <div className="flex items-center gap-2">
-                              Status
-                              {salarySortField === 'status' && (
-                                salarySortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                              )}
-                            </div>
-                          </th>
-                          <th className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white">
-                        {sortedSalaries.slice((salaryCurrentPage - 1) * salaryRowsPerPage, salaryCurrentPage * salaryRowsPerPage).map((teacher, index) => (
-                          <motion.tr
-                            key={teacher.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className={`border-b border-slate-200 hover:bg-blue-50 transition-colors ${
-                              index % 2 === 0 ? 'bg-white' : 'bg-slate-50'
-                            }`}
-                          >
-                            <td className="py-4 px-4 xl:px-6 whitespace-nowrap">
-                              <div>
-                                <p className="font-medium text-slate-900">{teacher.teacherName}</p>
-                                <p className="text-sm text-slate-600">
-                                  {teacher.teacherId} • {teacher.designation}
-                                </p>
-                              </div>
-                            </td>
-                            <td className="py-4 px-4 xl:px-6 whitespace-nowrap">
-                              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                                {teacher.department}
-                              </Badge>
-                            </td>
-                            <td className="py-4 px-4 xl:px-6 whitespace-nowrap">
-                              <p className="font-semibold text-slate-900">₹{teacher.monthlySalary.toLocaleString()}</p>
-                            </td>
-                            <td className="py-4 px-4 xl:px-6 text-green-600 font-medium whitespace-nowrap">
-                              ₹{teacher.paidAmount.toLocaleString()}
-                            </td>
-                            <td className="py-4 px-4 xl:px-6 text-red-600 font-medium whitespace-nowrap">
-                              {teacher.pendingAmount > 0 ? `₹${teacher.pendingAmount.toLocaleString()}` : '-'}
-                            </td>
-                            <td className="py-4 px-4 xl:px-6 whitespace-nowrap">
-                              <Badge variant="outline" className={getSalaryStatusColor(teacher.status)}>
-                                {teacher.status === 'paid' && <CheckCircle2 className="w-3 h-3 mr-1" />}
-                                {teacher.status === 'partial' && <Clock className="w-3 h-3 mr-1" />}
-                                {teacher.status === 'pending' && <AlertCircle className="w-3 h-3 mr-1" />}
-                                <span className="capitalize">{teacher.status}</span>
-                              </Badge>
-                            </td>
-                            <td className="py-4 px-4 xl:px-6 whitespace-nowrap">
-                              <div className="flex items-center gap-2">
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                                >
-                                  <Eye className="w-4 h-4 mr-1" />
-                                  View
-                                </Button>
-                                {teacher.status !== 'paid' && (
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-green-600 hover:text-green-700 hover:bg-green-50"
-                                  >
-                                    <CheckCircle2 className="w-4 h-4 mr-1" />
-                                    Pay
-                                  </Button>
-                                )}
-                              </div>
-                            </td>
-                          </motion.tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Pagination */}
-                  <div className="p-4 bg-gray-50 flex items-center justify-between border-t border-slate-200">
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm text-gray-700">Rows per page:</p>
-                      <select
-                        value={salaryRowsPerPage}
-                        onChange={(e) => handleSalaryRowsPerPageChange(Number(e.target.value))}
-                        className="w-20 h-10 px-2 border border-gray-300 rounded-lg bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        <option value={10}>10</option>
-                        <option value={25}>25</option>
-                        <option value={50}>50</option>
-                        <option value={100}>100</option>
-                      </select>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <p className="text-sm text-gray-700">
-                        Showing {(salaryCurrentPage - 1) * salaryRowsPerPage + 1} to {Math.min(salaryCurrentPage * salaryRowsPerPage, sortedSalaries.length)} of {sortedSalaries.length}
-                      </p>
-                      <div className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setSalaryCurrentPage(1)}
-                          disabled={salaryCurrentPage === 1}
-                          className="border-blue-300"
+                {/* New Class Form */}
+                {showNewClassForm && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    <Card className="p-6 border-2 border-blue-200 bg-blue-50">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="font-semibold">Add New Fee Structure</h4>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => {
+                            setShowNewClassForm(false);
+                            setNewClassName('');
+                          }}
+                          className="cursor-pointer"
                         >
-                          First
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setSalaryCurrentPage(salaryCurrentPage - 1)}
-                          disabled={salaryCurrentPage === 1}
-                          className="border-blue-300"
-                        >
-                          Previous
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setSalaryCurrentPage(salaryCurrentPage + 1)}
-                          disabled={salaryCurrentPage === Math.ceil(sortedSalaries.length / salaryRowsPerPage)}
-                          className="border-blue-300"
-                        >
-                          Next
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setSalaryCurrentPage(Math.ceil(sortedSalaries.length / salaryRowsPerPage))}
-                          disabled={salaryCurrentPage === Math.ceil(sortedSalaries.length / salaryRowsPerPage)}
-                          className="border-blue-300"
-                        >
-                          Last
+                          <X className="w-4 h-4" />
                         </Button>
                       </div>
+                      <div className="flex gap-4">
+                        <select
+                          value={newClassName}
+                          onChange={(e) => setNewClassName(e.target.value)}
+                          className="flex-1 h-10 px-4 border-2 border-slate-300 rounded-lg bg-white cursor-pointer"
+                        >
+                          <option value="">Select Class</option>
+                          {getUnconfiguredClasses().map(cls => (
+                            <option key={cls} value={cls}>{cls}</option>
+                          ))}
+                        </select>
+                        <Button 
+                          onClick={handleCreateNewClass}
+                          disabled={!newClassName}
+                          className="bg-blue-600 hover:bg-blue-700 cursor-pointer"
+                        >
+                          <Save className="w-4 h-4 mr-2" />
+                          Create Structure
+                        </Button>
+                      </div>
+                    </Card>
+                  </motion.div>
+                )}
+
+                {/* Fee Structure Cards */}
+                <div className="grid grid-cols-1 gap-6">
+                  {classFeeStructures.map((structure, idx) => (
+                    <motion.div
+                      key={structure.className}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                    >
+                      <Card className="p-6 border-2 border-slate-200 hover:shadow-lg transition-all">
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-6">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                              <GraduationCap className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold">{structure.className}</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Last updated: {new Date(structure.lastUpdated).toLocaleDateString('en-IN')}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="text-right">
+                              <p className="text-sm text-muted-foreground">Total Monthly Fee</p>
+                              <p className="text-2xl font-bold text-purple-700">
+                                ₹{structure.totalFee.toLocaleString()}
+                              </p>
+                            </div>
+                            {editingClass === structure.className ? (
+                              <div className="flex gap-2">
+                                <Button
+                                  size="sm"
+                                  onClick={handleSaveFeeStructure}
+                                  className="bg-green-600 hover:bg-green-700 cursor-pointer"
+                                >
+                                  <Save className="w-4 h-4 mr-1" />
+                                  Save
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={handleCancelEdit}
+                                  className="cursor-pointer"
+                                >
+                                  Cancel
+                                </Button>
+                              </div>
+                            ) : (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleEditClass(structure.className)}
+                                className="border-blue-300 text-blue-700 hover:bg-blue-50 cursor-pointer"
+                              >
+                                <Edit className="w-4 h-4 mr-1" />
+                                Edit
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Fee Components by Category - Only show if not applied or if editing */}
+                        {(!appliedClasses.has(structure.className) || editingClass === structure.className) && (
+                        <div className="space-y-6 mb-6">
+                          {/* (I) College Dues */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2 pb-2 border-b-2 border-orange-200">
+                              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
+                                <GraduationCap className="w-5 h-5 text-white" />
+                              </div>
+                              <h5 className="font-semibold text-orange-900">(I) College Dues</h5>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {(editingClass === structure.className ? editingFees : structure.feeComponents)
+                                .filter(c => c.category === 'college')
+                                .map((component) => (
+                                <div
+                                  key={component.id}
+                                  className="p-3 rounded-lg border border-orange-200 bg-orange-50/50"
+                                >
+                                  <div className="flex items-center justify-between mb-2">
+                                    <span className="font-medium text-sm text-slate-900">{component.name}</span>
+                                  </div>
+                                  {editingClass === structure.className ? (
+                                    <Input
+                                      type="number"
+                                      value={component.amount}
+                                      onChange={(e) => handleFeeAmountChange(component.id, e.target.value)}
+                                      className="border-2 border-slate-300 h-9"
+                                      placeholder="Enter amount"
+                                    />
+                                  ) : (
+                                    <p className="text-base font-semibold text-slate-900">
+                                      ₹{component.amount.toLocaleString()}
+                                    </p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* (II) Misc. Dues */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2 pb-2 border-b-2 border-orange-200">
+                              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
+                                <Book className="w-5 h-5 text-white" />
+                              </div>
+                              <h5 className="font-semibold text-orange-900">(II) Misc. Dues</h5>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                              {(editingClass === structure.className ? editingFees : structure.feeComponents)
+                                .filter(c => c.category === 'misc')
+                                .map((component) => (
+                                <div
+                                  key={component.id}
+                                  className="p-3 rounded-lg border border-orange-200 bg-orange-50/50"
+                                >
+                                  <div className="flex items-center justify-between mb-2">
+                                    <span className="font-medium text-sm text-slate-900">{component.name}</span>
+                                  </div>
+                                  {editingClass === structure.className ? (
+                                    <Input
+                                      type="number"
+                                      value={component.amount}
+                                      onChange={(e) => handleFeeAmountChange(component.id, e.target.value)}
+                                      className="border-2 border-slate-300 h-9"
+                                      placeholder="Enter amount"
+                                    />
+                                  ) : (
+                                    <p className="text-base font-semibold text-slate-900">
+                                      ₹{component.amount.toLocaleString()}
+                                    </p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* (III) Council */}
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2 pb-2 border-b-2 border-orange-200">
+                              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
+                                <FileText className="w-5 h-5 text-white" />
+                              </div>
+                              <h5 className="font-semibold text-orange-900">(III) Council</h5>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {(editingClass === structure.className ? editingFees : structure.feeComponents)
+                                .filter(c => c.category === 'council')
+                                .map((component) => (
+                                <div
+                                  key={component.id}
+                                  className="p-3 rounded-lg border border-orange-200 bg-orange-50/50"
+                                >
+                                  <div className="flex items-center justify-between mb-2">
+                                    <span className="font-medium text-sm text-slate-900">{component.name}</span>
+                                  </div>
+                                  {editingClass === structure.className ? (
+                                    <Input
+                                      type="number"
+                                      value={component.amount}
+                                      onChange={(e) => handleFeeAmountChange(component.id, e.target.value)}
+                                      className="border-2 border-slate-300 h-9"
+                                      placeholder="Enter amount"
+                                    />
+                                  ) : (
+                                    <p className="text-base font-semibold text-slate-900">
+                                      ₹{component.amount.toLocaleString()}
+                                    </p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        )}
+
+                        {/* Applied Status - Show when applied and not editing */}
+                        {appliedClasses.has(structure.className) && editingClass !== structure.className && (
+                          <div className="mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg">
+                            <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <CheckCircle2 className="w-6 h-6 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-green-900">Fee Structure Applied</h4>
+                                <p className="text-sm text-green-700">
+                                  This fee structure has been successfully applied to all students in {structure.className}
+                                </p>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-sm text-green-700 font-medium">Total Monthly Fee</p>
+                                <p className="text-3xl font-bold text-green-900">
+                                  ₹{structure.totalFee.toLocaleString()}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Apply Button */}
+                        {editingClass !== structure.className && !appliedClasses.has(structure.className) && (
+                          <div className="pt-4 border-t border-slate-200">
+                            <Button
+                              onClick={() => handleApplyToStudents(structure.className)}
+                              className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 cursor-pointer"
+                            >
+                              <CheckCircle2 className="w-4 h-4 mr-2" />
+                              Apply to All Students in {structure.className}
+                            </Button>
+                          </div>
+                        )}
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Info Card */}
+                <Card className="p-6 bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2">Fee Structure Guidelines</h4>
+                      <ul className="text-sm text-slate-700 space-y-1">
+                        <li>• Fee structure follows the standardized format with three categories:</li>
+                        <li className="ml-4">- <strong>College Dues:</strong> Tuition, Admission, Session fees, etc.</li>
+                        <li className="ml-4">- <strong>Misc. Dues:</strong> Magazine, Development, Examination, Library, etc.</li>
+                        <li className="ml-4">- <strong>Council:</strong> Migration, Registration, Examination, Marks fees, etc.</li>
+                        <li>• Applying a fee structure will update pending fees for all students in that class</li>
+                        <li>• Changes take effect immediately after saving</li>
+                        <li>• Enter 0 for fees that don't apply to a particular class</li>
+                      </ul>
                     </div>
                   </div>
                 </Card>
@@ -1221,7 +1332,7 @@ export function FeeManagement() {
                   <h3 className="mb-1">Payment Details</h3>
                   <p className="text-sm text-muted-foreground">{selectedStudent.studentId} - {selectedStudent.studentName}</p>
                 </div>
-                <Button variant="ghost" size="sm" onClick={() => setSelectedStudent(null)}>
+                <Button variant="ghost" size="sm" onClick={() => setSelectedStudent(null)} className="cursor-pointer">
                   <X className="w-4 h-4" />
                 </Button>
               </div>
@@ -1321,20 +1432,20 @@ export function FeeManagement() {
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
                   <Button 
-                    className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 cursor-pointer"
                     onClick={() => {
                       // Send reminder logic
-                      alert(`Reminder sent to ${selectedStudent.parentName} at ${selectedStudent.contactNumber}`);
+                      toast.success(`Reminder sent to ${selectedStudent.parentName} at ${selectedStudent.contactNumber}`);
                     }}
                   >
                     <Send className="w-4 h-4 mr-2" />
                     Send Payment Reminder
                   </Button>
-                  <Button variant="outline" className="flex-1 border-blue-300 text-blue-700 hover:bg-blue-50">
+                  <Button variant="outline" className="flex-1 border-blue-300 text-blue-700 hover:bg-blue-50 cursor-pointer">
                     <Mail className="w-4 h-4 mr-2" />
                     Email Invoice
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1 cursor-pointer">
                     <Download className="w-4 h-4 mr-2" />
                     Download PDF
                   </Button>

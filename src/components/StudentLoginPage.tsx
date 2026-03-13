@@ -16,6 +16,7 @@ import { Badge } from "./ui/badge";
 import { CarouselHeader } from "./CarouselHeader";
 import { Footer } from "./Footer";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { toast } from "sonner";
 
 export function StudentLoginPage() {
   const [step, setStep] = useState<"mobile" | "otp">("mobile");
@@ -35,6 +36,12 @@ export function StudentLoginPage() {
       // Simulate API call
       setTimeout(() => {
         setIsLoading(false);
+        
+        // Show success toast
+        toast.success('OTP Sent Successfully!', {
+          description: `A 6-digit OTP has been sent to ${mobile.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')}`,
+        });
+        
         setStep("otp");
       }, 1500);
     }
@@ -64,7 +71,15 @@ export function StudentLoginPage() {
       // Simulate API call
       setTimeout(() => {
         setIsLoading(false);
-        navigate("/student/dashboard");
+        
+        // Show success toast
+        toast.success('Login Successful!', {
+          description: 'Welcome to your student portal!',
+        });
+        
+        setTimeout(() => {
+          navigate("/student/dashboard");
+        }, 500);
       }, 1500);
     }
   };

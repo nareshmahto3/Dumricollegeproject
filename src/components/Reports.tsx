@@ -426,7 +426,7 @@ export function Reports() {
                 </Badge>
               </div>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={currentData}>
+                <LineChart data={currentData} id="revenue-chart-reports">
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="period" stroke="#64748b" />
                   <YAxis stroke="#64748b" />
@@ -437,7 +437,7 @@ export function Reports() {
                       borderRadius: '8px',
                     }}
                   />
-                  <Legend />
+                  <Legend wrapperStyle={{ paddingTop: '10px' }} />
                   <Line
                     type="monotone"
                     dataKey="revenue"
@@ -467,7 +467,7 @@ export function Reports() {
                 </Badge>
               </div>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={currentData}>
+                <BarChart data={currentData} id="admissions-chart-reports">
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="period" stroke="#64748b" />
                   <YAxis stroke="#64748b" />
@@ -478,7 +478,7 @@ export function Reports() {
                       borderRadius: '8px',
                     }}
                   />
-                  <Legend />
+                  <Legend wrapperStyle={{ paddingTop: '10px' }} />
                   <Bar dataKey="admissions" fill="#9333ea" name="New Admissions" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -535,7 +535,7 @@ export function Reports() {
                 </Badge>
               </div>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={currentData}>
+                <LineChart data={currentData} id="attendance-chart-reports">
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="period" stroke="#64748b" />
                   <YAxis stroke="#64748b" domain={[0, 100]} />
@@ -546,7 +546,7 @@ export function Reports() {
                       borderRadius: '8px',
                     }}
                   />
-                  <Legend />
+                  <Legend wrapperStyle={{ paddingTop: '10px' }} />
                   <Line
                     type="monotone"
                     dataKey="attendance"

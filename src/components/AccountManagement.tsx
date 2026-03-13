@@ -522,8 +522,8 @@ export function AccountManagement() {
                     }}
                   />
                   <Legend />
-                  <Bar dataKey="income" fill="#10b981" name="Income" />
-                  <Bar dataKey="expense" fill="#ef4444" name="Expense" />
+                  <Bar key="bar-income-account" dataKey="income" fill="#10b981" name="Income" />
+                  <Bar key="bar-expense-account" dataKey="expense" fill="#ef4444" name="Expense" />
                 </BarChart>
               </ResponsiveContainer>
             </Card>

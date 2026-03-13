@@ -1,21 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  Send,
-  MessageSquare,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-} from 'lucide-react';
-import { Card } from '../ui/card';
-import { Button } from '../ui/button';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
+import { ScrollToTop } from '../ScrollToTop';
+import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Building2 } from 'lucide-react';
+import { Card } from '../ui/card';
+import { toast } from 'sonner';
 
 export function ContactPage() {
   const [formData, setFormData] = useState({
@@ -30,6 +20,20 @@ export function ContactPage() {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', formData);
+    
+    // Show success toast
+    toast.success('Message Sent Successfully!', {
+      description: 'Thank you for contacting us. We will get back to you soon!',
+    });
+    
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: '',
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -388,6 +392,7 @@ export function ContactPage() {
 
       {/* Footer */}
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

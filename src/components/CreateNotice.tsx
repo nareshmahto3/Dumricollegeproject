@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
 export function CreateNotice() {
   const navigate = useNavigate();
@@ -22,8 +23,16 @@ export function CreateNotice() {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', formData);
+    
+    // Show success toast
+    toast.success('Notice Published Successfully!', {
+      description: `"${formData.title}" has been published to ${formData.targetAudience}.`,
+    });
+    
     // Navigate back to notices page
-    navigate('/admin/notices');
+    setTimeout(() => {
+      navigate('/admin/notices');
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {

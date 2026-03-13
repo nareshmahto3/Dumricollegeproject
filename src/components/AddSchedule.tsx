@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
 export function AddSchedule() {
   const navigate = useNavigate();
@@ -22,8 +23,16 @@ export function AddSchedule() {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', formData);
+    
+    // Show success toast
+    toast.success('Schedule Added Successfully!', {
+      description: `${formData.subject} scheduled for ${formData.day} at ${formData.startTime}.`,
+    });
+    
     // Navigate back to schedule page
-    navigate('/admin/schedule');
+    setTimeout(() => {
+      navigate('/admin/schedule');
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

@@ -79,7 +79,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/programs')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-white hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
+                    className="flex-1 bg-white cursor-pointer hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
                   >
                     Read More
                   </motion.button>
@@ -87,7 +87,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/apply')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-[#2563EB] hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
+                    className="flex-1 bg-[#2563EB] cursor-pointer hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
                   >
                     Apply Now
                     <span className="text-base">→</span>
@@ -139,7 +139,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/programs')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-white hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
+                    className="flex-1 cursor-pointer bg-white hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
                   >
                     Read More
                   </motion.button>
@@ -147,7 +147,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/apply')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-[#2563EB] hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
+                    className="flex-1 cursor-pointer bg-[#2563EB] hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
                   >
                     Apply Now
                   </motion.button>
@@ -198,7 +198,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/programs')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-white hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
+                    className="flex-1 cursor-pointer bg-white hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
                   >
                     Read More
                   </motion.button>
@@ -206,7 +206,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/apply')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-[#2563EB] hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
+                    className="flex-1 cursor-pointer bg-[#2563EB] hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
                   >
                     Apply Now
                   </motion.button>
@@ -234,7 +234,7 @@ export function ProgramsSection() {
             <motion.button
               whileHover={{ scale: 1.05, x: 5 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 text-gray-700 text-lg font-semibold hover:gap-4 transition-all"
+              className="inline-flex cursor-pointer items-center gap-2 text-gray-700 text-lg font-semibold hover:gap-4 transition-all"
               onClick={() => navigate('/join')}
             >
               Join Dumri College Now

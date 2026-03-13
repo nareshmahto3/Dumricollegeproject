@@ -18,6 +18,7 @@ import { Badge } from "./ui/badge";
 import { CarouselHeader } from "./CarouselHeader";
 import { Footer } from "./Footer";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { toast } from "sonner";
 
 const roles = [
   {
@@ -66,12 +67,20 @@ export function StaffLoginPage() {
       // Simulate API call
       setTimeout(() => {
         setIsLoading(false);
+        
+        // Show success toast
+        toast.success('Login Successful!', {
+          description: `Welcome back, ${username}!`,
+        });
+        
         // Navigate based on role
-        if (selectedRole === "admin") {
-          navigate("/admin/dashboard");
-        } else if (selectedRole === "teacher") {
-          navigate("/teacher/dashboard");
-        }
+        setTimeout(() => {
+          if (selectedRole === "admin") {
+            navigate("/admin/dashboard");
+          } else if (selectedRole === "teacher") {
+            navigate("/teacher/dashboard");
+          }
+        }, 500);
       }, 1500);
     }
   };

@@ -114,6 +114,42 @@ const carouselImages = [
   },
 ];
 
+// Notice carousel data
+const notices = [
+  {
+    id: 1,
+    title: "ADMISSIONS OPEN 2026:",
+    message: "Applications are now being accepted for Undergraduate, Postgraduate & Doctoral programs.",
+    primaryButton: { text: "Apply Now", link: "/apply" },
+    secondaryButton: { text: "View Programs", link: "/programs" },
+    bgGradient: "from-amber-500 via-orange-500 to-amber-500",
+  },
+  {
+    id: 2,
+    title: "SCHOLARSHIP NOTIFICATION:",
+    message: "Merit-based scholarships up to 100% tuition fee waiver available. Apply before March 31, 2026.",
+    primaryButton: { text: "Learn More", link: "/apply" },
+    secondaryButton: { text: "Check Eligibility", link: "/programs" },
+    bgGradient: "from-blue-600 via-blue-500 to-blue-600",
+  },
+  {
+    id: 3,
+    title: "PLACEMENT DRIVE 2026:",
+    message: "Registration open for final year students. 150+ companies participating. Last date: March 20, 2026.",
+    primaryButton: { text: "Register Now", link: "/apply" },
+    secondaryButton: { text: "View Companies", link: "/programs" },
+    bgGradient: "from-green-600 via-emerald-500 to-green-600",
+  },
+  {
+    id: 4,
+    title: "ANNUAL FEST 2026:",
+    message: "Join us for our grand cultural & technical fest from March 15-17. Register your team today!",
+    primaryButton: { text: "Register Team", link: "/apply" },
+    secondaryButton: { text: "Event Details", link: "/programs" },
+    bgGradient: "from-purple-600 via-pink-500 to-purple-600",
+  },
+];
+
 export default function DumriCollegeLanding() {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -129,6 +165,7 @@ export default function DumriCollegeLanding() {
   const [galleryCarouselIndex, setGalleryCarouselIndex] =
     useState(0);
   const [achievCardIndex, setAchievCardIndex] = useState(0);
+  const [noticeIndex, setNoticeIndex] = useState(0);
 
   // Auto-rotate carousel - increased to 6 seconds
   useEffect(() => {
@@ -137,6 +174,14 @@ export default function DumriCollegeLanding() {
         (prev) => (prev + 1) % carouselImages.length,
       );
     }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-rotate notice carousel - 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNoticeIndex((prev) => (prev + 1) % notices.length);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -211,7 +256,7 @@ export default function DumriCollegeLanding() {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 transition-all duration-300"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 transition-all duration-300 cursor-pointer"
           aria-label="Previous slide"
         >
           <svg
@@ -224,7 +269,7 @@ export default function DumriCollegeLanding() {
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 transition-all duration-300"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 transition-all duration-300 cursor-pointer"
           aria-label="Next slide"
         >
           <svg
@@ -242,7 +287,7 @@ export default function DumriCollegeLanding() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className="p-1.5"
+              className="p-1.5 cursor-pointer"
               aria-label={`Go to slide ${index + 1}`}
             >
               <div
@@ -250,6 +295,123 @@ export default function DumriCollegeLanding() {
                   index === currentSlide
                     ? "bg-[#869791]"
                     : "bg-[#d6d6d6]"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Important Notice Carousel */}
+      <section className="relative overflow-hidden">
+        {notices.map((notice, index) => (
+          <motion.div
+            key={notice.id}
+            initial={{ opacity: 0, x: 100 }}
+            animate={{
+              opacity: index === noticeIndex ? 1 : 0,
+              x: index === noticeIndex ? 0 : index < noticeIndex ? -100 : 100,
+            }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className={`${index === noticeIndex ? "relative" : "absolute inset-0"} bg-gradient-to-r ${notice.bgGradient} py-3 md:py-4`}
+            style={{ 
+              zIndex: index === noticeIndex ? 1 : 0,
+              pointerEvents: index === noticeIndex ? "auto" : "none"
+            }}
+          >
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+                <div className="flex items-center gap-3 flex-1">
+                  {/* Icon */}
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatDelay: 3
+                    }}
+                    className="flex-shrink-0"
+                  >
+                    <svg
+                      className="w-6 h-6 md:w-7 md:h-7 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </motion.div>
+                  
+                  {/* Notice Text */}
+                  <div className="flex-1 text-center md:text-left">
+                    <p className="text-white text-sm md:text-base font-medium">
+                      <span className="font-bold">{notice.title}</span> {notice.message}
+                    </p>
+                  </div>
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="flex gap-2 md:gap-3 flex-shrink-0">
+                  <motion.button
+                    onClick={() => navigate(notice.primaryButton.link)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-white text-gray-900 px-4 md:px-6 py-2 rounded-lg text-sm md:text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
+                  >
+                    {notice.primaryButton.text}
+                  </motion.button>
+                  <motion.button
+                    onClick={() => navigate(notice.secondaryButton.link)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-white/20 backdrop-blur-sm border border-white text-white px-4 md:px-6 py-2 rounded-lg text-sm md:text-base font-semibold hover:bg-white/30 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
+                  >
+                    {notice.secondaryButton.text}
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={() => setNoticeIndex((prev) => (prev - 1 + notices.length) % notices.length)}
+          className="hidden md:block absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300 cursor-pointer"
+          aria-label="Previous notice"
+        >
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+          </svg>
+        </button>
+        <button
+          onClick={() => setNoticeIndex((prev) => (prev + 1) % notices.length)}
+          className="hidden md:block absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300 cursor-pointer"
+          aria-label="Next notice"
+        >
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          </svg>
+        </button>
+
+        {/* Dots Indicator */}
+        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+          {notices.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setNoticeIndex(index)}
+              className="p-0.5 cursor-pointer"
+              aria-label={`Go to notice ${index + 1}`}
+            >
+              <div
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  index === noticeIndex ? "bg-white w-4" : "bg-white/50"
                 }`}
               />
             </button>
@@ -472,7 +634,7 @@ export default function DumriCollegeLanding() {
                 onClick={() => navigate("/programs")}
                 whileHover={{ scale: 1.05, x: 5 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+                className="inline-flex  items-center gap-2 bg-[#2563EB] text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 Read More
                 <svg
@@ -515,7 +677,7 @@ export default function DumriCollegeLanding() {
                     duration: 0.4,
                     delay: idx * 0.1,
                   }}
-                  className="group relative bg-white rounded-lg p-10 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="group relative bg-white rounded-lg p-10 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
                   whileHover={{ scale: 1.08, y: -5 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -837,7 +999,7 @@ export default function DumriCollegeLanding() {
                         )
                       }
                       disabled={eventsCarouselIndex === 0}
-                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow transition-all"
+                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow transition-all cursor-pointer"
                     >
                       ‹
                     </button>
@@ -848,7 +1010,7 @@ export default function DumriCollegeLanding() {
                           onClick={() =>
                             setEventsCarouselIndex(i)
                           }
-                          className={`w-2 h-2 rounded-full transition-all ${i === eventsCarouselIndex ? "bg-[#0C4D8B] w-5" : "bg-gray-300"}`}
+                          className={`w-2 h-2 rounded-full transition-all cursor-pointer ${i === eventsCarouselIndex ? "bg-[#0C4D8B] w-5" : "bg-gray-300"}`}
                         />
                       ))}
                     </div>
@@ -862,7 +1024,7 @@ export default function DumriCollegeLanding() {
                         eventsCarouselIndex ===
                         events.length - 1
                       }
-                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow transition-all"
+                      className="w-9 h-9 rounded-full bg-[#0C4D8B] disabled:bg-gray-300 text-white flex items-center justify-center shadow transition-all cursor-pointer"
                     >
                       ›
                     </button>
@@ -890,7 +1052,7 @@ export default function DumriCollegeLanding() {
                 <div className="text-center mt-8">
                   <motion.button
                     onClick={() => navigate("/gallery")}
-                    className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl"
+                    className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -1252,7 +1414,7 @@ export default function DumriCollegeLanding() {
                   }}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-3 font-light transition-all duration-300 ${
+                  className={`px-6 py-3 font-light transition-all duration-300 cursor-pointer ${
                     achievementTab === tab.key
                       ? "bg-[#D98600] text-white"
                       : "bg-[#0C4D8B] text-white hover:bg-[#0C4D8B]/80"
@@ -1368,7 +1530,7 @@ export default function DumriCollegeLanding() {
             <div className="text-center mt-8">
               <motion.button
                 onClick={() => navigate("/achievements")}
-                className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300"
+                className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -1439,7 +1601,7 @@ export default function DumriCollegeLanding() {
               <div className="text-center">
                 <motion.button
                   onClick={() => navigate("/labs")}
-                  className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300"
+                  className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -1796,7 +1958,7 @@ export default function DumriCollegeLanding() {
                 <div className="text-center mt-8 md:mt-12">
                   <motion.button
                     onClick={() => navigate("/about")}
-                    className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300"
+                    className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -1954,7 +2116,7 @@ export default function DumriCollegeLanding() {
           <div className="text-center mt-8 md:mt-12">
             <motion.button
               onClick={() => navigate("/gallery")}
-              className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#1e40af] hover:shadow-lg transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#1e40af] hover:shadow-lg transition-all duration-300 cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -2015,7 +2177,7 @@ export default function DumriCollegeLanding() {
             >
               <motion.button
                 onClick={() => navigate("/apply")}
-                className="bg-white text-[#2563EB] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-xl"
+                className="bg-white text-[#2563EB] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-xl cursor-pointer"
                 whileHover={{
                   scale: 1.1,
                   boxShadow: "0 25px 50px rgba(0,0,0,0.3)",
@@ -2026,7 +2188,7 @@ export default function DumriCollegeLanding() {
               </motion.button>
               <motion.button
                 onClick={() => navigate("/contact")}
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-[#2563EB] transition-all duration-300"
+                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-[#2563EB] transition-all duration-300 cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

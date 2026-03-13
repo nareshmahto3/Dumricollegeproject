@@ -258,7 +258,7 @@ export function CertificateRequestManagement() {
       <div className="space-y-6">
 
             {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <Card className="p-4 border-2 border-gray-100 hover:border-blue-200 hover:shadow-lg transition-all">
                 <p className="text-sm text-muted-foreground mb-1">Total Requests</p>
                 <h3>{stats.total}</h3>
@@ -275,7 +275,7 @@ export function CertificateRequestManagement() {
                 <p className="text-sm text-muted-foreground mb-1">Issued</p>
                 <h3 className="text-green-600">{stats.issued}</h3>
               </Card>
-            </div>
+            </div> */}
 
             {/* Filters */}
             <Card className="p-6 mb-6">

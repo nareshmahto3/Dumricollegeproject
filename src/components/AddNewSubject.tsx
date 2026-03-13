@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
 export function AddNewSubject() {
   const navigate = useNavigate();
@@ -21,8 +22,16 @@ export function AddNewSubject() {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', formData);
+    
+    // Show success toast
+    toast.success('Subject Added Successfully!', {
+      description: `${formData.subjectName} (${formData.subjectCode}) has been added to the curriculum.`,
+    });
+    
     // Navigate back to subjects page
-    navigate('/admin/subjects');
+    setTimeout(() => {
+      navigate('/admin/subjects');
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {

@@ -142,6 +142,26 @@
     font-weight: 700;
   }
 
+  /* Global cursor pointer for interactive elements */
+  button,
+  a,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  select,
+  label:has(input[type="checkbox"]),
+  label:has(input[type="radio"]) {
+    cursor: pointer;
+  }
+
+  /* Disabled state - not clickable */
+  button:disabled,
+  a:disabled,
+  [disabled] {
+    cursor: not-allowed;
+  }
+
   /* Global hover styles for better visibility */
   button:hover,
   a:hover {

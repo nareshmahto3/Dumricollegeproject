@@ -1,9 +1,21 @@
-import { motion, AnimatePresence } from "motion/react";
-import { Mail, Phone, MapPin, ArrowUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Youtube,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  ChevronUp,
+  Send,
+} from "lucide-react";
+import { toast } from "sonner";
 import logoImage from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
-import svgPaths from "../imports/svg-mnpf35yk8o";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -26,6 +38,12 @@ export function Footer() {
     e.preventDefault();
     if (email) {
       console.log("Newsletter signup:", email);
+      
+      // Show success toast
+      toast.success('Successfully Subscribed!', {
+        description: `Thank you for subscribing to our newsletter with ${email}`,
+      });
+      
       setEmail("");
     }
   };
@@ -275,36 +293,35 @@ export function Footer() {
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-9 h-9 bg-white/10 hover:bg-[#2563EB] rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
-                    <path d={svgPaths.p302cda80} />
-                  </svg>
+                  <Facebook className="w-4 h-4" />
                 </motion.a>
                 <motion.a
                   href="#"
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-9 h-9 bg-white/10 hover:bg-[#2563EB] rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
-                    <path d={svgPaths.p26acad00} />
-                  </svg>
+                  <Twitter className="w-4 h-4" />
                 </motion.a>
                 <motion.a
                   href="#"
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-9 h-9 bg-white/10 hover:bg-[#2563EB] rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
-                    <path d={svgPaths.p144b3900} />
-                  </svg>
+                  <Instagram className="w-4 h-4" />
                 </motion.a>
                 <motion.a
                   href="#"
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-9 h-9 bg-white/10 hover:bg-[#2563EB] rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
-                    <path d={svgPaths.p2a776880} />
-                  </svg>
+                  <Linkedin className="w-4 h-4" />
+                </motion.a>
+                <motion.a
+                  href="#"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="w-9 h-9 bg-white/10 hover:bg-[#2563EB] rounded-xl flex items-center justify-center transition-colors cursor-pointer"
+                >
+                  <Youtube className="w-4 h-4" />
                 </motion.a>
               </div>
             </div>
@@ -335,7 +352,7 @@ export function Footer() {
             className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-[#2563EB] hover:bg-[#1e40af] rounded-full flex items-center justify-center transition-colors shadow-2xl cursor-pointer"
             aria-label="Scroll to top"
           >
-            <ArrowUp className="w-6 h-6 text-white" />
+            <ChevronUp className="w-6 h-6 text-white" />
           </motion.button>
         )}
       </AnimatePresence>
