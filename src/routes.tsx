@@ -34,14 +34,44 @@ const AboutPage = lazy(() =>
     default: m.AboutPage,
   }))
 );
+const AboutLayout = lazy(() =>
+  import("./components/pages/AboutLayout").then((m) => ({
+    default: m.AboutLayout,
+  }))
+);
+const AboutOverview = lazy(() =>
+  import("./components/pages/about/AboutOverview").then((m) => ({
+    default: m.AboutOverview,
+  }))
+);
+const VisionMission = lazy(() =>
+  import("./components/pages/about/VisionMission").then((m) => ({
+    default: m.VisionMission,
+  }))
+);
+const Administration = lazy(() =>
+  import("./components/pages/about/Administration").then((m) => ({
+    default: m.Administration,
+  }))
+);
+const Founder = lazy(() =>
+  import("./components/pages/about/Founder").then((m) => ({
+    default: m.Founder,
+  }))
+);
+const PrincipalMessage = lazy(() =>
+  import("./components/pages/about/PrincipalMessage").then((m) => ({
+    default: m.PrincipalMessage,
+  }))
+);
+const Alumni = lazy(() =>
+  import("./components/pages/about/Alumni").then((m) => ({
+    default: m.Alumni,
+  }))
+);
 const HistoryPage = lazy(() =>
   import("./components/pages/HistoryPage").then((m) => ({
     default: m.HistoryPage,
-  }))
-);
-const AdministrationPage = lazy(() =>
-  import("./components/pages/AdministrationPage").then((m) => ({
-    default: m.AdministrationPage,
   }))
 );
 const CampusLifePage = lazy(() =>
@@ -105,6 +135,46 @@ const HowToApplyPage = lazy(() =>
 const ProgramsPage = lazy(() =>
   import("./components/pages/ProgramsPage").then((m) => ({
     default: m.ProgramsPage,
+  }))
+);
+const ProgramDetailPage = lazy(() =>
+  import("./components/pages/ProgramDetailPage").then((m) => ({
+    default: m.ProgramDetailPage,
+  }))
+);
+const EventsPage = lazy(() =>
+  import("./components/pages/EventsPage").then((m) => ({
+    default: m.EventsPage,
+  }))
+);
+const FeeStructurePage = lazy(() =>
+  import("./components/pages/FeeStructurePage").then((m) => ({
+    default: m.FeeStructurePage,
+  }))
+);
+const AllFacultyPage = lazy(() =>
+  import("./components/pages/AllFacultyPage").then((m) => ({
+    default: m.AllFacultyPage,
+  }))
+);
+const FacultyDetailPage = lazy(() =>
+  import("./components/pages/FacultyDetailPage").then((m) => ({
+    default: m.FacultyDetailPage,
+  }))
+);
+const AdmissionRequirementsPage = lazy(() =>
+  import("./components/pages/AdmissionRequirementsPage").then((m) => ({
+    default: m.AdmissionRequirementsPage,
+  }))
+);
+const NoticesPage = lazy(() =>
+  import("./components/pages/NoticesPage").then((m) => ({
+    default: m.NoticesPage,
+  }))
+);
+const HolidayPage = lazy(() =>
+  import("./components/pages/HolidayPage").then((m) => ({
+    default: m.HolidayPage,
   }))
 );
 const FacultyOverviewPage = lazy(() =>
@@ -273,6 +343,11 @@ const MarkAttendance = lazy(() =>
     default: m.MarkAttendance,
   }))
 );
+const AdminHoliday = lazy(() =>
+  import("./components/AdminHoliday").then((m) => ({
+    default: m.AdminHoliday,
+  }))
+);
 
 // ─── Teacher portal ──────────────────────────────────────────────────────────
 const TeacherDashboard = lazy(() =>
@@ -318,6 +393,11 @@ const TeacherNotices = lazy(() =>
 const TeacherMessages = lazy(() =>
   import("./components/TeacherMessages").then((m) => ({
     default: m.TeacherMessages,
+  }))
+);
+const TeacherHoliday = lazy(() =>
+  import("./components/TeacherHoliday").then((m) => ({
+    default: m.TeacherHoliday,
   }))
 );
 
@@ -400,13 +480,18 @@ const StudentFeeReceipt = lazy(() =>
     default: m.StudentFeeReceipt,
   }))
 );
+const StudentHoliday = lazy(() =>
+  import("./components/StudentHoliday").then((m) => ({
+    default: m.StudentHoliday,
+  }))
+);
 
 // Not Found
 const NotFound = lazy(() =>
   import("./components/NotFound").then((m) => ({ default: m.NotFound }))
 );
 
-// ─── Page-level loading fallback ─────────────────────────────────────────────
+// ─── Page-level loading fallback ────
 function PageLoader() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -415,7 +500,7 @@ function PageLoader() {
         <p className="text-slate-500 text-sm font-medium">Loading…</p>
       </div>
     </div>
-  ); 
+  );
 }
 
 // ─── Root layout ─────────────────────────────────────────────────────────────
@@ -440,10 +525,20 @@ export const router = createBrowserRouter([
       { path: "/enhanced",    Component: EnhancedLandingPage },
       { path: "/figma",       Component: FigmaLandingPage },
 
-      // ── Info pages ────────────────────────────────────────────────────────
-      { path: "/about",                 Component: AboutPage },
+      // ── Info pages ───────────────────────────────────────────────────────
+      { 
+        path: "/about",
+        Component: AboutLayout,
+        children: [
+          { index: true, Component: AboutOverview },
+          { path: "vision-mission", Component: VisionMission },
+          { path: "administration", Component: Administration },
+          { path: "founder", Component: Founder },
+          { path: "principal-message", Component: PrincipalMessage },
+          { path: "alumni", Component: Alumni },
+        ]
+      },
       { path: "/history",               Component: HistoryPage },
-      { path: "/administration",        Component: AdministrationPage },
       { path: "/campus-life",           Component: CampusLifePage },
       { path: "/research",              Component: ResearchPage },
       { path: "/scholarships",          Component: ScholarshipsPage },
@@ -457,6 +552,14 @@ export const router = createBrowserRouter([
       { path: "/course-catalog",        Component: CourseCatalogPage },
       { path: "/how-to-apply",          Component: HowToApplyPage },
       { path: "/programs",              Component: ProgramsPage },
+      { path: "/programs/:programId",   Component: ProgramDetailPage },
+      { path: "/events",                Component: EventsPage },
+      { path: "/fee-structure",         Component: FeeStructurePage },
+      { path: "/all-faculty",           Component: AllFacultyPage },
+      { path: "/faculty/:facultyId",    Component: FacultyDetailPage },
+      { path: "/admission-requirements", Component: AdmissionRequirementsPage },
+      { path: "/notices",               Component: NoticesPage },
+      { path: "/holiday",               Component: HolidayPage },
       { path: "/faculty",               Component: FacultyOverviewPage },
       { path: "/library",               Component: LibraryPage },
       { path: "/signup",                Component: SignupPage },
@@ -496,6 +599,7 @@ export const router = createBrowserRouter([
       { path: "/admin/schedule-exam",   Component: ScheduleNewExam },
       { path: "/admin/create-notice",   Component: CreateNotice },
       { path: "/admin/mark-attendance", Component: MarkAttendance },
+      { path: "/admin/holiday",         Component: AdminHoliday },
 
       // ── Teacher portal ────────────────────────────────────────────────────
       { path: "/teacher/dashboard",    Component: TeacherDashboard },
@@ -507,6 +611,7 @@ export const router = createBrowserRouter([
       { path: "/teacher/assignments",  Component: TeacherAssignments },
       { path: "/teacher/notices",      Component: TeacherNotices },
       { path: "/teacher/messages",     Component: TeacherMessages },
+      { path: "/teacher/holiday",      Component: TeacherHoliday },
 
       // ── Student portal ────────────────────────────────────────────────────
       { path: "/student/dashboard",         Component: StudentDashboard },
@@ -526,8 +631,9 @@ export const router = createBrowserRouter([
       { path: "/student/notices",           Component: StudentNotices },
       { path: "/student/messages",          Component: StudentMessages },
       { path: "/student/fee-receipt",       Component: StudentFeeReceipt },
+      { path: "/student/holiday",           Component: StudentHoliday },
 
-      // ── Fallback ──────────────────────────────────────────────────────────
+      // ── Fallback ─────────────────────────────────────────────────────────
       { path: "*", Component: NotFound },
     ],
   },
