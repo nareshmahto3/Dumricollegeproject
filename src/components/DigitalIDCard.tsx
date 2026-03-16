@@ -93,7 +93,7 @@ export function DigitalIDCard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="overflow-hidden shadow-lg border border-slate-200">
+            <Card className="overflow-hidden shadow-lg border-2 border-blue-500">
               <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-6 text-white">
                 <div className="flex items-center justify-between mb-4">
                   <div>
@@ -160,7 +160,7 @@ export function DigitalIDCard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <Card className="overflow-hidden shadow-lg border border-slate-200">
+            <Card className="overflow-hidden shadow-lg border-2 border-blue-500">
               <div className="bg-blue-50 p-6">
                 <h4 className="font-bold text-slate-900 mb-4">Card Details & Verification</h4>
                 
@@ -223,7 +223,7 @@ export function DigitalIDCard() {
             <Download className="w-4 h-4 mr-2" />
             Download ID Card (PDF)
           </Button>
-          <Button onClick={handlePrint} variant="outline" className="flex-1 border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-[#2F80ED] hover:border-blue-500 font-semibold transition-all duration-200">
+          <Button onClick={handlePrint} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-600 font-semibold transition-all duration-200">
             <Printer className="w-4 h-4 mr-2" />
             Print ID Card
           </Button>
@@ -251,36 +251,6 @@ export function DigitalIDCard() {
                 </ul>
               </div>
             </div>
-          </Card>
-        </motion.div>
-
-        {/* Features */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          <Card className="p-6 bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200">
-            <div className="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center mb-3">
-              <CheckCircle2 className="w-6 h-6 text-emerald-600" />
-            </div>
-            <h4 className="mb-2 font-bold text-slate-900">QR Verified</h4>
-            <p className="text-sm text-slate-600 font-medium">Instant verification through QR code scanning</p>
-          </Card>
-          <Card className="p-6 bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-3">
-              <Download className="w-6 h-6 text-blue-600" />
-            </div>
-            <h4 className="mb-2 font-bold text-slate-900">Digital & Print</h4>
-            <p className="text-sm text-slate-600 font-medium">Available in both digital and printable formats</p>
-          </Card>
-          <Card className="p-6 bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-3">
-              <QrCode className="w-6 h-6 text-blue-600" />
-            </div>
-            <h4 className="mb-2 font-bold text-slate-900">Secure</h4>
-            <p className="text-sm text-slate-600 font-medium">Encrypted QR code with unique student identifier</p>
           </Card>
         </motion.div>
       </motion.div>

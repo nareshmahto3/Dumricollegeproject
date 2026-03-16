@@ -91,6 +91,25 @@ export function AdmissionManagement() {
       pageTitle="Admission Management"
       breadcrumbs={["Home", "Admin", "Admissions"]}
     >
+      {/* Summary Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <Card className="p-4 bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-300 shadow-lg hover:shadow-xl transition-all">
+            <p className="text-sm text-purple-700 mb-1 font-medium">Total Applications</p>
+            <h3 className="text-purple-900">{admissions.length}</h3>
+          </Card>
+          <Card className="p-4 bg-gradient-to-br from-blue-100 to-cyan-200 border-2 border-blue-300 shadow-lg hover:shadow-xl transition-all">
+            <p className="text-sm text-blue-700 mb-1 font-medium">Applied</p>
+            <h3 className="text-blue-900">{admissions.filter(a => a.status === 'Applied').length}</h3>
+          </Card>
+          <Card className="p-4 bg-gradient-to-br from-yellow-100 to-amber-200 border-2 border-yellow-300 shadow-lg hover:shadow-xl transition-all">
+            <p className="text-sm text-yellow-700 mb-1 font-medium">Under Review</p>
+            <h3 className="text-yellow-900">{admissions.filter(a => a.status === 'Under Review').length}</h3>
+          </Card>
+          <Card className="p-4 bg-gradient-to-br from-green-100 to-emerald-200 border-2 border-green-300 shadow-lg hover:shadow-xl transition-all">
+            <p className="text-sm text-green-700 mb-1 font-medium">Selected</p>
+            <h3 className="text-green-900">{admissions.filter(a => a.status === 'Selected').length}</h3>
+          </Card>
+        </div>
       <div className="space-y-6">
         {/* Filters */}
         <Card className="bg-white border-slate-200 p-6 shadow-sm">
@@ -128,25 +147,7 @@ export function AdmissionManagement() {
           </div>
         </Card>
 
-        {/* Summary Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <Card className="p-4 bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-purple-700 mb-1 font-medium">Total Applications</p>
-            <h3 className="text-purple-900">{admissions.length}</h3>
-          </Card>
-          <Card className="p-4 bg-gradient-to-br from-blue-100 to-cyan-200 border-2 border-blue-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-blue-700 mb-1 font-medium">Applied</p>
-            <h3 className="text-blue-900">{admissions.filter(a => a.status === 'Applied').length}</h3>
-          </Card>
-          <Card className="p-4 bg-gradient-to-br from-yellow-100 to-amber-200 border-2 border-yellow-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-yellow-700 mb-1 font-medium">Under Review</p>
-            <h3 className="text-yellow-900">{admissions.filter(a => a.status === 'Under Review').length}</h3>
-          </Card>
-          <Card className="p-4 bg-gradient-to-br from-green-100 to-emerald-200 border-2 border-green-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-green-700 mb-1 font-medium">Selected</p>
-            <h3 className="text-green-900">{admissions.filter(a => a.status === 'Selected').length}</h3>
-          </Card>
-        </div>
+        
 
         {/* Admissions Table */}
         <Card className="bg-white border-slate-200 overflow-hidden shadow-sm">
@@ -180,7 +181,7 @@ export function AdmissionManagement() {
                       {sortField === 'id' ? (
                         sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                       ) : (
-                        <ChevronUp className="w-4 h-4 opacity-0" />
+                        <ChevronUp className="w-4 h-4 opacity-30" />
                       )}
                     </div>
                   </th>
@@ -193,7 +194,7 @@ export function AdmissionManagement() {
                       {sortField === 'name' ? (
                         sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                       ) : (
-                        <ChevronUp className="w-4 h-4 opacity-0" />
+                        <ChevronUp className="w-4 h-4 opacity-30" />
                       )}
                     </div>
                   </th>
@@ -206,7 +207,7 @@ export function AdmissionManagement() {
                       {sortField === 'class' ? (
                         sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                       ) : (
-                        <ChevronUp className="w-4 h-4 opacity-0" />
+                        <ChevronUp className="w-4 h-4 opacity-30" />
                       )}
                     </div>
                   </th>
@@ -219,7 +220,7 @@ export function AdmissionManagement() {
                       {sortField === 'phone' ? (
                         sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                       ) : (
-                        <ChevronUp className="w-4 h-4 opacity-0" />
+                        <ChevronUp className="w-4 h-4 opacity-30" />
                       )}
                     </div>
                   </th>
@@ -232,7 +233,7 @@ export function AdmissionManagement() {
                       {sortField === 'status' ? (
                         sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                       ) : (
-                        <ChevronUp className="w-4 h-4 opacity-0" />
+                        <ChevronUp className="w-4 h-4 opacity-30" />
                       )}
                     </div>
                   </th>
@@ -245,7 +246,7 @@ export function AdmissionManagement() {
                       {sortField === 'date' ? (
                         sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                       ) : (
-                        <ChevronUp className="w-4 h-4 opacity-0" />
+                        <ChevronUp className="w-4 h-4 opacity-30" />
                       )}
                     </div>
                   </th>

@@ -27,7 +27,6 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { LanguageSelector } from './LanguageSelector';
 import { useState } from 'react';
 
 const features = [
@@ -193,7 +192,6 @@ export function LandingPage() {
               <button onClick={() => scrollToSection('contact')} className="text-sm hover:text-blue-600 transition-colors">
                 Contact
               </button>
-              <LanguageSelector variant="compact" />
               <Button onClick={() => navigate('/login')} className="bg-blue-600 hover:bg-blue-700">
                 Portal Login
               </Button>
@@ -234,9 +232,6 @@ export function LandingPage() {
               <button onClick={() => scrollToSection('contact')} className="text-left py-2 px-4 hover:bg-gray-50 rounded-lg">
                 Contact
               </button>
-              <div className="px-4 py-2">
-                <LanguageSelector variant="simple" />
-              </div>
               <Button onClick={() => navigate('/login')} className="bg-blue-600 hover:bg-blue-700 mt-2">
                 Portal Login
               </Button>

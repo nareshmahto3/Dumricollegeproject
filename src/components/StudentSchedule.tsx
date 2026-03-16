@@ -71,6 +71,17 @@ const getTypeColor = (type: string) => {
   return colors[type as keyof typeof colors] || 'bg-gray-50 text-gray-700 font-medium';
 };
 
+const getCardBackground = (type: string) => {
+  const backgrounds = {
+    Theory: 'bg-gradient-to-br from-blue-50 to-blue-100/50',
+    Lab: 'bg-gradient-to-br from-purple-50 to-purple-100/50',
+    Tutorial: 'bg-gradient-to-br from-emerald-50 to-emerald-100/50',
+    Practical: 'bg-gradient-to-br from-orange-50 to-orange-100/50',
+    Activity: 'bg-gradient-to-br from-pink-50 to-pink-100/50',
+  };
+  return backgrounds[type as keyof typeof backgrounds] || 'bg-slate-50';
+};
+
 export function StudentSchedule() {
   return (
     <PortalLayout
@@ -147,7 +158,7 @@ export function StudentSchedule() {
                         return (
                           <td key={day} className="py-4 px-4 whitespace-nowrap">
                             {classData && typeof classData === 'object' ? (
-                              <div className="space-y-2">
+                              <div className={`p-3 rounded-lg border border-opacity-50 ${getCardBackground(classData.type)} space-y-2`}>
                                 <div className="font-bold text-slate-900">{classData.subject}</div>
                                 <div className="flex items-center gap-1.5 text-xs text-slate-600">
                                   <User className="w-3 h-3 text-blue-600" />

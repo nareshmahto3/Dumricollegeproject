@@ -425,7 +425,7 @@ export function Reports() {
                   {activePeriod}
                 </Badge>
               </div>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={300} key={`revenue-chart-${activePeriod}`}>
                 <LineChart data={currentData} id="revenue-chart-reports">
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="period" stroke="#64748b" />
@@ -439,6 +439,7 @@ export function Reports() {
                   />
                   <Legend wrapperStyle={{ paddingTop: '10px' }} />
                   <Line
+                    key="line-revenue-reports"
                     type="monotone"
                     dataKey="revenue"
                     stroke="#2563eb"
@@ -466,7 +467,7 @@ export function Reports() {
                   {activePeriod}
                 </Badge>
               </div>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={300} key={`admissions-chart-${activePeriod}`}>
                 <BarChart data={currentData} id="admissions-chart-reports">
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="period" stroke="#64748b" />
@@ -479,7 +480,7 @@ export function Reports() {
                     }}
                   />
                   <Legend wrapperStyle={{ paddingTop: '10px' }} />
-                  <Bar dataKey="admissions" fill="#9333ea" name="New Admissions" radius={[8, 8, 0, 0]} />
+                  <Bar key="bar-admissions-reports" dataKey="admissions" fill="#9333ea" name="New Admissions" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </Card>
@@ -534,7 +535,7 @@ export function Reports() {
                   {activePeriod}
                 </Badge>
               </div>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={300} key={`attendance-chart-${activePeriod}`}>
                 <LineChart data={currentData} id="attendance-chart-reports">
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="period" stroke="#64748b" />
@@ -548,6 +549,7 @@ export function Reports() {
                   />
                   <Legend wrapperStyle={{ paddingTop: '10px' }} />
                   <Line
+                    key="line-attendance-reports"
                     type="monotone"
                     dataKey="attendance"
                     stroke="#f59e0b"

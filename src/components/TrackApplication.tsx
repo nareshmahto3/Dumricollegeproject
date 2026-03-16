@@ -155,6 +155,24 @@ export function TrackApplication() {
     }
   };
 
+  const getTimelineColor = (index: number, completed: boolean) => {
+    if (!completed) {
+      return {
+        bg: 'bg-slate-200',
+        line: 'bg-slate-200',
+      };
+    }
+    
+    const colors = [
+      { bg: 'bg-emerald-600', line: 'bg-emerald-600' },      // Step 1 - Green
+      { bg: 'bg-blue-600', line: 'bg-blue-600' },            // Step 2 - Blue
+      { bg: 'bg-indigo-600', line: 'bg-indigo-600' },        // Step 3 - Indigo
+      { bg: 'bg-purple-600', line: 'bg-purple-600' },        // Step 4 - Purple
+    ];
+    
+    return colors[index] || colors[0];
+  };
+
   const handleFileSelect = (documentName: string, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setSelectedFiles(prev => ({ ...prev, [documentName]: file }));
@@ -336,7 +354,7 @@ export function TrackApplication() {
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center ${
                       item.completed
-                        ? 'bg-blue-600'
+                        ? getTimelineColor(index, item.completed).bg
                         : 'bg-slate-200'
                     }`}
                   >
@@ -349,7 +367,7 @@ export function TrackApplication() {
                   {index < application.timeline.length - 1 && (
                     <div
                       className={`w-0.5 h-16 ${
-                        item.completed ? 'bg-blue-600' : 'bg-slate-200'
+                        item.completed ? getTimelineColor(index, item.completed).line : 'bg-slate-200'
                       }`}
                     />
                   )}

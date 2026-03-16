@@ -19,7 +19,7 @@ import imgTellATale1 from "figma:asset/428e9a82aa3a56261889c4b9e388b51942f2272b.
 import imgTellATale2 from "figma:asset/67529013d3689662828047b20bdd33edaf92f516.png";
 import imgTellATale3 from "figma:asset/5423f3c995ee1d097e5f3a0e53d472669230dd10.png";
 import imgTellATale4 from "figma:asset/9e54e95c8994a095badd8b900606abdd52b3ca7e.png";
-import imgTellATale5 from "figma:asset/4d1f9323858b357f075b977d93ef7948d472b6f3.png";
+import imgTellATale5 from "figma:asset/4d1f9323858b357075b977d93ef7948d472b6f3.png";
 import imgImage from "figma:asset/a4c38540a7286f78a506af2217d101bb503c5e25.png";
 import imgImage1 from "figma:asset/96e0702f37ad4c9fc5ca3a2cce495ae0759d7e74.png";
 import imgImg from "figma:asset/3f7d6d0216311d72e61c8d469d04ec0313b2b944.png";
@@ -93,9 +93,9 @@ function HeroSection() {
     <div className="relative h-[600px] md:h-[861px] w-full overflow-hidden">
       {/* Hero Image */}
       <div className="absolute inset-0">
-        <img
-          src={img207898621820260129012617Jpg}
-          alt="Campus"
+        <img 
+          src={img207898621820260129012617Jpg} 
+          alt="Campus" 
           className="w-full h-full object-cover"
         />
       </div>
@@ -114,12 +114,12 @@ function HeroSection() {
         <button className="bg-[#0099d0] text-white px-4 py-2 rounded border border-[#0c4d8b] hover:bg-[#0088bb] transition-colors">
           Know More
         </button>
-
+        
         {/* Carousel Dots */}
         <div className="flex gap-2 mt-4 justify-center">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-            <div
-              key={i}
+            <div 
+              key={i} 
               className={`w-2.5 h-2.5 rounded-full ${i === 3 ? 'bg-[#869791]' : 'bg-[#d6d6d6]'}`}
             />
           ))}
@@ -153,7 +153,7 @@ function FindDegreeSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {programs.map((program, i) => (
-            <div
+            <div 
               key={i}
               className="bg-[#e6e7e8] rounded-lg h-[106px] flex items-center justify-center relative border-2 border-[#e6e7e8] shadow-[0px_0px_6px_2px_rgba(0,0,0,0.21)] hover:shadow-lg transition-shadow cursor-pointer group"
             >
@@ -184,13 +184,13 @@ function QuickLinksSection() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {links.map((link, i) => (
-            <div
+            <div 
               key={i}
               className="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow cursor-pointer group"
             >
               <div className="aspect-square relative">
-                <img
-                  src={link.img}
+                <img 
+                  src={link.img} 
                   alt={link.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                 />
@@ -208,41 +208,41 @@ function QuickLinksSection() {
 
 function EventsSection() {
   const events = [
-    {
-      title: 'Inauguration Of Arcathon - Fractal',
-      date: '19 February 2026',
+    { 
+      title: 'Inauguration Of Arcathon - Fractal', 
+      date: '19 February 2026', 
       location: 'Bangalore - Yeshwanthpur Campus',
-      img: imgInaugurationOfArcathonFractal19February2026BangaloreYeshwanthpurCampus
+      img: imgInaugurationOfArcathonFractal19February2026BangaloreYeshwanthpurCampus 
     },
-    {
-      title: 'Raabta 2026 - Inauguration',
-      date: '16 February 2026',
+    { 
+      title: 'Raabta 2026 - Inauguration', 
+      date: '16 February 2026', 
       location: 'Bangalore - Bannerghatta Road Campus',
-      img: imgRaabta2026Inauguration16February2026BangaloreBannerghattaRoadCampus
+      img: imgRaabta2026Inauguration16February2026BangaloreBannerghattaRoadCampus 
     },
-    {
-      title: '1776 Syndrome',
-      date: '12-13 February 2026',
+    { 
+      title: '1776 Syndrome', 
+      date: '12-13 February 2026', 
       location: 'Bangalore - Bannerghatta Road Campus',
-      img: img1776Syndrome1213February2026BangaloreBannerghattaRoadCampus
+      img: img1776Syndrome1213February2026BangaloreBannerghattaRoadCampus 
     },
-    {
-      title: 'Gallery',
-      date: '',
+    { 
+      title: 'Gallery', 
+      date: '', 
       location: '',
-      img: imgGallery
+      img: imgGallery 
     },
-    {
-      title: 'Transforming Teaching With AI',
-      date: '03-04 February 2026',
+    { 
+      title: 'Transforming Teaching With AI', 
+      date: '03-04 February 2026', 
       location: 'Bangalore - Bannerghatta Road Campus',
-      img: imgTranformingTeachinWithAi0304February2026BangaloreBannerghattaRoadCampus
+      img: imgTranformingTeachinWithAi0304February2026BangaloreBannerghattaRoadCampus 
     },
-    {
-      title: 'Laying Of The Foundation Stone',
-      date: '20 February 2026',
+    { 
+      title: 'Laying Of The Foundation Stone', 
+      date: '20 February 2026', 
       location: 'Bangalore - Kengeri Campus',
-      img: imgLayingOfTheFoundationStoneForTheAcademicBlockGirlsResidenceHall20February2026BangaloreKengeriCampus
+      img: imgLayingOfTheFoundationStoneForTheAcademicBlockGirlsResidenceHall20February2026BangaloreKengeriCampus 
     },
   ];
 
@@ -252,16 +252,16 @@ function EventsSection() {
         <h2 className="text-[#0c4d8b] text-3xl md:text-[40px] font-['Heebo'] mb-10 text-center">
           Events & News
         </h2>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.map((event, i) => (
-            <div
+            <div 
               key={i}
               className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer group"
             >
               <div className="aspect-video relative overflow-hidden">
-                <img
-                  src={event.img}
+                <img 
+                  src={event.img} 
                   alt={event.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                 />
@@ -303,15 +303,15 @@ function GallerySection() {
         <h2 className="text-[#0c4d8b] text-3xl md:text-[40px] font-['Heebo'] mb-10 text-center">
           Gallery
         </h2>
-
+        
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {images.map((img, i) => (
-            <div
+            <div 
               key={i}
               className="aspect-square rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow cursor-pointer group"
             >
-              <img
-                src={img}
+              <img 
+                src={img} 
                 alt={`Gallery ${i + 1}`}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform"
               />
@@ -331,7 +331,7 @@ function FooterSection() {
           <div className="text-center md:text-left">
             <p className="font-['Heebo'] text-sm">&copy; 2026 Dumri College. All rights reserved.</p>
           </div>
-
+          
           <div className="flex gap-6">
             <a href="#" className="hover:opacity-80 transition-opacity">
               <img src={imgItemLinkSocialMedia} alt="Social" className="w-6 h-6" />
@@ -343,7 +343,7 @@ function FooterSection() {
               <img src={imgItemLinkFlicker} alt="Flicker" className="w-6 h-6" />
             </a>
           </div>
-
+          
           <div className="flex gap-4 flex-wrap justify-center">
             <img src={imgWorldUniversityRanking2026} alt="World Ranking" className="h-12 object-contain" />
             <img src={imgUnai} alt="UNAI" className="h-12 object-contain" />

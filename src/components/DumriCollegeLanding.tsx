@@ -74,6 +74,7 @@ import imgAqma6QL0R7Pz3S9CSs2PX96ZhrYYaxybkhXgYeEa4WghCf6T0XPkRj9ZoNyYrN85Xe1ALn
 import imgAqo2Ck3Drpf0Ai8E28ImWzt6GIajYhD56BWkUlUt5DyysOdASd5Jh8USLz6Axc4S8GPxz1E24Oag4Jcgpm4OrjFJz0Q8BYsdMMp4 from "figma:asset/f7883e702cf881bb69ab5e1526c6b6696a722fcd.png";
 import img629591488180992041369173873294802342293289923NJpg from "figma:asset/acbf2df85208d6385ad30d7f53644a86b27761ff.png";
 import img631838878180987385819173877110310279382797744NJpg from "figma:asset/081178be4e31e4a7b2f1521658c448b0470b564d.png";
+import imgCollegeBuilding from "figma:asset/5e1bebd644aff64baf3354389c6dde5691668810.png";
 import { imgTellATale } from "../imports/svg-pduv6";
 import Frame from "../imports/Frame-206-1785";
 
@@ -92,9 +93,16 @@ function NewsItem({ text }: { text: string }) {
 // Carousel images with high-quality images and metadata
 const carouselImages = [
   {
+    url: imgCollegeBuilding,
+    title: "Jharkhand College Dumri",
+    subtitle: "Excellence in Education Since 1950",
+    cta: "Explore Campus",
+    ctaLink: "/about",
+  },
+  {
     url: img23714285420260224035427Jpg,
     title: "Welcome to Dumri College",
-    subtitle: "Excellence in Education Since 1950",
+    subtitle: "Shaping Minds, Building Futures",
     cta: "Explore Programs",
     ctaLink: "/academics",
   },
@@ -1051,7 +1059,7 @@ export default function DumriCollegeLanding() {
                 {/* View All Button */}
                 <div className="text-center mt-8">
                   <motion.button
-                    onClick={() => navigate("/gallery")}
+                    onClick={() => navigate("/events")}
                     className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -1957,7 +1965,7 @@ export default function DumriCollegeLanding() {
                 {/* View All Button */}
                 <div className="text-center mt-8 md:mt-12">
                   <motion.button
-                    onClick={() => navigate("/about")}
+                    onClick={() => navigate("/about/alumni")}
                     className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

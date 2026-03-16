@@ -1,55 +1,124 @@
-import { motion, AnimatePresence } from 'motion/react';
-import { Camera, Image as ImageIcon, Video, Calendar, Award, Music, Palette, Trophy, Users, Heart, Sparkles, Play, MapPin, Building, X, ChevronLeft, ChevronRight, Maximize2, ZoomIn, Share2 } from 'lucide-react';
-import { Badge } from './ui/badge';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-// import { SharedNavigation } from './shared/SharedNavigation';
-import { CarouselHeader } from './CarouselHeader';
-import { SharedFooter } from './shared/SharedFooter';
-import { Footer } from './Footer';
-import { Preloader } from './shared/Preloader';
-import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { motion } from 'motion/react';
+import { ChevronRight, X } from 'lucide-react';
+import { CarouselHeader } from './CarouselHeader';
+import { Footer } from './Footer';
+import imgDivElementorElement from "figma:asset/04d1f575a7ef1739b76204137772fe6c3ad17fe6.png";
+import imgBnrArrow11 from "figma:asset/13bec648740b03b5c9d2c72567cc9f3e05c47165.png";
+import imgGalleryImg55MinJpg from "figma:asset/42eacf93ea3054579ca1fa8f5ce78d9b065e6f8a.png";
+import imgGalleryImg5Jpg from "figma:asset/15c3fd45d7da5342a52535f718dc36e0eb37d0e3.png";
+import imgGalleryImg4MinJpg from "figma:asset/d871d868f1f32cc206ea9d0915fceee73eb84c6e.png";
+import imgGalleryImg3MinJpg from "figma:asset/08575e4e244c4d18de0ef25022dd7a4fd3eddd44.png";
+import imgGalleryImg6Jpg from "figma:asset/5ecc01adcbaf2fb031ee6a927356d1c25871b29d.png";
+import imgGalleryImg2MinJpg from "figma:asset/c9c9ffb636b53266c96e26987f011f92912502c6.png";
+
+type GalleryCategory = 'all' | 'campus-life' | 'academic' | 'labs' | 'graduation';
+
+interface GalleryImage {
+  id: string;
+  src: string;
+  alt: string;
+  category: GalleryCategory[];
+}
+
+const galleryImages: GalleryImage[] = [
+  {
+    id: '1',
+    src: imgGalleryImg55MinJpg,
+    alt: 'Students in classroom raising hands',
+    category: ['all', 'academic', 'campus-life']
+  },
+  {
+    id: '2',
+    src: imgGalleryImg5Jpg,
+    alt: 'Happy students on campus',
+    category: ['all', 'campus-life']
+  },
+  {
+    id: '3',
+    src: imgGalleryImg4MinJpg,
+    alt: 'College building exterior',
+    category: ['all', 'graduation']
+  },
+  {
+    id: '4',
+    src: imgGalleryImg3MinJpg,
+    alt: 'Students studying outdoors',
+    category: ['all', 'campus-life', 'academic']
+  },
+  {
+    id: '5',
+    src: imgGalleryImg6Jpg,
+    alt: 'Music performance',
+    category: ['all', 'campus-life']
+  },
+  {
+    id: '6',
+    src: imgGalleryImg2MinJpg,
+    alt: 'Students gathering outdoor',
+    category: ['all', 'campus-life', 'graduation']
+  },
+  // Additional images from Unsplash
+  {
+    id: '7',
+    src: 'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwY2xhc3Nyb29tJTIwc3R1ZGVudHMlMjBzdHVkeWluZ3xlbnwxfHx8fDE3NzM2MDA2Njl8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    alt: 'Classroom study session',
+    category: ['all', 'academic']
+  },
+  {
+    id: '8',
+    src: 'https://images.unsplash.com/photo-1763890763432-17c9a529da20?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwZnJpZW5kcyUyMGNhbXB1cyUyMG91dGRvb3J8ZW58MXx8fHwxNzczNjAwNjcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    alt: 'Friends on campus',
+    category: ['all', 'campus-life']
+  },
+  {
+    id: '9',
+    src: 'https://images.unsplash.com/photo-1733426509854-10931d84009a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwbGFib3JhdG9yeSUyMHNjaWVuY2UlMjBleHBlcmltZW50fGVufDF8fHx8MTc3MzYwMDY3MHww&ixlib=rb-4.1.0&q=80&w=1080',
+    alt: 'Science laboratory',
+    category: ['all', 'labs', 'academic']
+  },
+  {
+    id: '10',
+    src: 'https://images.unsplash.com/photo-1708578200684-3aa944b73237?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwc3R1ZGVudHMlMjBvdXRkb29yJTIwZGlzY3Vzc2lvbnxlbnwxfHx8fDE3NzM2MDA2NzF8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    alt: 'Outdoor discussion',
+    category: ['all', 'campus-life', 'academic']
+  },
+  {
+    id: '11',
+    src: 'https://images.unsplash.com/photo-1770844049822-583611b8efb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwbXVzaWMlMjBiYW5kJTIwcGVyZm9ybWFuY2V8ZW58MXx8fHwxNzczNTA3NjIxfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    alt: 'Music band performance',
+    category: ['all', 'campus-life']
+  },
+  {
+    id: '12',
+    src: 'https://images.unsplash.com/photo-1687866394811-9fe40749c860?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmUlMjBjYW1wdXN8ZW58MXx8fHwxNzczNjAwNjcxfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    alt: 'College building architecture',
+    category: ['all', 'graduation']
+  }
+];
+
+const categories = [
+  { id: 'all' as const, label: 'All' },
+  { id: 'campus-life' as const, label: 'Campus Life' },
+  { id: 'academic' as const, label: 'Academic Activities' },
+  { id: 'labs' as const, label: 'Classrooms & Labs' },
+  { id: 'graduation' as const, label: 'Graduation Ceremony' }
+];
 
 export function Gallery() {
   const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState<GalleryCategory>('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [currentCategory, setCurrentCategory] = useState('');
 
-  const eventImages = [
-    { url: 'https://images.unsplash.com/photo-1643199032520-99230e970fb9?w=800&q=80', title: 'Annual Convocation 2025', category: 'Events', date: 'March 15, 2025', filename: 'gallery-img-1' },
-    { url: 'https://images.unsplash.com/photo-1759456629213-3db5a7bb53ae?w=800&q=80', title: 'TechFest Innovation Fair', category: 'Events', date: 'February 10, 2025', filename: 'gallery-img-2' },
-    { url: 'https://images.unsplash.com/photo-1686213011371-2aff28a08f16?w=800&q=80', title: 'Placement Drive 2025', category: 'Career', date: 'January 20, 2025', filename: 'gallery-img-3' },
-  ];
+  // Filter images based on active category
+  const filteredImages = activeCategory === 'all' 
+    ? galleryImages 
+    : galleryImages.filter(img => img.category.includes(activeCategory));
 
-  const campusImages = [
-    { url: 'https://images.unsplash.com/photo-1670111482157-c5ecbba142a7?w=800&q=80', title: 'Main Academic Block', category: 'Campus', filename: 'gallery-img-4' },
-    { url: 'https://images.unsplash.com/photo-1588618319407-948d4424befd?w=800&q=80', title: 'Central Library', category: 'Facilities', filename: 'gallery-img-5' },
-    { url: 'https://images.unsplash.com/photo-1733426509854-10931d84009a?w=800&q=80', title: 'Science Laboratory', category: 'Facilities', filename: 'gallery-img-6' },
-    { url: 'https://images.unsplash.com/photo-1701448149957-b96dbd1926ff?w=800&q=80', title: 'Engineering Workshop', category: 'Facilities', filename: 'gallery-img-7' },
-    { url: 'https://images.unsplash.com/photo-1767319257862-e5c5aeb1c628?w=800&q=80', title: 'Research Center', category: 'Research', filename: 'gallery-img-8' },
-    { url: 'https://images.unsplash.com/photo-1765294064326-036a233f9f49?w=800&q=80', title: 'Campus Aerial View', category: 'Campus', filename: 'gallery-img-9' },
-  ];
-
-  const studentLife = [
-    { url: 'https://images.unsplash.com/photo-1763890498955-13f109b2fbd7?w=800&q=80', title: 'Students in Campus', category: 'Student Life', filename: 'gallery-img-10' },
-    { url: 'https://images.unsplash.com/photo-1664273891579-22f28332f3c4?w=800&q=80', title: 'Study Group', category: 'Student Life', filename: 'gallery-img-11' },
-    { url: 'https://images.unsplash.com/photo-1766459710529-c9fdb8023ecb?w=800&q=80', title: 'Sports Day', category: 'Sports', filename: 'gallery-img-12' },
-    { url: 'https://images.unsplash.com/photo-1766297248027-864589dbd336?w=800&q=80', title: 'Laboratory Work', category: 'Academics', filename: 'gallery-img-13' },
-    { url: 'https://images.unsplash.com/photo-1768796370407-6d36619e7d6d?w=800&q=80', title: 'Workshop Session', category: 'Learning', filename: 'gallery-img-14' },
-    { url: 'https://images.unsplash.com/photo-1766297247924-6638d54e7c89?w=800&q=80', title: 'Computer Lab', category: 'Technology', filename: 'gallery-img-15' },
-  ];
-
-  const cultural = [
-    { url: 'https://images.unsplash.com/photo-1771736462659-786b163d291e?w=800&q=80', title: 'Cultural Festival', category: 'Culture', filename: 'gallery-img-16' },
-    { url: 'https://images.unsplash.com/photo-1742497360373-a399f83ec432?w=800&q=80', title: 'Art Exhibition', category: 'Art', filename: 'gallery-img-17' },
-    { url: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=800&q=80', title: 'Leadership Summit', category: 'Conference', filename: 'gallery-img-18' },
-  ];
-
-  const openLightbox = (index: number, category: string) => {
+  const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
-    setCurrentCategory(category);
     setLightboxOpen(true);
   };
 
@@ -58,575 +127,211 @@ export function Gallery() {
   };
 
   const goToNext = () => {
-    const images = getCategoryImages(currentCategory);
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % filteredImages.length);
   };
 
   const goToPrev = () => {
-    const images = getCategoryImages(currentCategory);
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndex((prev) => (prev - 1 + filteredImages.length) % filteredImages.length);
   };
-
-  const getCategoryImages = (category: string) => {
-    switch (category) {
-      case 'events':
-        return eventImages;
-      case 'campus':
-        return campusImages;
-      case 'studentLife':
-        return studentLife;
-      case 'cultural':
-        return cultural;
-      default:
-        return [];
-    }
-  };
-
-  const currentImage = getCategoryImages(currentCategory)[currentImageIndex];
-  const totalImages = getCategoryImages(currentCategory).length;
 
   return (
-    <>
-      <Preloader />
-      <div className="min-h-screen bg-white">
-        <CarouselHeader />
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <CarouselHeader />
 
-        {/* Hero Section */}
-        <section className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
-          <div className="absolute inset-0">
-            <img
-              src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80"
-              alt="Campus Gallery"
-              className="w-full h-full object-cover"
+      {/* Hero Banner */}
+      <section className="relative h-[320px] overflow-hidden">
+        {/* Background with texture */}
+        <div className="absolute inset-0">
+          <div className="absolute bg-[#0c5776] inset-0" />
+          <div className="absolute inset-0 overflow-hidden">
+            <img 
+              alt="" 
+              className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-30" 
+              src={imgDivElementorElement} 
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-950/95 via-blue-900/90 to-cyan-900/85" />
           </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8 }}
-                className="text-center text-white"
+        </div>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#00192C]/40 to-transparent"></div>
+
+        {/* Decorative Arrow - Bottom Right */}
+        <div className="absolute bottom-[40px] right-[100px] z-10 hidden lg:block opacity-70">
+          <img 
+            alt="" 
+            className="w-[120px] h-[120px]" 
+            src={imgBnrArrow11} 
+          />
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20 pb-8">
+          {/* Breadcrumbs */}
+          <div className="flex items-center gap-2 mb-4">
+            <button
+              onClick={() => navigate('/')}
+              className="text-white text-sm hover:underline"
+            >
+              Home
+            </button>
+            <ChevronRight className="w-4 h-4 text-white" />
+            <span className="text-white text-sm">Gallery</span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-5xl md:text-6xl font-light text-white mb-6 font-serif">
+            Gallery
+          </h1>
+
+          {/* Description */}
+          <p className="text-white/90 text-base leading-7 max-w-3xl">
+            Education goes beyond textbooks and classrooms. We believe in empowering students
+            <br className="hidden sm:block" />
+            to explore their passions, challenge conventions, and discover their potential.
+          </p>
+        </div>
+      </section>
+
+      {/* Life at Our University Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
+              Life at Our University
+            </h2>
+            <p className="text-gray-600 text-base max-w-2xl mx-auto">
+              Explore life at our university through images and memories.
+            </p>
+          </div>
+
+          {/* Category Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors ${
+                  activeCategory === category.id
+                    ? 'bg-[#00a7b8] text-white'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                }`}
               >
-                <Badge className="bg-blue-500/30 text-blue-100 border-blue-400/50 backdrop-blur-md mb-6 md:mb-8 px-4 md:px-8 py-2 md:py-4 text-sm md:text-lg">
-                  <Camera className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
-                  <span className="hidden sm:inline">1000+ Photos • 50+ Events</span>
-                  <span className="sm:hidden">Campus Moments</span>
-                </Badge>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-8 leading-tight px-4">
-                  Campus Gallery
-                </h1>
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-blue-100 mb-4 md:mb-6 max-w-4xl mx-auto font-light px-4">
-                  Moments That Define Our Community
-                </p>
-                <p className="text-base md:text-xl text-blue-200 max-w-3xl mx-auto leading-relaxed px-4">
-                  Explore the vibrant life, culture, and achievements at Dumri College
-                </p>
-              </motion.div>
-            </div>
+                {category.label}
+              </button>
+            ))}
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-20 md:h-32 bg-gradient-to-t from-white to-transparent" />
-        </section>
 
-        {/* Gallery Categories */}
-        <section className="py-16 bg-white -mt-20 relative z-10">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { icon: Calendar, label: 'Events', count: '50+', color: 'blue' },
-                { icon: Building, label: 'Campus', count: '200+', color: 'indigo' },
-                { icon: Users, label: 'Student Life', count: '300+', color: 'cyan' },
-                { icon: Palette, label: 'Cultural', count: '100+', color: 'purple' },
-              ].map((cat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="p-6 text-center border-0 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:-translate-y-2">
-                    <div className={`w-14 h-14 bg-${cat.color}-100 rounded-full flex items-center justify-center mx-auto mb-3`}>
-                      <cat.icon className={`w-7 h-7 text-${cat.color}-600`} />
-                    </div>
-                    <div className={`text-3xl font-black text-${cat.color}-600 mb-1`}>{cat.count}</div>
-                    <div className="text-slate-600 text-sm font-medium">{cat.label}</div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Recent Events */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <Badge className="bg-blue-100 text-blue-700 border-0 mb-4 px-4 py-2">
-                <Calendar className="w-4 h-4 mr-2" />
-                Latest Updates
-              </Badge>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6">
-                Recent Events
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Highlights from our latest college events and celebrations
-              </p>
-              <div className="w-24 h-2 bg-blue-600 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {eventImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  whileHover={{ y: -15 }}
-                  className="group cursor-pointer"
-                  onClick={() => openLightbox(index, 'events')}
-                >
-                  <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all rounded-2xl">
-                    <div className="relative h-96 overflow-hidden rounded-2xl">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                        <Badge className="bg-blue-600 text-white border-0 mb-4">
-                          <Calendar className="w-3 h-3 mr-1" />
-                          {image.date}
-                        </Badge>
-                        <h3 className="text-3xl font-black mb-2">{image.title}</h3>
-                        <p className="text-blue-200 font-semibold">{image.category}</p>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Campus Infrastructure */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <Badge className="bg-indigo-100 text-indigo-700 border-0 mb-4 px-4 py-2">
-                <Building className="w-4 h-4 mr-2" />
-                Infrastructure
-              </Badge>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6">
-                Campus Infrastructure
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                World-class facilities spread across 200 acres
-              </p>
-              <div className="w-24 h-2 bg-indigo-600 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {campusImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
-                  whileHover={{ y: -10 }}
-                  className="group cursor-pointer"
-                  onClick={() => openLightbox(index, 'campus')}
-                >
-                  <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all rounded-2xl">
-                    <div className="relative h-72 overflow-hidden rounded-2xl">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-full group-hover:translate-y-0 transition-transform">
-                        <Badge className="bg-indigo-600 text-white border-0 mb-3 text-xs">
-                          {image.category}
-                        </Badge>
-                        <h3 className="text-xl font-bold">{image.title}</h3>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Student Life */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <Badge className="bg-cyan-100 text-cyan-700 border-0 mb-4 px-4 py-2">
-                <Users className="w-4 h-4 mr-2" />
-                Campus Life
-              </Badge>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6">
-                Student Life
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                A vibrant community of learners, creators, and achievers
-              </p>
-              <div className="w-24 h-2 bg-cyan-600 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {studentLife.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="group cursor-pointer"
-                  onClick={() => openLightbox(index, 'studentLife')}
-                >
-                  <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all rounded-2xl">
-                    <div className="relative h-72 overflow-hidden rounded-2xl">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/80 via-cyan-900/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <Badge className="bg-cyan-600 text-white border-0 mb-3 text-xs">
-                          {image.category}
-                        </Badge>
-                        <h3 className="text-xl font-bold">{image.title}</h3>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Cultural & Sports */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <Badge className="bg-purple-100 text-purple-700 border-0 mb-4 px-4 py-2">
-                <Palette className="w-4 h-4 mr-2" />
-                Culture & Arts
-              </Badge>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6">
-                Cultural Events
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Celebrating diversity, creativity, and talent
-              </p>
-              <div className="w-24 h-2 bg-purple-600 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {cultural.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  whileHover={{ y: -10 }}
-                  className="group cursor-pointer"
-                  onClick={() => openLightbox(index, 'cultural')}
-                >
-                  <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all rounded-2xl">
-                    <div className="relative h-96 overflow-hidden rounded-2xl">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-purple-900/90 via-purple-900/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                        <Badge className="bg-purple-600 text-white border-0 mb-4">
-                          {image.category}
-                        </Badge>
-                        <h3 className="text-3xl font-black">{image.title}</h3>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Statistics */}
-        <section className="py-24 bg-gradient-to-br from-blue-950 via-indigo-900 to-purple-900 text-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-5xl lg:text-6xl font-black mb-6">
-                Gallery Statistics
-              </h2>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-                Capturing moments of excellence
-              </p>
-              <div className="w-24 h-2 bg-blue-400 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-4 gap-8">
-              {[
-                { icon: ImageIcon, value: '1000+', label: 'Photos' },
-                { icon: Video, value: '100+', label: 'Videos' },
-                { icon: Calendar, value: '50+', label: 'Events Covered' },
-                { icon: Trophy, value: '30+', label: 'Awards Captured' },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="text-center"
-                >
-                  <div className="w-20 h-20 bg-blue-500/30 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <item.icon className="w-10 h-10 text-blue-200" />
-                  </div>
-                  <div className="text-5xl font-black mb-2">{item.value}</div>
-                  <div className="text-blue-100 font-medium text-lg">{item.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Video Gallery Section */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <Badge className="bg-red-100 text-red-700 border-0 mb-4 px-4 py-2">
-                <Video className="w-4 h-4 mr-2" />
-                Video Gallery
-              </Badge>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6">
-                Campus Videos
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Experience Dumri College through our video collection
-              </p>
-              <div className="w-24 h-2 bg-red-600 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { title: 'Campus Tour 2026', duration: '5:30', thumbnail: 'https://images.unsplash.com/photo-1670111482157-c5ecbba142a7?w=800&q=80' },
-                { title: 'Convocation Highlights', duration: '8:45', thumbnail: 'https://images.unsplash.com/photo-1643199032520-99230e970fb9?w=800&q=80' },
-                { title: 'Student Life at Dumri', duration: '6:20', thumbnail: 'https://images.unsplash.com/photo-1763890498955-13f109b2fbd7?w=800&q=80' },
-              ].map((video, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  whileHover={{ y: -10 }}
-                  className="group cursor-pointer"
-                >
-                  <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all">
-                    <div className="relative h-64 overflow-hidden">
-                      <img
-                        src={video.thumbnail}
-                        alt={video.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors flex items-center justify-center">
-                        <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Play className="w-10 h-10 text-white ml-1" fill="white" />
-                        </div>
-                      </div>
-                      <Badge className="absolute top-4 right-4 bg-black/70 text-white border-0">
-                        {video.duration}
-                      </Badge>
-                    </div>
-                    <div className="p-6 bg-white">
-                      <h3 className="text-xl font-bold text-slate-900">{video.title}</h3>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="max-w-4xl mx-auto text-center"
-            >
-              <Sparkles className="w-16 h-16 mx-auto mb-8 text-blue-200" />
-              <h2 className="text-5xl lg:text-6xl font-black mb-8 leading-tight">
-                Experience Campus Life Firsthand
-              </h2>
-              <p className="text-2xl text-blue-100 mb-12 leading-relaxed">
-                Schedule a campus visit and see why Dumri College is the perfect place 
-                for your academic journey.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Button
-                  size="lg"
-                  onClick={() => navigate('/contact')}
-                  className="bg-white text-blue-600 hover:bg-blue-50 px-12 py-8 text-xl font-bold shadow-2xl"
-                >
-                  Schedule Visit
-                  <MapPin className="ml-3 w-6 h-6" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => navigate('/apply')}
-                  className="border-3 border-white text-white hover:bg-white/10 px-12 py-8 text-xl font-bold"
-                >
-                  Apply Now
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        <Footer />
-      </div>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxOpen && currentImage && (
+          {/* Gallery Grid */}
           <motion.div
+            key={activeCategory}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center"
-            onClick={closeLightbox}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {/* Counter - Top Left */}
-            <div className="absolute top-6 left-6 text-white text-base font-medium z-10">
-              {currentImageIndex + 1} / {totalImages}
-            </div>
-
-            {/* Action Buttons - Top Right */}
-            <div className="absolute top-6 right-6 flex items-center gap-4 z-10">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // Fullscreen functionality
-                }}
-                className="p-2 bg-transparent hover:bg-white/10 rounded transition-colors"
+            {filteredImages.map((image, index) => (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="group cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all"
+                onClick={() => openLightbox(index)}
               >
-                <Maximize2 className="w-5 h-5 text-white" />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // Zoom functionality
-                }}
-                className="p-2 bg-transparent hover:bg-white/10 rounded transition-colors"
-              >
-                <ZoomIn className="w-5 h-5 text-white" />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // Share functionality
-                }}
-                className="p-2 bg-transparent hover:bg-white/10 rounded transition-colors"
-              >
-                <Share2 className="w-5 h-5 text-white" />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  closeLightbox();
-                }}
-                className="p-2 bg-transparent hover:bg-white/10 rounded transition-colors"
-              >
-                <X className="w-6 h-6 text-white" />
-              </button>
-            </div>
-
-            {/* Main Image Container */}
-            <div className="relative max-w-5xl max-h-[80vh] mx-auto px-20" onClick={(e) => e.stopPropagation()}>
-              <img
-                src={currentImage.url}
-                alt={currentImage.title}
-                className="max-w-full max-h-[80vh] object-contain rounded-lg"
-              />
-
-              {/* Image Caption - Bottom Center */}
-              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-white text-sm whitespace-nowrap">
-                {currentImage.filename}
-              </div>
-            </div>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goToPrev();
-              }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
-            >
-              <ChevronLeft className="w-8 h-8 text-white" />
-            </button>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goToNext();
-              }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
-            >
-              <ChevronRight className="w-8 h-8 text-white" />
-            </button>
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+
+          {/* No Results */}
+          {filteredImages.length === 0 && (
+            <div className="text-center py-16">
+              <p className="text-gray-600 text-lg mb-4">No images found in this category</p>
+              <button
+                onClick={() => setActiveCategory('all')}
+                className="text-[#00a7b8] hover:underline font-medium"
+              >
+                View all images
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Lightbox Modal */}
+      {lightboxOpen && (
+        <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
+          {/* Close Button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+            aria-label="Close lightbox"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Image Counter */}
+          <div className="absolute top-6 left-6 text-white text-base font-medium z-10">
+            {currentImageIndex + 1} / {filteredImages.length}
+          </div>
+
+          {/* Previous Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrev();
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+            aria-label="Previous image"
+          >
+            <ChevronRight className="w-6 h-6 text-white rotate-180" />
+          </button>
+
+          {/* Next Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Image */}
+          <div className="max-w-6xl max-h-[90vh] px-16" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={filteredImages[currentImageIndex]?.src}
+              alt={filteredImages[currentImageIndex]?.alt}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            />
+          </div>
+
+          {/* Image Title */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-center">
+            <p className="text-lg font-medium">{filteredImages[currentImageIndex]?.alt}</p>
+          </div>
+
+          {/* Background Click to Close */}
+          <div
+            className="absolute inset-0 -z-10"
+            onClick={closeLightbox}
+          />
+        </div>
+      )}
+    </div>
   );
 }

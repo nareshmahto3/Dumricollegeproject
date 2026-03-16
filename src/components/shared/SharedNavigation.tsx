@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router';
 import { motion } from 'motion/react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import logoImage from 'figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png';
-import { LanguageSelector } from '../LanguageSelector';
 
 export function SharedNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -93,7 +92,6 @@ export function SharedNavigation() {
               >
                 Contact
               </Link>
-              <LanguageSelector variant="compact" />
             </div>
 
             {/* Mobile Menu Button */}
@@ -158,9 +156,6 @@ export function SharedNavigation() {
                 >
                   Contact
                 </Link>
-                <div className="pt-2 border-t border-slate-200">
-                  <LanguageSelector variant="portal" />
-                </div>
               </div>
             </motion.div>
           )}

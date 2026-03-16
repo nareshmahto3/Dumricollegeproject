@@ -211,8 +211,8 @@ export function EnhancedAdminDashboard() {
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Area key="area-students-admin-dashboard" type="monotone" dataKey="students" stroke="#10b981" fillOpacity={1} fill="url(#colorStudents-admin-dashboard)" />
-                <Area key="area-revenue-admin-dashboard" type="monotone" dataKey="revenue" stroke="#3b82f6" fillOpacity={1} fill="url(#colorRevenue-admin-dashboard)" />
+                <Area key="area-students-enhanced-admin" type="monotone" dataKey="students" stroke="#10b981" fillOpacity={1} fill="url(#colorStudents-admin-dashboard)" />
+                <Area key="area-revenue-enhanced-admin" type="monotone" dataKey="revenue" stroke="#3b82f6" fillOpacity={1} fill="url(#colorRevenue-admin-dashboard)" />
               </AreaChart>
             </ResponsiveContainer>
           </Card>
@@ -235,8 +235,8 @@ export function EnhancedAdminDashboard() {
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {pieData.map((entry) => (
-                    <Cell key={`pie-cell-${entry.name}`} fill={entry.color} />
+                  {pieData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
                 <Tooltip />

@@ -331,7 +331,7 @@ export function AccountManagement() {
                           {sortField === 'id' ? (
                             sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                           ) : (
-                            <ChevronUp className="w-4 h-4 opacity-0" />
+                            <ChevronUp className="w-4 h-4 opacity-30" />
                           )}
                         </div>
                       </th>
@@ -344,7 +344,7 @@ export function AccountManagement() {
                           {sortField === 'date' ? (
                             sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                           ) : (
-                            <ChevronUp className="w-4 h-4 opacity-0" />
+                            <ChevronUp className="w-4 h-4 opacity-30" />
                           )}
                         </div>
                       </th>
@@ -357,7 +357,7 @@ export function AccountManagement() {
                           {sortField === 'description' ? (
                             sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                           ) : (
-                            <ChevronUp className="w-4 h-4 opacity-0" />
+                            <ChevronUp className="w-4 h-4 opacity-30" />
                           )}
                         </div>
                       </th>
@@ -370,7 +370,7 @@ export function AccountManagement() {
                           {sortField === 'category' ? (
                             sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                           ) : (
-                            <ChevronUp className="w-4 h-4 opacity-0" />
+                            <ChevronUp className="w-4 h-4 opacity-30" />
                           )}
                         </div>
                       </th>
@@ -383,7 +383,7 @@ export function AccountManagement() {
                           {sortField === 'type' ? (
                             sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                           ) : (
-                            <ChevronUp className="w-4 h-4 opacity-0" />
+                            <ChevronUp className="w-4 h-4 opacity-30" />
                           )}
                         </div>
                       </th>
@@ -396,7 +396,7 @@ export function AccountManagement() {
                           {sortField === 'amount' ? (
                             sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                           ) : (
-                            <ChevronUp className="w-4 h-4 opacity-0" />
+                            <ChevronUp className="w-4 h-4 opacity-30" />
                           )}
                         </div>
                       </th>
@@ -409,7 +409,7 @@ export function AccountManagement() {
                           {sortField === 'status' ? (
                             sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                           ) : (
-                            <ChevronUp className="w-4 h-4 opacity-0" />
+                            <ChevronUp className="w-4 h-4 opacity-30" />
                           )}
                         </div>
                       </th>
@@ -575,6 +575,7 @@ export function AccountManagement() {
                       }}
                     />
                     <Line
+                      key="line-income-account"
                       type="monotone"
                       dataKey="income"
                       stroke="#f59e0b"

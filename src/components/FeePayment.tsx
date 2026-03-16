@@ -141,7 +141,7 @@ export function FeePayment() {
   const [view, setView] = useState<'unpaid' | 'paid' | 'payment-details'>('unpaid');
   const [selectedFee, setSelectedFee] = useState<MonthlyFee | null>(null);
   const [selectedMonths, setSelectedMonths] = useState<number[]>([]);
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'upi' | 'netbanking'>('upi');
+  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'cash'>('upi');
 
   const monthlyTotal = feeBreakdown.reduce((sum, item) => sum + item.amount, 0);
 
@@ -414,11 +414,12 @@ export function FeePayment() {
             {/* Payment Method Selection */}
             <div className="mb-6">
               <h3 className="font-bold text-slate-900 mb-4">Select Payment Method</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 items-stretch">
+                {/* UPI Payment Option */}
                 <motion.div
                   whileHover={{ scale: 1.03 }}
                   onClick={() => setPaymentMethod('upi')}
-                  className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                  className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all ${
                     paymentMethod === 'upi'
                       ? 'border-amber-500 bg-amber-50 shadow-lg'
                       : 'border-gray-200 hover:border-amber-300'
@@ -440,72 +441,54 @@ export function FeePayment() {
                   <p className="text-xs text-slate-600">GPay, PhonePe, Paytm</p>
                 </motion.div>
 
+                {/* Cash Payment Option */}
                 <motion.div
                   whileHover={{ scale: 1.03 }}
-                  onClick={() => setPaymentMethod('card')}
-                  className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                    paymentMethod === 'card'
+                  onClick={() => setPaymentMethod('cash')}
+                  className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                    paymentMethod === 'cash'
                       ? 'border-amber-500 bg-amber-50 shadow-lg'
                       : 'border-gray-200 hover:border-amber-300'
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      paymentMethod === 'card' ? 'bg-amber-100' : 'bg-blue-100'
-                    }`}>
-                      <CreditCard className={`w-5 h-5 ${
-                        paymentMethod === 'card' ? 'text-amber-600' : 'text-blue-600'
-                      }`} />
-                    </div>
-                    {paymentMethod === 'card' && (
-                      <CheckCircle2 className="w-5 h-5 text-amber-600" />
-                    )}
-                  </div>
-                  <p className="font-medium text-slate-900">Card Payment</p>
-                  <p className="text-xs text-slate-600">Visa, Mastercard, Rupay</p>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  onClick={() => setPaymentMethod('netbanking')}
-                  className={`p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                    paymentMethod === 'netbanking'
-                      ? 'border-amber-500 bg-amber-50 shadow-lg'
-                      : 'border-gray-200 hover:border-amber-300'
-                  }`}
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      paymentMethod === 'netbanking' ? 'bg-amber-100' : 'bg-purple-100'
+                      paymentMethod === 'cash' ? 'bg-amber-100' : 'bg-gray-100'
                     }`}>
                       <Wallet className={`w-5 h-5 ${
-                        paymentMethod === 'netbanking' ? 'text-amber-600' : 'text-purple-600'
+                        paymentMethod === 'cash' ? 'text-amber-600' : 'text-gray-600'
                       }`} />
                     </div>
-                    {paymentMethod === 'netbanking' && (
+                    {paymentMethod === 'cash' && (
                       <CheckCircle2 className="w-5 h-5 text-amber-600" />
                     )}
                   </div>
-                  <p className="font-medium text-slate-900">Net Banking</p>
-                  <p className="text-xs text-slate-600">All major banks</p>
+                  <p className="font-medium text-slate-900">Cash Payment</p>
+                  <p className="text-xs text-slate-600">Pay at school office</p>
+                </motion.div>
+
+                {/* Payment Button in the same row */}
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex-1"
+                >
+                  <Button
+                    onClick={handleMakePayment}
+                    className="w-full h-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-6 text-base flex flex-col items-center justify-center gap-1"
+                  >
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="w-5 h-5" />
+                      <span>Make Payment</span>
+                    </div>
+                    <div className="text-sm font-semibold">
+                      ₹{selectedTotal.toLocaleString()}
+                      {isMultipleMonths && ` (${selectedMonths.length} months)`}
+                    </div>
+                  </Button>
                 </motion.div>
               </div>
             </div>
-
-            {/* Payment Button */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Button
-                onClick={handleMakePayment}
-                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-6 text-lg"
-              >
-                <CreditCard className="w-5 h-5 mr-2" />
-                Make Payment of ₹{selectedTotal.toLocaleString()}
-                {isMultipleMonths && ` (${selectedMonths.length} months)`}
-              </Button>
-            </motion.div>
 
             {/* Security Note */}
             <Card className="p-4 bg-emerald-50 border-emerald-200 mt-6">

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import {
-  GraduationCap,
-  ArrowLeft,
-  CheckCircle2,
-  User,
-  MapPin,
-  BookOpen,
-  Users,
+import { 
+  GraduationCap, 
+  ArrowLeft, 
+  CheckCircle2, 
+  User, 
+  MapPin, 
+  BookOpen, 
+  Users, 
   ClipboardCheck,
   Check,
   Sparkles,
@@ -21,7 +21,8 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { motion, AnimatePresence } from 'motion/react';
-import { toast } from 'sonner';
+import { toast } from 'sonner@2.0.3';
+import { PortalLayout } from './PortalLayout';
 
 export function AddStudentForm() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export function AddStudentForm() {
     religion: '',
     category: '',
     aadharNumber: '',
-
+    
     // Contact Details
     email: '',
     phone: '',
@@ -45,7 +46,7 @@ export function AddStudentForm() {
     city: '',
     state: '',
     pincode: '',
-
+    
     // Academic Details
     previousSchool: '',
     previousClass: '',
@@ -54,7 +55,7 @@ export function AddStudentForm() {
     section: '',
     rollNumber: '',
     admissionId: '',
-
+    
     // Parent Details
     fatherName: '',
     fatherOccupation: '',
@@ -76,44 +77,44 @@ export function AddStudentForm() {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const steps = [
-    {
-      id: 1,
-      title: 'Personal Details',
+    { 
+      id: 1, 
+      title: 'Personal Details', 
       icon: User,
       description: 'Basic information',
       color: 'blue'
     },
-    {
-      id: 2,
-      title: 'Contact Information',
+    { 
+      id: 2, 
+      title: 'Contact Information', 
       icon: MapPin,
       description: 'Address & contact',
       color: 'yellow'
     },
-    {
-      id: 3,
-      title: 'Academic Details',
+    { 
+      id: 3, 
+      title: 'Academic Details', 
       icon: BookOpen,
       description: 'Class & academic info',
       color: 'orange'
     },
-    {
-      id: 4,
-      title: 'Parent Information',
+    { 
+      id: 4, 
+      title: 'Parent Information', 
       icon: Users,
       description: 'Guardian details',
       color: 'purple'
     },
-    {
-      id: 5,
-      title: 'Documents',
+    { 
+      id: 5, 
+      title: 'Documents', 
       icon: Upload,
       description: 'Upload documents',
       color: 'indigo'
     },
-    {
-      id: 6,
-      title: 'Review & Submit',
+    { 
+      id: 6, 
+      title: 'Review & Submit', 
       icon: ClipboardCheck,
       description: 'Verify all info',
       color: 'green'
@@ -123,7 +124,7 @@ export function AddStudentForm() {
   const handleSubmit = () => {
     const generatedId = `STD${new Date().getFullYear()}${Math.floor(Math.random() * 100000).toString().padStart(5, '0')}`;
     setStudentId(generatedId);
-
+    
     toast.success('Student added successfully!', {
       description: `Student ID: ${generatedId}`,
       duration: 5000,
@@ -218,72 +219,48 @@ export function AddStudentForm() {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col overflow-hidden">
-      {/* Modern Header */}
-      <motion.div
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="bg-white border-b shadow-sm z-50 backdrop-blur-lg bg-white/90 flex-shrink-0"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <motion.div
-              className="flex items-center gap-3"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
-                <GraduationCap className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Add New Student</h3>
-                <p className="text-xs text-gray-600">Academic Year 2026-27</p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Button
-                variant="ghost"
-                onClick={() => navigate('/admin/students')}
-                className="hover:bg-gray-100"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Button>
-            </motion.div>
-          </div>
+    <PortalLayout
+      role="admin"
+      userName="Stevie Zone"
+      userRole="Admin"
+      pageTitle="Add New Student"
+      breadcrumbs={["Home", "Admin", "Students", "Add New Student"]}
+    >
+      <div className="space-y-6">
+        {/* Back Button */}
+        <div className="flex justify-end">
+          <Button 
+            variant="outline" 
+            onClick={() => navigate('/admin/students')}
+            className="border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Students
+          </Button>
         </div>
-      </motion.div>
 
-      {/* Modern Progress Stepper */}
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-3 border-b border-white/50 backdrop-blur-sm flex-shrink-0"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Modern Progress Stepper */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white rounded-lg border border-slate-200 p-4 sm:p-6 shadow-sm"
+        >
           <div className="relative">
             {/* Progress Line */}
-            <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 rounded-full hidden md:block"
+            <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 rounded-full hidden md:block" 
               style={{ marginLeft: '2.5rem', marginRight: '2.5rem' }}
             />
-            <motion.div
+            <motion.div 
               className="absolute top-5 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full hidden md:block"
               initial={{ width: 0 }}
-              animate={{
+              animate={{ 
                 width: `${((currentStep - 1) / (steps.length - 1)) * 100}%`,
               }}
               transition={{ duration: 0.5 }}
               style={{ marginLeft: '2.5rem', right: '2.5rem' }}
             />
-
+            
             {/* Steps */}
             <div className="relative flex justify-between">
               {steps.map((step, index) => {
@@ -291,7 +268,7 @@ export function AddStudentForm() {
                 const isCompleted = completedSteps.includes(step.id) || currentStep > step.id;
                 const StepIcon = step.icon;
                 const colors = getStepColor(step.color);
-
+                
                 return (
                   <motion.div
                     key={step.id}
@@ -301,12 +278,13 @@ export function AddStudentForm() {
                     transition={{ delay: 0.3 + index * 0.1 }}
                   >
                     <motion.div
-                      className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-md ${isCompleted
-                          ? `bg-gradient-to-br ${colors.gradient} text-white`
-                          : isActive
-                            ? `bg-white border-3 ${colors.border} ${colors.text}`
+                      className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-md ${
+                        isCompleted 
+                          ? `bg-gradient-to-br ${colors.gradient} text-white` 
+                          : isActive 
+                            ? `bg-white border-3 ${colors.border} ${colors.text}` 
                             : 'bg-gray-100 text-gray-400 border-2 border-gray-200'
-                        }`}
+                      }`}
                       animate={isActive ? {
                         scale: [1, 1.05, 1],
                       } : {}}
@@ -323,7 +301,7 @@ export function AddStudentForm() {
                       ) : (
                         <StepIcon className="w-5 h-5" />
                       )}
-
+                      
                       {isActive && (
                         <motion.div
                           className={`absolute inset-0 rounded-xl bg-gradient-to-br ${colors.gradient} opacity-20`}
@@ -332,15 +310,16 @@ export function AddStudentForm() {
                         />
                       )}
                     </motion.div>
-
+                    
                     <div className="mt-2 text-center hidden md:block">
-                      <p className={`text-xs font-medium ${isActive ? colors.text : isCompleted ? 'text-gray-700' : 'text-gray-400'
-                        }`}>
+                      <p className={`text-xs font-medium ${
+                        isActive ? colors.text : isCompleted ? 'text-gray-700' : 'text-gray-400'
+                      }`}>
                         {step.title}
                       </p>
                       <p className="text-[10px] text-gray-500 mt-0.5">{step.description}</p>
                     </div>
-
+                    
                     {/* Mobile: Show only active step title */}
                     {isActive && (
                       <div className="mt-1 text-center md:hidden">
@@ -352,12 +331,10 @@ export function AddStudentForm() {
               })}
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Scrollable Form Content */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="h-full max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        {/* Form Content Container */}
+        <div className="space-y-6">
           {/* Success Message */}
           <AnimatePresence>
             {studentId && (
@@ -373,14 +350,14 @@ export function AddStudentForm() {
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -mr-32 -mt-32" />
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full -ml-32 -mb-32" />
                   </div>
-
+                  
                   <div className="relative flex items-start gap-6">
                     <motion.div
-                      animate={{
+                      animate={{ 
                         rotate: 360,
                         scale: [1, 1.2, 1]
                       }}
-                      transition={{
+                      transition={{ 
                         rotate: { duration: 0.6, ease: "easeInOut" },
                         scale: { duration: 1, repeat: Infinity, repeatDelay: 2 }
                       }}
@@ -390,7 +367,7 @@ export function AddStudentForm() {
                         <CheckCircle2 className="w-10 h-10 text-white" />
                       </div>
                     </motion.div>
-
+                    
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold text-white mb-2">
                         Student Added Successfully! 🎉
@@ -398,12 +375,12 @@ export function AddStudentForm() {
                       <p className="text-green-100 mb-6">
                         The student has been successfully added to the system. Please save the Student ID for future reference.
                       </p>
-
+                      
                       <div className="bg-white/20 backdrop-blur-md p-6 rounded-xl border-2 border-white/40">
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-sm text-green-100 mb-1">Student ID</p>
-                            <motion.p
+                            <motion.p 
                               className="text-3xl font-bold text-white tracking-wider"
                               animate={{ scale: [1, 1.05, 1] }}
                               transition={{ duration: 2, repeat: Infinity }}
@@ -433,10 +410,10 @@ export function AddStudentForm() {
               <Card className="overflow-hidden shadow-xl border-0 bg-white">
                 {/* Card Header with Color Accent */}
                 <div className={`h-2 bg-gradient-to-r ${getStepColor(currentStepData.color).gradient}`} />
-
+                
                 <div className="p-8">
                   {/* Step Title */}
-                  <motion.div
+                  <motion.div 
                     className="mb-8"
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -485,7 +462,7 @@ export function AddStudentForm() {
                             />
                           </motion.div>
                         ))}
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -503,7 +480,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -525,7 +502,7 @@ export function AddStudentForm() {
                             <option value="other">Other</option>
                           </select>
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -551,7 +528,7 @@ export function AddStudentForm() {
                             <option value="AB-">AB-</option>
                           </select>
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -569,7 +546,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -586,7 +563,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all rounded-xl"
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -657,7 +634,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-yellow-400 focus:ring-4 focus:ring-yellow-100 transition-all rounded-xl"
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -676,8 +653,8 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-
-                        <motion.div
+                        
+                        <motion.div 
                           className="md:col-span-2"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -695,7 +672,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -713,7 +690,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -731,7 +708,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -779,7 +756,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -796,7 +773,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -817,7 +794,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -848,7 +825,7 @@ export function AddStudentForm() {
                             <option value="12">Class 12</option>
                           </select>
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -871,7 +848,7 @@ export function AddStudentForm() {
                             <option value="D">Section D</option>
                           </select>
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -888,7 +865,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -941,7 +918,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -958,7 +935,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -977,7 +954,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1021,7 +998,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1038,7 +1015,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1057,7 +1034,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1100,7 +1077,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1117,7 +1094,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1135,7 +1112,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-
+                            
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1332,7 +1309,7 @@ export function AddStudentForm() {
                   )}
 
                   {/* Navigation Buttons */}
-                  <motion.div
+                  <motion.div 
                     className="flex justify-between mt-12 pt-6 border-t border-gray-200"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -1378,6 +1355,6 @@ export function AddStudentForm() {
           </AnimatePresence>
         </div>
       </div>
-    </div>
+    </PortalLayout>
   );
 }

@@ -12,10 +12,12 @@ import {
 } from 'lucide-react';
 
 const sidebarMenuItems = [
-  { id: 'who-we-are', label: 'Who We Are', active: true },
-  { id: 'history', label: 'History', active: false },
+  { id: 'About Jharkhand Commerce Inter College', label: 'About Jharkhand Commerce Inter College', active: true },
+  { id: 'Vision and Mission', label: 'Vision and Mission', active: false },
   { id: 'administration', label: 'Administration', active: false },
-  { id: 'campus-map', label: 'Campus Map', active: false },
+  { id: 'Founder', label: 'Founder', active: false },
+  { id: 'Principal Message', label: 'Principal Message', active: false },
+  { id: 'Our Alumini', label: 'Our Alumini', active: false },
 ];
 
 export function AboutPage() {

@@ -110,7 +110,7 @@ export function AdminDashboard() {
                     fontSize: '13px'
                   }}
                 />
-                <Bar dataKey="students" fill="#3b82f6" radius={[6, 6, 0, 0]} />
+                <Bar key="bar-students-admin" dataKey="students" fill="#3b82f6" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Card>
@@ -133,7 +133,7 @@ export function AdminDashboard() {
                     fontSize: '13px'
                   }}
                 />
-                <Line type="monotone" dataKey="amount" stroke="#10b981" strokeWidth={2.5} dot={{ fill: '#10b981', r: 4 }} />
+                <Line key="line-amount-admin" type="monotone" dataKey="amount" stroke="#10b981" strokeWidth={2.5} dot={{ fill: '#10b981', r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
           </Card>

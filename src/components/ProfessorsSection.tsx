@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight, GraduationCap, Linkedin, Instagram, Share2, Facebook } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 interface Professor {
   name: string;
@@ -44,6 +45,7 @@ const professors: Professor[] = [
 export function ProfessorsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % professors.length);
@@ -103,6 +105,7 @@ export function ProfessorsSection() {
 
           {/* View All Button */}
           <motion.button
+            onClick={() => navigate("/all-faculty")}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}

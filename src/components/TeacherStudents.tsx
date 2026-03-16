@@ -10,6 +10,7 @@ import {
   TrendingUp,
   Award,
   AlertCircle,
+  X,
 } from 'lucide-react';
 import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
@@ -120,6 +121,8 @@ const students = [
 export function TeacherStudents() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedClass, setSelectedClass] = useState<string>('all');
+  const [showModal, setShowModal] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState<number | null>(null);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -135,6 +138,14 @@ export function TeacherStudents() {
         return null;
     }
   };
+
+  const handleViewDetails = (studentId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedStudent(studentId);
+    setShowModal(true);
+  };
+
+  const selectedStudentDetails = students.find((s) => s.id === selectedStudent);
 
   const classes = ['all', ...new Set(students.map((s) => s.class))];
 
@@ -163,45 +174,53 @@ export function TeacherStudents() {
     >
       <div className="space-y-6">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card className="p-6 bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg">
-            <div className="flex items-center justify-between mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card className="p-5 bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-3xl font-bold mb-1">{totalStudents}</h3>
+                <p className="text-white/90 text-sm font-semibold">Total Students</p>
+              </div>
               <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                 <Users className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h3 className="text-3xl font-bold mb-1">{totalStudents}</h3>
-            <p className="text-white/90 text-sm font-semibold">Total Students</p>
           </Card>
 
-          <Card className="p-6 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white border-0 shadow-lg">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-5 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white border-0 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-3xl font-bold mb-1">{excellentStudents}</h3>
+                <p className="text-white/90 text-sm font-semibold">Top Performers</p>
+              </div>
               <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                 <Award className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h3 className="text-3xl font-bold mb-1">{excellentStudents}</h3>
-            <p className="text-white/90 text-sm font-semibold">Top Performers</p>
           </Card>
 
-          <Card className="p-6 bg-gradient-to-br from-red-500 to-red-600 text-white border-0 shadow-lg">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-5 bg-gradient-to-br from-red-500 to-red-600 text-white border-0 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-3xl font-bold mb-1">{needsAttention}</h3>
+                <p className="text-white/90 text-sm font-semibold">Needs Attention</p>
+              </div>
               <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                 <AlertCircle className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h3 className="text-3xl font-bold mb-1">{needsAttention}</h3>
-            <p className="text-white/90 text-sm font-semibold">Needs Attention</p>
           </Card>
 
-          <Card className="p-6 bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-lg">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-5 bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-3xl font-bold mb-1">{avgAttendance}%</h3>
+                <p className="text-white/90 text-sm font-semibold">Avg. Attendance</p>
+              </div>
               <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h3 className="text-3xl font-bold mb-1">{avgAttendance}%</h3>
-            <p className="text-white/90 text-sm font-semibold">Avg. Attendance</p>
           </Card>
         </div>
 
@@ -235,7 +254,7 @@ export function TeacherStudents() {
         {/* Students List */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredStudents.map((student) => (
-            <Card key={student.id} className="p-6 bg-white border border-slate-200 hover:shadow-lg hover:border-blue-300 transition-all group">
+            <Card key={student.id} className="p-6 bg-white border-2 border-blue-200 hover:shadow-lg hover:border-blue-400 transition-all">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-lg">
@@ -291,14 +310,14 @@ export function TeacherStudents() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button variant="outline" size="sm" className="flex-1 bg-blue-600 text-white hover:bg-blue-700 border-0">
+              <div className="mt-4">
+                <Button
+                  size="sm"
+                  className="w-full bg-blue-600 text-white hover:bg-blue-700 border-0"
+                  onClick={(e) => handleViewDetails(student.id, e)}
+                >
                   <Eye className="w-4 h-4 mr-1" />
-                  View Profile
-                </Button>
-                <Button variant="outline" size="sm" className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50">
-                  <Mail className="w-4 h-4 mr-1" />
-                  Contact
+                  View Details
                 </Button>
               </div>
             </Card>
@@ -315,6 +334,76 @@ export function TeacherStudents() {
           </Card>
         )}
       </div>
+
+      {/* Modal for Student Details */}
+      {showModal && selectedStudentDetails && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <Card className="p-8 bg-white border border-slate-200 w-96">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-lg">
+                  {selectedStudentDetails.name.charAt(0)}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-1">{selectedStudentDetails.name}</h3>
+                  <p className="text-sm text-slate-600">
+                    Roll: {selectedStudentDetails.rollNo} • {selectedStudentDetails.class}
+                  </p>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-red-600 text-white hover:bg-red-700 border-0"
+                onClick={() => setShowModal(false)}
+              >
+                <X className="w-4 h-4 mr-1" />
+                Close
+              </Button>
+            </div>
+
+            <div className="space-y-3 mb-4">
+              <div className="flex items-center gap-2 text-sm text-slate-700">
+                <Mail className="w-4 h-4 text-slate-500" />
+                <span>{selectedStudentDetails.email}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-700">
+                <Phone className="w-4 h-4 text-slate-500" />
+                <span>{selectedStudentDetails.phone}</span>
+              </div>
+            </div>
+
+            <div className="space-y-3 pb-4 border-b border-slate-200">
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-slate-700">Attendance</span>
+                  <span className="text-sm font-semibold text-green-600">{selectedStudentDetails.attendance}%</span>
+                </div>
+                <Progress value={selectedStudentDetails.attendance} className="h-2" />
+              </div>
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-slate-700">Performance</span>
+                  <span className="text-sm font-semibold text-blue-600">{selectedStudentDetails.performance}%</span>
+                </div>
+                <Progress value={selectedStudentDetails.performance} className="h-2" />
+              </div>
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-slate-700">Assignments</span>
+                  <span className="text-sm font-semibold text-slate-900">
+                    {selectedStudentDetails.assignments.submitted}/{selectedStudentDetails.assignments.total}
+                  </span>
+                </div>
+                <Progress
+                  value={(selectedStudentDetails.assignments.submitted / selectedStudentDetails.assignments.total) * 100}
+                  className="h-2"
+                />
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
     </PortalLayout>
   );
 }

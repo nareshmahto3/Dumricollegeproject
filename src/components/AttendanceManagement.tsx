@@ -418,6 +418,7 @@ export function AttendanceManagement() {
                       }}
                     />
                     <Line
+                      key="line-percentage-attendance"
                       type="monotone"
                       dataKey="percentage"
                       stroke="#f59e0b"

@@ -231,7 +231,7 @@ export function StudentExams() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + index * 0.1 }}
             >
-              <Card className="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all duration-200">
+              <Card className="bg-white border-2 border-blue-500 hover:border-blue-600 hover:shadow-md transition-all duration-200">
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>

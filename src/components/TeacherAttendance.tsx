@@ -43,6 +43,7 @@ export function TeacherAttendance() {
     }, {} as Record<number, string>)
   );
   const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
 
   const handleAttendanceToggle = (studentId: number, status: 'present' | 'absent' | 'late') => {
     setAttendanceData((prev) => ({
@@ -68,11 +69,14 @@ export function TeacherAttendance() {
   const absentCount = Object.values(attendanceData).filter((s) => s === 'absent').length;
   const lateCount = Object.values(attendanceData).filter((s) => s === 'late').length;
 
-  const filteredStudents = students.filter(
-    (student) =>
+  const filteredStudents = students.filter((student) => {
+    const matchesSearch =
       student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      student.rollNo.includes(searchQuery)
-  );
+      student.rollNo.includes(searchQuery);
+    const matchesStatus =
+      statusFilter === 'all' || attendanceData[student.id] === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <PortalLayout
@@ -167,6 +171,16 @@ export function TeacherAttendance() {
                   className="pl-10 w-64 border-2 border-slate-300 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="h-10 px-4 border-2 border-slate-300 rounded-lg bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="all">All Status</option>
+                <option value="present">Present</option>
+                <option value="late">Late</option>
+                <option value="absent">Absent</option>
+              </select>
             </div>
           </div>
 
