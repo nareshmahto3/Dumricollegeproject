@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import * as react from 'react';
 import { useNavigate } from 'react-router';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
@@ -22,7 +22,7 @@ const sidebarMenuItems = [
 
 export function AboutPage() {
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState('who-we-are');
+  const [activeSection, setActiveSection] = react.useState('who-we-are');
 
   return (
     <div className="min-h-screen bg-white">

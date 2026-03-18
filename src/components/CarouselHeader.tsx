@@ -21,7 +21,7 @@ const menuItems: MenuItem[] = [
     label: 'About Us',
     submenu: [
       { label: 'About Jharkhand Commerce Inter College', href: '/about' },
-      { label: 'Vision and Mission', href: '/about/vision-mission' },
+      { label: 'Vision and Mission', href: '/mission-values' },
       { label: 'Administration', href: '/about/administration' },
       { label: 'Founder', href: '/about/founder' },
       { label: 'Principal Message', href: '/about/principal-message' },

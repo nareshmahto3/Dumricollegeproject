@@ -1,91 +1,67 @@
 import { useNavigate } from 'react-router';
-import { motion } from 'motion/react';
-import { ChevronRight, CheckCircle, Calendar, FileText, GraduationCap, Globe, BookOpen } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
 import imgDivElementorElement from "figma:asset/1984a55cef37a722e6e3c4f9648e5453dfb17fde.png";
 import imgBnrArrow11 from "figma:asset/13bec648740b03b5c9d2c72567cc9f3e05c47165.png";
 import imgBlueInnerImg12Min from "figma:asset/6f80bfba6db1beafc8dd029dc489318e273a6781.png";
 import imgBlueInnerImg11Min from "figma:asset/99f316eb7a0340d02e25db78d33cfef89f9a904a.png";
+import imgCyanMLogo1Png from "figma:asset/4390c9dc27ebf2ffe56e2958dabd7064dd04c77a.png";
 import imgInnerCatImg1Min from "figma:asset/e1886cb1a3038b5a3e557c24ffe13af7ce6ba265.png";
 import imgInnerCatImg2Min from "figma:asset/9f26c0743f65c6213fe7564c446e3fc378c07c31.png";
 import imgInnerCatImg3Min from "figma:asset/a21bf85983e046d11ab824973aea9471a85af035.png";
-
-interface Requirement {
-  text: string;
-}
-
-interface DeadlineRow {
-  university: string;
-  springIntake: string;
-  fallIntake: string;
-  decisionDate: string;
-  applyBy: string;
-}
-
-const ugRequirements: Requirement[] = [
-  { text: "Completed application through CUET, specifying interest" },
-  { text: "Official SATs are required up to 31 for certain courses" },
-  { text: "Results of SATs (if applicable for your country)" },
-  { text: "Transcript" }
-];
-
-const graduateRequirements: Requirement[] = [
-  { text: "Completed application form" },
-  { text: "Statement of purpose (a one-page essay)" },
-  { text: "At least one recommendation from a teacher or professor" },
-  { text: "Proof of English proficiency (if required)" },
-  { text: "Official transcript from the graduate institution (original)" },
-  { text: "A scan of your valid government-issued ID" }
-];
-
-const additionalRequirements: Requirement[] = [
-  { text: "3 GRE or GMAT (if applicable for your course)" },
-  { text: "Liasre (for applicable courses)" },
-  { text: "Interview (for select courses)" },
-  { text: "Portfolio (for creative courses)" }
-];
-
-const deadlines: DeadlineRow[] = [
-  {
-    university: "University Accolades",
-    springIntake: "Spring Intake",
-    fallIntake: "Fall Intake",
-    decisionDate: "October 15",
-    applyBy: "December 15"
-  },
-  {
-    university: "IIT Bombay",
-    springIntake: "Spring Intake",
-    fallIntake: "Fall Intake",
-    decisionDate: "April 1",
-    applyBy: "July 31"
-  },
-  {
-    university: "Postgraduate",
-    springIntake: "Spring Intake",
-    fallIntake: "Fall Intake",
-    decisionDate: "October 15",
-    applyBy: "December 30"
-  },
-  {
-    university: "Research/PhD",
-    springIntake: "Spring Intake",
-    fallIntake: "Fall Intake",
-    decisionDate: "October 1",
-    applyBy: "January 15"
-  },
-  {
-    university: "International Students",
-    springIntake: "All Intakes",
-    fallIntake: "6 Months Before",
-    decisionDate: "3 Months Before",
-    applyBy: "As Stipulated"
-  }
-];
+import svgPaths from "../../imports/svg-61vxak0o4a";
 
 export function AdmissionRequirementsPage() {
   const navigate = useNavigate();
+
+  const requirements = {
+    academic: [
+      'Completed secondary education (HSC/A-Level/Equivalent).',
+      'Minimum GPA/grade requirements as set by the university.',
+      'For graduate programs: a recognized bachelor\'s degree with required CGPA.'
+    ],
+    language: [
+      'TOEFL, IELTS, PTE, or equivalent test score.',
+      'University-approved English placement test (if applicable).'
+    ],
+    additional: [
+      'Portfolio (Art/Music/Design), Fine Arts',
+      'Scholarship Assessment (Computer Science, IT)',
+      'Interview (Business Administration Programs)',
+      'Research proposal (Master\'s/PhD'
+    ],
+    essential: [
+      'Completed application form',
+      'Academic transcript & certificates',
+      'Proof of identity (passport / government-issued ID)',
+      'Recent passport-sized photographs',
+      'Letter of recommendation (if required)',
+      'Statement of Purpose/Personal Essay (selected programs)'
+    ],
+    applicationProcess: [
+      'Some programs require an entrance exam or aptitude test',
+      'Application must may be invited for an admission interview'
+    ],
+    financialAdmin: [
+      'Valid passport',
+      'Other letter from the university',
+      'Financial sponsorship documents',
+      'Medical clearance (if applicable)'
+    ],
+    submissionDetails: [
+      'Payment of application fee',
+      'Proof of ability to cover tuition fees during study (for international students)'
+    ]
+  };
+
+  const deadlineData = [
+    { program: 'Undergraduate', springIntake: 'Spring Intake', october: 'October 1', december: 'December 15', january: 'January 15' },
+    { program: 'Undergraduate', springIntake: 'Fall Intake', october: 'April 1', december: 'July 30', january: 'September 1' },
+    { program: 'Postgraduate', springIntake: 'Spring Intake', october: 'October 1', december: 'December 30', january: 'January 15' },
+    { program: 'Postgraduate', springIntake: 'Fall Intake', october: 'April', december: 'August 15', january: 'September 5' },
+    { program: 'International Students', springIntake: 'All Intakes', october: 'As before', december: '3 Months Before', january: 'As Scheduled' }
+  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -141,304 +117,355 @@ export function AdmissionRequirementsPage() {
           <h1 className="text-5xl md:text-6xl font-light text-white mb-6 font-serif">
             Admission Requirements
           </h1>
-
-          {/* Description */}
-          <p className="text-white/90 text-base leading-7 max-w-3xl">
-            Education goes beyond textbooks and classrooms. We believe in empowering
-            <br className="hidden sm:block" />
-            students to explore their passions, challenge conventions, and discover their potential.
-          </p>
         </div>
       </section>
 
-      {/* Requirements and Deadlines Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-light text-gray-900 mb-4">Requirements and Deadlines</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Our colleges and universities worldwide are residential. In order that students' Graduation is accelerated, the university maintains both the academic rigor offered at all of our campuses and offers as wide as possible choice among our course offerings.
-            </p>
-          </motion.div>
-
-          {/* Two Images Side by Side */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="rounded-2xl overflow-hidden shadow-lg"
-            >
-              <img
-                src={imgBlueInnerImg11Min}
-                alt="Students on campus"
-                className="w-full h-[400px] object-cover"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="rounded-2xl overflow-hidden shadow-lg"
-            >
+      {/* Requirements and Deadlines Header Section */}
+      <section className="py-16 bg-[#f6f4ee]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1300px]">
+          {/* Hero Images with Center Logo */}
+          <div className="relative flex justify-between gap-4 items-start mb-8">
+            {/* Left Image */}
+            <div className="flex-1 max-w-[632.5px]">
               <img
                 src={imgBlueInnerImg12Min}
-                alt="University building"
-                className="w-full h-[400px] object-cover"
+                alt="Students"
+                className="w-full aspect-[632.5/383.54] rounded-2xl object-cover"
               />
-            </motion.div>
+            </div>
+
+            {/* Right Image */}
+            <div className="flex-1 max-w-[632.5px]">
+              <img
+                src={imgBlueInnerImg11Min}
+                alt="Campus"
+                className="w-full aspect-[632.5/383.54] rounded-2xl object-cover"
+              />
+            </div>
+
+            {/* Center Logo */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0c5776] p-5 rounded-full">
+              <img
+                src={imgCyanMLogo1Png}
+                alt="Logo"
+                className="w-[90px] h-[88.5px]"
+              />
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Admissions Requirements */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-12"
-          >
-            <h2 className="text-4xl font-light text-gray-900 mb-8">Admissions Requirements</h2>
+          {/* Section Title */}
+          <h2 className="font-['Bitter',serif]  text-[36px] leading-[46px] text-[#030303] mb-6">
+            Requirements and Deadlines
+          </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Left Column - UG Requirements */}
+          {/* Description */}
+          <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-12">
+            Our program costs are designed to remain transparent competitive and accessible for students from diverse backgrounds. Each academic program includes tuition fees
+            registration charges and essential learning resources ensuring students receive high-quality education and comprehensive academic support Costs may vary based o
+            program type, course load, and mode of study (on-campus, hybrid, or online) We aim to provide exceptional value through modern facilities, expert faculty, and industr
+            aligned curriculum making your investment in education both meaningful and future-focused.
+          </p>
+
+          {/* Admissions Requirements */}
+          <h2 className="font-['Bitter',serif]  text-[36px] leading-[46px] text-[#030303] mb-8 pt-4">
+            Admissions Requirements
+          </h2>
+
+          {/* Requirements Grid */}
+          <div className="grid grid-cols-1 bg-white p-2 rounded-xl lg:grid-cols-2 gap-8 mb-12">
+            {/* Left Column */}
+            <div className="flex  flex-col gap-6">
+              {/* 1. Academic Qualifications */}
               <div>
-                <ul className="space-y-4">
-                  {ugRequirements.map((req, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-start gap-3"
-                    >
-                      <CheckCircle className="w-5 h-5 text-[#0c5776] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{req.text}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-
-                <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Graduate Requirements:</h3>
-                <ul className="space-y-4">
-                  {graduateRequirements.map((req, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: (ugRequirements.length + index) * 0.1 }}
-                      className="flex items-start gap-3"
-                    >
-                      <CheckCircle className="w-5 h-5 text-[#0c5776] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{req.text}</span>
-                    </motion.li>
+                <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
+                  1. Academic Qualifications
+                </h3>
+                <ul className="space-y-1">
+                  {requirements.academic.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="mr-[5px]">
+                        <svg className="w-[5px] h-[5px]" fill="none" viewBox="0 0 4.84375 4.84375">
+                          <path d={svgPaths.p1f525e80} fill="#4C4C4C" />
+                        </svg>
+                      </div>
+                      <span className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                        {item}
+                      </span>
+                    </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Right Column - Additional Requirements */}
+              {/* 3. Language Proficiency Test */}
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Additional Requirements:</h3>
-                <ul className="space-y-4">
-                  {additionalRequirements.map((req, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, x: 10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-start gap-3"
-                    >
-                      <CheckCircle className="w-5 h-5 text-[#0c5776] mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{req.text}</span>
-                    </motion.li>
+                <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
+                  3. Language Proficiency Test
+                </h3>
+                <ul className="space-y-1">
+                  {requirements.language.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="mr-[5px]">
+                        <svg className="w-[5px] h-[5px]" fill="none" viewBox="0 0 4.84375 4.84375">
+                          <path d={svgPaths.p1f525e80} fill="#4C4C4C" />
+                        </svg>
+                      </div>
+                      <span className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                        {item}
+                      </span>
+                    </li>
                   ))}
                 </ul>
+              </div>
 
-                <div className="mt-8 p-6 bg-blue-50 rounded-lg border-l-4 border-[#0c5776]">
-                  <p className="text-gray-700 leading-relaxed">
-                    <strong>Note:</strong> A certified copy of your photo ID from other Indian CUET agencies or states may work. However, if you're applying for any government program, certify your signature and any programs.
-                  </p>
-                </div>
+              {/* 5. Additional Criteria for Special Programs */}
+              <div>
+                <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
+                  5. Additional Criteria for Special Programs
+                </h3>
+                <ul className="space-y-1">
+                  {requirements.additional.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="mr-[5px]">
+                        <svg className="w-[5px] h-[5px]" fill="none" viewBox="0 0 4.84375 4.84375">
+                          <path d={svgPaths.p1f525e80} fill="#4C4C4C" />
+                        </svg>
+                      </div>
+                      <span className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 7. Visa Requirements (International Students) */}
+              <div>
+                <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
+                  7. Visa Requirements (International Students
+                </h3>
+                <ul className="space-y-1">
+                  {requirements.financialAdmin.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="mr-[5px]">
+                        <svg className="w-[5px] h-[5px]" fill="none" viewBox="0 0 4.84375 4.84375">
+                          <path d={svgPaths.p1f525e80} fill="#4C4C4C" />
+                        </svg>
+                      </div>
+                      <span className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Apply Deadlines Table */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-light text-gray-900 mb-8">Apply Deadlines</h2>
+            {/* Right Column */}
+            <div className="flex flex-col gap-6">
+              {/* 2. Essential Qualifications */}
+              <div>
+                <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
+                  2. Academic Qualifications
+                </h3>
+                <ul className="space-y-1">
+                  {requirements.essential.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="mr-[5px]">
+                        <svg className="w-[5px] h-[5px]" fill="none" viewBox="0 0 4.84375 4.84375">
+                          <path d={svgPaths.p1f525e80} fill="#4C4C4C" />
+                        </svg>
+                      </div>
+                      <span className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="bg-[#0c5776] text-white">
-                      <th className="px-6 py-4 text-left text-sm font-normal">University</th>
-                      <th className="px-6 py-4 text-left text-sm font-normal">Spring Intake</th>
-                      <th className="px-6 py-4 text-left text-sm font-normal">Fall Intake</th>
-                      <th className="px-6 py-4 text-left text-sm font-normal">October 15</th>
-                      <th className="px-6 py-4 text-left text-sm font-normal">December 15</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {deadlines.map((deadline, index) => (
-                      <motion.tr
-                        key={index}
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className={index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}
-                      >
-                        <td className="px-6 py-4 text-gray-900 font-medium">{deadline.university}</td>
-                        <td className="px-6 py-4 text-gray-600">{deadline.springIntake}</td>
-                        <td className="px-6 py-4 text-gray-600">{deadline.fallIntake}</td>
-                        <td className="px-6 py-4 text-gray-600">{deadline.decisionDate}</td>
-                        <td className="px-6 py-4 text-gray-600">{deadline.applyBy}</td>
-                      </motion.tr>
-                    ))}
-                  </tbody>
-                </table>
+              {/* 4. Application Process */}
+              <div>
+                <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
+                  4. Application Process
+                </h3>
+                <ul className="space-y-1">
+                  {requirements.applicationProcess.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="mr-[5px]">
+                        <svg className="w-[5px] h-[5px]" fill="none" viewBox="0 0 4.84375 4.84375">
+                          <path d={svgPaths.p1f525e80} fill="#4C4C4C" />
+                        </svg>
+                      </div>
+                      <span className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 6. Submission Details */}
+              <div>
+                <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
+                  6. Submission Details
+                </h3>
+                <ul className="space-y-1">
+                  {requirements.submissionDetails.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="mr-[5px]">
+                        <svg className="w-[5px] h-[5px]" fill="none" viewBox="0 0 4.84375 4.84375">
+                          <path d={svgPaths.p1f525e80} fill="#4C4C4C" />
+                        </svg>
+                      </div>
+                      <span className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
 
-      {/* Apply Now Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-light text-gray-900 mb-4">Apply Now</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              All programs operate on an annual basis. However, some programs are conducted year-round. Contact us at the Student Onsite Admissions support, at <span className="text-[#0c5776] font-medium">+91 98765 43210</span>. In order to benefit from early considerations, use start (March), and apply as early as high school students can for these programs. Check with an agent in your continent to know the final date for submission.
-            </p>
-          </motion.div>
+          {/* Apply Deadlines */}
+          <h2 className="font-['Bitter',serif]  text-[36px] leading-[46px] text-[#030303] mb-8 pt-8">
+            Apply Deadlines
+          </h2>
 
-          {/* Three Call-to-Action Cards */}
+          {/* Deadlines Table */}
+          <div className="bg-white rounded-xl overflow-hidden mb-12">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-[#0c5776]">
+                  <th className="px-6 py-4 text-left font-['Inter',sans-serif] font-normal text-base leading-7 text-white">
+                    University
+                  </th>
+                  <th className="px-6 py-4 text-left font-['Inter',sans-serif] font-normal text-base leading-7 text-white">
+                    Spring Intake
+                  </th>
+                  <th className="px-6 py-4 text-left font-['Inter',sans-serif] font-normal text-base leading-7 text-white">
+                    October 1
+                  </th>
+                  <th className="px-6 py-4 text-left font-['Inter',sans-serif] font-normal text-base leading-7 text-white">
+                    December 15
+                  </th>
+                  <th className="px-6 py-4 text-left font-['Inter',sans-serif] font-normal text-base leading-7 text-white">
+                    January 15
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {deadlineData.map((row, index) => (
+                  <tr
+                    key={index}
+                    className={index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}
+                  >
+                    <td className="px-6 py-4 font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                      {row.program}
+                    </td>
+                    <td className="px-6 py-4 font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                      {row.springIntake}
+                    </td>
+                    <td className="px-6 py-4 font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                      {row.october}
+                    </td>
+                    <td className="px-6 py-4 font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                      {row.december}
+                    </td>
+                    <td className="px-6 py-4 font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                      {row.january}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Apply Now Section */}
+          <h2 className="font-['Bitter',serif]  text-[36px] leading-[46px] text-[#030303] mb-6 pt-8">
+            Apply Now
+          </h2>
+
+          <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-12">
+            Our program costs are designed to remain transparent competitive and accessible for students from diverse backgrounds. Each academic program includes tuition fees
+            registration charges and essential learning resources ensuring students receive high-quality education and comprehensive academic support Costs may vary based o
+            program type, course load, and mode of study (on-campus, hybrid, or online) We aim to provide exceptional value through modern facilities, expert faculty, and industr
+            aligned curriculum making your investment in education both meaningful and future-focused.
+          </p>
+
+          {/* Apply Now Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Undergraduate Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="flex bg-white rounded-2xl pb-3 flex-col items-center text-center">
+              <div className="w-full aspect-[1/1] rounded-2xl overflow-hidden mb-6">
                 <img
                   src={imgInnerCatImg1Min}
                   alt="Undergraduate"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <GraduationCap className="w-8 h-8 mb-3" />
-                <h3 className="text-2xl font-semibold mb-2">Undergraduate</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Begin your academic journey with world-class undergraduate programs and supportive faculty.
-                </p>
-                <button
-                  onClick={() => navigate('/apply')}
-                  className="inline-flex items-center gap-2 bg-white text-[#0c5776] px-5 py-2.5 rounded-full font-medium hover:bg-blue-50 transition-colors text-sm"
-                >
-                  Apply Now
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </motion.div>
+              <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
+                Undergraduate
+              </h3>
+              <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
+                Begin your academic journey into flexible entry requirements with supportive faculty.
+              </p>
+              <button
+                onClick={() => navigate('/apply')}
+                className="bg-[#0c5776] text-white px-8 py-3 rounded-full font-['Inter',sans-serif] font-medium text-base hover:bg-[#094561] transition-colors inline-flex items-center gap-2"
+              >
+                Apply Now
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
 
             {/* Graduate Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="flex bg-white rounded-2xl pb-3 flex-col items-center text-center">
+              <div className="w-full aspect-[1/1] rounded-2xl overflow-hidden mb-6">
                 <img
                   src={imgInnerCatImg2Min}
                   alt="Graduate"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <BookOpen className="w-8 h-8 mb-3" />
-                <h3 className="text-2xl font-semibold mb-2">Graduate</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Advance your career with specialized graduate programs and cutting-edge research.
-                </p>
-                <button
-                  onClick={() => navigate('/apply')}
-                  className="inline-flex items-center gap-2 bg-white text-[#0c5776] px-5 py-2.5 rounded-full font-medium hover:bg-blue-50 transition-colors text-sm"
-                >
-                  Apply Now
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </motion.div>
+              <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
+                Graduate
+              </h3>
+              <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
+                Advance your career with streamlined graduate program admissions.
+              </p>
+              <button
+                onClick={() => navigate('/apply')}
+                className="bg-[#0c5776] text-white px-8 py-3 rounded-full font-['Inter',sans-serif] font-medium text-base hover:bg-[#094561] transition-colors inline-flex items-center gap-2"
+              >
+                Apply Now
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
 
             {/* International Students Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="flex flex-col bg-white rounded-2xl pb-3 items-center text-center">
+              <div className="w-full  aspect-[1/1] rounded-2xl overflow-hidden mb-6">
                 <img
                   src={imgInnerCatImg3Min}
                   alt="International Students"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <Globe className="w-8 h-8 mb-3" />
-                <h3 className="text-2xl font-semibold mb-2">International Students</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Join a diverse campus community from around the world with comprehensive support.
-                </p>
-                <button
-                  onClick={() => navigate('/apply')}
-                  className="inline-flex items-center gap-2 bg-white text-[#0c5776] px-5 py-2.5 rounded-full font-medium hover:bg-blue-50 transition-colors text-sm"
-                >
-                  Apply Now
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </motion.div>
+              <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
+                International Students
+              </h3>
+              <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
+                Join a diverse campus community through a global world-class admissions.
+              </p>
+              <button
+                onClick={() => navigate('/apply')}
+                className="bg-[#0c5776] text-white px-8 py-3 rounded-full font-['Inter',sans-serif] font-medium text-base hover:bg-[#094561] transition-colors inline-flex items-center gap-2"
+              >
+                Apply Now
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </section>

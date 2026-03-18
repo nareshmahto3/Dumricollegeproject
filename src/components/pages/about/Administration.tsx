@@ -1,146 +1,182 @@
 import { motion } from 'motion/react';
-import { UserCog, Mail, Phone, Building } from 'lucide-react';
 
 export function Administration() {
-  const administrators = [
-    {
-      name: 'Dr. Rajesh Kumar',
-      role: 'Principal',
-      qualification: 'Ph.D. in Education',
-      email: 'principal@dumricollege.edu',
-      phone: '+91 98765 43210',
-      image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80',
-      bio: 'Dr. Kumar has been leading the institution for over 15 years, bringing extensive experience in educational administration and policy development.'
-    },
-    {
-      name: 'Dr. Priya Sharma',
-      role: 'Vice Principal (Academics)',
-      qualification: 'Ph.D. in Computer Science',
-      email: 'vp.academics@dumricollege.edu',
-      phone: '+91 98765 43211',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
-      bio: 'Dr. Sharma oversees academic programs and curriculum development, ensuring high-quality education across all departments.'
-    },
-    {
-      name: 'Prof. Amit Singh',
-      role: 'Dean of Research',
-      qualification: 'Ph.D. in Engineering',
-      email: 'dean.research@dumricollege.edu',
-      phone: '+91 98765 43212',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80',
-      bio: 'Prof. Singh leads research initiatives and promotes innovation, guiding students and faculty in cutting-edge projects.'
-    },
-    {
-      name: 'Dr. Meera Patel',
-      role: 'Dean of Students',
-      qualification: 'Ph.D. in Psychology',
-      email: 'dean.students@dumricollege.edu',
-      phone: '+91 98765 43213',
-      image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&q=80',
-      bio: 'Dr. Patel focuses on student welfare, counseling services, and creating a supportive campus environment.'
-    },
+  const frequentlyContactedOffices = [
+    { department: 'Administrative Center (International)', office: 'W18 218', phone: '+1 (201) 895-3801', email: 'info@univet.edu' },
+    { department: 'Global Administration Hub', office: 'W18 210', phone: '+1 (202) 895-4801', email: 'info@univet.edu' },
+    { department: 'International Services Office', office: 'W17 212', phone: '+1 (203) 895-3808', email: 'info@univet.edu' },
+    { department: 'Worldwide Administration Unit', office: 'W17 232', phone: '+1 (204) 895-3809', email: 'info@univet.edu' },
+  ];
+
+  const universityAdministrativeDirectory = [
+    { department: 'Administrative Center (International)', phone: '+1 (201) 895-3801', email: 'info@univet.edu' },
+    { department: 'International Affairs Office', phone: '+1 (202) 895-3805', email: 'info@univet.edu' },
+    { department: 'Global Administration Center', phone: '+1 (203) 895-3803', email: 'info@univet.edu' },
+    { department: 'Global Services & Administration', phone: '+1 (201) 895-3806', email: 'info@univet.edu' },
+    { department: 'International Programs Office', phone: '+1 (201) 895-3806', email: 'info@univet.edu' },
+    { department: 'Office of Global Engagement', phone: '+1 (201) 895-3807', email: 'info@univet.edu' },
+    { department: 'Worldwide Operations Unit', phone: '+1 (204) 895-3809', email: 'info@univet.edu' },
+  ];
+
+  const campusAdministrativeDirectory = [
+    { department: 'Global Institutional Support Center', phone: '+1 (201) 895-3811', email: 'info@univet.edu' },
+    { department: 'Administrative Unit (International)', phone: '+1 (202) 895-3812', email: 'info@univet.edu' },
+    { department: 'Administrative Division (International)', phone: '+1 (203) 895-3813', email: 'info@univet.edu' },
+    { department: 'Administrative Management Center', phone: '+1 (201) 895-3816', email: 'info@univet.edu' },
+    { department: 'Administrative Resources Office', phone: '+1 (201) 895-3816', email: 'info@univet.edu' },
+    { department: 'Administrative Services Unit', phone: '+1 (201) 895-3817', email: 'info@univet.edu' },
+    { department: 'Administrative Support Office', phone: '+1 (204) 895-3819', email: 'info@univet.edu' },
   ];
 
   return (
-    <>
-      <div className="mb-8">
-        <h2 className="text-3xl font-light text-gray-900 mb-5 font-serif leading-tight">
-          Administration
+    <div className="">
+      {/* Header Section */}
+      <div className="mb-10">
+        <h2 className="font-['Bitter',serif] font-thin text-[48px] leading-[58px] text-[#030303] mb-4">
+          Univet Administration Director
         </h2>
-        <p className="text-gray-600 text-base leading-7">
-          Meet our dedicated leadership team committed to excellence in education and student development.
-          <br className="hidden lg:block" />
-          Our administrators bring decades of combined experience in education, research, and institutional management.
+        <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+          At Univet, education goes beyond textbooks and classrooms. We believe in empowering students to explore their passion challenge conventions and discover their potential through meaningful experiences. Our distinguished faculty members are leaders their respective fields, dedicated to delivering world-class education that integrates theory with practical application.
         </p>
       </div>
 
-      {/* Administrative Team */}
-      <div className="space-y-8">
-        {administrators.map((admin, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100 hover:border-[#2F584F] transition-all"
-          >
-            <div className="flex flex-col md:flex-row gap-6">
-              {/* Profile Image */}
-              <div className="flex-shrink-0">
-                <div className="relative w-32 h-32 rounded-2xl overflow-hidden">
-                  <img
-                    src={admin.image}
-                    alt={admin.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2F584F]/60 to-transparent"></div>
-                </div>
-              </div>
-
-              {/* Details */}
-              <div className="flex-1">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-1">{admin.name}</h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <UserCog className="w-5 h-5 text-[#2F584F]" />
-                      <p className="text-[#2F584F] font-semibold text-lg">{admin.role}</p>
-                    </div>
-                    <p className="text-gray-600 text-sm">{admin.qualification}</p>
-                  </div>
-                </div>
-
-                <p className="text-gray-700 leading-relaxed mb-4">{admin.bio}</p>
-
-                <div className="flex flex-wrap gap-4">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Mail className="w-4 h-4 text-[#FDC72F]" />
-                    <a href={`mailto:${admin.email}`} className="text-sm hover:text-[#2F584F] transition-colors">
-                      {admin.email}
+      {/* Frequently Contacted Offices */}
+      <div className="mb-12">
+        <h3 className="font-['Bitter',serif] font-thin text-[28px] leading-[38px] text-[#030303] mb-5">
+          Frequently Contacted Offices
+        </h3>
+        
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-[#0c5776]">
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Department
+                </th>
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Office
+                </th>
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Phone
+                </th>
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Email
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {frequentlyContactedOffices.map((office, index) => (
+                <tr key={index} className="bg-white hover:bg-slate-50 transition-colors">
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    {office.department}
+                  </td>
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    {office.office}
+                  </td>
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    {office.phone}
+                  </td>
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    <a href={`mailto:${office.email}`} className="text-[#4c4c4c] hover:text-[#0c5776] transition-colors">
+                      {office.email}
                     </a>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Phone className="w-4 h-4 text-[#FDC72F]" />
-                    <a href={`tel:${admin.phone}`} className="text-sm hover:text-[#2F584F] transition-colors">
-                      {admin.phone}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="font-['Inter',sans-serif] font-normal text-sm leading-6 text-[#4c4c4c] mt-4">
+          International offices may require English language ability.
+          <br />
+          (U.S) = United states
+        </p>
       </div>
 
-      {/* Office Information */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        className="mt-8 bg-gradient-to-br from-[#2F584F] to-[#1a3329] rounded-2xl p-8 text-white"
-      >
-        <div className="flex items-start gap-4 mb-6">
-          <Building className="w-8 h-8 text-[#FDC72F]" />
-          <div>
-            <h3 className="text-2xl font-bold mb-2">Administrative Office</h3>
-            <p className="text-white/90">
-              For general inquiries and administrative matters, please visit our main office or contact us during working hours.
-            </p>
-          </div>
+      {/* University Administrative Directory */}
+      <div className="mb-12">
+        <h3 className="font-['Bitter',serif] font-thin text-[28px] leading-[38px] text-[#030303] mb-5">
+          University Administrative Directory
+        </h3>
+        
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-[#0c5776]">
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Department
+                </th>
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Phone
+                </th>
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Email
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {universityAdministrativeDirectory.map((office, index) => (
+                <tr key={index} className="bg-white hover:bg-slate-50 transition-colors">
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    {office.department}
+                  </td>
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    {office.phone}
+                  </td>
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    <a href={`mailto:${office.email}`} className="text-[#4c4c4c] hover:text-[#0c5776] transition-colors">
+                      {office.email}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div className="grid md:grid-cols-2 gap-4 mt-6">
-          <div>
-            <p className="text-[#FDC72F] font-semibold mb-1">Office Hours</p>
-            <p className="text-white/90">Monday - Friday: 9:00 AM - 5:00 PM</p>
-            <p className="text-white/90">Saturday: 9:00 AM - 1:00 PM</p>
-          </div>
-          <div>
-            <p className="text-[#FDC72F] font-semibold mb-1">Contact</p>
-            <p className="text-white/90">Phone: +91 98765 43200</p>
-            <p className="text-white/90">Email: admin@dumricollege.edu</p>
-          </div>
+      </div>
+
+      {/* Campus Administrative Directory */}
+      <div className="mb-12">
+        <h3 className="font-['Bitter',serif] font-thin text-[28px] leading-[38px] text-[#030303] mb-5">
+          Campus Administrative Directory
+        </h3>
+        
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-[#0c5776]">
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Department
+                </th>
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Phone
+                </th>
+                <th className="font-['Bitter',serif] font-thin text-[15px] leading-[25px] text-white text-left px-6 py-4 border border-white/[0.09]">
+                  Email
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {campusAdministrativeDirectory.map((office, index) => (
+                <tr key={index} className="bg-white hover:bg-slate-50 transition-colors">
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    {office.department}
+                  </td>
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    {office.phone}
+                  </td>
+                  <td className="font-['Inter',sans-serif] font-normal text-[15px] leading-[25px] text-[#4c4c4c] px-6 py-4 border border-[#e4e4e4]">
+                    <a href={`mailto:${office.email}`} className="text-[#4c4c4c] hover:text-[#0c5776] transition-colors">
+                      {office.email}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </motion.div>
-    </>
+      </div>
+    </div>
   );
 }

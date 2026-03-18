@@ -2,14 +2,39 @@ import { useNavigate, useLocation, Outlet } from 'react-router';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
 import { ChevronRight } from 'lucide-react';
+import imgAboutSidebarThumb from "../imports/svg-xmjpvvfj2s";
 
 const sidebarMenuItems = [
-  { id: 'overview', label: 'About Jharkhand Commerce Inter College', path: '/about' },
-  { id: 'vision-mission', label: 'Vision and Mission', path: '/about/vision-mission' },
-  { id: 'administration', label: 'Administration', path: '/about/administration' },
-  { id: 'founder', label: 'Founder', path: '/about/founder' },
-  { id: 'principal-message', label: 'Principal Message', path: '/about/principal-message' },
-  { id: 'alumni', label: 'Our Alumni', path: '/about/alumni' },
+  { 
+    id: 'overview', 
+    label: 'About Jharkhand Commerce Inter College', 
+    path: '/about',
+    image: 'https://images.unsplash.com/photo-1718327453695-4d32b94c90a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMGxpYnJhcnl8ZW58MXx8fHwxNzcyNDQ5ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080'
+  },
+  { 
+    id: 'administration', 
+    label: 'Administration', 
+    path: '/about/administration',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80'
+  },
+  { 
+    id: 'founder', 
+    label: 'Founder', 
+    path: '/about/founder',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80'
+  },
+  { 
+    id: 'principal-message', 
+    label: 'Principal Message', 
+    path: '/about/principal-message',
+    image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80'
+  },
+  { 
+    id: 'alumni', 
+    label: 'Our Alumni', 
+    path: '/about/alumni',
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=80'
+  },
 ];
 
 export function AboutLayout() {
@@ -22,6 +47,9 @@ export function AboutLayout() {
     }
     return location.pathname === path;
   };
+
+  // Get current active menu item
+  const activeMenuItem = sidebarMenuItems.find(item => isActiveRoute(item.path)) || sidebarMenuItems[0];
 
   return (
     <div className="min-h-screen bg-white">
@@ -82,13 +110,13 @@ export function AboutLayout() {
             <div className="lg:w-80 flex-shrink-0">
               <div className="bg-white rounded-xl p-8 shadow-sm sticky top-8">
                 {/* Sidebar Title */}
-                <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">
-                  Dumri Inside
+                <h3 className="font-['Bitter',serif] font-thin text-[20px] leading-[30px] text-[#030303] mb-3">
+                  Univet Inside
                 </h3>
 
                 {/* Decorative Line */}
                 <div className="relative w-full h-[1px] bg-[#E4E4E4] mb-6">
-                  <div className="absolute left-0 top-0 w-[70px] h-[2px] bg-[#FDC72F]"></div>
+                  <div className="absolute left-0 top-[-0.5px] w-[70px] h-[2px] bg-[#00ade2]"></div>
                 </div>
 
                 {/* Menu Items */}
@@ -97,14 +125,19 @@ export function AboutLayout() {
                     <button
                       key={item.id}
                       onClick={() => navigate(item.path)}
-                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all ${
+                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all font-['Inter',sans-serif] font-medium text-base leading-[26px] ${
                         isActiveRoute(item.path)
-                          ? 'bg-[#2F584F] text-white'
-                          : 'bg-[#F6F4EE] text-gray-900 hover:bg-gray-100'
+                          ? 'bg-[#0c5776] text-white'
+                          : 'bg-[#F6F4EE] text-[#030303] hover:bg-[#e8e6de]'
                       }`}
                     >
-                      <span className="font-medium">{item.label}</span>
-                      <ChevronRight className="w-4 h-4" />
+                      <span>{item.label}</span>
+                      <svg className="w-4 h-4" viewBox="0 0 15.8931 12.3194" fill="none">
+                        <path 
+                          d="M10.3029 12.3194H9.34898C9.1664 8.968 11.2414 7.21023 12.2899 6.69629H0V5.66864H12.2899C9.77351 4.29027 9.15333 1.6218 9.35031 0H10.295C9.88631 3.99989 14.0936 5.66354 15.8931 5.66864V6.68675C10.6724 7.2879 10.0956 11.0413 10.3029 12.3194Z" 
+                          fill={isActiveRoute(item.path) ? 'white' : '#030303'}
+                        />
+                      </svg>
                     </button>
                   ))}
                 </div>
@@ -112,9 +145,9 @@ export function AboutLayout() {
                 {/* Sidebar Image */}
                 <div className="rounded-xl overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1718327453695-4d32b94c90a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMGxpYnJhcnl8ZW58MXx8fHwxNzcyNDQ5ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080"
-                    alt="College Building"
-                    className="w-full h-40 object-cover"
+                    src={activeMenuItem.image}
+                    alt={activeMenuItem.label}
+                    className="w-full h-40 object-cover transition-all duration-300"
                   />
                 </div>
               </div>

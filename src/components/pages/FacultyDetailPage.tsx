@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
-import { ChevronRight, Mail, Phone, GraduationCap, BookOpen, Award, Users, Building2, Calendar, Linkedin, Twitter, Globe } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
 import imgDivElementorElement from "figma:asset/3d5000040b465c89cecd0e435b2d96dd8f3c2294.png";
@@ -16,6 +16,7 @@ import imgAwardWin1Min from "figma:asset/6c35012f40f1cec33e961cafd30da1aa4f6f338
 import imgAwardWin2Min from "figma:asset/44d160b9127c1374c2c22e310fe22b15598e6417.png";
 import imgAwardWin3Min from "figma:asset/28d031cb8ed7fad993a505b823122a14a9dc4e7e.png";
 import imgAwardWin4Min from "figma:asset/1da4d1b3bdc122541806c2db61e0bfeeb9456aa7.png";
+import svgPaths from "../../imports/svg-ncfhf8do3f";
 
 interface FacultyMember {
   id: string;
@@ -46,28 +47,14 @@ const facultyData: { [key: string]: FacultyMember } = {
     position: 'Support Teacher',
     department: 'Commerce',
     image: imgEBlTeam1MinJpg,
-    email: 'kathryn.murphy@dumricollege.edu',
-    phone: '+91 9876543210',
+    email: 'leslie@univerisity.edu',
+    phone: '+1 (201) 895-3801',
     education: 'M.Com, B.Ed',
-    bio: 'Kathryn Murphy is a dedicated support teacher with over 8 years of experience in commerce education. She specializes in financial accounting and business studies, helping students develop strong analytical and problem-solving skills. Her teaching philosophy emphasizes practical application and real-world business scenarios.',
-    specialization: ['Financial Accounting', 'Business Studies', 'Economics', 'Taxation'],
-    experience: '8+ years in Commerce Education',
-    achievements: [
-      'Best Support Teacher Award 2023',
-      'Published 5+ research papers on commerce education',
-      'Successfully mentored 200+ students',
-      'Developed innovative teaching modules for accounting'
-    ],
-    publications: [
-      'Modern Approaches to Financial Accounting Education (2023)',
-      'Business Studies in Digital Age (2022)',
-      'Taxation Simplified for Students (2021)'
-    ],
-    courses: ['Financial Accounting I & II', 'Business Studies', 'Economics', 'Corporate Taxation'],
-    officeHours: 'Mon-Fri: 2:00 PM - 4:00 PM',
-    researchInterests: ['Financial Literacy', 'Digital Commerce', 'Entrepreneurship Education'],
-    linkedin: 'https://linkedin.com/in/kathryn-murphy',
-    twitter: 'https://twitter.com/kathrynmurphy'
+    bio: 'Kathryn Murphy is a highly experienced professor in the Department of Computer Science, recognized for his expertise in artificial intelligence and data science. He blends academic research with practical industry insights, guiding students through hands-on learning and innovative problem-solving. Dr. Doe actively publishes in top-tier journals and mentors students at both undergraduate and graduate levels',
+    specialization: ['Ph.D. in Mathematics, University of Cambridge', 'M.SC. in Mathematics. University of California', 'B.Sc. in mathematics, University of Helsinki'],
+    experience: 'Conventions and discover their potential through meaningful Our faculty experiences Our distinguished faculty members are leaders their respective fields dedicated to delivering world-class education that integrates theory with practical support application With',
+    courses: ['MPhil & PhD Programs', 'Advanced Research Labs', 'Research Funding & Grants', 'Master of Laws (LLM)'],
+    researchInterests: ['Algebraic Geometry', 'Number Theory', 'Discrete Geometry']
   },
   '2': {
     id: '2',
@@ -81,21 +68,8 @@ const facultyData: { [key: string]: FacultyMember } = {
     bio: 'Dr. Savannah Nguyen is an accomplished academic advisor and physicist with extensive research experience in quantum mechanics and theoretical physics. She has been instrumental in guiding students toward academic excellence and research opportunities in the field of physics.',
     specialization: ['Quantum Mechanics', 'Theoretical Physics', 'Computational Physics', 'Astrophysics'],
     experience: '12+ years in Physics Research & Education',
-    achievements: [
-      'Ph.D in Quantum Mechanics from IIT Delhi',
-      'Published 15+ research papers in international journals',
-      'Received Excellence in Teaching Award 2022',
-      'Principal Investigator of 3 research projects'
-    ],
-    publications: [
-      'Quantum Entanglement in Multi-particle Systems (2023)',
-      'Applications of Theoretical Physics in Modern Technology (2022)',
-      'Computational Methods in Quantum Mechanics (2021)'
-    ],
     courses: ['Quantum Mechanics', 'Thermodynamics', 'Classical Mechanics', 'Advanced Physics Lab'],
-    officeHours: 'Tue-Thu: 3:00 PM - 5:00 PM',
-    researchInterests: ['Quantum Computing', 'Particle Physics', 'Condensed Matter Physics'],
-    website: 'https://savannahnguyen.edu'
+    researchInterests: ['Quantum Computing', 'Particle Physics', 'Condensed Matter Physics']
   },
   '3': {
     id: '3',
@@ -109,19 +83,7 @@ const facultyData: { [key: string]: FacultyMember } = {
     bio: 'Brooklyn Simmons is a passionate academic assistant specializing in English literature and creative writing. With a deep love for language and storytelling, she inspires students to explore the richness of literature and develop their own creative voices.',
     specialization: ['English Literature', 'Creative Writing', 'Linguistics', 'Contemporary Fiction'],
     experience: '6+ years in English Literature Education',
-    achievements: [
-      'Published award-winning short stories',
-      'Conducted creative writing workshops for 500+ students',
-      'Featured in literary journals and magazines',
-      'Recipient of Young Educator Award 2022'
-    ],
-    publications: [
-      'Narrative Techniques in Modern Fiction (2023)',
-      'The Art of Creative Writing (2022)',
-      'Literary Analysis: A Student\'s Guide (2021)'
-    ],
     courses: ['English Literature', 'Creative Writing', 'Poetry Analysis', 'Modern Drama'],
-    officeHours: 'Mon-Wed: 1:00 PM - 3:00 PM',
     researchInterests: ['Postmodern Literature', 'Creative Pedagogy', 'Digital Storytelling']
   },
   '4': {
@@ -136,19 +98,7 @@ const facultyData: { [key: string]: FacultyMember } = {
     bio: 'Darlene Robertson brings a wealth of industry experience and academic knowledge to her role as an academic advisor. With an MBA and extensive corporate background, she bridges the gap between theoretical commerce education and practical business applications.',
     specialization: ['Business Management', 'Marketing', 'Strategic Planning', 'Corporate Finance'],
     experience: '10+ years in Commerce & Business Management',
-    achievements: [
-      'Former Marketing Manager at Fortune 500 company',
-      'MBA with distinction from top business school',
-      'Mentored 100+ students in career development',
-      'Published case studies on business strategy'
-    ],
-    publications: [
-      'Strategic Marketing in the Digital Era (2023)',
-      'Corporate Finance: Theory and Practice (2022)',
-      'Business Analytics for Decision Making (2021)'
-    ],
     courses: ['Business Management', 'Marketing Strategy', 'Corporate Finance', 'Entrepreneurship'],
-    officeHours: 'Mon-Fri: 10:00 AM - 12:00 PM',
     researchInterests: ['Digital Marketing', 'Business Analytics', 'Startup Ecosystems']
   },
   '5': {
@@ -163,19 +113,7 @@ const facultyData: { [key: string]: FacultyMember } = {
     bio: 'Cameron Williamson is a dedicated research assistant specializing in organic chemistry and biochemistry. His research focuses on sustainable chemistry and green synthesis methods, contributing to environmental protection through scientific innovation.',
     specialization: ['Organic Chemistry', 'Biochemistry', 'Green Chemistry', 'Analytical Chemistry'],
     experience: '5+ years in Chemistry Research',
-    achievements: [
-      'Published 8+ research papers in peer-reviewed journals',
-      'Developed eco-friendly synthesis methods',
-      'Winner of Young Scientist Award 2023',
-      'Collaborated on international research projects'
-    ],
-    publications: [
-      'Green Synthesis Methods in Organic Chemistry (2023)',
-      'Biochemical Applications of Novel Compounds (2022)',
-      'Sustainable Chemistry Practices (2021)'
-    ],
     courses: ['Organic Chemistry', 'Biochemistry', 'Analytical Techniques', 'Environmental Chemistry'],
-    officeHours: 'Wed-Fri: 2:00 PM - 4:00 PM',
     researchInterests: ['Sustainable Chemistry', 'Drug Discovery', 'Nanomaterials']
   },
   '6': {
@@ -184,188 +122,14 @@ const facultyData: { [key: string]: FacultyMember } = {
     position: 'Teaching Assistant (TA)',
     department: 'Arts',
     image: imgEBlTeam6MinJpg,
-    email: 'leslie.alexander@dumricollege.edu',
-    phone: '+91 9876543215',
+    email: 'leslie@univerisity.edu',
+    phone: '+1 (201) 895-3801',
     education: 'M.A (History)',
     bio: 'Leslie Alexander is an enthusiastic teaching assistant with a passion for history and cultural studies. She specializes in modern Indian history and helps students develop critical thinking skills through historical analysis and research methodologies.',
-    specialization: ['Modern Indian History', 'Cultural Studies', 'Historical Research', 'Archaeology'],
-    experience: '4+ years in History Education',
-    achievements: [
-      'Completed dissertation on Indian Independence Movement',
-      'Conducted heritage walks for students',
-      'Published articles in history journals',
-      'Active member of Historical Research Society'
-    ],
-    publications: [
-      'Perspectives on Modern Indian History (2023)',
-      'Cultural Heritage and Identity (2022)',
-      'Historical Research Methodologies (2021)'
-    ],
-    courses: ['Modern History', 'Cultural Studies', 'Historical Research Methods', 'Indian Civilization'],
-    officeHours: 'Tue-Thu: 11:00 AM - 1:00 PM',
-    researchInterests: ['Postcolonial Studies', 'Cultural Heritage', 'Oral History']
-  },
-  '7': {
-    id: '7',
-    name: 'Dr. Rajesh Kumar',
-    position: 'Professor & HOD',
-    department: 'Commerce',
-    image: 'https://images.unsplash.com/photo-1584554376766-ac0f2c65e949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB0ZWFjaGVyJTIwcG9ydHJhaXQlMjBtYWxlfGVufDF8fHx8MTc3MzYwMTAzMXww&ixlib=rb-4.1.0&q=80&w=1080',
-    email: 'rajesh.kumar@dumricollege.edu',
-    phone: '+91 9876543216',
-    education: 'M.Com, Ph.D (Commerce)',
-    bio: 'Dr. Rajesh Kumar serves as the Head of Department for Commerce with over 20 years of experience in commerce education and research. His expertise in financial management and accounting has shaped the commerce curriculum at Dumri College.',
-    specialization: ['Financial Management', 'Advanced Accounting', 'Corporate Governance', 'Auditing'],
-    experience: '20+ years in Commerce Education & Administration',
-    achievements: [
-      'Ph.D in Financial Management',
-      'Published 30+ research papers',
-      'Received Lifetime Achievement Award in Education',
-      'Developed modern commerce curriculum'
-    ],
-    publications: [
-      'Advanced Financial Management Techniques (2023)',
-      'Corporate Governance in Indian Context (2022)',
-      'Auditing Practices and Standards (2021)'
-    ],
-    courses: ['Financial Management', 'Advanced Accounting', 'Corporate Governance', 'Auditing'],
-    officeHours: 'Mon-Fri: 9:00 AM - 11:00 AM',
-    researchInterests: ['Financial Markets', 'Corporate Finance', 'Accounting Standards']
-  },
-  '8': {
-    id: '8',
-    name: 'Dr. Priya Sharma',
-    position: 'Associate Professor',
-    department: 'Science',
-    image: 'https://images.unsplash.com/photo-1758685848001-0396a85ba84f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB0ZWFjaGVyJTIwcG9ydHJhaXQlMjBmZW1hbGV8ZW58MXx8fHwxNzczNjAxMDMxfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    email: 'priya.sharma@dumricollege.edu',
-    phone: '+91 9876543217',
-    education: 'M.Sc, Ph.D (Biology)',
-    bio: 'Dr. Priya Sharma is an accomplished biologist specializing in molecular biology and genetics. Her groundbreaking research in genetic engineering has earned her recognition in the scientific community.',
-    specialization: ['Molecular Biology', 'Genetics', 'Biotechnology', 'Cell Biology'],
-    experience: '15+ years in Biology Research & Education',
-    achievements: [
-      'Ph.D in Molecular Biology',
-      'Published 25+ research papers in top journals',
-      'Received DST Young Scientist Award',
-      'Led multiple research grants'
-    ],
-    publications: [
-      'Advances in Genetic Engineering (2023)',
-      'Molecular Mechanisms of Disease (2022)',
-      'Biotechnology Applications in Medicine (2021)'
-    ],
-    courses: ['Molecular Biology', 'Genetics', 'Biotechnology', 'Cell Biology'],
-    officeHours: 'Mon-Wed-Fri: 2:00 PM - 4:00 PM',
-    researchInterests: ['Gene Therapy', 'Cancer Biology', 'Stem Cell Research']
-  },
-  '9': {
-    id: '9',
-    name: 'Prof. Amit Verma',
-    position: 'Senior Lecturer',
-    department: 'Arts',
-    image: 'https://images.unsplash.com/photo-1755519024827-fd05075a7200?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzb3IlMjBhY2FkZW1pYyUyMHBvcnRyYWl0JTIwbWFsZXxlbnwxfHx8fDE3NzM2MDEwMzF8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    email: 'amit.verma@dumricollege.edu',
-    phone: '+91 9876543218',
-    education: 'M.A (Political Science), Ph.D',
-    bio: 'Prof. Amit Verma is a distinguished political scientist with expertise in Indian politics and international relations. His insightful analysis and teaching methods have made him a favorite among students.',
-    specialization: ['Political Science', 'International Relations', 'Public Policy', 'Comparative Politics'],
-    experience: '14+ years in Political Science Education',
-    achievements: [
-      'Ph.D in Political Science',
-      'Published 20+ research papers',
-      'Regular contributor to political analysis',
-      'Invited speaker at national conferences'
-    ],
-    publications: [
-      'Indian Democracy: Challenges and Opportunities (2023)',
-      'International Relations in the 21st Century (2022)',
-      'Public Policy and Governance (2021)'
-    ],
-    courses: ['Political Science', 'International Relations', 'Public Policy', 'Indian Politics'],
-    officeHours: 'Tue-Thu: 10:00 AM - 12:00 PM',
-    researchInterests: ['Electoral Politics', 'Foreign Policy', 'Governance']
-  },
-  '10': {
-    id: '10',
-    name: 'Dr. Meera Patel',
-    position: 'Assistant Professor',
-    department: 'Commerce',
-    image: 'https://images.unsplash.com/photo-1758685845906-6f705cde4fb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzb3IlMjBhY2FkZW1pYyUyMHBvcnRyYWl0JTIwZmVtYWxlfGVufDF8fHx8MTc3MzYwMTAzMnww&ixlib=rb-4.1.0&q=80&w=1080',
-    email: 'meera.patel@dumricollege.edu',
-    phone: '+91 9876543219',
-    education: 'M.Com, CA, Ph.D',
-    bio: 'Dr. Meera Patel is a chartered accountant turned academician who brings practical industry experience to the classroom. Her expertise in taxation and financial reporting is invaluable to commerce students.',
-    specialization: ['Taxation', 'Financial Reporting', 'Cost Accounting', 'GST'],
-    experience: '11+ years in Accounting & Taxation',
-    achievements: [
-      'Chartered Accountant',
-      'Ph.D in Taxation',
-      'Former Senior Auditor at Big 4 firm',
-      'Published tax law commentaries'
-    ],
-    publications: [
-      'GST: A Comprehensive Guide (2023)',
-      'Financial Reporting Standards in India (2022)',
-      'Cost Accounting for Modern Business (2021)'
-    ],
-    courses: ['Taxation', 'Financial Reporting', 'Cost Accounting', 'Auditing'],
-    officeHours: 'Mon-Thu: 3:00 PM - 5:00 PM',
-    researchInterests: ['Tax Policy', 'Financial Accounting', 'Compliance']
-  },
-  '11': {
-    id: '11',
-    name: 'Prof. Suresh Singh',
-    position: 'Lecturer',
-    department: 'Science',
-    image: 'https://images.unsplash.com/photo-1758685734511-4f49ce9a382b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwbGVjdHVyZXIlMjBwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzM2MDEwMzJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    email: 'suresh.singh@dumricollege.edu',
-    phone: '+91 9876543220',
-    education: 'M.Sc (Mathematics), B.Ed',
-    bio: 'Prof. Suresh Singh is a mathematics educator known for making complex mathematical concepts accessible to students. His innovative teaching methods have helped countless students overcome their fear of mathematics.',
-    specialization: ['Calculus', 'Linear Algebra', 'Statistics', 'Applied Mathematics'],
-    experience: '9+ years in Mathematics Education',
-    achievements: [
-      'Best Mathematics Teacher Award 2022',
-      'Developed interactive math learning modules',
-      'Published textbooks on calculus',
-      'Conducted math olympiad training'
-    ],
-    publications: [
-      'Calculus Made Easy: A Student\'s Guide (2023)',
-      'Linear Algebra Applications (2022)',
-      'Statistics for Science Students (2021)'
-    ],
-    courses: ['Calculus', 'Linear Algebra', 'Statistics', 'Differential Equations'],
-    officeHours: 'Mon-Wed-Fri: 1:00 PM - 3:00 PM',
-    researchInterests: ['Mathematical Modeling', 'Data Science', 'Computational Mathematics']
-  },
-  '12': {
-    id: '12',
-    name: 'Dr. Anjali Gupta',
-    position: 'Associate Professor',
-    department: 'Arts',
-    image: 'https://images.unsplash.com/photo-1659080907111-7c726e435a28?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2FkZW1pYyUyMHN0YWZmJTIwcHJvZmVzc2lvbmFsJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzczNjAxMDMzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    email: 'anjali.gupta@dumricollege.edu',
-    phone: '+91 9876543221',
-    education: 'M.A (Sociology), Ph.D',
-    bio: 'Dr. Anjali Gupta is a sociologist whose research focuses on social change and development in contemporary India. Her work on gender studies and social inequality has contributed significantly to the field.',
-    specialization: ['Sociology', 'Gender Studies', 'Social Research', 'Development Studies'],
-    experience: '13+ years in Sociology Research & Education',
-    achievements: [
-      'Ph.D in Sociology',
-      'Published 18+ research papers',
-      'Conducted field studies in rural India',
-      'Gender equality advocate'
-    ],
-    publications: [
-      'Gender and Society in Modern India (2023)',
-      'Social Change and Development (2022)',
-      'Research Methods in Sociology (2021)'
-    ],
-    courses: ['Sociology', 'Gender Studies', 'Social Research Methods', 'Development Studies'],
-    officeHours: 'Tue-Thu: 2:00 PM - 4:00 PM',
-    researchInterests: ['Gender Equality', 'Social Justice', 'Urban Sociology']
+    specialization: ['Ph.D. in Mathematics, University of Cambridge', 'M.SC. in Mathematics. University of California', 'B.Sc. in mathematics, University of Helsinki'],
+    experience: 'Conventions and discover their potential through meaningful Our faculty experiences Our distinguished faculty members are leaders their respective fields dedicated to delivering world-class education that integrates theory with practical support application With',
+    courses: ['MPhil & PhD Programs', 'Advanced Research Labs', 'Research Funding & Grants', 'Master of Laws (LLM)'],
+    researchInterests: ['Algebraic Geometry', 'Number Theory', 'Discrete Geometry']
   }
 };
 
@@ -458,262 +222,407 @@ export function FacultyDetailPage() {
         </div>
       </section>
 
-      {/* Faculty Profile Content */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Profile Card */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="lg:col-span-1"
-            >
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden sticky top-24">
-                {/* Profile Image */}
-                <div className="relative aspect-[3/4] bg-gray-100">
-                  <img
-                    src={faculty.image}
-                    alt={faculty.name}
-                    className="w-full h-full object-cover"
-                  />
+      {/* Faculty Profile Content - Responsive Design */}
+      <section className="bg-[#f6f4ee]">
+        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-[128.8px] py-12 md:py-16 lg:py-[110px] flex justify-center">
+          <div className="w-full max-w-[1260px] flex flex-col gap-5 md:gap-8 lg:gap-5">
+            {/* Main Profile Section */}
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-[50px] lg:h-[532.74px] lg:items-end shrink-0 w-full">
+              {/* Left Column - Profile Card */}
+              <div className="flex items-start self-stretch shrink-0 justify-center lg:justify-start">
+                <div className="bg-white rounded-2xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)] p-3 flex flex-col gap-5 w-full max-w-[390.6px] lg:w-[390.6px]">
+                  {/* Profile Image */}
+                  <div className="relative rounded-2xl overflow-hidden">
+                    <img
+                      src={faculty.image}
+                      alt={faculty.name}
+                      className="w-full h-auto aspect-[366.6/405.74] object-cover"
+                    />
+                  </div>
+
+                  {/* Profile Info */}
+                  <div className="text-center pb-3 pt-1.5">
+                    <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-0.5">
+                      {faculty.name}
+                    </h4>
+                    <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                      {faculty.position}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column - Content */}
+              <div className="flex-1 flex flex-col gap-5 lg:h-[533.34px]">
+                {/* About: Introduction Section */}
+                <div className="flex flex-col gap-[15px] w-full lg:min-w-[819.4px]">
+                  {/* About Heading */}
+                  <div className="pb-[0.6px]">
+                    <h3 className="font-['Bitter',serif] font-thin text-3xl md:text-[36px] leading-[46px] text-[#030303]">
+                      About: Introduction
+                    </h3>
+                  </div>
+
+                  {/* Bio Text with bottom border */}
+                  <div className="pb-[30px] border-b-[0.8px] border-[#e4e4e4]">
+                    <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                      {faculty.bio}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Profile Info */}
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">{faculty.name}</h2>
-                  <p className="text-[#0c5776] font-medium text-lg mb-1">{faculty.position}</p>
-                  
-                  {/* Department Badge */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4">
-                    <GraduationCap className="w-4 h-4" />
-                    {faculty.department}
+                {/* Academic Qualifications & Research Interests - Two Columns */}
+                <div className="pt-3 flex flex-col gap-5">
+                  <div className="flex flex-col md:flex-row gap-8 md:gap-5 items-start justify-center shrink-0 w-full">
+                    {/* Academic Qualifications */}
+                    <div className="flex-1 flex flex-col gap-5 w-full">
+                      <div className="h-[29px]">
+                        <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                          Academic Qualifications
+                        </h4>
+                      </div>
+                      <div className="flex flex-col gap-[0.5px]">
+                        {faculty.specialization?.map((item, index) => (
+                          <div key={index} className="flex items-center pb-[0.5px]">
+                            <div className="flex items-start pr-[3.5px] shrink-0">
+                              <div className="overflow-clip relative shrink-0 size-[6px]">
+                                <div className="absolute inset-[1.56%]">
+                                  <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 5.8125 5.8125">
+                                    <path d={svgPaths.p2194aa80} fill="#4C4C4C" />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="pl-[5px]">
+                              <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                                {item}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Research Interests */}
+                    <div className="flex-1 flex flex-col gap-5 w-full">
+                      <div className="h-[29px]">
+                        <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                          Research Interests
+                        </h4>
+                      </div>
+                      <div className="flex flex-col gap-[0.5px]">
+                        {faculty.researchInterests?.map((item, index) => (
+                          <div key={index} className="flex items-center pb-[0.5px]">
+                            <div className="flex items-start pr-[3.5px] shrink-0">
+                              <div className="overflow-clip relative shrink-0 size-[6px]">
+                                <div className="absolute inset-[1.56%]">
+                                  <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 5.8125 5.8125">
+                                    <path d={svgPaths.p2194aa80} fill="#4C4C4C" />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="pl-[5px]">
+                              <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                                {item}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Education */}
-                  <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                      <BookOpen className="w-4 h-4 text-[#0c5776]" />
-                      Education
-                    </h3>
-                    <p className="text-gray-600 text-sm">{faculty.education}</p>
-                  </div>
+                  {/* Contact Information */}
+                  <div className="pt-[10px] border-t-[0.8px] border-[#e4e4e4] flex flex-col gap-5">
+                    {/* Contact Title */}
+                    <div className="pt-[26px] pb-[5px] w-full">
+                      <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                        Contact Information's
+                      </h4>
+                    </div>
 
-                  {/* Contact Info */}
-                  <div className="space-y-3 border-t pt-4">
-                    {faculty.email && (
-                      <div className="flex items-start gap-3">
-                        <Mail className="w-4 h-4 text-[#0c5776] mt-0.5 flex-shrink-0" />
-                        <a 
-                          href={`mailto:${faculty.email}`}
-                          className="text-sm text-gray-600 hover:text-[#0c5776] transition-colors break-all"
-                        >
-                          {faculty.email}
+                    {/* Contact Pills */}
+                    <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-[25px] items-start">
+                      {/* Email */}
+                      <div className="flex items-start shrink-0">
+                        <a href={`mailto:${faculty.email}`} className="bg-white cursor-pointer flex gap-[10px] items-center overflow-clip px-[14px] py-2 rounded-[100px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)]">
+                          <div className="flex items-center justify-center">
+                            <div className="overflow-clip relative shrink-0 size-5">
+                              <div className="absolute inset-[16.67%_0]">
+                                <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 13.3333">
+                                  <path d={svgPaths.p2537ddf0} fill="#030303" />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                          <p className="font-['Inter',sans-serif] font-normal text-sm sm:text-base leading-7 text-[#4c4c4c] whitespace-nowrap">
+                            {faculty.email}
+                          </p>
                         </a>
                       </div>
-                    )}
-                    {faculty.phone && (
-                      <div className="flex items-center gap-3">
-                        <Phone className="w-4 h-4 text-[#0c5776] flex-shrink-0" />
-                        <span className="text-sm text-gray-600">{faculty.phone}</span>
-                      </div>
-                    )}
-                    {faculty.officeHours && (
-                      <div className="flex items-start gap-3">
-                        <Calendar className="w-4 h-4 text-[#0c5776] mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="text-xs font-semibold text-gray-700 mb-0.5">Office Hours</p>
-                          <p className="text-sm text-gray-600">{faculty.officeHours}</p>
+
+                      {/* Phone */}
+                      <div className="flex items-start shrink-0">
+                        <div className="bg-white flex gap-[10px] items-center overflow-clip px-[14px] py-2 rounded-[100px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)]">
+                          <div className="flex items-center justify-center">
+                            <div className="overflow-clip relative shrink-0 size-5">
+                              <div className="absolute inset-[5.78%_6.2%_0_0]">
+                                <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 18.7592 18.8432">
+                                  <path d={svgPaths.p232a0d00} fill="#030303" />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                          <p className="font-['Inter',sans-serif] font-normal text-sm sm:text-base leading-7 text-[#4c4c4c] whitespace-nowrap">
+                            {faculty.phone}
+                          </p>
                         </div>
                       </div>
-                    )}
-                  </div>
 
-                  {/* Social Links */}
-                  {(faculty.linkedin || faculty.twitter || faculty.website) && (
-                    <div className="mt-6 flex gap-3 border-t pt-4">
-                      {faculty.linkedin && (
-                        <a
-                          href={faculty.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
-                        >
-                          <Linkedin className="w-5 h-5" />
-                        </a>
-                      )}
-                      {faculty.twitter && (
-                        <a
-                          href={faculty.twitter}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center w-10 h-10 bg-sky-500 text-white rounded-full hover:bg-sky-600 transition-colors"
-                        >
-                          <Twitter className="w-5 h-5" />
-                        </a>
-                      )}
-                      {faculty.website && (
-                        <a
-                          href={faculty.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center w-10 h-10 bg-gray-700 text-white rounded-full hover:bg-gray-800 transition-colors"
-                        >
-                          <Globe className="w-5 h-5" />
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Column - Details */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="lg:col-span-2 space-y-8"
-            >
-              {/* Biography */}
-              {faculty.bio && (
-                <div className="bg-white rounded-xl shadow-md p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Biography</h3>
-                  <p className="text-gray-700 leading-relaxed">{faculty.bio}</p>
-                </div>
-              )}
-
-              {/* Experience */}
-              {faculty.experience && (
-                <div className="bg-white rounded-xl shadow-md p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <Building2 className="w-6 h-6 text-[#0c5776]" />
-                    Experience
-                  </h3>
-                  <p className="text-gray-700 text-lg font-medium">{faculty.experience}</p>
-                </div>
-              )}
-
-              {/* Specialization */}
-              {faculty.specialization && faculty.specialization.length > 0 && (
-                <div className="bg-white rounded-xl shadow-md p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Areas of Specialization</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {faculty.specialization.map((spec, index) => (
-                      <span
-                        key={index}
-                        className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium"
-                      >
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Research Interests */}
-              {faculty.researchInterests && faculty.researchInterests.length > 0 && (
-                <div className="bg-white rounded-xl shadow-md p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Research Interests</h3>
-                  <ul className="space-y-2">
-                    {faculty.researchInterests.map((interest, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <ChevronRight className="w-5 h-5 text-[#0c5776] mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700">{interest}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Achievements */}
-              {faculty.achievements && faculty.achievements.length > 0 && (
-                <div className="bg-white rounded-xl shadow-md p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <Award className="w-6 h-6 text-[#0c5776]" />
-                    Key Achievements
-                  </h3>
-                  <ul className="space-y-3">
-                    {faculty.achievements.map((achievement, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-[#0c5776] rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Publications */}
-              {faculty.publications && faculty.publications.length > 0 && (
-                <div className="bg-white rounded-xl shadow-md p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Recent Publications</h3>
-                  <ul className="space-y-4">
-                    {faculty.publications.map((publication, index) => (
-                      <li key={index} className="flex items-start gap-3 pb-4 border-b last:border-b-0">
-                        <BookOpen className="w-5 h-5 text-[#0c5776] mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 italic">{publication}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Courses Taught */}
-              {faculty.courses && faculty.courses.length > 0 && (
-                <div className="bg-white rounded-xl shadow-md p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <Users className="w-6 h-6 text-[#0c5776]" />
-                    Courses Taught
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {faculty.courses.map((course, index) => (
-                      <div
-                        key={index}
-                        className="p-4 bg-gray-50 rounded-lg border border-gray-200"
-                      >
-                        <p className="text-gray-800 font-medium">{course}</p>
+                      {/* Address */}
+                      <div className="flex items-start shrink-0 w-full sm:w-auto">
+                        <div className="bg-white flex gap-[10px] items-center overflow-clip px-[14px] py-2 rounded-[100px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)]">
+                          <div className="flex items-center justify-center">
+                            <div className="overflow-clip relative shrink-0 size-5">
+                              <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 20">
+                                <path d="M10 0C6.67 0 4 2.67 4 6c0 5.25 6 14 6 14s6-8.75 6-14c0-3.33-2.67-6-6-6zm0 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="#030303" />
+                              </svg>
+                            </div>
+                          </div>
+                          <p className="font-['Inter',sans-serif] font-normal text-sm sm:text-base leading-7 text-[#4c4c4c]">
+                            Preston Rd. Inglewood, Maine 1521
+                          </p>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Awards Gallery (Using Figma Images) */}
-              <div className="bg-white rounded-xl shadow-md p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Awards & Recognition</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img
-                      src={imgAwardWin1Min}
-                      alt="Award 1"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img
-                      src={imgAwardWin2Min}
-                      alt="Award 2"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img
-                      src={imgAwardWin3Min}
-                      alt="Award 3"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img
-                      src={imgAwardWin4Min}
-                      alt="Award 4"
-                      className="w-full h-full object-cover"
-                    />
+                    </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Professional Experience & Courses Section */}
+            <div className="pt-12 md:pt-16 lg:pt-[80px]">
+              <div className="bg-white rounded-xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)] px-6 md:px-10 py-6 md:py-10">
+                {/* Professional Experience & Courses Row */}
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-5 pb-5 items-start">
+                  {/* Left Side - Professional Experience with Timeline */}
+                  <div className="w-full lg:w-[590px] flex gap-[30px] items-start">
+                    {/* Timeline Line */}
+                    <div className="hidden lg:flex items-end self-stretch">
+                      <div className="w-[0.53px] h-[145px] flex flex-col justify-center items-start">
+                        <div className="self-stretch flex-1 relative bg-[#E4E4E4]">
+                          <div className="w-4 h-4 left-[-7px] top-[-8px] absolute bg-[#0C5776] shadow-[0px_10px_30px_rgba(0,0,0,0.30)] rounded-lg border-2 border-[rgba(255,255,255,0.99)]" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex items-start self-stretch flex-1">
+                      <div className="w-full lg:min-w-[528.95px] lg:h-[146px]">
+                        <div className="flex flex-col gap-[10px] items-start">
+                          <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                            Professional Experience
+                          </h4>
+                          <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
+                            {faculty.experience || 'Conventions and discover their potential through meaningful Our faculty experiences Our distinguished faculty members are leaders their respective fields dedicated to delivering world-class education that integrates theory with practical support application With'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Timeline Line (Right) */}
+                    <div className="hidden lg:flex items-end self-stretch">
+                      <div className="w-[0.53px] h-[145px] flex flex-col justify-center items-start">
+                        <div className="self-stretch flex-1 relative bg-[#E4E4E4]">
+                          <div className="w-4 h-4 left-[-7px] top-[-8px] absolute bg-[#0C5776] shadow-[0px_10px_30px_rgba(0,0,0,0.30)] rounded-lg border-2 border-[rgba(255,255,255,0.99)]" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Side - Courses */}
+                  <div className="w-full lg:w-[570px] lg:pl-5 flex flex-col gap-5 items-start">
+                    <div className="lg:pl-2">
+                      <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                        Courses
+                      </h4>
+                    </div>
+
+                    {/* Course Pills Grid */}
+                    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 lg:h-[113.60px] lg:relative">
+                      {/* Row 1 */}
+                      <div className="lg:absolute lg:left-0 lg:top-0 lg:w-[264px]">
+                        <div className="px-7 py-3.5 bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.06)] rounded-[30px] border-b-[0.8px] border-[#E4E4E4] flex justify-center items-center gap-2.5">
+                          <span className="font-['Inter',sans-serif] font-medium text-[15px] leading-[18px] text-[#030303] text-center">
+                            {faculty.courses?.[0] || 'MPhil & PhD Programs'}
+                          </span>
+                          <div className="w-[15px] h-[15px] flex-shrink-0">
+                            <ChevronRight className="w-full h-full" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="lg:absolute lg:left-[286px] lg:top-0 lg:w-[264px]">
+                        <div className="px-7 py-3.5 bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.06)] rounded-[30px] border-b-[0.8px] border-[#E4E4E4] flex justify-center items-center gap-2.5">
+                          <span className="font-['Inter',sans-serif] font-medium text-[15px] leading-[18px] text-[#030303] text-center">
+                            {faculty.courses?.[1] || 'Advanced Research Labs'}
+                          </span>
+                          <div className="w-[15px] h-[15px] flex-shrink-0">
+                            <ChevronRight className="w-full h-full" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Row 2 */}
+                      <div className="lg:absolute lg:left-0 lg:top-[66.80px] lg:w-[264px]">
+                        <div className="px-4 py-3.5 bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.06)] rounded-[30px] border-b-[0.8px] border-[#E4E4E4] flex justify-center items-center gap-[15px]">
+                          <span className="font-['Inter',sans-serif] font-medium text-[15px] leading-[18px] text-[#030303] text-center">
+                            {faculty.courses?.[2] || 'Research Funding & Grants'}
+                          </span>
+                          <div className="w-[15px] h-[15px] flex-shrink-0">
+                            <ChevronRight className="w-full h-full" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="lg:absolute lg:left-[286px] lg:top-[66.80px] lg:w-[264px]">
+                        <div className="px-[26px] py-3.5 bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.06)] rounded-[30px] border-b-[0.8px] border-[#E4E4E4] flex justify-center items-center gap-2.5">
+                          <span className="font-['Inter',sans-serif] font-medium text-[15px] leading-[18px] text-[#030303] text-center">
+                            {faculty.courses?.[3] || 'Master of Laws (LLM)'}
+                          </span>
+                          <div className="w-[15px] h-[15px] flex-shrink-0">
+                            <ChevronRight className="w-full h-full" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Featured Image */}
+                <div className="mt-5">
+                  <img
+                    src={imgCapManMin}
+                    alt="Faculty"
+                    className="w-full h-auto aspect-[1180/380.55] rounded-xl object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Research Excellence Awards Section */}
+            <div className="pt-12 md:pt-16 lg:pt-[80px] min-h-[391.20px] relative">
+              <div className="flex flex-col lg:flex-row gap-8 lg:gap-5 lg:items-end">
+                {/* Left Side - Tilted Badge */}
+                <div className="w-full lg:w-[501.94px] flex flex-col items-start">
+                  <div className="max-w-[496px] px-4 py-[5.90px] pb-[7.10px] bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.06)] rounded-[100px] lg:rotate-[-45deg] lg:origin-top-left">
+                    <h3 className="font-['Bitter',serif] font-thin text-xl leading-[30px] text-[#030303]">
+                      Research Excellence Awards
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Right Side - Awards List */}
+                <div className="w-full lg:w-[744px] bg-white rounded-[10px] flex flex-col">
+                  <div className="self-stretch relative flex flex-col">
+                    <div className="self-stretch flex flex-col">
+                      {/* Award 1 */}
+                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
+                        <div className="flex gap-4 sm:gap-5 items-center">
+                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
+                            <img
+                              src={imgAwardWin1Min}
+                              alt="Award"
+                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                              Research Excellence Award
+                            </h4>
+                          </div>
+                        </div>
+                        <div className="overflow-hidden flex flex-col shrink-0">
+                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                            2025
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Award 2 */}
+                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
+                        <div className="flex gap-4 sm:gap-5 items-center">
+                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
+                            <img
+                              src={imgAwardWin2Min}
+                              alt="Award"
+                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                              Excellence in Teaching Award
+                            </h4>
+                          </div>
+                        </div>
+                        <div className="overflow-hidden flex flex-col shrink-0">
+                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                            2024
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Award 3 */}
+                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
+                        <div className="flex gap-4 sm:gap-5 items-center">
+                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
+                            <img
+                              src={imgAwardWin3Min}
+                              alt="Award"
+                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                              Young Researcher Award
+                            </h4>
+                          </div>
+                        </div>
+                        <div className="overflow-hidden flex flex-col shrink-0">
+                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                            2023
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Award 4 */}
+                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
+                        <div className="flex gap-4 sm:gap-5 items-center">
+                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
+                            <img
+                              src={imgAwardWin4Min}
+                              alt="Award"
+                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                              Lifetime Achievement Award
+                            </h4>
+                          </div>
+                        </div>
+                        <div className="overflow-hidden flex flex-col shrink-0">
+                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
+                            2022
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

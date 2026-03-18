@@ -44,11 +44,6 @@ const AboutOverview = lazy(() =>
     default: m.AboutOverview,
   }))
 );
-const VisionMission = lazy(() =>
-  import("./components/pages/about/VisionMission").then((m) => ({
-    default: m.VisionMission,
-  }))
-);
 const Administration = lazy(() =>
   import("./components/pages/about/Administration").then((m) => ({
     default: m.Administration,
@@ -67,6 +62,11 @@ const PrincipalMessage = lazy(() =>
 const Alumni = lazy(() =>
   import("./components/pages/about/Alumni").then((m) => ({
     default: m.Alumni,
+  }))
+);
+const MissionValuesPage = lazy(() =>
+  import("./components/pages/MissionValuesPage").then((m) => ({
+    default: m.MissionValuesPage,
   }))
 );
 const HistoryPage = lazy(() =>
@@ -192,8 +192,6 @@ const SignupPage = lazy(() =>
     default: m.SignupPage,
   }))
 );
-
-// Shared pages
 const Academics = lazy(() =>
   import("./components/Academics").then((m) => ({ default: m.Academics }))
 );
@@ -519,119 +517,119 @@ export const router = createBrowserRouter([
     Component: RootLayout,
     children: [
       // ── Landing / public ──────────────────────────────────────────────────
-      { path: "/",            Component: DumriCollegeLanding },
-      { path: "/modern",      Component: ModernUniversityLanding },
-      { path: "/christ",      Component: UniversityLandingPage },
-      { path: "/enhanced",    Component: EnhancedLandingPage },
-      { path: "/figma",       Component: FigmaLandingPage },
+      { path: "/", Component: DumriCollegeLanding },
+      { path: "/modern", Component: ModernUniversityLanding },
+      { path: "/christ", Component: UniversityLandingPage },
+      { path: "/enhanced", Component: EnhancedLandingPage },
+      { path: "/figma", Component: FigmaLandingPage },
 
       // ── Info pages ───────────────────────────────────────────────────────
-      { 
+      {
         path: "/about",
         Component: AboutLayout,
         children: [
           { index: true, Component: AboutOverview },
-          { path: "vision-mission", Component: VisionMission },
           { path: "administration", Component: Administration },
           { path: "founder", Component: Founder },
           { path: "principal-message", Component: PrincipalMessage },
           { path: "alumni", Component: Alumni },
         ]
       },
-      { path: "/history",               Component: HistoryPage },
-      { path: "/campus-life",           Component: CampusLifePage },
-      { path: "/research",              Component: ResearchPage },
-      { path: "/scholarships",          Component: ScholarshipsPage },
-      { path: "/faq",                   Component: FAQPage },
-      { path: "/faculty/engineering",   Component: FacultyEngineeringPage },
-      { path: "/faculty/sciences",      Component: FacultySciencesPage },
-      { path: "/faculty/arts",          Component: FacultyArtsPage },
-      { path: "/faculty/commerce",      Component: FacultyCommercePage },
-      { path: "/faculty/education",     Component: FacultyEducationPage },
-      { path: "/academic-calendar",     Component: AcademicCalendarPage },
-      { path: "/course-catalog",        Component: CourseCatalogPage },
-      { path: "/how-to-apply",          Component: HowToApplyPage },
-      { path: "/programs",              Component: ProgramsPage },
-      { path: "/programs/:programId",   Component: ProgramDetailPage },
-      { path: "/events",                Component: EventsPage },
-      { path: "/fee-structure",         Component: FeeStructurePage },
-      { path: "/all-faculty",           Component: AllFacultyPage },
-      { path: "/faculty/:facultyId",    Component: FacultyDetailPage },
+      { path: "/mission-values", Component: MissionValuesPage },
+      { path: "/history", Component: HistoryPage },
+      { path: "/campus-life", Component: CampusLifePage },
+      { path: "/research", Component: ResearchPage },
+      { path: "/scholarships", Component: ScholarshipsPage },
+      { path: "/faq", Component: FAQPage },
+      { path: "/faculty/engineering", Component: FacultyEngineeringPage },
+      { path: "/faculty/sciences", Component: FacultySciencesPage },
+      { path: "/faculty/arts", Component: FacultyArtsPage },
+      { path: "/faculty/commerce", Component: FacultyCommercePage },
+      { path: "/faculty/education", Component: FacultyEducationPage },
+      { path: "/academic-calendar", Component: AcademicCalendarPage },
+      { path: "/course-catalog", Component: CourseCatalogPage },
+      { path: "/how-to-apply", Component: HowToApplyPage },
+      { path: "/programs", Component: ProgramsPage },
+      { path: "/programs/:programId", Component: ProgramDetailPage },
+      { path: "/events", Component: EventsPage },
+      { path: "/fee-structure", Component: FeeStructurePage },
+      { path: "/all-faculty", Component: AllFacultyPage },
+      { path: "/faculty/:facultyId", Component: FacultyDetailPage },
       { path: "/admission-requirements", Component: AdmissionRequirementsPage },
-      { path: "/notices",               Component: NoticesPage },
-      { path: "/holiday",               Component: HolidayPage },
-      { path: "/faculty",               Component: FacultyOverviewPage },
-      { path: "/library",               Component: LibraryPage },
-      { path: "/signup",                Component: SignupPage },
-      { path: "/academics",             Component: Academics },
-      { path: "/gallery",               Component: Gallery },
-      { path: "/contact",               Component: Contact },
+      { path: "/notices", Component: NoticesPage },
+      { path: "/holiday", Component: HolidayPage },
+      { path: "/faculty", Component: FacultyOverviewPage },
+      { path: "/library", Component: LibraryPage },
+      { path: "/signup", Component: SignupPage },
+      { path: "/academics", Component: Academics },
+      { path: "/gallery", Component: Gallery },
+      { path: "/contact", Component: Contact },
 
       // ── Auth ──────────────────────────────────────────────────────────────
       { path: "/studentlogin", Component: StudentLoginPage },
-      { path: "/stafflogin",   Component: StaffLoginPage },
+      { path: "/stafflogin", Component: StaffLoginPage },
 
       // ── Admission ─────────────────────────────────────────────────────────
-      { path: "/apply",              Component: AdmissionApplicationForm },
+      { path: "/apply", Component: AdmissionApplicationForm },
 
       // ── Admin portal ──────────────────────────────────────────────────────
-      { path: "/admin/dashboard",       Component: EnhancedAdminDashboard },
-      { path: "/admin/admissions",      Component: AdmissionManagement },
-      { path: "/admin/teachers",        Component: TeacherManagement },
-      { path: "/admin/schedule",        Component: ScheduleManagement },
-      { path: "/admin/certificates",    Component: CertificateRequestManagement },
-      { path: "/admin/fee",             Component: FeeManagement },
-      { path: "/admin/reports",         Component: Reports },
+      { path: "/admin/dashboard", Component: EnhancedAdminDashboard },
+      { path: "/admin/admissions", Component: AdmissionManagement },
+      { path: "/admin/teachers", Component: TeacherManagement },
+      { path: "/admin/schedule", Component: ScheduleManagement },
+      { path: "/admin/certificates", Component: CertificateRequestManagement },
+      { path: "/admin/fee", Component: FeeManagement },
+      { path: "/admin/reports", Component: Reports },
       { path: "/admin/admin-fee-payment", Component: AdminFeePayment },
-      { path: "/admin/exams",           Component: ExamManagement },
-      { path: "/admin/students",        Component: AllStudentsData },
-      { path: "/admin/add-student",     Component: AddStudentForm },
-      { path: "/admin/add-teacher",     Component: AddTeacherForm },
-      { path: "/admin/account",         Component: AccountManagement },
-      { path: "/admin/classes",         Component: ClassManagement },
-      { path: "/admin/subjects",        Component: SubjectManagement },
-      { path: "/admin/attendance",      Component: AttendanceManagement },
-      { path: "/admin/notices",         Component: NoticeManagement },
-      { path: "/admin/messages",        Component: MessageManagement },
-      { path: "/admin/add-class",       Component: AddNewClass },
-      { path: "/admin/add-subject",     Component: AddNewSubject },
-      { path: "/admin/add-schedule",    Component: AddSchedule },
-      { path: "/admin/schedule-exam",   Component: ScheduleNewExam },
-      { path: "/admin/create-notice",   Component: CreateNotice },
+      { path: "/admin/exams", Component: ExamManagement },
+      { path: "/admin/students", Component: AllStudentsData },
+      { path: "/admin/add-student", Component: AddStudentForm },
+      { path: "/admin/add-teacher", Component: AddTeacherForm },
+      { path: "/admin/account", Component: AccountManagement },
+      { path: "/admin/classes", Component: ClassManagement },
+      { path: "/admin/subjects", Component: SubjectManagement },
+      { path: "/admin/attendance", Component: AttendanceManagement },
+      { path: "/admin/notices", Component: NoticeManagement },
+      { path: "/admin/messages", Component: MessageManagement },
+      { path: "/admin/add-class", Component: AddNewClass },
+      { path: "/admin/add-subject", Component: AddNewSubject },
+      { path: "/admin/add-schedule", Component: AddSchedule },
+      { path: "/admin/schedule-exam", Component: ScheduleNewExam },
+      { path: "/admin/create-notice", Component: CreateNotice },
       { path: "/admin/mark-attendance", Component: MarkAttendance },
-      { path: "/admin/holiday",         Component: AdminHoliday },
+      { path: "/admin/holiday", Component: AdminHoliday },
 
       // ── Teacher portal ────────────────────────────────────────────────────
-      { path: "/teacher/dashboard",    Component: TeacherDashboard },
-      { path: "/teacher/students",     Component: TeacherStudents },
-      { path: "/teacher/classes",      Component: TeacherClasses },
-      { path: "/teacher/schedule",     Component: TeacherSchedule },
-      { path: "/teacher/attendance",   Component: TeacherAttendance },
-      { path: "/teacher/exams",        Component: TeacherExams },
-      { path: "/teacher/assignments",  Component: TeacherAssignments },
-      { path: "/teacher/notices",      Component: TeacherNotices },
-      { path: "/teacher/messages",     Component: TeacherMessages },
-      { path: "/teacher/holiday",      Component: TeacherHoliday },
+      { path: "/teacher/dashboard", Component: TeacherDashboard },
+      { path: "/teacher/students", Component: TeacherStudents },
+      { path: "/teacher/classes", Component: TeacherClasses },
+      { path: "/teacher/schedule", Component: TeacherSchedule },
+      { path: "/teacher/attendance", Component: TeacherAttendance },
+      { path: "/teacher/exams", Component: TeacherExams },
+      { path: "/teacher/assignments", Component: TeacherAssignments },
+      { path: "/teacher/notices", Component: TeacherNotices },
+      { path: "/teacher/messages", Component: TeacherMessages },
+      { path: "/teacher/holiday", Component: TeacherHoliday },
 
       // ── Student portal ────────────────────────────────────────────────────
-      { path: "/student/dashboard",         Component: StudentDashboard },
+      { path: "/student/dashboard", Component: StudentDashboard },
       { path: "/student/track-application", Component: TrackApplication },
-      { path: "/student/classes",           Component: StudentClasses },
-      { path: "/student/schedule",          Component: StudentSchedule },
-      { path: "/student/attendance",        Component: StudentAttendance },
-      { path: "/student/exams",             Component: StudentExams },
-      { path: "/student/results",           Component: StudentResults },
-      { path: "/student/assignments",       Component: StudentAssignments },
-      { path: "/student/library",           Component: StudentLibrary },
-      { path: "/student/fees",              Component: FeePayment },
-      { path: "/student/documents",         Component: DocumentUpload },
-      { path: "/student/certificates",      Component: CertificateDownload },
-      { path: "/student/id-card",           Component: DigitalIDCard },
-      { path: "/student/gallery",           Component: StudentGallery },
-      { path: "/student/notices",           Component: StudentNotices },
-      { path: "/student/messages",          Component: StudentMessages },
-      { path: "/student/fee-receipt",       Component: StudentFeeReceipt },
-      { path: "/student/holiday",           Component: StudentHoliday },
+      { path: "/student/classes", Component: StudentClasses },
+      { path: "/student/schedule", Component: StudentSchedule },
+      { path: "/student/attendance", Component: StudentAttendance },
+      { path: "/student/exams", Component: StudentExams },
+      { path: "/student/results", Component: StudentResults },
+      { path: "/student/assignments", Component: StudentAssignments },
+      { path: "/student/library", Component: StudentLibrary },
+      { path: "/student/fees", Component: FeePayment },
+      { path: "/student/documents", Component: DocumentUpload },
+      { path: "/student/certificates", Component: CertificateDownload },
+      { path: "/student/id-card", Component: DigitalIDCard },
+      { path: "/student/gallery", Component: StudentGallery },
+      { path: "/student/notices", Component: StudentNotices },
+      { path: "/student/messages", Component: StudentMessages },
+      { path: "/student/fee-receipt", Component: StudentFeeReceipt },
+      { path: "/student/holiday", Component: StudentHoliday },
 
       // ── Fallback ─────────────────────────────────────────────────────────
       { path: "*", Component: NotFound },
