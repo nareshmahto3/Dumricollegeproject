@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { 
-  GraduationCap, 
-  ArrowLeft, 
-  CheckCircle2, 
-  User, 
-  MapPin, 
-  BookOpen, 
-  Users, 
+import {
+  GraduationCap,
+  ArrowLeft,
+  CheckCircle2,
+  User,
+  MapPin,
+  BookOpen,
+  Users,
   ClipboardCheck,
   Check,
   Sparkles,
@@ -21,7 +21,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { motion, AnimatePresence } from 'motion/react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { PortalLayout } from './PortalLayout';
 
 export function AddStudentForm() {
@@ -38,7 +38,7 @@ export function AddStudentForm() {
     religion: '',
     category: '',
     aadharNumber: '',
-    
+
     // Contact Details
     email: '',
     phone: '',
@@ -46,7 +46,7 @@ export function AddStudentForm() {
     city: '',
     state: '',
     pincode: '',
-    
+
     // Academic Details
     previousSchool: '',
     previousClass: '',
@@ -55,7 +55,7 @@ export function AddStudentForm() {
     section: '',
     rollNumber: '',
     admissionId: '',
-    
+
     // Parent Details
     fatherName: '',
     fatherOccupation: '',
@@ -77,44 +77,44 @@ export function AddStudentForm() {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const steps = [
-    { 
-      id: 1, 
-      title: 'Personal Details', 
+    {
+      id: 1,
+      title: 'Personal Details',
       icon: User,
       description: 'Basic information',
       color: 'blue'
     },
-    { 
-      id: 2, 
-      title: 'Contact Information', 
+    {
+      id: 2,
+      title: 'Contact Information',
       icon: MapPin,
       description: 'Address & contact',
       color: 'yellow'
     },
-    { 
-      id: 3, 
-      title: 'Academic Details', 
+    {
+      id: 3,
+      title: 'Academic Details',
       icon: BookOpen,
       description: 'Class & academic info',
       color: 'orange'
     },
-    { 
-      id: 4, 
-      title: 'Parent Information', 
+    {
+      id: 4,
+      title: 'Parent Information',
       icon: Users,
       description: 'Guardian details',
       color: 'purple'
     },
-    { 
-      id: 5, 
-      title: 'Documents', 
+    {
+      id: 5,
+      title: 'Documents',
       icon: Upload,
       description: 'Upload documents',
       color: 'indigo'
     },
-    { 
-      id: 6, 
-      title: 'Review & Submit', 
+    {
+      id: 6,
+      title: 'Review & Submit',
       icon: ClipboardCheck,
       description: 'Verify all info',
       color: 'green'
@@ -124,7 +124,56 @@ export function AddStudentForm() {
   const handleSubmit = () => {
     const generatedId = `STD${new Date().getFullYear()}${Math.floor(Math.random() * 100000).toString().padStart(5, '0')}`;
     setStudentId(generatedId);
-    
+
+    // ── Console logging ──────────────────────────────────────────
+    console.group('✅ Student Submitted Successfully');
+    console.log('Student ID:', generatedId);
+    console.group('📋 Personal Details');
+    console.log('First Name:', formData.firstName);
+    console.log('Middle Name:', formData.middleName);
+    console.log('Last Name:', formData.lastName);
+    console.log('Date of Birth:', formData.dateOfBirth);
+    console.log('Gender:', formData.gender);
+    console.log('Blood Group:', formData.bloodGroup);
+    console.log('Nationality:', formData.nationality);
+    console.log('Religion:', formData.religion);
+    console.log('Category:', formData.category);
+    console.log('Aadhar Number:', formData.aadharNumber);
+    console.groupEnd();
+    console.group('📍 Contact Information');
+    console.log('Email:', formData.email);
+    console.log('Phone:', formData.phone);
+    console.log('Address:', formData.address);
+    console.log('City:', formData.city);
+    console.log('State:', formData.state);
+    console.log('Pincode:', formData.pincode);
+    console.groupEnd();
+    console.group('📚 Academic Details');
+    console.log('Previous School:', formData.previousSchool);
+    console.log('Previous Class:', formData.previousClass);
+    console.log('Previous Percentage:', formData.previousPercentage);
+    console.log('Admitting to Class:', formData.admittingToClass);
+    console.log('Section:', formData.section);
+    console.log('Roll Number:', formData.rollNumber);
+    console.groupEnd();
+    console.group('👨‍👩‍👧 Parent / Guardian Details');
+    console.log('Father Name:', formData.fatherName);
+    console.log('Father Occupation:', formData.fatherOccupation);
+    console.log('Father Phone:', formData.fatherPhone);
+    console.log('Father Email:', formData.fatherEmail);
+    console.log('Mother Name:', formData.motherName);
+    console.log('Mother Occupation:', formData.motherOccupation);
+    console.log('Mother Phone:', formData.motherPhone);
+    console.log('Mother Email:', formData.motherEmail);
+    console.log('Guardian Name:', formData.guardianName);
+    console.log('Guardian Relation:', formData.guardianRelation);
+    console.log('Guardian Phone:', formData.guardianPhone);
+    console.log('Annual Income:', formData.annualIncome);
+    console.groupEnd();
+    console.log('📦 Full formData object:', formData);
+    console.groupEnd();
+    // ────────────────────────────────────────────────────────────
+
     toast.success('Student added successfully!', {
       description: `Student ID: ${generatedId}`,
       duration: 5000,
@@ -144,6 +193,32 @@ export function AddStudentForm() {
     if (!completedSteps.includes(currentStep)) {
       setCompletedSteps([...completedSteps, currentStep]);
     }
+
+    // ── Console logging ──────────────────────────────────────────
+    const stepLabels: Record<number, string> = {
+      1: 'Personal Details',
+      2: 'Contact Information',
+      3: 'Academic Details',
+      4: 'Parent Information',
+      5: 'Documents',
+    };
+    const stepFields: Record<number, (keyof typeof formData)[]> = {
+      1: ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'gender', 'bloodGroup', 'nationality', 'religion', 'category', 'aadharNumber'],
+      2: ['email', 'phone', 'address', 'city', 'state', 'pincode'],
+      3: ['previousSchool', 'previousClass', 'previousPercentage', 'admittingToClass', 'section', 'rollNumber', 'admissionId'],
+      4: ['fatherName', 'fatherOccupation', 'fatherPhone', 'fatherEmail', 'motherName', 'motherOccupation', 'motherPhone', 'motherEmail', 'guardianName', 'guardianRelation', 'guardianPhone', 'annualIncome'],
+    };
+    if (stepFields[currentStep]) {
+      const stepData = stepFields[currentStep].reduce((acc, key) => {
+        acc[key] = formData[key];
+        return acc;
+      }, {} as Partial<typeof formData>);
+      console.group(`➡️ Step ${currentStep} Completed — ${stepLabels[currentStep]}`);
+      console.table(stepData);
+      console.groupEnd();
+    }
+    // ────────────────────────────────────────────────────────────
+
     setCurrentStep(currentStep + 1);
   };
 
@@ -154,6 +229,7 @@ export function AddStudentForm() {
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      console.log('📷 Photo uploaded:', { name: file.name, size: `${(file.size / 1024).toFixed(1)} KB`, type: file.type });
       const reader = new FileReader();
       reader.onloadend = () => {
         setPhotoPreview(reader.result as string);
@@ -229,8 +305,8 @@ export function AddStudentForm() {
       <div className="space-y-6">
         {/* Back Button */}
         <div className="flex justify-end">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={() => navigate('/admin/students')}
             className="border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
           >
@@ -248,19 +324,19 @@ export function AddStudentForm() {
         >
           <div className="relative">
             {/* Progress Line */}
-            <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 rounded-full hidden md:block" 
+            <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 rounded-full hidden md:block"
               style={{ marginLeft: '2.5rem', marginRight: '2.5rem' }}
             />
-            <motion.div 
+            <motion.div
               className="absolute top-5 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full hidden md:block"
               initial={{ width: 0 }}
-              animate={{ 
+              animate={{
                 width: `${((currentStep - 1) / (steps.length - 1)) * 100}%`,
               }}
               transition={{ duration: 0.5 }}
               style={{ marginLeft: '2.5rem', right: '2.5rem' }}
             />
-            
+
             {/* Steps */}
             <div className="relative flex justify-between">
               {steps.map((step, index) => {
@@ -268,7 +344,7 @@ export function AddStudentForm() {
                 const isCompleted = completedSteps.includes(step.id) || currentStep > step.id;
                 const StepIcon = step.icon;
                 const colors = getStepColor(step.color);
-                
+
                 return (
                   <motion.div
                     key={step.id}
@@ -278,13 +354,12 @@ export function AddStudentForm() {
                     transition={{ delay: 0.3 + index * 0.1 }}
                   >
                     <motion.div
-                      className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-md ${
-                        isCompleted 
-                          ? `bg-gradient-to-br ${colors.gradient} text-white` 
-                          : isActive 
-                            ? `bg-white border-3 ${colors.border} ${colors.text}` 
+                      className={`relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 shadow-md ${isCompleted
+                          ? `bg-gradient-to-br ${colors.gradient} text-white`
+                          : isActive
+                            ? `bg-white border-3 ${colors.border} ${colors.text}`
                             : 'bg-gray-100 text-gray-400 border-2 border-gray-200'
-                      }`}
+                        }`}
                       animate={isActive ? {
                         scale: [1, 1.05, 1],
                       } : {}}
@@ -301,7 +376,7 @@ export function AddStudentForm() {
                       ) : (
                         <StepIcon className="w-5 h-5" />
                       )}
-                      
+
                       {isActive && (
                         <motion.div
                           className={`absolute inset-0 rounded-xl bg-gradient-to-br ${colors.gradient} opacity-20`}
@@ -310,16 +385,15 @@ export function AddStudentForm() {
                         />
                       )}
                     </motion.div>
-                    
+
                     <div className="mt-2 text-center hidden md:block">
-                      <p className={`text-xs font-medium ${
-                        isActive ? colors.text : isCompleted ? 'text-gray-700' : 'text-gray-400'
-                      }`}>
+                      <p className={`text-xs font-medium ${isActive ? colors.text : isCompleted ? 'text-gray-700' : 'text-gray-400'
+                        }`}>
                         {step.title}
                       </p>
                       <p className="text-[10px] text-gray-500 mt-0.5">{step.description}</p>
                     </div>
-                    
+
                     {/* Mobile: Show only active step title */}
                     {isActive && (
                       <div className="mt-1 text-center md:hidden">
@@ -350,14 +424,14 @@ export function AddStudentForm() {
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -mr-32 -mt-32" />
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full -ml-32 -mb-32" />
                   </div>
-                  
+
                   <div className="relative flex items-start gap-6">
                     <motion.div
-                      animate={{ 
+                      animate={{
                         rotate: 360,
                         scale: [1, 1.2, 1]
                       }}
-                      transition={{ 
+                      transition={{
                         rotate: { duration: 0.6, ease: "easeInOut" },
                         scale: { duration: 1, repeat: Infinity, repeatDelay: 2 }
                       }}
@@ -367,7 +441,7 @@ export function AddStudentForm() {
                         <CheckCircle2 className="w-10 h-10 text-white" />
                       </div>
                     </motion.div>
-                    
+
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold text-white mb-2">
                         Student Added Successfully! 🎉
@@ -375,12 +449,12 @@ export function AddStudentForm() {
                       <p className="text-green-100 mb-6">
                         The student has been successfully added to the system. Please save the Student ID for future reference.
                       </p>
-                      
+
                       <div className="bg-white/20 backdrop-blur-md p-6 rounded-xl border-2 border-white/40">
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-sm text-green-100 mb-1">Student ID</p>
-                            <motion.p 
+                            <motion.p
                               className="text-3xl font-bold text-white tracking-wider"
                               animate={{ scale: [1, 1.05, 1] }}
                               transition={{ duration: 2, repeat: Infinity }}
@@ -410,10 +484,10 @@ export function AddStudentForm() {
               <Card className="overflow-hidden shadow-xl border-0 bg-white">
                 {/* Card Header with Color Accent */}
                 <div className={`h-2 bg-gradient-to-r ${getStepColor(currentStepData.color).gradient}`} />
-                
+
                 <div className="p-8">
                   {/* Step Title */}
-                  <motion.div 
+                  <motion.div
                     className="mb-8"
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -462,7 +536,7 @@ export function AddStudentForm() {
                             />
                           </motion.div>
                         ))}
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -480,7 +554,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -502,7 +576,7 @@ export function AddStudentForm() {
                             <option value="other">Other</option>
                           </select>
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -528,7 +602,7 @@ export function AddStudentForm() {
                             <option value="AB-">AB-</option>
                           </select>
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -546,7 +620,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -563,7 +637,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 transition-all rounded-xl"
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -634,7 +708,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-yellow-400 focus:ring-4 focus:ring-yellow-100 transition-all rounded-xl"
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -653,8 +727,8 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-                        
-                        <motion.div 
+
+                        <motion.div
                           className="md:col-span-2"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -672,7 +746,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -690,7 +764,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -708,7 +782,7 @@ export function AddStudentForm() {
                             required
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -756,7 +830,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -773,7 +847,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -794,7 +868,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -825,7 +899,7 @@ export function AddStudentForm() {
                             <option value="12">Class 12</option>
                           </select>
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -848,7 +922,7 @@ export function AddStudentForm() {
                             <option value="D">Section D</option>
                           </select>
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -865,7 +939,7 @@ export function AddStudentForm() {
                             className="h-12 border-2 border-gray-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition-all rounded-xl"
                           />
                         </motion.div>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -918,7 +992,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -935,7 +1009,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -954,7 +1028,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -998,7 +1072,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1015,7 +1089,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1034,7 +1108,7 @@ export function AddStudentForm() {
                                 required
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1077,7 +1151,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1094,7 +1168,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1112,7 +1186,7 @@ export function AddStudentForm() {
                                 className="h-12 border-2 border-gray-200 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all rounded-xl"
                               />
                             </motion.div>
-                            
+
                             <motion.div
                               initial={{ opacity: 0, y: 20 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -1309,7 +1383,7 @@ export function AddStudentForm() {
                   )}
 
                   {/* Navigation Buttons */}
-                  <motion.div 
+                  <motion.div
                     className="flex justify-between mt-12 pt-6 border-t border-gray-200"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
