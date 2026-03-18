@@ -1,0 +1,168 @@
+import { useNavigate, useLocation, Outlet } from 'react-router';
+import { CarouselHeader } from '../CarouselHeader';
+import { Footer } from '../Footer';
+import { ChevronRight } from 'lucide-react';
+import imgAboutSidebarThumb from "../imports/svg-xmjpvvfj2s";
+
+const sidebarMenuItems = [
+  { 
+    id: 'overview', 
+    label: 'About Jharkhand Commerce Inter College', 
+    path: '/about',
+    image: 'https://images.unsplash.com/photo-1718327453695-4d32b94c90a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMGxpYnJhcnl8ZW58MXx8fHwxNzcyNDQ5ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080'
+  },
+  { 
+    id: 'administration', 
+    label: 'Administration', 
+    path: '/about/administration',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80'
+  },
+  { 
+    id: 'founder', 
+    label: 'Founder', 
+    path: '/about/founder',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80'
+  },
+  { 
+    id: 'principal-message', 
+    label: 'Principal Message', 
+    path: '/about/principal-message',
+    image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80'
+  },
+  { 
+    id: 'alumni', 
+    label: 'Our Alumni', 
+    path: '/about/alumni',
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=80'
+  },
+];
+
+export function AboutLayout() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActiveRoute = (path: string) => {
+    if (path === '/about') {
+      return location.pathname === '/about';
+    }
+    return location.pathname === path;
+  };
+
+  // Get current active menu item
+  const activeMenuItem = sidebarMenuItems.find(item => isActiveRoute(item.path)) || sidebarMenuItems[0];
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <CarouselHeader />
+
+      {/* Hero Banner Section */}
+      <section
+        className="relative h-[385px] bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(https://images.unsplash.com/photo-1673609218895-bb331f054e7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwY2FtcHVzJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmV8ZW58MXx8fHwxNzcyNDk3NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080)',
+        }}
+      >
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#00192C]"></div>
+
+        {/* Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20 pb-16">
+          {/* Breadcrumbs */}
+          <div className="flex items-center gap-2 mb-5">
+            <button
+              onClick={() => navigate('/')}
+              className="text-white text-base hover:underline"
+            >
+              Home
+            </button>
+            <ChevronRight className="w-4 h-4 text-white" />
+            <span className="text-white text-base">About us</span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-5xl font-light text-white mb-5 font-serif">
+            About Dumri College
+          </h1>
+
+          {/* Decorative Line */}
+          <div className="relative w-full max-w-[480px] h-[1px] bg-white/15 mb-5">
+            <div className="absolute left-0 top-0 w-[145px] h-[2px] bg-white"></div>
+          </div>
+
+          {/* Description */}
+          <p className="text-white/90 text-base leading-7 max-w-2xl">
+            Education goes beyond textbooks and classrooms. We believe in empowering students
+            <br />
+            to explore their passions and challenge conventions.
+          </p>
+        </div>
+
+        {/* Decorative Circle Element */}
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#FDC72F] opacity-20 blur-xl hidden lg:block"></div>
+      </section>
+
+      {/* Main Content Section */}
+      <section className="bg-[#F6F4EE] py-20 lg:py-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-10">
+            {/* Left Sidebar */}
+            <div className="lg:w-80 flex-shrink-0">
+              <div className="bg-white rounded-xl p-8 shadow-sm sticky top-8">
+                {/* Sidebar Title */}
+                <h3 className="font-['Bitter',serif] font-thin text-[20px] leading-[30px] text-[#030303] mb-3">
+                  Univet Inside
+                </h3>
+
+                {/* Decorative Line */}
+                <div className="relative w-full h-[1px] bg-[#E4E4E4] mb-6">
+                  <div className="absolute left-0 top-[-0.5px] w-[70px] h-[2px] bg-[#00ade2]"></div>
+                </div>
+
+                {/* Menu Items */}
+                <div className="space-y-3 mb-8">
+                  {sidebarMenuItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => navigate(item.path)}
+                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all font-['Inter',sans-serif] font-medium text-base leading-[26px] ${
+                        isActiveRoute(item.path)
+                          ? 'bg-[#0c5776] text-white'
+                          : 'bg-[#F6F4EE] text-[#030303] hover:bg-[#e8e6de]'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <svg className="w-4 h-4" viewBox="0 0 15.8931 12.3194" fill="none">
+                        <path 
+                          d="M10.3029 12.3194H9.34898C9.1664 8.968 11.2414 7.21023 12.2899 6.69629H0V5.66864H12.2899C9.77351 4.29027 9.15333 1.6218 9.35031 0H10.295C9.88631 3.99989 14.0936 5.66354 15.8931 5.66864V6.68675C10.6724 7.2879 10.0956 11.0413 10.3029 12.3194Z" 
+                          fill={isActiveRoute(item.path) ? 'white' : '#030303'}
+                        />
+                      </svg>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Sidebar Image */}
+                <div className="rounded-xl overflow-hidden">
+                  <img
+                    src={activeMenuItem.image}
+                    alt={activeMenuItem.label}
+                    className="w-full h-40 object-cover transition-all duration-300"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Content Area - Dynamic Content from Routes */}
+            <div className="flex-1">
+              <Outlet />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+}

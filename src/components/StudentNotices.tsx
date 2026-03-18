@@ -120,18 +120,19 @@ export function StudentNotices() {
         transition={{ duration: 0.3 }}
       >
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <Bell className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">Total Notices</p>
                   <h3 className="text-3xl font-bold text-white">{allNotices.length}</h3>
                 </div>
@@ -143,13 +144,14 @@ export function StudentNotices() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-red-500 to-red-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-red-500 to-red-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <AlertCircle className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">Urgent Notices</p>
                   <h3 className="text-3xl font-bold text-white">{urgentCount}</h3>
                 </div>
@@ -161,13 +163,14 @@ export function StudentNotices() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <Pin className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">Pinned</p>
                   <h3 className="text-3xl font-bold text-white">{pinnedCount}</h3>
                 </div>
@@ -179,13 +182,14 @@ export function StudentNotices() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <Calendar className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">This Month</p>
                   <h3 className="text-3xl font-bold text-white">{thisMonthCount}</h3>
                 </div>

@@ -8,7 +8,6 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "./ui/button";
-import { LanguageSelector } from "./LanguageSelector";
 
 export function SharedNavbar() {
   const navigate = useNavigate();
@@ -127,7 +126,6 @@ export function SharedNavbar() {
               >
                 News
               </button>
-              <LanguageSelector variant="compact" />
               <Button
                 onClick={() => navigate("/apply")}
                 className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-slate-900 border-0 shadow-lg shadow-amber-500/40 font-bold"
@@ -198,9 +196,6 @@ export function SharedNavbar() {
                 >
                   News
                 </button>
-                <div className="px-4 py-2">
-                  <LanguageSelector variant="navbar" />
-                </div>
                 <div className="flex flex-col gap-2 mt-2">
                   <Button
                     onClick={() => navigate("/apply")}

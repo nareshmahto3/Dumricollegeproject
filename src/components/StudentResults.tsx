@@ -67,18 +67,19 @@ export function StudentResults() {
         transition={{ duration: 0.3 }}
       >
         {/* Performance Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">Overall Percentage</p>
                   <h3 className="text-3xl font-bold text-white">85.5%</h3>
                 </div>
@@ -90,13 +91,14 @@ export function StudentResults() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <Award className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">Grade</p>
                   <h3 className="text-3xl font-bold text-white">A</h3>
                 </div>
@@ -108,13 +110,14 @@ export function StudentResults() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <TrendingUp className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">Class Rank</p>
                   <h3 className="text-3xl font-bold text-white">3rd</h3>
                 </div>
@@ -126,13 +129,14 @@ export function StudentResults() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
+            className="h-full"
           >
-            <Card className="bg-gradient-to-br from-orange-500 to-orange-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-orange-500 to-orange-600 border-0 shadow-lg p-6 h-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm flex-shrink-0">
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-white/90 mb-1">Total Subjects</p>
                   <h3 className="text-3xl font-bold text-white">{midtermResults.length}</h3>
                 </div>

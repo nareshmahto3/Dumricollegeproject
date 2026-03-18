@@ -58,7 +58,7 @@ export function StudentDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <Card className="p-6 bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
+            <Card className="h-full p-6 bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                   <CreditCard className="w-6 h-6 text-white" />
@@ -68,8 +68,8 @@ export function StudentDashboard() {
                 </Badge>
               </div>
               <h3 className="text-2xl font-bold text-white mb-1">₹45,000</h3>
-              <p className="text-sm font-semibold text-white/90">Current Term Fees</p>
-              <p className="text-xs text-white/80 flex items-center gap-1.5 mt-3">
+              <p className="text-sm font-semibold text-white/90 mb-3">Current Term Fees</p>
+              <p className="text-xs text-white/80 flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>Last paid: Jan 10, 2026</span>
               </p>
@@ -81,17 +81,21 @@ export function StudentDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="p-6 bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
+            <Card className="h-full p-6 bg-gradient-to-br from-indigo-500 to-indigo-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                   <FileText className="w-6 h-6 text-white" />
                 </div>
                 <Badge className="bg-white/20 text-white border-white/30 font-semibold backdrop-blur-sm">
-                  Under Review
+                  Active
                 </Badge>
               </div>
-              <h3 className="text-lg font-bold text-white mb-1">Application Status</h3>
-              <p className="text-sm font-semibold text-white/90 mt-1">Documents Under Review</p>
+              <h3 className="text-2xl font-bold text-white mb-1">Under Review</h3>
+              <p className="text-sm font-semibold text-white/90 mb-3">Application Status</p>
+              <p className="text-xs text-white/80 flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Updated: Jan 14, 2026</span>
+              </p>
             </Card>
           </motion.div>
 
@@ -100,7 +104,7 @@ export function StudentDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <Card className="p-6 bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200 sm:col-span-2 lg:col-span-1">
+            <Card className="h-full p-6 bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
               <div className="flex items-start justify-between mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                   <Award className="w-6 h-6 text-white" />
@@ -109,8 +113,12 @@ export function StudentDashboard() {
                   2 Available
                 </Badge>
               </div>
-              <h3 className="text-lg font-bold text-white mb-1">Certificates</h3>
-              <p className="text-sm font-semibold text-white/90 mt-1">Ready to Download</p>
+              <h3 className="text-2xl font-bold text-white mb-1">Certificates</h3>
+              <p className="text-sm font-semibold text-white/90 mb-3">Ready to Download</p>
+              <p className="text-xs text-white/80 flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>2 certificates ready</span>
+              </p>
             </Card>
           </motion.div>
         </div>

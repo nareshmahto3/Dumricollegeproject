@@ -3,7 +3,7 @@ import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { PortalLayout } from './PortalLayout';
-import { BookOpen, Users, Clock, MapPin, Calendar, Video, FileText } from 'lucide-react';
+import { BookOpen, Users, Clock, MapPin, Calendar, Eye } from 'lucide-react';
 
 interface ClassInfo {
   id: string;
@@ -195,13 +195,9 @@ export function StudentClasses() {
                   </div>
 
                   <div className="pt-4 border-t border-slate-200 flex gap-2">
-                    <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all duration-200">
-                      <FileText className="w-4 h-4 mr-2" />
-                      Notes
-                    </Button>
-                    <Button variant="outline" className="flex-1 border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-[#2F80ED] hover:border-blue-500 font-semibold transition-all duration-200">
-                      <Video className="w-4 h-4 mr-2" />
-                      Recordings
+                    <Button variant="outline" className="w-full bg-blue-50 border-blue-500 text-blue-600 hover:bg-blue-100 hover:border-blue-600 font-semibold transition-all duration-200">
+                      <Eye className="w-4 h-4 mr-2" />
+                      View Details
                     </Button>
                   </div>
                 </div>

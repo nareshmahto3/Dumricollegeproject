@@ -19,7 +19,6 @@ import imgTellATale1 from "figma:asset/428e9a82aa3a56261889c4b9e388b51942f2272b.
 import imgTellATale2 from "figma:asset/67529013d3689662828047b20bdd33edaf92f516.png";
 import imgTellATale3 from "figma:asset/5423f3c995ee1d097e5f3a0e53d472669230dd10.png";
 import imgTellATale4 from "figma:asset/9e54e95c8994a095badd8b900606abdd52b3ca7e.png";
-import imgTellATale5 from "figma:asset/4d1f9323858b357f075b977d93ef7948d472b6f3.png";
 import imgImage from "figma:asset/a4c38540a7286f78a506af2217d101bb503c5e25.png";
 import imgImage1 from "figma:asset/96e0702f37ad4c9fc5ca3a2cce495ae0759d7e74.png";
 import imgImg from "figma:asset/3f7d6d0216311d72e61c8d469d04ec0313b2b944.png";
@@ -56,7 +55,6 @@ import imgRecruithon2026PanUniversityPlacementDrive19February2026BangaloreCentra
 import imgSection6 from "figma:asset/b7458ea64b960e74f6e6c1703e23c259546c28a6.png";
 import img622347142180971142589173876682224996541029289NJpg from "figma:asset/77a63dd6a13ed31865910e3f1169cf79bfa36790.png";
 import imgAqma6QL0R7Pz3S9CSs2PX96ZhrYYaxybkhXgYeEa4WghCf6T0XPkRj9ZoNyYrN85Xe1ALnLhTqlRuJlMjTkxFuMp4 from "figma:asset/cd1665ea57115148ecb3474ddc69e678d081a39f.png";
-import imgAqpF7OTkrfV1OtWb2BX1Z4MnJfUt50Rzu0Zh3ARvtx34I3FsJtLj0TxdsyxvvLsOvIVaTKpM5ElKo1RgIbBcMp4 from "figma:asset/a73fa8370596c614c4668a616dd0f8f93acb4232.png";
 import imgAqo2Ck3Drpf0Ai8E28ImWzt6GIajYhD56BWkUlUt5DyysOdASd5Jh8USLz6Axc4S8GPxz1E24Oag4Jcgpm4OrjFJz0Q8BYsdMMp4 from "figma:asset/091d6347f03d0480e383b94863e74359d21a6f0b.png";
 import img629591488180992041369173873294802342293289923NJpg from "figma:asset/acbf2df85208d6385ad30d7f53644a86b27761ff.png";
 import imgSection7 from "figma:asset/5de67a80bffdf139d94e9ef61685010ce90da1d9.png";
@@ -289,7 +287,6 @@ function GallerySection() {
     imgTellATale2,
     imgTellATale3,
     imgTellATale4,
-    imgTellATale5,
     imgResearchFacilities,
     imgResearchFacilities1,
     imgResearchFacilities2,

@@ -336,7 +336,7 @@ export function AllStudentsData() {
               </div>
 
               {/* Table - Desktop View */}
-              <div className="hidden lg:block overflow-x-auto table-scroll">
+              <div className="hidden lg:block overflow-x-auto table-scroll has-checkbox">
                 <div className="w-full">
                   <table className="w-full">
                     <thead>
@@ -358,7 +358,7 @@ export function AllStudentsData() {
                             {sortField === 'roll' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -371,7 +371,7 @@ export function AllStudentsData() {
                             {sortField === 'name' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -384,7 +384,7 @@ export function AllStudentsData() {
                             {sortField === 'gender' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -397,7 +397,7 @@ export function AllStudentsData() {
                             {sortField === 'class' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -410,7 +410,7 @@ export function AllStudentsData() {
                             {sortField === 'section' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -426,7 +426,7 @@ export function AllStudentsData() {
                             {sortField === 'address' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -439,7 +439,7 @@ export function AllStudentsData() {
                             {sortField === 'dob' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -452,7 +452,7 @@ export function AllStudentsData() {
                             {sortField === 'phone' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>
@@ -465,7 +465,7 @@ export function AllStudentsData() {
                             {sortField === 'email' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-0" />
+                              <ChevronUp className="w-4 h-4 opacity-30" />
                             )}
                           </div>
                         </th>

@@ -74,6 +74,7 @@ import imgAqma6QL0R7Pz3S9CSs2PX96ZhrYYaxybkhXgYeEa4WghCf6T0XPkRj9ZoNyYrN85Xe1ALn
 import imgAqo2Ck3Drpf0Ai8E28ImWzt6GIajYhD56BWkUlUt5DyysOdASd5Jh8USLz6Axc4S8GPxz1E24Oag4Jcgpm4OrjFJz0Q8BYsdMMp4 from "figma:asset/f7883e702cf881bb69ab5e1526c6b6696a722fcd.png";
 import img629591488180992041369173873294802342293289923NJpg from "figma:asset/acbf2df85208d6385ad30d7f53644a86b27761ff.png";
 import img631838878180987385819173877110310279382797744NJpg from "figma:asset/081178be4e31e4a7b2f1521658c448b0470b564d.png";
+import imgCollegeBuilding from "figma:asset/5e1bebd644aff64baf3354389c6dde5691668810.png";
 import { imgTellATale } from "../imports/svg-pduv6";
 import Frame from "../imports/Frame-206-1785";
 
@@ -92,9 +93,16 @@ function NewsItem({ text }: { text: string }) {
 // Carousel images with high-quality images and metadata
 const carouselImages = [
   {
+    url: imgCollegeBuilding,
+    title: "Jharkhand College Dumri",
+    subtitle: "Excellence in Education Since 1950",
+    cta: "Explore Campus",
+    ctaLink: "/about",
+  },
+  {
     url: img23714285420260224035427Jpg,
     title: "Welcome to Dumri College",
-    subtitle: "Excellence in Education Since 1950",
+    subtitle: "Shaping Minds, Building Futures",
     cta: "Explore Programs",
     ctaLink: "/academics",
   },
@@ -622,7 +630,7 @@ export default function DumriCollegeLanding() {
                 </span>
                 <span className="text-[#0C4D8B]">Degree</span>
               </h2>
-              <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
+              <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 max-w-md">
                 Dumri College offers rigorous programs, valuable
                 resources, and countless opportunities that will
                 enable you to pursue your desired course of
@@ -632,9 +640,9 @@ export default function DumriCollegeLanding() {
               {/* Read More Button */}
               <motion.button
                 onClick={() => navigate("/programs")}
-                whileHover={{ scale: 1.05, x: 5 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex  items-center gap-2 bg-[#2563EB] text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 Read More
                 <svg
@@ -653,23 +661,22 @@ export default function DumriCollegeLanding() {
               </motion.button>
             </motion.div>
 
-            {/* Right Content - Program Boxes */}
+            {/* Right Content - 2x2 Grid of Degree Cards */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="grid grid-cols-2 gap-6"
+              className="grid grid-cols-2 gap-4 md:gap-6"
             >
               {[
-                { title: "DOCTORAL (PhD)", link: "/academics" },
-                { title: "POSTGRADUATE", link: "/academics" },
-                { title: "UNDERGRADUATE", link: "/academics" },
-                { title: "DIPLOMA", link: "/academics" },
-              ].map((program, idx) => (
+                { title: "Intermediate in Commerce (I.Com)", link: "/programs/icom" },
+                { title: "Intermediate in Science (I.Sc)", link: "/programs/isc" },
+                { title: "Intermediate in Arts (I.A)", link: "/programs/ia" },
+              ].map((degree, idx) => (
                 <motion.button
                   key={idx}
-                  onClick={() => navigate(program.link)}
+                  onClick={() => navigate(degree.link)}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -677,22 +684,22 @@ export default function DumriCollegeLanding() {
                     duration: 0.4,
                     delay: idx * 0.1,
                   }}
-                  className="group relative bg-white rounded-lg p-10 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-                  whileHover={{ scale: 1.08, y: -5 }}
+                  className="group relative bg-white rounded-lg p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                  whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <motion.div
                     className="relative z-10"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <h3 className="text-[#0C4D8B] font-semibold text-lg text-center">
-                      {program.title}
+                    <h3 className="text-[#0C4D8B] font-semibold text-sm md:text-base text-center uppercase tracking-wide">
+                      {degree.title}
                     </h3>
                   </motion.div>
                   {/* Gradient Bottom Border */}
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0099D0] to-[#FFD288]"
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0099D0] to-[#FFD288]"
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     transition={{
@@ -1051,7 +1058,7 @@ export default function DumriCollegeLanding() {
                 {/* View All Button */}
                 <div className="text-center mt-8">
                   <motion.button
-                    onClick={() => navigate("/gallery")}
+                    onClick={() => navigate("/events")}
                     className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -1957,7 +1964,7 @@ export default function DumriCollegeLanding() {
                 {/* View All Button */}
                 <div className="text-center mt-8 md:mt-12">
                   <motion.button
-                    onClick={() => navigate("/about")}
+                    onClick={() => navigate("/about/alumni")}
                     className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

@@ -10,6 +10,7 @@ import {
   Edit,
   BarChart3,
   Calendar,
+  X,
 } from 'lucide-react';
 import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
@@ -88,6 +89,7 @@ const classes = [
 
 export function TeacherClasses() {
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const getAttendanceColor = (rate: number) => {
     if (rate >= 90) return 'text-green-600';
@@ -100,6 +102,14 @@ export function TeacherClasses() {
     if (rate >= 75) return 'bg-yellow-50';
     return 'bg-red-50';
   };
+
+  const handleViewDetails = (classId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedClass(classId);
+    setShowModal(true);
+  };
+
+  const selectedClassDetails = classes.find((c) => c.id === selectedClass);
 
   return (
     <PortalLayout
@@ -166,8 +176,7 @@ export function TeacherClasses() {
           {classes.map((classItem) => (
             <Card
               key={classItem.id}
-              className="p-6 bg-white border border-slate-200 hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer group"
-              onClick={() => setSelectedClass(classItem.id)}
+              className="p-6 bg-white border-2 border-blue-200 hover:shadow-lg hover:border-blue-400 transition-all"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
@@ -217,20 +226,91 @@ export function TeacherClasses() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button variant="outline" size="sm" className="flex-1 bg-blue-600 text-white hover:bg-blue-700 border-0">
+              <div className="mt-4">
+                <Button
+                  size="sm"
+                  className="w-full bg-blue-600 text-white hover:bg-blue-700 border-0"
+                  onClick={(e) => handleViewDetails(classItem.id, e)}
+                >
                   <Eye className="w-4 h-4 mr-1" />
                   View Details
-                </Button>
-                <Button variant="outline" size="sm" className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50">
-                  <Edit className="w-4 h-4 mr-1" />
-                  Manage
                 </Button>
               </div>
             </Card>
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      {showModal && selectedClassDetails && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-slate-900">{selectedClassDetails.name}</h3>
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-slate-500 hover:text-slate-700"
+                onClick={() => setShowModal(false)}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            <div className="space-y-3 mb-4">
+              <div className="flex items-center gap-2 text-sm text-slate-700">
+                <Users className="w-4 h-4 text-slate-500" />
+                <span>{selectedClassDetails.students} Students</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-700">
+                <Clock className="w-4 h-4 text-slate-500" />
+                <span>{selectedClassDetails.schedule}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-700">
+                <MapPin className="w-4 h-4 text-slate-500" />
+                <span>{selectedClassDetails.room}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-700">
+                <Calendar className="w-4 h-4 text-slate-500" />
+                <span className="text-emerald-600 font-medium">{selectedClassDetails.nextClass}</span>
+              </div>
+            </div>
+
+            <div className="space-y-4 pb-4 border-b border-slate-200">
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-slate-700">Attendance Rate</span>
+                  <span
+                    className={`text-sm font-semibold ${getAttendanceColor(selectedClassDetails.attendance)}`}
+                  >
+                    {selectedClassDetails.attendance}%
+                  </span>
+                </div>
+                <Progress value={selectedClassDetails.attendance} className="h-2" />
+              </div>
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-slate-700">Class Performance</span>
+                  <span className="text-sm font-semibold text-blue-600">{selectedClassDetails.performance}%</span>
+                </div>
+                <Progress value={selectedClassDetails.performance} className="h-2" />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1 bg-blue-600 text-white hover:bg-blue-700 border-0"
+                onClick={() => setShowModal(false)}
+              >
+                <Eye className="w-4 h-4 mr-1" />
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </PortalLayout>
   );
 }

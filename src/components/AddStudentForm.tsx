@@ -22,6 +22,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { motion, AnimatePresence } from 'motion/react';
 import { toast } from 'sonner';
+import { PortalLayout } from './PortalLayout';
 
 export function AddStudentForm() {
   const navigate = useNavigate();
@@ -124,6 +125,55 @@ export function AddStudentForm() {
     const generatedId = `STD${new Date().getFullYear()}${Math.floor(Math.random() * 100000).toString().padStart(5, '0')}`;
     setStudentId(generatedId);
 
+    // ── Console logging ──────────────────────────────────────────
+    console.group('✅ Student Submitted Successfully');
+    console.log('Student ID:', generatedId);
+    console.group('📋 Personal Details');
+    console.log('First Name:', formData.firstName);
+    console.log('Middle Name:', formData.middleName);
+    console.log('Last Name:', formData.lastName);
+    console.log('Date of Birth:', formData.dateOfBirth);
+    console.log('Gender:', formData.gender);
+    console.log('Blood Group:', formData.bloodGroup);
+    console.log('Nationality:', formData.nationality);
+    console.log('Religion:', formData.religion);
+    console.log('Category:', formData.category);
+    console.log('Aadhar Number:', formData.aadharNumber);
+    console.groupEnd();
+    console.group('📍 Contact Information');
+    console.log('Email:', formData.email);
+    console.log('Phone:', formData.phone);
+    console.log('Address:', formData.address);
+    console.log('City:', formData.city);
+    console.log('State:', formData.state);
+    console.log('Pincode:', formData.pincode);
+    console.groupEnd();
+    console.group('📚 Academic Details');
+    console.log('Previous School:', formData.previousSchool);
+    console.log('Previous Class:', formData.previousClass);
+    console.log('Previous Percentage:', formData.previousPercentage);
+    console.log('Admitting to Class:', formData.admittingToClass);
+    console.log('Section:', formData.section);
+    console.log('Roll Number:', formData.rollNumber);
+    console.groupEnd();
+    console.group('👨‍👩‍👧 Parent / Guardian Details');
+    console.log('Father Name:', formData.fatherName);
+    console.log('Father Occupation:', formData.fatherOccupation);
+    console.log('Father Phone:', formData.fatherPhone);
+    console.log('Father Email:', formData.fatherEmail);
+    console.log('Mother Name:', formData.motherName);
+    console.log('Mother Occupation:', formData.motherOccupation);
+    console.log('Mother Phone:', formData.motherPhone);
+    console.log('Mother Email:', formData.motherEmail);
+    console.log('Guardian Name:', formData.guardianName);
+    console.log('Guardian Relation:', formData.guardianRelation);
+    console.log('Guardian Phone:', formData.guardianPhone);
+    console.log('Annual Income:', formData.annualIncome);
+    console.groupEnd();
+    console.log('📦 Full formData object:', formData);
+    console.groupEnd();
+    // ────────────────────────────────────────────────────────────
+
     toast.success('Student added successfully!', {
       description: `Student ID: ${generatedId}`,
       duration: 5000,
@@ -143,6 +193,32 @@ export function AddStudentForm() {
     if (!completedSteps.includes(currentStep)) {
       setCompletedSteps([...completedSteps, currentStep]);
     }
+
+    // ── Console logging ──────────────────────────────────────────
+    const stepLabels: Record<number, string> = {
+      1: 'Personal Details',
+      2: 'Contact Information',
+      3: 'Academic Details',
+      4: 'Parent Information',
+      5: 'Documents',
+    };
+    const stepFields: Record<number, (keyof typeof formData)[]> = {
+      1: ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'gender', 'bloodGroup', 'nationality', 'religion', 'category', 'aadharNumber'],
+      2: ['email', 'phone', 'address', 'city', 'state', 'pincode'],
+      3: ['previousSchool', 'previousClass', 'previousPercentage', 'admittingToClass', 'section', 'rollNumber', 'admissionId'],
+      4: ['fatherName', 'fatherOccupation', 'fatherPhone', 'fatherEmail', 'motherName', 'motherOccupation', 'motherPhone', 'motherEmail', 'guardianName', 'guardianRelation', 'guardianPhone', 'annualIncome'],
+    };
+    if (stepFields[currentStep]) {
+      const stepData = stepFields[currentStep].reduce((acc, key) => {
+        acc[key] = formData[key];
+        return acc;
+      }, {} as Partial<typeof formData>);
+      console.group(`➡️ Step ${currentStep} Completed — ${stepLabels[currentStep]}`);
+      console.table(stepData);
+      console.groupEnd();
+    }
+    // ────────────────────────────────────────────────────────────
+
     setCurrentStep(currentStep + 1);
   };
 
@@ -153,6 +229,7 @@ export function AddStudentForm() {
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      console.log('📷 Photo uploaded:', { name: file.name, size: `${(file.size / 1024).toFixed(1)} KB`, type: file.type });
       const reader = new FileReader();
       reader.onloadend = () => {
         setPhotoPreview(reader.result as string);
@@ -218,57 +295,33 @@ export function AddStudentForm() {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex flex-col overflow-hidden">
-      {/* Modern Header */}
-      <motion.div
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="bg-white border-b shadow-sm z-50 backdrop-blur-lg bg-white/90 flex-shrink-0"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <motion.div
-              className="flex items-center gap-3"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
-                <GraduationCap className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Add New Student</h3>
-                <p className="text-xs text-gray-600">Academic Year 2026-27</p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Button
-                variant="ghost"
-                onClick={() => navigate('/admin/students')}
-                className="hover:bg-gray-100"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Button>
-            </motion.div>
-          </div>
+    <PortalLayout
+      role="admin"
+      userName="Stevie Zone"
+      userRole="Admin"
+      pageTitle="Add New Student"
+      breadcrumbs={["Home", "Admin", "Students", "Add New Student"]}
+    >
+      <div className="space-y-6">
+        {/* Back Button */}
+        <div className="flex justify-end">
+          <Button
+            variant="outline"
+            onClick={() => navigate('/admin/students')}
+            className="border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Students
+          </Button>
         </div>
-      </motion.div>
 
-      {/* Modern Progress Stepper */}
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-3 border-b border-white/50 backdrop-blur-sm flex-shrink-0"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Modern Progress Stepper */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white rounded-lg border border-slate-200 p-4 sm:p-6 shadow-sm"
+        >
           <div className="relative">
             {/* Progress Line */}
             <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 rounded-full hidden md:block"
@@ -352,12 +405,10 @@ export function AddStudentForm() {
               })}
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Scrollable Form Content */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="h-full max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        {/* Form Content Container */}
+        <div className="space-y-6">
           {/* Success Message */}
           <AnimatePresence>
             {studentId && (
@@ -1378,6 +1429,6 @@ export function AddStudentForm() {
           </AnimatePresence>
         </div>
       </div>
-    </div>
+    </PortalLayout>
   );
 }

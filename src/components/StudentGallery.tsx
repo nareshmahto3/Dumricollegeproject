@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, Upload, Plus, X, Calendar, Tag, FileText, Download, Trash2 } from 'lucide-react';
+import { Image, Upload, Plus, X, Calendar, Tag, Video, Download, Trash2, Play } from 'lucide-react';
 import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
 import { Badge } from './ui/badge';
@@ -9,11 +9,11 @@ import { Label } from './ui/label';
 
 interface GalleryItem {
   id: number;
-  type: 'image' | 'note';
+  type: 'image' | 'video';
   title: string;
   description?: string;
   url?: string;
-  content?: string;
+  thumbnail?: string;
   tags: string[];
   date: string;
   eventName?: string;
@@ -32,9 +32,11 @@ const sampleGalleryItems: GalleryItem[] = [
   },
   {
     id: 2,
-    type: 'note',
-    title: 'Physics Formula Notes',
-    content: 'Important formulas for Physics exam: \n- F = ma\n- E = mc²\n- v = u + at',
+    type: 'video',
+    title: 'Physics Lab Experiment',
+    description: 'Newton\'s laws demonstration in lab',
+    url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=500',
     tags: ['study', 'physics'],
     date: '2026-02-10',
   },
@@ -50,10 +52,12 @@ const sampleGalleryItems: GalleryItem[] = [
   },
   {
     id: 4,
-    type: 'note',
-    title: 'Mathematics Tips',
-    content: 'Quick tips for solving calculus problems:\n1. Always check domain\n2. Simplify before differentiation\n3. Use chain rule when needed',
-    tags: ['study', 'mathematics'],
+    type: 'video',
+    title: 'Chemistry Reaction Demo',
+    description: 'Exciting chemical reaction demonstration',
+    url: 'https://www.w3schools.com/html/movie.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1628863353691-0071c8c1874c?w=500',
+    tags: ['study', 'chemistry'],
     date: '2026-02-08',
   },
   {
@@ -66,19 +70,30 @@ const sampleGalleryItems: GalleryItem[] = [
     date: '2026-01-30',
     eventName: 'Tech Fest',
   },
+  {
+    id: 6,
+    type: 'video',
+    title: 'Annual Function Performance',
+    description: 'Dance performance at annual function',
+    url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=500',
+    tags: ['event', 'cultural'],
+    date: '2026-01-26',
+    eventName: 'Annual Day',
+  },
 ];
 
 export function StudentGallery() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>(sampleGalleryItems);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [selectedType, setSelectedType] = useState<'image' | 'note'>('image');
-  const [filter, setFilter] = useState<'all' | 'images' | 'notes'>('all');
+  const [selectedType, setSelectedType] = useState<'image' | 'video'>('image');
+  const [filter, setFilter] = useState<'all' | 'images' | 'videos'>('all');
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
   const filteredItems = galleryItems.filter((item) => {
     if (filter === 'all') return true;
     if (filter === 'images') return item.type === 'image';
-    if (filter === 'notes') return item.type === 'note';
+    if (filter === 'videos') return item.type === 'video';
     return true;
   });
 
@@ -119,39 +134,39 @@ export function StudentGallery() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card className="p-6 bg-white border border-slate-200 hover:border-blue-300 transition-all duration-200 shadow-sm">
+          <Card className="p-6 bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                <Image className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                <Image className="w-6 h-6 text-white" />
               </div>
-              <Badge className="bg-blue-50 text-blue-700 border-blue-200 font-medium">Total</Badge>
+              <Badge className="bg-white/20 text-white border-white/30 font-medium">Total</Badge>
             </div>
-            <h3 className="text-3xl font-bold text-slate-900 mb-1">{galleryItems.length}</h3>
-            <p className="text-sm text-slate-600 font-medium">Total Items</p>
+            <h3 className="text-3xl font-bold text-white mb-1">{galleryItems.length}</h3>
+            <p className="text-sm text-white/90 font-medium">Total Items</p>
           </Card>
-          <Card className="p-6 bg-white border border-slate-200 hover:border-blue-300 transition-all duration-200 shadow-sm">
+          <Card className="p-6 bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center">
-                <Image className="w-6 h-6 text-emerald-600" />
+              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                <Image className="w-6 h-6 text-white" />
               </div>
-              <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 font-medium">Media</Badge>
+              <Badge className="bg-white/20 text-white border-white/30 font-medium">Media</Badge>
             </div>
-            <h3 className="text-3xl font-bold text-slate-900 mb-1">
+            <h3 className="text-3xl font-bold text-white mb-1">
               {galleryItems.filter((item) => item.type === 'image').length}
             </h3>
-            <p className="text-sm text-slate-600 font-medium">Images</p>
+            <p className="text-sm text-white/90 font-medium">Images</p>
           </Card>
-          <Card className="p-6 bg-white border border-slate-200 hover:border-blue-300 transition-all duration-200 shadow-sm">
+          <Card className="p-6 bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg hover:shadow-xl transition-all duration-200">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
-                <FileText className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                <Video className="w-6 h-6 text-white" />
               </div>
-              <Badge className="bg-purple-50 text-purple-700 border-purple-200 font-medium">Docs</Badge>
+              <Badge className="bg-white/20 text-white border-white/30 font-medium">Videos</Badge>
             </div>
-            <h3 className="text-3xl font-bold text-slate-900 mb-1">
-              {galleryItems.filter((item) => item.type === 'note').length}
+            <h3 className="text-3xl font-bold text-white mb-1">
+              {galleryItems.filter((item) => item.type === 'video').length}
             </h3>
-            <p className="text-sm text-slate-600 font-medium">Notes</p>
+            <p className="text-sm text-white/90 font-medium">Videos</p>
           </Card>
         </div>
 
@@ -176,13 +191,13 @@ export function StudentGallery() {
               Images
             </Button>
             <Button
-              variant={filter === 'notes' ? 'default' : 'outline'}
+              variant={filter === 'videos' ? 'default' : 'outline'}
               size="sm"
-              onClick={() => setFilter('notes')}
-              className={filter === 'notes' ? 'bg-blue-600 hover:bg-blue-700 text-white font-semibold' : 'border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-[#2F80ED] hover:border-blue-500 font-semibold transition-all duration-200'}
+              onClick={() => setFilter('videos')}
+              className={filter === 'videos' ? 'bg-blue-600 hover:bg-blue-700 text-white font-semibold' : 'border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-[#2F80ED] hover:border-blue-500 font-semibold transition-all duration-200'}
             >
-              <FileText className="w-4 h-4 mr-2" />
-              Notes
+              <Video className="w-4 h-4 mr-2" />
+              Videos
             </Button>
           </div>
         </Card>
@@ -216,17 +231,29 @@ export function StudentGallery() {
                   </div>
                 </div>
               ) : (
-                <div className="relative h-48 bg-blue-50 p-4 overflow-hidden">
-                  <div className="absolute top-3 right-3">
-                    <Badge className="bg-blue-600 text-white border-blue-600 font-medium">
-                      <FileText className="w-3 h-3 mr-1" />
-                      Note
-                    </Badge>
+                <div className="relative h-48 bg-slate-100">
+                  {item.thumbnail ? (
+                    <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-purple-50">
+                      <Video className="w-12 h-12 text-purple-400" />
+                    </div>
+                  )}
+                  {/* Play Icon Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                      <Play className="w-8 h-8 text-purple-600" fill="currentColor" />
+                    </div>
                   </div>
-                  <div className="h-full overflow-hidden">
-                    <pre className="text-sm text-slate-700 whitespace-pre-wrap line-clamp-6 font-sans font-medium">
-                      {item.content}
-                    </pre>
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-purple-600 text-white border-purple-600 font-medium">
+                      <Video className="w-3 h-3 mr-1" />
+                      Video
+                    </Badge>
                   </div>
                 </div>
               )}
@@ -309,12 +336,12 @@ export function StudentGallery() {
                     </Button>
                     <Button
                       type="button"
-                      variant={selectedType === 'note' ? 'default' : 'outline'}
-                      onClick={() => setSelectedType('note')}
-                      className={selectedType === 'note' ? 'bg-blue-600 hover:bg-blue-700 font-semibold' : ''}
+                      variant={selectedType === 'video' ? 'default' : 'outline'}
+                      onClick={() => setSelectedType('video')}
+                      className={selectedType === 'video' ? 'bg-blue-600 hover:bg-blue-700 font-semibold' : ''}
                     >
-                      <FileText className="w-4 h-4 mr-2" />
-                      Note
+                      <Video className="w-4 h-4 mr-2" />
+                      Video
                     </Button>
                   </div>
                 </div>
@@ -352,13 +379,21 @@ export function StudentGallery() {
                 ) : (
                   <>
                     <div>
-                      <Label htmlFor="note-title">Title</Label>
-                      <Input id="note-title" placeholder="e.g., Physics Notes" className="mt-2" />
+                      <Label htmlFor="video-title">Title</Label>
+                      <Input id="video-title" placeholder="e.g., Physics Lab Experiment" className="mt-2" />
                     </div>
                     <div>
-                      <Label htmlFor="note-content">Content</Label>
+                      <Label htmlFor="video-url">Video URL</Label>
+                      <Input id="video-url" placeholder="Enter video URL" className="mt-2" />
+                    </div>
+                    <div>
+                      <Label htmlFor="video-thumbnail">Thumbnail URL (Optional)</Label>
+                      <Input id="video-thumbnail" placeholder="Enter thumbnail URL" className="mt-2" />
+                    </div>
+                    <div>
+                      <Label htmlFor="video-description">Description</Label>
                       <textarea
-                        id="note-content"
+                        id="video-description"
                         placeholder="Write your notes here..."
                         className="w-full mt-2 min-h-[200px] p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                       />
@@ -463,11 +498,35 @@ export function StudentGallery() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <pre className="text-sm whitespace-pre-wrap font-sans">
-                      {selectedItem.content}
-                    </pre>
+                  <div className="relative h-96 bg-gray-100 rounded-lg overflow-hidden">
+                    {selectedItem.url ? (
+                      <video
+                        src={selectedItem.url}
+                        alt={selectedItem.title}
+                        className="w-full h-full object-contain"
+                        controls
+                      >
+                        <source src={selectedItem.url} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Video className="w-16 h-16 text-gray-400" />
+                      </div>
+                    )}
                   </div>
+                  {selectedItem.description && (
+                    <div>
+                      <h4 className="text-sm text-muted-foreground mb-2">Description</h4>
+                      <p>{selectedItem.description}</p>
+                    </div>
+                  )}
+                  {selectedItem.eventName && (
+                    <div>
+                      <h4 className="text-sm text-muted-foreground mb-2">Event</h4>
+                      <p>{selectedItem.eventName}</p>
+                    </div>
+                  )}
                 </div>
               )}
 

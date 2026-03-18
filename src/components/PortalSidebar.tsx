@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import { useSidebar } from "../contexts/SidebarContext";
 import { motion, AnimatePresence } from "motion/react";
+import { useState } from "react";
 
 interface PortalSidebarProps {
   role: "admin" | "student" | "teacher";
@@ -41,6 +42,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const { isCollapsed, toggleSidebar } = useSidebar();
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   // Menu items based on role
   const adminLinks = [
@@ -52,6 +54,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
     { path: "/admin/classes", label: "Class", icon: LayoutGrid },
     { path: "/admin/subjects", label: "Subject", icon: BookOpen },
     { path: "/admin/schedule", label: "Class Routine", icon: Calendar },
+    { path: "/admin/holiday", label: "Holiday", icon: CalendarDays },
     { path: "/admin/attendance", label: "Attendance", icon: ClipboardCheck },
     { path: "/admin/exams", label: "Exam", icon: FileCheck },
     { path: "/admin/fee", label: "Fee", icon: DollarSign },
@@ -66,6 +69,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
     { path: "/teacher/students", label: "My Students", icon: GraduationCap },
     { path: "/teacher/classes", label: "My Classes", icon: Boxes },
     { path: "/teacher/schedule", label: "Class Routine", icon: Calendar },
+    { path: "/teacher/holiday", label: "Holiday", icon: CalendarDays },
     { path: "/teacher/attendance", label: "Attendance", icon: ClipboardCheck },
     { path: "/teacher/exams", label: "Exams", icon: FileCheck },
     { path: "/teacher/assignments", label: "Assignments", icon: FileText },
@@ -78,6 +82,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
     { path: "/student/track-application", label: "Track Application", icon: FileSearch },
     { path: "/student/classes", label: "My Classes", icon: Boxes },
     { path: "/student/schedule", label: "Class Routine", icon: Calendar },
+    { path: "/student/holiday", label: "Holiday", icon: CalendarDays },
     { path: "/student/attendance", label: "Attendance", icon: ClipboardCheck },
     { path: "/student/exams", label: "Exams", icon: FileCheck },
     { path: "/student/results", label: "Results", icon: Award },
@@ -140,23 +145,45 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
               const Icon = link.icon;
 
               return (
-                <motion.button
+                <div
                   key={link.path}
-                  onClick={() => handleNavigation(link.path)}
-                  whileHover={{ scale: 1.05 }}
-                  className={`w-full flex items-center justify-center py-2.5 transition-all flex-shrink-0 ${
-                    isActive
-                      ? "bg-amber-500/10 border-l-4 border-amber-500"
-                      : "hover:bg-slate-800/50 border-l-4 border-transparent"
-                  }`}
-                  title={link.label}
+                  className="relative"
+                  onMouseEnter={() => setHoveredLink(link.path)}
+                  onMouseLeave={() => setHoveredLink(null)}
                 >
-                  <Icon
-                    className={`w-5 h-5 ${
-                      isActive ? "text-amber-400" : "text-amber-500"
+                  <motion.button
+                    onClick={() => handleNavigation(link.path)}
+                    whileHover={{ scale: 1.05 }}
+                    className={`w-full flex items-center justify-center py-2.5 transition-all flex-shrink-0 border-b border-slate-700/50 ${
+                      isActive
+                        ? "bg-amber-500/10 border-l-4 border-amber-500"
+                        : "hover:bg-slate-800/50 border-l-4 border-transparent"
                     }`}
-                  />
-                </motion.button>
+                  >
+                    <Icon
+                      className={`w-5 h-5 ${
+                        isActive ? "text-amber-400" : "text-amber-500"
+                      }`}
+                    />
+                  </motion.button>
+
+                  {/* Tooltip */}
+                  <AnimatePresence>
+                    {hoveredLink === link.path && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -10 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-3 py-1.5 bg-slate-800 text-white text-sm font-medium rounded-md shadow-lg whitespace-nowrap z-50 pointer-events-none"
+                      >
+                        {link.label}
+                        {/* Arrow pointing left */}
+                        <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[6px] border-r-slate-800" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               );
             })}
           </nav>
@@ -222,7 +249,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
                       key={link.path}
                       onClick={() => handleNavigation(link.path)}
                       whileHover={{ x: 4 }}
-                      className={`w-full flex items-center justify-between px-6 py-3 text-left transition-all ${
+                      className={`w-full flex items-center justify-between px-6 py-3 text-left transition-all border-b border-slate-700/50 ${
                         isActive
                           ? "bg-amber-500/10 border-l-4 border-amber-500"
                           : "hover:bg-slate-800/50"

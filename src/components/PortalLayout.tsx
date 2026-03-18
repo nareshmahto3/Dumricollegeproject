@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useNavigate } from "react-router";
 import { PortalSidebar } from "./PortalSidebar";
 import { PortalHeader } from "./PortalHeader";
 import { useSidebar } from "../contexts/SidebarContext";
@@ -23,6 +24,69 @@ export function PortalLayout({
   breadcrumbs = ["Home"],
 }: PortalLayoutProps) {
   const { isCollapsed } = useSidebar();
+  const navigate = useNavigate();
+
+  // Function to get the route for a breadcrumb
+  const getBreadcrumbRoute = (crumb: string, index: number): string => {
+    const lowerCrumb = crumb.toLowerCase();
+    
+    // Home breadcrumb
+    if (lowerCrumb === "home") {
+      return "/";
+    }
+    
+    // Role-based dashboard (Admin, Student, Teacher)
+    if (lowerCrumb === "admin") {
+      return "/admin";
+    }
+    if (lowerCrumb === "student") {
+      return "/student";
+    }
+    if (lowerCrumb === "teacher") {
+      return "/teacher";
+    }
+    
+    // Build path based on role and previous breadcrumbs
+    const basePath = role === "admin" ? "/admin" : role === "student" ? "/student" : "/teacher";
+    
+    // Map common breadcrumb names to routes
+    const routeMap: { [key: string]: string } = {
+      "admissions": "/admissions",
+      "students": "/students",
+      "teachers": "/teachers",
+      "classes": "/classes",
+      "subjects": "/subjects",
+      "schedule": "/schedule",
+      "fees": "/fees",
+      "payment": "/payment",
+      "account": "/account",
+      "exams": "/exams",
+      "results": "/results",
+      "attendance": "/attendance",
+      "notices": "/notices",
+      "library": "/library",
+      "transport": "/transport",
+      "hostel": "/hostel",
+    };
+    
+    if (routeMap[lowerCrumb]) {
+      return basePath + routeMap[lowerCrumb];
+    }
+    
+    return "#"; // Default for unknown routes
+  };
+
+  const handleBreadcrumbClick = (crumb: string, index: number) => {
+    // Don't navigate if it's the last breadcrumb (current page)
+    if (index === breadcrumbs.length - 1) {
+      return;
+    }
+    
+    const route = getBreadcrumbRoute(crumb, index);
+    if (route !== "#") {
+      navigate(route);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -49,10 +113,11 @@ export function PortalLayout({
                 {breadcrumbs.map((crumb, index) => (
                   <div key={index} className="flex items-center gap-2 whitespace-nowrap">
                     <span
+                      onClick={() => handleBreadcrumbClick(crumb, index)}
                       className={
                         index === breadcrumbs.length - 1
-                          ? "text-amber-600 font-semibold"
-                          : "text-slate-500"
+                          ? "text-amber-600 font-semibold cursor-default"
+                          : "text-slate-500 hover:text-blue-600 cursor-pointer transition-colors"
                       }
                     >
                       {crumb}

@@ -267,148 +267,106 @@ export function TeacherDashboard() {
     >
       <div className="space-y-6">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg p-6 hover:shadow-xl transition-all">
-            <div className="flex items-center justify-between mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg p-5 hover:shadow-xl transition-all">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-3xl font-bold text-white mb-1">6</h3>
+                <p className="text-sm font-semibold text-white/90">My Classes</p>
+                <p className="text-xs text-white/80 mt-1">Active</p>
+              </div>
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h3 className="text-3xl font-bold text-white mb-1">6</h3>
-            <p className="text-sm font-semibold text-white/90">My Classes</p>
-            <p className="text-xs text-white/80 mt-2">Active</p>
           </Card>
 
-          <Card className="bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg p-6 hover:shadow-xl transition-all">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="bg-gradient-to-br from-emerald-500 to-emerald-600 border-0 shadow-lg p-5 hover:shadow-xl transition-all">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-3xl font-bold text-white mb-1">248</h3>
+                <p className="text-sm font-semibold text-white/90">Total Students</p>
+                <p className="text-xs text-white/80 mt-1">Enrolled</p>
+              </div>
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                 <Users className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h3 className="text-3xl font-bold text-white mb-1">248</h3>
-            <p className="text-sm font-semibold text-white/90">Total Students</p>
-            <p className="text-xs text-white/80 mt-2">Enrolled</p>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg p-6 hover:shadow-xl transition-all">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="bg-gradient-to-br from-purple-500 to-purple-600 border-0 shadow-lg p-5 hover:shadow-xl transition-all">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-3xl font-bold text-white mb-1">92.5%</h3>
+                <p className="text-sm font-semibold text-white/90">Avg. Attendance</p>
+                <p className="text-xs text-white/80 mt-1">+3% this month</p>
+              </div>
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
             </div>
-            <h3 className="text-3xl font-bold text-white mb-1">92.5%</h3>
-            <p className="text-sm font-semibold text-white/90">Avg. Attendance</p>
-            <p className="text-xs text-white/80 mt-2">+3% this month</p>
           </Card>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Today's Schedule */}
-          <Card className="p-6 lg:col-span-2 bg-white border border-slate-200">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-slate-700" />
-                <h3 className="text-lg font-semibold text-slate-900">Today's Schedule</h3>
-              </div>
-              <Badge className="bg-blue-50 text-blue-700 border-blue-200">
-                {todaySchedule.length} Classes
-              </Badge>
+        <Card className="p-5 bg-white border border-slate-200">
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-slate-700" />
+              <h3 className="text-lg font-semibold text-slate-900">Today's Schedule</h3>
             </div>
-            <div className="space-y-3">
-              {todaySchedule.map((schedule) => (
-                <div
-                  key={schedule.id}
-                  className={`p-4 border rounded-lg transition-all ${
-                    schedule.status === "current"
-                      ? "border-blue-300 bg-blue-50 shadow-sm"
-                      : schedule.status === "completed"
-                        ? "border-slate-200 bg-slate-50 opacity-70"
-                        : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-slate-900">
-                        {schedule.time}
-                      </span>
-                      {getScheduleStatus(schedule.status)}
-                      {schedule.status === "current" && (
-                        <Badge className="bg-blue-100 text-blue-700 border-blue-200 text-xs">
-                          In Progress
-                        </Badge>
-                      )}
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-blue-600 hover:bg-blue-50 font-medium"
-                    >
-                      {schedule.status === "upcoming"
-                        ? "Prepare"
-                        : "View"}
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-semibold text-slate-900">
-                        {schedule.subject}
-                      </p>
-                      <p className="text-xs text-slate-600">
-                        {schedule.class} • {schedule.room}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          {/* Pending Tasks */}
-          <Card className="p-6 bg-white border border-slate-200">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-slate-900">Pending Tasks</h3>
-              <Badge className="bg-orange-50 text-orange-700 border-orange-200">
-                {pendingTasks.length}
-              </Badge>
-            </div>
-            <div className="space-y-3">
-              {pendingTasks.map((task) => (
-                <div
-                  key={task.id}
-                  className="p-3 border border-slate-200 bg-white rounded-lg hover:border-blue-300 transition-colors"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="text-sm font-semibold text-slate-900">
-                      {task.task}
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className={`text-xs ${getPriorityColor(task.priority)}`}
-                    >
-                      {task.priority}
-                    </Badge>
-                  </div>
-                  <p className="text-xs text-slate-600 mb-2">
-                    {task.class} • {task.count}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-orange-600 font-medium">
-                      {task.due}
+            <Badge className="bg-blue-50 text-blue-700 border-blue-200">
+              {todaySchedule.length} Classes
+            </Badge>
+          </div>
+          <div className="space-y-2.5">
+            {todaySchedule.map((schedule) => (
+              <div
+                key={schedule.id}
+                className={`p-3 border rounded-lg transition-all ${
+                  schedule.status === "current"
+                    ? "border-blue-300 bg-blue-50 shadow-sm"
+                    : schedule.status === "completed"
+                      ? "border-slate-200 bg-slate-50 opacity-70"
+                      : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-semibold text-slate-900">
+                      {schedule.time}
                     </span>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-xs h-auto p-1 text-blue-600 hover:bg-blue-50"
-                    >
-                      Start →
-                    </Button>
+                    {getScheduleStatus(schedule.status)}
+                    {schedule.status === "current" && (
+                      <Badge className="bg-blue-100 text-blue-700 border-blue-200 text-xs">
+                        In Progress
+                      </Badge>
+                    )}
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-blue-600 hover:bg-blue-50 font-medium text-xs h-auto py-1 px-2"
+                  >
+                    {schedule.status === "upcoming"
+                      ? "Prepare"
+                      : "View"}
+                  </Button>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-900">
+                      {schedule.subject}
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      {schedule.class} • {schedule.room}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </Card>
-        </div>
+              </div>
+            ))}
+          </div>
+        </Card>
 
         {/* Assignments & Analytics */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -511,9 +469,9 @@ export function TeacherDashboard() {
                   paddingAngle={2}
                   dataKey="value"
                 >
-                  {performanceData.map((entry, index) => (
+                  {performanceData.map((entry) => (
                     <Cell
-                      key={`cell-${index}`}
+                      key={`performance-${entry.name}`}
                       fill={entry.color}
                     />
                   ))}

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router';
-import { ChevronDown, X, MessageCircle, Menu } from 'lucide-react';
+import { ChevronDown, X, MessageCircle, Menu, Globe } from 'lucide-react';
 import svgPaths from "../imports/svg-o5h25uox4w";
 import imgImageDumriCollege from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
-import { LanguageSelector } from './LanguageSelector';
 
 interface CarouselHeaderProps {
   onMenuClick?: () => void;
@@ -21,18 +20,21 @@ const menuItems: MenuItem[] = [
   {
     label: 'About Us',
     submenu: [
-      { label: 'History', href: '/history' },
-      { label: 'Administration', href: '/administration' },
-      { label: 'Campus Life', href: '/campus-life' },
+      { label: 'About Jharkhand Commerce Inter College', href: '/about' },
+      { label: 'Vision and Mission', href: '/mission-values' },
+      { label: 'Administration', href: '/about/administration' },
+      { label: 'Founder', href: '/about/founder' },
+      { label: 'Principal Message', href: '/about/principal-message' },
+      { label: 'Our Alumini', href: '/about/alumni' },
     ],
   },
   {
     label: 'Academics',
     submenu: [
       { label: 'Programs', href: '/programs' },
-      { label: 'All Faculties', href: '/faculty' },
-      { label: 'Academic Calendar', href: '/academic-calendar' },
-      { label: 'Course Catalog', href: '/course-catalog' },
+      { label: 'All Faculties', href: '/all-faculty' },
+      { label: 'Admission Requirements', href: '/admission-requirements' },
+      { label: 'Fee Structure', href: '/fee-structure' },
     ],
   },
   // {
@@ -50,29 +52,34 @@ const menuItems: MenuItem[] = [
     label: 'Student Life',
     submenu: [
       { label: 'Campus Life', href: '/campus-life' },
+      { label: 'Notices', href: '/notices' },
+      { label: 'Holiday List', href: '/holiday' },
+      { label: 'how to apply', href: '/scholarships' },
       { label: 'Student Portal', href: '/student/dashboard' },
       { label: 'Scholarships', href: '/scholarships' },
     ],
   },
-  {
-    label: 'E - Services',
-    submenu: [
-      { label: 'Student Login', href: '/studentlogin' },
-      { label: 'Staff Login', href: '/stafflogin' },
-      { label: 'Track Application', href: '/student/track-application' },
-      { label: 'Fee Payment', href: '/student/fees' },
-    ],
-  },
-  {
-    label: 'Campuses',
-    submenu: [
-      { label: 'About Dumri College', href: '/about' },
-      { label: 'Gallery', href: '/gallery' },
-    ],
-  },
+  // {
+  //   label: 'E - Services',
+  //   submenu: [
+  //     { label: 'Student Login', href: '/studentlogin' },
+  //     { label: 'Staff Login', href: '/stafflogin' },
+  //     { label: 'Track Application', href: '/student/track-application' },
+  //     { label: 'Fee Payment', href: '/student/fees' },
+  //   ],
+  // },
+  // {
+  //   label: 'Campuses',
+  //   submenu: [
+  //     { label: 'About Dumri College', href: '/about' },
+  //     { label: 'Gallery', href: '/gallery' },
+  //   ],
+  // },
   {
     label: 'Visitors',
     submenu: [
+      { label: 'Gallery', href: '/gallery' },
+      { label: 'Events', href: '/events' },
       { label: 'Contact Us', href: '/contact' },
       { label: 'FAQ', href: '/faq' },
       { label: 'How to Apply', href: '/how-to-apply' },
@@ -96,6 +103,8 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState<'en' | 'hi'>('en');
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -105,6 +114,40 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Hide Google Translate bar with JavaScript
+    const hideGoogleTranslateBar = () => {
+      const frames = document.querySelectorAll('iframe.goog-te-banner-frame, .goog-te-banner-frame, iframe.skiptranslate');
+      frames.forEach(frame => {
+        if (frame instanceof HTMLElement) {
+          frame.style.display = 'none';
+          frame.style.visibility = 'hidden';
+        }
+      });
+
+      // Remove the body top margin/padding that Google adds
+      document.body.style.top = '0';
+      document.body.style.position = 'static';
+
+      // Hide the translate bar container
+      const bannerFrames = document.getElementsByClassName('goog-te-banner-frame');
+      for (let i = 0; i < bannerFrames.length; i++) {
+        (bannerFrames[i] as HTMLElement).style.display = 'none';
+      }
+    };
+
+    // Run immediately
+    hideGoogleTranslateBar();
+
+    // Run periodically to catch late-loading elements
+    const interval = setInterval(hideGoogleTranslateBar, 100);
+
+    // Clean up after 5 seconds
+    setTimeout(() => clearInterval(interval), 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleMenuClick = () => {
@@ -122,8 +165,53 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
     setExpandedItem(expandedItem === label ? null : label);
   };
 
+  const handleLanguageChange = (lang: 'en' | 'hi') => {
+    setCurrentLanguage(lang);
+    setShowLanguageMenu(false);
+    
+    // Using Google Translate to translate the page
+    const googleTranslateElementInit = () => {
+      // @ts-ignore
+      if (window.google && window.google.translate) {
+        // @ts-ignore
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi',
+            layout: 0, // SIMPLE layout
+          },
+          'google_translate_element'
+        );
+      }
+    };
+
+    // Load Google Translate script if not already loaded
+    if (!document.getElementById('google-translate-script')) {
+      const script = document.createElement('script');
+      script.id = 'google-translate-script';
+      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.async = true;
+      document.body.appendChild(script);
+      
+      // @ts-ignore
+      window.googleTranslateElementInit = googleTranslateElementInit;
+    }
+
+    // Trigger translation
+    setTimeout(() => {
+      const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      }
+    }, 1000);
+  };
+
   return (
     <>
+      {/* Hidden Google Translate Element */}
+      <div id="google_translate_element" style={{ display: 'none' }}></div>
+
       {/* Header overlay on carousel - Hidden when scrolled */}
       {!isScrolled && (
         <div className="absolute top-0 left-0 right-0 z-30 pointer-events-none">
@@ -264,10 +352,6 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                     STAFF LOGIN
                   </button>
                 </div>
-                {/* Language Selector */}
-                <div className="mt-4">
-                  <LanguageSelector variant="simple" />
-                </div>
               </div>
 
               {/* Menu Items */}
@@ -330,6 +414,38 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                   </div>
                 ))}
               </nav>
+
+              {/* Language Selector */}
+              <div className="px-7 mt-6 pt-6 border-t border-gray-200">
+                <div className="mb-3">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Globe className="w-5 h-5 text-[#2563EB]" />
+                    <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Select Language</h3>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => handleLanguageChange('en')}
+                    className={`py-3 px-4 rounded-lg font-medium text-sm tracking-wide transition-all border-2 ${ 
+                      currentLanguage === 'en' 
+                        ? 'bg-[#2563EB] text-white border-[#2563EB]' 
+                        : 'bg-white text-gray-700 border-gray-300 hover:border-[#2563EB] hover:text-[#2563EB]'
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    onClick={() => handleLanguageChange('hi')}
+                    className={`py-3 px-4 rounded-lg font-medium text-sm tracking-wide transition-all border-2 ${ 
+                      currentLanguage === 'hi' 
+                        ? 'bg-[#2563EB] text-white border-[#2563EB]' 
+                        : 'bg-white text-gray-700 border-gray-300 hover:border-[#2563EB] hover:text-[#2563EB]'
+                    }`}
+                  >
+                    हिंदी
+                  </button>
+                </div>
+              </div>
 
               {/* Chat Widget */}
               <div className="fixed bottom-8 right-[470px] z-[110]">

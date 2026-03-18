@@ -1,6 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Alice&display=swap');
-
 @custom-variant strong (&:is(.dark *));
+
+/* Hide Google Translate Bar */
+.goog-te-banner-frame,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+/* Additional Google Translate hiding */
+.goog-te-banner-frame.skiptranslate,
+body > .skiptranslate {
+  display: none !important;
+}
+
+body > iframe.skiptranslate {
+  display: none !important;
+}
+
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-ftab-float {
+  display: none !important;
+}
+
+#google_translate_element .skiptranslate {
+  display: none !important;
+}
+
+#google_translate_element .goog-te-gadget {
+  display: none !important;
+}
+
+#google_translate_element .goog-te-combo {
+  display: none !important;
+}
+
+.goog-te-gadget,
+.goog-te-combo,
+.goog-logo-link {
+  display: none !important;
+}
+
+/* Force body to stay in place */
+body.translated-ltr {
+  top: 0 !important;
+}
+
+body.translated-rtl {
+  top: 0 !important;
+}
 
 :root {
   --font-size: 16px;
@@ -269,6 +328,113 @@ html {
 
 .table-scroll::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Sticky table columns - First 2 columns fixed */
+/* For tables WITHOUT checkbox column */
+.table-scroll table th:nth-child(1),
+.table-scroll table td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: inherit;
+  min-width: 140px;
+}
+
+.table-scroll table th:nth-child(2),
+.table-scroll table td:nth-child(2) {
+  position: sticky;
+  left: 140px;
+  z-index: 10;
+  background-color: inherit;
+  min-width: 200px;
+}
+
+/* For tables WITH checkbox column - make columns 2 and 3 sticky */
+.table-scroll.has-checkbox table th:nth-child(1),
+.table-scroll.has-checkbox table td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: inherit;
+  min-width: 50px;
+  max-width: 50px;
+}
+
+.table-scroll.has-checkbox table th:nth-child(2),
+.table-scroll.has-checkbox table td:nth-child(2) {
+  position: sticky;
+  left: 50px;
+  z-index: 10;
+  background-color: inherit;
+  min-width: 120px;
+}
+
+.table-scroll.has-checkbox table th:nth-child(3),
+.table-scroll.has-checkbox table td:nth-child(3) {
+  position: sticky;
+  left: 170px;
+  z-index: 10;
+  background-color: inherit;
+  min-width: 200px;
+}
+
+/* Add shadow to indicate scrollable content - for tables without checkbox */
+.table-scroll table th:nth-child(2)::after,
+.table-scroll table td:nth-child(2)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -8px;
+  bottom: 0;
+  width: 8px;
+  background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
+  pointer-events: none;
+}
+
+/* Shadow for tables with checkbox - apply to 3rd column */
+.table-scroll.has-checkbox table th:nth-child(3)::after,
+.table-scroll.has-checkbox table td:nth-child(3)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -8px;
+  bottom: 0;
+  width: 8px;
+  background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
+  pointer-events: none;
+}
+
+.table-scroll.has-checkbox table th:nth-child(2)::after,
+.table-scroll.has-checkbox table td:nth-child(2)::after {
+  display: none;
+}
+
+/* Ensure header cells maintain their background */
+.table-scroll table thead th:nth-child(1),
+.table-scroll table thead th:nth-child(2),
+.table-scroll.has-checkbox table thead th:nth-child(3) {
+  background-color: rgb(241 245 249); /* bg-slate-100 */
+}
+
+/* Ensure body cells maintain alternating backgrounds */
+.table-scroll table tbody tr:nth-child(odd) td:nth-child(1),
+.table-scroll table tbody tr:nth-child(odd) td:nth-child(2),
+.table-scroll.has-checkbox table tbody tr:nth-child(odd) td:nth-child(3) {
+  background-color: white;
+}
+
+.table-scroll table tbody tr:nth-child(even) td:nth-child(1),
+.table-scroll table tbody tr:nth-child(even) td:nth-child(2),
+.table-scroll.has-checkbox table tbody tr:nth-child(even) td:nth-child(3) {
+  background-color: rgb(248 250 252); /* bg-slate-50 */
+}
+
+/* Maintain hover state */
+.table-scroll table tbody tr:hover td:nth-child(1),
+.table-scroll table tbody tr:hover td:nth-child(2),
+.table-scroll.has-checkbox table tbody tr:hover td:nth-child(3) {
+  background-color: rgb(239 246 255); /* bg-blue-50 */
 }
 
 /* Light Gradient Utilities */

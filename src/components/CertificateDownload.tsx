@@ -126,6 +126,21 @@ export function CertificateDownload() {
           </Card>
         </div>
 
+        {/* Request New Certificate */}
+        <Card className="p-6 bg-gradient-to-r from-blue-50 to-cyan-50 shadow-lg hover:shadow-xl transition-all">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Need a New Certificate?</h3>
+              <p className="text-slate-600">
+                Request additional certificates or duplicates from the admin office
+              </p>
+            </div>
+            <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
+              Request Certificate
+            </Button>
+          </div>
+        </Card>
+
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificates.map((cert) => (
@@ -174,21 +189,6 @@ export function CertificateDownload() {
             </Card>
           ))}
         </div>
-
-        {/* Request New Certificate */}
-        <Card className="p-6 bg-gradient-to-r from-blue-50 to-cyan-50 shadow-lg hover:shadow-xl transition-all">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">Need a New Certificate?</h3>
-              <p className="text-slate-600">
-                Request additional certificates or duplicates from the admin office
-              </p>
-            </div>
-            <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
-              Request Certificate
-            </Button>
-          </div>
-        </Card>
       </div>
     </PortalLayout>
   );
