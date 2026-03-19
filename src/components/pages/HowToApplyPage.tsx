@@ -154,12 +154,12 @@ export function HowToApplyPage() {
           </div>
 
           <p className="text-white/90 text-lg max-w-2xl leading-relaxed">
-            Your journey to excellence begins here - Simple steps to join Dumri College
+            Your journey to excellence begins here - Simple steps to join Jharkhand Commerce Inter College
           </p>
         </div>
       </section>
 
-      {/* Statistics */}
+      {/* Statistics
       <section className="py-16 bg-gradient-to-br from-[#2563EB] to-[#1e40af] text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
@@ -178,7 +178,7 @@ export function HowToApplyPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Application Steps */}
       <section className="py-20 bg-white">

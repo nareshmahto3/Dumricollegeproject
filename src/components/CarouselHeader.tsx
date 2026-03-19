@@ -81,8 +81,8 @@ const menuItems: MenuItem[] = [
       { label: 'Gallery', href: '/gallery' },
       { label: 'Events', href: '/events' },
       { label: 'Contact Us', href: '/contact' },
+      { label: 'Gallery', href: '/gallery' },
       { label: 'FAQ', href: '/faq' },
-      { label: 'How to Apply', href: '/how-to-apply' },
     ],
   },
 ];
@@ -239,7 +239,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
             className="absolute font-['Alice',serif] h-[84px] leading-[20px] left-[107px] not-italic text-[25px] text-black top-[17px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <p className="mb-0 ">Dumri Commerce</p>
+            <p className="mb-0 ">Jharkhand Commerce </p>
             <p>
               <br aria-hidden="true" />
               Inter College

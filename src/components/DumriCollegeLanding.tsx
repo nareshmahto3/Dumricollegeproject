@@ -136,26 +136,27 @@ const notices = [
     id: 2,
     title: "SCHOLARSHIP NOTIFICATION:",
     message: "Merit-based scholarships up to 100% tuition fee waiver available. Apply before March 31, 2026.",
-    primaryButton: { text: "Learn More", link: "/apply" },
-    secondaryButton: { text: "Check Eligibility", link: "/programs" },
+   
+    secondaryButton: { text: "Check Eligibility", link: "/" },
+     primaryButton: { text: "Apply Now", link: "/scholarships" },
     bgGradient: "from-blue-600 via-blue-500 to-blue-600",
   },
-  {
-    id: 3,
-    title: "PLACEMENT DRIVE 2026:",
-    message: "Registration open for final year students. 150+ companies participating. Last date: March 20, 2026.",
-    primaryButton: { text: "Register Now", link: "/apply" },
-    secondaryButton: { text: "View Companies", link: "/programs" },
-    bgGradient: "from-green-600 via-emerald-500 to-green-600",
-  },
-  {
-    id: 4,
-    title: "ANNUAL FEST 2026:",
-    message: "Join us for our grand cultural & technical fest from March 15-17. Register your team today!",
-    primaryButton: { text: "Register Team", link: "/apply" },
-    secondaryButton: { text: "Event Details", link: "/programs" },
-    bgGradient: "from-purple-600 via-pink-500 to-purple-600",
-  },
+  // {
+  //   id: 3,
+  //   title: "PLACEMENT DRIVE 2026:",
+  //   message: "Registration open for final year students. 150+ companies participating. Last date: March 20, 2026.",
+  //   primaryButton: { text: "Register Now", link: "/apply" },
+  //   secondaryButton: { text: "View Companies", link: "/programs" },
+  //   bgGradient: "from-green-600 via-emerald-500 to-green-600",
+  // },
+  // {
+  //   id: 4,
+  //   title: "ANNUAL FEST 2026:",
+  //   message: "Join us for our grand cultural & technical fest from March 15-17. Register your team today!",
+  //   primaryButton: { text: "Register Team", link: "/apply" },
+  //   secondaryButton: { text: "Event Details", link: "/programs" },
+  //   bgGradient: "from-purple-600 via-pink-500 to-purple-600",
+  // },
 ];
 
 export default function DumriCollegeLanding() {
@@ -459,7 +460,7 @@ export default function DumriCollegeLanding() {
             </div>
           </motion.div>
 
-          {/* Apply Now */}
+          {/* Apply Now
           <motion.button
             onClick={() => navigate("/apply")}
             initial={{ opacity: 0, y: 20 }}
@@ -482,8 +483,55 @@ export default function DumriCollegeLanding() {
                   "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
               }}
             />
-          </motion.button>
+          </motion.button> */}
 
+          {/* About Us */}
+          <motion.button
+            onClick={() => navigate("/about")}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
+          >
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              About Us
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
+          </motion.button>
+        {/* Programs */}
+          <motion.button
+            onClick={() => navigate("/programs")}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
+          >
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Programs
+            </span><div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
+          </motion.button>
           {/* Admission */}
           <motion.button
             onClick={() => navigate("/apply")}
@@ -509,7 +557,7 @@ export default function DumriCollegeLanding() {
             />
           </motion.button>
 
-          {/* Gallery */}
+          {/* Notice */}
           <motion.button
             onClick={() => navigate("/gallery")}
             initial={{ opacity: 0, y: 20 }}
@@ -523,7 +571,7 @@ export default function DumriCollegeLanding() {
             className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
           >
             <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
-              Gallery
+              Notices
             </span>
             <div
               className="absolute w-px h-9 right-0"
@@ -559,48 +607,7 @@ export default function DumriCollegeLanding() {
             />
           </motion.button>
 
-          {/* About Us */}
-          <motion.button
-            onClick={() => navigate("/about")}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            whileHover={{
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
-          >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
-              About Us
-            </span>
-            <div
-              className="absolute w-px h-9 right-0"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
-              }}
-            />
-          </motion.button>
-
-          {/* Programs */}
-          <motion.button
-            onClick={() => navigate("/programs")}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            whileHover={{
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
-          >
-            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
-              Programs
-            </span>
-          </motion.button>
+         
         </div>
       </motion.section>
 
@@ -763,20 +770,20 @@ export default function DumriCollegeLanding() {
               <span className="text-white">Life</span>
             </h2>
             <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-              Explore the vibrant campus life at Dumri College
+              Explore the vibrant campus life at Jharkhand Commerce Inter College
               with various facilities and services
             </p>
           </motion.div>
 
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-6">
             {[
-              { name: "Placements", icon: Briefcase },
-              { name: "Consulting", icon: UserCheck },
+              { name: "Programs", icon: Briefcase },
+              // { name: "Consulting", icon: UserCheck },
               { name: "Admissions", icon: GraduationCap },
-              { name: "Health Services", icon: Heart },
-              { name: "Examinations", icon: ClipboardCheck },
-              { name: "Student Council", icon: Users },
-              { name: "Centres & Cells", icon: Building2 },
+              { name: "Administration", icon: Heart },
+              { name: "Contact Us", icon: ClipboardCheck },
+              { name: "Notice", icon: Users },
+              { name: "Tuition & Fee", icon: Building2 },
             ].map((item, idx) => {
               const IconComponent = item.icon;
               return (
@@ -1188,11 +1195,12 @@ export default function DumriCollegeLanding() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8">
             {[
-              { value: "25+", label: "Academic Departments" },
-              { value: "5000+", label: "Students" },
-              { value: "200+", label: "Faculty Members" },
-              { value: "50,000+", label: "Library Books" },
-              { value: "10,000+", label: "Alumni" },
+              
+              { value: "1000+", label: "Students" },
+              { value: "5+", label: "Academic Departments" },
+              { value: "20+", label: "Faculty Members" },
+              { value: "500+", label: "Library Books" },
+              { value: "1000+", label: "Alumni" },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
@@ -1266,19 +1274,19 @@ export default function DumriCollegeLanding() {
           {(() => {
             const achievements = [
               {
-                title: "NAAC A+ Accreditation",
+                title: "Excellent Academic Performance",
                 description:
-                  "Recognized for excellence in higher education with the highest grade",
+                  "Students consistently achieve high results in the Intermediate examinations conducted by the Jharkhand Academic Council, reflecting strong academic guidance and dedication.",
               },
               {
-                title: "100% Placement Rate",
+                title: "High Pass Percentage",
                 description:
-                  "Our students are recruited by top companies across various industries",
+                  "The Commerce stream in Jharkhand regularly records strong success rates, with around 91% pass percentage in Class 12 Commerce examinations.",
               },
               {
-                title: "State-of-the-Art Infrastructure",
+                title: "Career-Oriented Commerce Education",
                 description:
-                  "Modern classrooms, labs, library, and sports facilities",
+                  "The college provides strong preparation in Accountancy, Business Studies, and Economics, helping students build careers in finance, business, and entrepreneurship.",
               },
             ];
             const AchievCard = ({
@@ -1394,7 +1402,7 @@ export default function DumriCollegeLanding() {
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6 md:mb-8">
               <span className="text-[#886E53]">
-                University{" "}
+                  College{" "}
               </span>
               <span className="text-[#0C4D8B]">
                 Achievements
@@ -1410,7 +1418,7 @@ export default function DumriCollegeLanding() {
                 { key: "student" as const, label: "Student" },
                 {
                   key: "university" as const,
-                  label: "University",
+                  label: "College",
                 },
               ].map((tab) => (
                 <motion.button
@@ -1467,39 +1475,86 @@ export default function DumriCollegeLanding() {
                   {achievementTab === "faculty" && (
                     <>
                       <h3 className="text-2xl font-medium text-black mb-4">
-                        Distinguished Service Award
+                        Excellence in Teaching
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Dr. Joseph C C, Vice Chancellor received
-                        the Distinguished Service Award during
-                        the 55th Annual Family Day 2025 - "A Day
-                        to Reunite, Reflect, and Reignite"
+                       Faculty members have been recognized for their dedication to quality education and innovative teaching methods that help students achieve strong academic results.
+                      </p>
+                      <h3 className="text-2xl font-medium text-black mb-4">
+                        Academic Contribution Awards
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                      Teachers are honored for their contribution to developing effective learning environments and guiding students in commerce, arts, and science streams.
+                      </p>
+                       <h3 className="text-2xl font-medium text-black mb-4">
+                       Student Mentorship Recognition
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                     Faculty members receive appreciation for mentoring students, supporting career guidance, and preparing them for higher education programs such as Bachelor of Commerce, Bachelor of Arts, and Bachelor of Science.
                       </p>
                     </>
                   )}
+                  
                   {achievementTab === "student" && (
                     <>
                       <h3 className="text-2xl font-medium text-black mb-4">
-                        National Merit Scholarship
+                       Academic Excellence Award
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Students from Dumri College received
-                        National Merit Scholarships for
-                        outstanding academic performance and
-                        leadership in extracurricular activities
+                      Given to students who achieve outstanding marks in Intermediate examinations conducted by the Jharkhand Academic Council.
+                      </p>
+                       <h3 className="text-2xl font-medium text-black mb-4">
+                      Commerce Topper Award
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                     Presented to students who secure the highest marks in commerce subjects such as Accountancy, Business Studies, and Economics.
+                      </p>
+                        <h3 className="text-2xl font-medium text-black mb-4">
+                     Best All-Rounder Student Award
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                     Awarded to students who excel in academics, leadership, cultural activities, and overall contribution to college life.
+                      </p>
+                         <h3 className="text-2xl font-medium text-black mb-4">
+                    Sports Achievement Award
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                    Recognizes students who perform exceptionally well in sports competitions at inter-college, district, or state levels.
+                      </p>
+                     
+                         <h3 className="text-2xl font-medium text-black mb-4">
+                   Cultural Excellence Award
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                  Honors students who demonstrate outstanding talent in cultural events, debates, quizzes, and stage performances.
                       </p>
                     </>
                   )}
                   {achievementTab === "university" && (
                     <>
                       <h3 className="text-2xl font-medium text-black mb-4">
-                        Excellence in Research
+                       Academic Excellence Award
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Dumri College recognized as a center of
-                        excellence for research and innovation,
-                        contributing significantly to academic
-                        publications and patents
+                       Recognized for maintaining high academic standards and excellent student performance in examinations conducted by the Jharkhand Academic Council.
+                      </p>
+                      <h3 className="text-2xl font-medium text-black mb-4">
+                      Best Commerce Education Award
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                       Honored for providing quality education in commerce subjects such as Accountancy, Business Studies, and Economics.
+                      </p>
+                       <h3 className="text-2xl font-medium text-black mb-4">
+                     Outstanding Educational Institution Award
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                      Awarded for the college’s contribution to higher secondary education and student development in the region.
+                      </p>
+                        <h3 className="text-2xl font-medium text-black mb-4">
+                     Excellence in Student Development
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                      Recognized for encouraging students to participate in academic competitions, cultural activities, and leadership programs.
                       </p>
                     </>
                   )}
@@ -1534,7 +1589,7 @@ export default function DumriCollegeLanding() {
             </div>
 
             {/* View All Button */}
-            <div className="text-center mt-8">
+            {/* <div className="text-center mt-8">
               <motion.button
                 onClick={() => navigate("/achievements")}
                 className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
@@ -1543,7 +1598,7 @@ export default function DumriCollegeLanding() {
               >
                 View All
               </motion.button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -1820,11 +1875,11 @@ export default function DumriCollegeLanding() {
           {(() => {
             const alumniList = [
               {
-                name: "SHWETA SASTRI",
-                position: "Managing Director",
+                name: "SNAJAY KUMAR MAHTO",
+                position: "Personal Assistant(PA)",
                 organization:
-                  "Canadian International School Bangalore",
-                degree: "Bachelor of Business Management (BBM)",
+                  "Personal Assistant to the Jairam Mahto (MLA),Dumri, Jharkhand",
+                degree: "Intermediate in Commerce",
                 year: "2004",
                 image:
                   "https://images.unsplash.com/photo-1770364019741-3518f4f05513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGJ1c2luZXNzJTIwbGVhZGVyfGVufDF8fHx8MTc3MjI3OTc5MXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -2173,7 +2228,7 @@ export default function DumriCollegeLanding() {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Join Dumri College and be part of a legacy of
+              Join Jharkhand Commerce Inter College and be part of a legacy of
               excellence, innovation, and success.
             </motion.p>
             <motion.div

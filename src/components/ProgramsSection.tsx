@@ -40,7 +40,7 @@ export function ProgramsSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
             >
               <div className="relative h-56">
@@ -78,18 +78,17 @@ export function ProgramsSection() {
                     onClick={() => navigate('/programs/icom')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-white cursor-pointer hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
+                    className="flex-1 cursor-pointer bg-white hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
                   >
-                    Read More
+                    Read More..
                   </motion.button>
                   <motion.button
                     onClick={() => navigate('/apply')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-[#2563EB] cursor-pointer hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
+                    className="flex-1 cursor-pointer bg-[#2563EB] hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
                   >
                     Apply Now
-                    <span className="text-base">→</span>
                   </motion.button>
                 </div>
               </div>
@@ -160,7 +159,7 @@ export function ProgramsSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6 }}
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
             >
               <div className="relative h-56">
@@ -198,7 +197,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/programs/ia')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 cursor-pointer bg-white hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
+                    className="flex-1 bg-white cursor-pointer hover:bg-gray-50 text-[#2563EB] border-2 border-[#2563EB] py-2.5 px-6 rounded-full font-medium transition-colors text-sm"
                   >
                     Read More
                   </motion.button>
@@ -206,7 +205,7 @@ export function ProgramsSection() {
                     onClick={() => navigate('/apply')}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 cursor-pointer bg-[#2563EB] hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
+                    className="flex-1 bg-[#2563EB] cursor-pointer hover:bg-[#1e40af] text-white py-2.5 px-6 rounded-full font-medium transition-colors text-sm flex items-center justify-center gap-1"
                   >
                     Apply Now
                     <span className="text-base">→</span>
@@ -238,7 +237,7 @@ export function ProgramsSection() {
               className="inline-flex cursor-pointer items-center gap-2 text-gray-700 text-lg font-semibold hover:gap-4 transition-all"
               onClick={() => navigate('/apply')}
             >
-              Join Dumri College Now
+              Join Jharkhand Commerce Inter College
               <span className="text-2xl">→</span>
             </motion.button>
           </motion.div>

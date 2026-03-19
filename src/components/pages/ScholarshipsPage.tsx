@@ -119,7 +119,7 @@ export function ScholarshipsPage() {
               Supporting Student Dreams
             </h2>
             <p className="text-gray-600 text-base leading-7">
-              At Dumri College, we believe that financial constraints should not hinder talented students from
+              At Jharkhand Commerce Inter College, we believe that financial constraints should not hinder talented students from
               pursuing higher education. We offer various scholarships and financial aid programs to support
               deserving students in their academic journey.
             </p>
