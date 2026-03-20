@@ -1,4 +1,4 @@
-import * as react from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
@@ -22,7 +22,7 @@ const sidebarMenuItems = [
 
 export function AboutPage() {
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = react.useState('who-we-are');
+  const [activeSection, setActiveSection] = useState('who-we-are');
 
   return (
     <div className="min-h-screen bg-white">
@@ -31,7 +31,7 @@ export function AboutPage() {
 
       {/* Hero Banner Section */}
       <section
-        className="relative h-[385px] bg-cover bg-center"
+        className="relative  bg-cover bg-center"
         style={{
           backgroundImage: 'url(https://images.unsplash.com/photo-1673609218895-bb331f054e7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwY2FtcHVzJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmV8ZW58MXx8fHwxNzcyNDk3NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080)',
         }}
@@ -55,7 +55,7 @@ export function AboutPage() {
 
           {/* Title */}
           <h1 className="text-5xl font-light text-white mb-5 font-serif">
-            About Jharkhand Commerce Inter College
+            About Dumri College
           </h1>
 
           {/* Decorative Line */}
@@ -76,7 +76,7 @@ export function AboutPage() {
       </section>
 
       {/* Main Content Section */}
-      <section className="bg-[#F6F4EE] py-20 lg:py-32">
+      <section className="bg-[#F6F4EE] ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Left Sidebar */}
@@ -84,7 +84,7 @@ export function AboutPage() {
               <div className="bg-white rounded-xl p-8 shadow-sm">
                 {/* Sidebar Title */}
                 <h3 className="text-xl font-light text-gray-900 mb-3 font-serif">
-                  Jharkhand Commerce Inter College Inside
+                  Dumri Inside
                 </h3>
 
                 {/* Decorative Line */}
@@ -98,11 +98,10 @@ export function AboutPage() {
                     <button
                       key={item.id}
                       onClick={() => setActiveSection(item.id)}
-                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all ${
-                        activeSection === item.id
+                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all ${activeSection === item.id
                           ? 'bg-[#2F584F] text-white'
                           : 'bg-[#F6F4EE] text-gray-900 hover:bg-gray-100'
-                      }`}
+                        }`}
                     >
                       <span className="font-medium">{item.label}</span>
                       <ChevronRight className="w-4 h-4" />
@@ -126,10 +125,10 @@ export function AboutPage() {
               {/* Main Title and Description */}
               <div className="mb-8">
                 <h2 className="text-3xl font-light text-gray-900 mb-5 font-serif leading-tight">
-                  About Jharkhand Commerce Inter College
+                  About Dumri College
                 </h2>
                 <p className="text-gray-600 text-base leading-7">
-                  At Jharkhand Commerce Inter College, education goes beyond textbooks and classrooms. We believe in empowering
+                  At Dumri College, education goes beyond textbooks and classrooms. We believe in empowering
                   <br className="hidden lg:block" />
                   students to explore their passions, challenge conventions, and discover their potential through
                   <br className="hidden lg:block" />

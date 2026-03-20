@@ -167,6 +167,21 @@ const AdmissionRequirementsPage = lazy(() =>
     default: m.AdmissionRequirementsPage,
   }))
 );
+const IComProgramPage = lazy(() =>
+  import("./components/pages/IComProgramPage").then((m) => ({
+    default: m.IComProgramPage,
+  }))
+);
+const IScProgramPage = lazy(() =>
+  import("./components/pages/IScProgramPage").then((m) => ({
+    default: m.IScProgramPage,
+  }))
+);
+const IAProgramPage = lazy(() =>
+  import("./components/pages/IAProgramPage").then((m) => ({
+    default: m.IAProgramPage,
+  }))
+);
 const NoticesPage = lazy(() =>
   import("./components/pages/NoticesPage").then((m) => ({
     default: m.NoticesPage,
@@ -550,6 +565,9 @@ export const router = createBrowserRouter([
       { path: "/course-catalog", Component: CourseCatalogPage },
       { path: "/how-to-apply", Component: HowToApplyPage },
       { path: "/programs", Component: ProgramsPage },
+      { path: "/programs/icom", Component: IComProgramPage },
+      { path: "/programs/isc", Component: IScProgramPage },
+      { path: "/programs/ia", Component: IAProgramPage },
       { path: "/programs/:programId", Component: ProgramDetailPage },
       { path: "/events", Component: EventsPage },
       { path: "/fee-structure", Component: FeeStructurePage },

@@ -5,35 +5,50 @@ import { ChevronRight } from 'lucide-react';
 import imgAboutSidebarThumb from "../imports/svg-xmjpvvfj2s";
 
 const sidebarMenuItems = [
-  { 
-    id: 'overview', 
-    label: 'About Jharkhand Commerce Inter College', 
+  {
+    id: 'overview',
+    label: 'About Jharkhand Commerce Inter College',
     path: '/about',
-    image: 'https://images.unsplash.com/photo-1718327453695-4d32b94c90a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMGxpYnJhcnl8ZW58MXx8fHwxNzcyNDQ5ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080'
+    image: 'https://images.unsplash.com/photo-1718327453695-4d32b94c90a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMGxpYnJhcnl8ZW58MXx8fHwxNzcyNDQ5ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerImage: 'https://images.unsplash.com/photo-1682161473727-402b497251b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmUlMjBtb2Rlcm58ZW58MXx8fHwxNzczOTM4MzQ0fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerTitle: 'About Dumri College',
+    bannerDescription: 'Education goes beyond textbooks and classrooms. We believe in empowering students to explore their passions and challenge conventions.'
   },
-  { 
-    id: 'administration', 
-    label: 'Administration', 
+  {
+    id: 'administration',
+    label: 'Administration',
     path: '/about/administration',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80'
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1748261595246-5516b94b2dc0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZG1pbmlzdHJhdGlvbiUyMG9mZmljZSUyMHByb2Zlc3Npb25hbHxlbnwxfHx8fDE3NzM5MzgzNDR8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerTitle: 'Administration',
+    bannerDescription: 'Meet our dedicated administrative team committed to excellence in education. Our leadership ensures smooth operations and academic excellence across all departments.'
   },
-  { 
-    id: 'founder', 
-    label: 'Founder', 
+  {
+    id: 'founder',
+    label: 'Founder',
     path: '/about/founder',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80'
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1769071166862-8cc3a6f2ac5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3VuZGVyJTIwcG9ydHJhaXQlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzczOTM4MzQ1fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerTitle: 'Founder',
+    bannerDescription: 'Learn about the visionary founder who established Dumri College with a mission to provide quality education and empower generations of students.'
   },
-  { 
-    id: 'principal-message', 
-    label: 'Principal Message', 
+  {
+    id: 'principal-message',
+    label: 'Principal Message',
     path: '/about/principal-message',
-    image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80'
+    image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1765366417030-16d9765d920a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBvZmZpY2UlMjBkZXNrJTIwd29ya3NwYWNlfGVufDF8fHx8MTc3MzkzODM0OXww&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerTitle: 'Principal Message',
+    bannerDescription: 'A message from our Principal, guiding our institution towards academic excellence and holistic development of every student.'
   },
-  { 
-    id: 'alumni', 
-    label: 'Our Alumni', 
+  {
+    id: 'alumni',
+    label: 'Our Alumni',
     path: '/about/alumni',
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=80'
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1748144679532-c36d9d5584e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwZ3JhZHVhdGlvbiUyMGFsdW1uaXxlbnwxfHx8fDE3NzM5MzgzNDV8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerTitle: 'Our Alumni',
+    bannerDescription: 'Celebrating the success stories of our distinguished alumni who have made significant contributions in various fields across the globe.'
   },
 ];
 
@@ -58,9 +73,9 @@ export function AboutLayout() {
 
       {/* Hero Banner Section */}
       <section
-        className="relative h-[385px] bg-cover bg-center"
+        className="relative h-[385px] bg-cover bg-center transition-all duration-500"
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1673609218895-bb331f054e7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwY2FtcHVzJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmV8ZW58MXx8fHwxNzcyNDk3NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080)',
+          backgroundImage: `url(${activeMenuItem.bannerImage})`,
         }}
       >
         {/* Gradient Overlay */}
@@ -78,11 +93,13 @@ export function AboutLayout() {
             </button>
             <ChevronRight className="w-4 h-4 text-white" />
             <span className="text-white text-base">About us</span>
+            <ChevronRight className="w-4 h-4 text-white" />
+            <span className="text-white text-base">{activeMenuItem.label}</span>
           </div>
 
           {/* Title */}
           <h1 className="text-5xl font-light text-white mb-5 font-serif">
-            About Dumri College
+            {activeMenuItem.bannerTitle}
           </h1>
 
           {/* Decorative Line */}
@@ -92,9 +109,7 @@ export function AboutLayout() {
 
           {/* Description */}
           <p className="text-white/90 text-base leading-7 max-w-2xl">
-            Education goes beyond textbooks and classrooms. We believe in empowering students
-            <br />
-            to explore their passions and challenge conventions.
+            {activeMenuItem.bannerDescription}
           </p>
         </div>
 
@@ -125,16 +140,15 @@ export function AboutLayout() {
                     <button
                       key={item.id}
                       onClick={() => navigate(item.path)}
-                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all font-['Inter',sans-serif] font-medium text-base leading-[26px] ${
-                        isActiveRoute(item.path)
+                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all font-['Inter',sans-serif] font-medium text-base leading-[26px] ${isActiveRoute(item.path)
                           ? 'bg-[#0c5776] text-white'
                           : 'bg-[#F6F4EE] text-[#030303] hover:bg-[#e8e6de]'
-                      }`}
+                        }`}
                     >
                       <span>{item.label}</span>
                       <svg className="w-4 h-4" viewBox="0 0 15.8931 12.3194" fill="none">
-                        <path 
-                          d="M10.3029 12.3194H9.34898C9.1664 8.968 11.2414 7.21023 12.2899 6.69629H0V5.66864H12.2899C9.77351 4.29027 9.15333 1.6218 9.35031 0H10.295C9.88631 3.99989 14.0936 5.66354 15.8931 5.66864V6.68675C10.6724 7.2879 10.0956 11.0413 10.3029 12.3194Z" 
+                        <path
+                          d="M10.3029 12.3194H9.34898C9.1664 8.968 11.2414 7.21023 12.2899 6.69629H0V5.66864H12.2899C9.77351 4.29027 9.15333 1.6218 9.35031 0H10.295C9.88631 3.99989 14.0936 5.66354 15.8931 5.66864V6.68675C10.6724 7.2879 10.0956 11.0413 10.3029 12.3194Z"
                           fill={isActiveRoute(item.path) ? 'white' : '#030303'}
                         />
                       </svg>
