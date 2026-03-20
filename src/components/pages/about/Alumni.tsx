@@ -77,12 +77,12 @@ export function Alumni() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center">
             <Users className="w-10 h-10 text-[#FDC72F] mx-auto mb-3" />
-            <div className="text-4xl font-bold mb-1">50,000+</div>
+            <div className="text-4xl font-bold mb-1">50,00+</div>
             <div className="text-white/90 text-sm">Total Alumni</div>
           </div>
           <div className="text-center">
             <Globe className="w-10 h-10 text-[#FDC72F] mx-auto mb-3" />
-            <div className="text-4xl font-bold mb-1">40+</div>
+            <div className="text-4xl font-bold mb-1">1</div>
             <div className="text-white/90 text-sm">Countries</div>
           </div>
           <div className="text-center">

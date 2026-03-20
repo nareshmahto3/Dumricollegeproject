@@ -26,6 +26,43 @@ const feeData: Record<StudentCategory, FeeStructure[]> = {
       annualTuition: '₹15,000',
       additionalNotes: 'Books and stationery not included'
     },
+    // {
+    //   program: 'Intermediate Science',
+    //   degree: 'I.Sc - Intermediate in Science',
+    //   duration: '2 Years',
+    //   annualTuition: '₹18,000',
+    //   additionalNotes: 'Lab fees and equipment included'
+    // },
+    // {
+    //   program: 'Intermediate Arts',
+    //   degree: 'I.A - Intermediate in Arts',
+    //   duration: '2 Years',
+    //   annualTuition: '₹12,000',
+    //   additionalNotes: 'Library access included'
+    // },
+    // {
+    //   program: 'Commerce Stream',
+    //   degree: 'B.Com - Bachelor of Commerce',
+    //   duration: '3 Years',
+    //   annualTuition: '₹20,000',
+    //   additionalNotes: 'Industry internship opportunities'
+    // },
+    // {
+    //   program: 'Science Stream',
+    //   degree: 'B.Sc - Bachelor of Science',
+    //   duration: '3 Years',
+    //   annualTuition: '₹25,000',
+    //   additionalNotes: 'Lab & technology fees included'
+    // },
+    // {
+    //   program: 'Arts & Humanities',
+    //   degree: 'B.A - Bachelor of Arts',
+    //   duration: '3 Years',
+    //   annualTuition: '₹18,000',
+    //   additionalNotes: 'Research project funding available'
+    // }
+  ],
+  graduate: [
     {
       program: 'Intermediate Science',
       degree: 'I.Sc - Intermediate in Science',
@@ -33,124 +70,22 @@ const feeData: Record<StudentCategory, FeeStructure[]> = {
       annualTuition: '₹18,000',
       additionalNotes: 'Lab fees and equipment included'
     },
-    {
+  ],
+  international: [
+  {
       program: 'Intermediate Arts',
       degree: 'I.A - Intermediate in Arts',
       duration: '2 Years',
       annualTuition: '₹12,000',
       additionalNotes: 'Library access included'
     },
-    {
-      program: 'Commerce Stream',
-      degree: 'B.Com - Bachelor of Commerce',
-      duration: '3 Years',
-      annualTuition: '₹20,000',
-      additionalNotes: 'Industry internship opportunities'
-    },
-    {
-      program: 'Science Stream',
-      degree: 'B.Sc - Bachelor of Science',
-      duration: '3 Years',
-      annualTuition: '₹25,000',
-      additionalNotes: 'Lab & technology fees included'
-    },
-    {
-      program: 'Arts & Humanities',
-      degree: 'B.A - Bachelor of Arts',
-      duration: '3 Years',
-      annualTuition: '₹18,000',
-      additionalNotes: 'Research project funding available'
-    }
-  ],
-  graduate: [
-    {
-      program: 'Commerce Postgraduate',
-      degree: 'M.Com - Master of Commerce',
-      duration: '2 Years',
-      annualTuition: '₹30,000',
-      additionalNotes: 'Advanced business analytics included'
-    },
-    {
-      program: 'Science Postgraduate',
-      degree: 'M.Sc - Master of Science',
-      duration: '2 Years',
-      annualTuition: '₹35,000',
-      additionalNotes: 'Research lab access included'
-    },
-    {
-      program: 'Arts Postgraduate',
-      degree: 'M.A - Master of Arts',
-      duration: '2 Years',
-      annualTuition: '₹28,000',
-      additionalNotes: 'Thesis guidance included'
-    },
-    {
-      program: 'Education',
-      degree: 'B.Ed - Bachelor of Education',
-      duration: '2 Years',
-      annualTuition: '₹25,000',
-      additionalNotes: 'Teaching practice included'
-    }
-  ],
-  doctoral: [
-    {
-      program: 'Doctoral - Commerce',
-      degree: 'Ph.D - Doctor of Philosophy (Commerce)',
-      duration: '3-5 Years',
-      annualTuition: '₹40,000',
-      additionalNotes: 'Research funding available'
-    },
-    {
-      program: 'Doctoral - Science',
-      degree: 'Ph.D - Doctor of Philosophy (Science)',
-      duration: '3-5 Years',
-      annualTuition: '₹45,000',
-      additionalNotes: 'Lab facilities & equipment included'
-    },
-    {
-      program: 'Doctoral - Arts',
-      degree: 'Ph.D - Doctor of Philosophy (Arts)',
-      duration: '3-5 Years',
-      annualTuition: '₹38,000',
-      additionalNotes: 'Conference funding support'
-    }
-  ],
-  international: [
-    {
-      program: 'Intermediate Programs',
-      degree: 'I.Com / I.Sc / I.A',
-      duration: '2 Years',
-      annualTuition: '₹50,000',
-      additionalNotes: 'Visa assistance provided'
-    },
-    {
-      program: 'Undergraduate Programs',
-      degree: 'B.Com / B.Sc / B.A',
-      duration: '3 Years',
-      annualTuition: '₹75,000',
-      additionalNotes: 'International student support included'
-    },
-    {
-      program: 'Postgraduate Programs',
-      degree: 'M.Com / M.Sc / M.A / B.Ed',
-      duration: '2 Years',
-      annualTuition: '₹90,000',
-      additionalNotes: 'Accommodation assistance available'
-    },
-    {
-      program: 'Doctoral Programs',
-      degree: 'Ph.D in Commerce / Science / Arts',
-      duration: '3-5 Years',
-      annualTuition: '₹1,20,000',
-      additionalNotes: 'Research scholarships available'
-    }
   ]
 };
 
 const studentCategories = [
-  { id: 'undergrad' as const, label: 'Undergraduate Tuition', icon: BookOpen },
-  { id: 'graduate' as const, label: 'Graduate Tuition', icon: GraduationCap },
-  { id: 'doctoral' as const, label: 'Doctoral (PhD) Tuition', icon: GraduationCap },
+  { id: 'undergrad' as const, label: 'Intermediate in Commerce (I.Com)', icon: BookOpen },
+  { id: 'graduate' as const, label: 'Intermediate in Science (I.Sc)', icon: GraduationCap },
+  // { id: 'doctoral' as const, label: 'Intermediate in Arts (I.A)', icon: GraduationCap },
   { id: 'international' as const, label: 'International Students Tuition', icon: GraduationCap }
 ];
 
@@ -253,7 +188,7 @@ export function FeeStructurePage() {
                   How Much Will It Cost You?
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  Our university costs are designed to remain financially accessible for students from diverse backgrounds. Each academic program includes tuition fees, registration charges, and essential learning resources ensuring students for receive education and comprehensive academic support.
+                  Our college costs are designed to remain financially accessible for students from diverse backgrounds. Each academic program includes tuition fees, registration charges, and essential learning resources ensuring students for receive education and comprehensive academic support.
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-8">
                   We offer various scholarships, financial aid programs, and flexible payment options to make quality education accessible to all deserving students.
@@ -278,7 +213,7 @@ export function FeeStructurePage() {
             {/* Section Header */}
             <div className="mb-12">
               <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
-                Annual Tuition Fees 2025–2026
+                Annual Tuition Fees 2026-2027
               </h2>
               <p className="text-gray-700 leading-relaxed max-w-4xl">
                 Our Core Courses provide the essential foundation every student needs to thrive academically and professionally. These courses strengthen critical thinking, communication, and digital literacy skills, offering insights at various levels. Each course, tuition includes technology and comprehensive academic support.

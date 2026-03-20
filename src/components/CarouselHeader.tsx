@@ -32,9 +32,10 @@ const menuItems: MenuItem[] = [
     label: 'Academics',
     submenu: [
       { label: 'Programs', href: '/programs' },
-      { label: 'All Faculties', href: '/all-faculty' },
+      { label: 'Faculties', href: '/all-faculty' },
       { label: 'Admission Requirements', href: '/admission-requirements' },
       { label: 'Fee Structure', href: '/fee-structure' },
+       { label: 'Admissions', href: '/apply' },
     ],
   },
   // {
@@ -51,12 +52,13 @@ const menuItems: MenuItem[] = [
   {
     label: 'Student Life',
     submenu: [
-      { label: 'Campus Life', href: '/campus-life' },
-      { label: 'Notices', href: '/notices' },
+    
+      { label: 'Notices and Announcements', href: '/notices' },
       { label: 'Holiday List', href: '/holiday' },
-      { label: 'how to apply', href: '/scholarships' },
+      { label: 'How to Apply', href: '/how-to-apply' },
       { label: 'Student Portal', href: '/student/dashboard' },
       { label: 'Scholarships', href: '/scholarships' },
+        { label: 'Admissions', href: '/apply' },
     ],
   },
   // {
@@ -80,9 +82,11 @@ const menuItems: MenuItem[] = [
     submenu: [
       { label: 'Gallery', href: '/gallery' },
       { label: 'Events', href: '/events' },
-      { label: 'Contact Us', href: '/contact' },
+  { label: 'How to Apply', href: '/how-to-apply' },   
+    { label: 'Admission', href: '/apply' },  
       { label: 'Gallery', href: '/gallery' },
       { label: 'FAQ', href: '/faq' },
+       { label: 'Contact Us', href: '/contact' },
     ],
   },
 ];

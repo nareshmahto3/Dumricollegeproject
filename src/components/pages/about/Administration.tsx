@@ -33,10 +33,10 @@ export function Administration() {
       {/* Header Section */}
       <div className="mb-10">
         <h2 className="font-['Bitter',serif] font-thin text-[48px] leading-[58px] text-[#030303] mb-4">
-          Univet Administration Director
+          Jharkhand Commerce Inter College Administration Director
         </h2>
         <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
-          At Univet, education goes beyond textbooks and classrooms. We believe in empowering students to explore their passion challenge conventions and discover their potential through meaningful experiences. Our distinguished faculty members are leaders their respective fields, dedicated to delivering world-class education that integrates theory with practical application.
+          At Jharkhand Commerce Inter College, education goes beyond textbooks and classrooms. We believe in empowering students to explore their passion challenge conventions and discover their potential through meaningful experiences. Our distinguished faculty members are leaders their respective fields, dedicated to delivering world-class education that integrates theory with practical application.
         </p>
       </div>
 
@@ -87,11 +87,7 @@ export function Administration() {
           </table>
         </div>
 
-        <p className="font-['Inter',sans-serif] font-normal text-sm leading-6 text-[#4c4c4c] mt-4">
-          International offices may require English language ability.
-          <br />
-          (U.S) = United states
-        </p>
+    
       </div>
 
       {/* University Administrative Directory */}

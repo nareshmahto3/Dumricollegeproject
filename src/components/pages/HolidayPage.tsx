@@ -224,7 +224,7 @@ export function HolidayPage() {
 
           {/* Description */}
           <p className="text-white/90 text-base leading-7 max-w-3xl">
-            Plan ahead with our comprehensive holiday calendar for the academic year 2025-2026.
+            Plan ahead with our comprehensive holiday calendar for the academic year 2026-2027.
             <br className="hidden sm:block" />
             View all public holidays and school breaks throughout the year.
           </p>

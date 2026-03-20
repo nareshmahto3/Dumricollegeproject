@@ -85,13 +85,11 @@ export function MissionValuesPage() {
               <div className="lg:col-span-4">
                 <div className="sticky top-8">
                   {/* Icon */}
-                  <div className="mb-6">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080" alt="Mission Icon" className="w-16 h-20" />
-                  </div>
+                 
 
                   {/* Title */}
                   <h2 className="text-4xl font-light text-gray-900 mb-8 font-serif">
-                    The Univet Mission
+                    The Jharkhand Commerce Inter College Mission
                   </h2>
 
                   {/* Counter */}
@@ -103,7 +101,7 @@ export function MissionValuesPage() {
 
                   {/* Description */}
                   <p className="text-gray-600 leading-relaxed">
-                    of our students successfully graduat<br />
+                    of our students successfully graduate<br />
                     and begin their career development
                   </p>
                 </div>
@@ -126,7 +124,7 @@ export function MissionValuesPage() {
                       Mission
                     </h3>
                     <p className="text-gray-600 leading-relaxed mb-6">
-                      Univet is committed to delivering university-based education that blends academic excellence with<br />
+                      Jharkhand Commerce Inter College is committed to delivering college-based education that blends academic excellence with<br />
                       practical knowledge, and ethical values. Our mission is to empower students with industry-relevant<br />
                       skills, innovative thinking, and global awareness preparing them to become competent responsibility<br />
                       professionals, responsible leaders, and positive contributors to society through research, learning,<br />
@@ -155,7 +153,7 @@ export function MissionValuesPage() {
       </section>
 
       {/* Award Marquee Section */}
-      <section className="bg-white py-16 overflow-hidden">
+      {/* <section className="bg-white py-16 overflow-hidden">
         <div className="relative">
           <div className="flex items-center justify-center gap-8 animate-marquee whitespace-nowrap">
             <div className="flex items-center gap-8">
@@ -170,7 +168,7 @@ export function MissionValuesPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Overview Section - Exact Figma Design */}
       <section className="bg-white py-28">
@@ -182,7 +180,7 @@ export function MissionValuesPage() {
                 Overview
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Our university curriculum is designed to deliver a balanced future-focused learning experience that empowers students with both academic knowledge and practical competencies Each program is structured to combine foundational coursework specialized major subjects hands-on learning and interdisciplinary opportunities By integrating theory research and real-world applications we prepare students to excel in a rapidly evolving global environment Students begin with core courses that build essential skills in communication, critical thinking, digital literacy, and quantitative analysis.
+                Our college curriculum is designed to deliver a balanced future-focused learning experience that empowers students with both academic knowledge and practical competencies Each program is structured to combine foundational coursework specialized major subjects hands-on learning and interdisciplinary opportunities By integrating theory research and real-world applications we prepare students to excel in a rapidly evolving global environment Students begin with core courses that build essential skills in communication, critical thinking, digital literacy, and quantitative analysis.
               </p>
             </div>
 
@@ -241,7 +239,7 @@ export function MissionValuesPage() {
                               <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
                                 <circle cx="3" cy="3" r="3" />
                               </svg>
-                              <span>Minimum GPA/grade requirements as set by the university.</span>
+                              <span>Minimum GPA/grade requirements as set by the College.</span>
                             </li>
                             <li className="flex items-center gap-2 text-gray-600">
                               <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
@@ -258,8 +256,7 @@ export function MissionValuesPage() {
                   {/* Value Accordion - Clickable */}
                   <div className="bg-transparent rounded-xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)] overflow-hidden">
                     {/* Value Header - Clickable Button */}
-                    <button
-                      onClick={() => setValueExpanded(!valueExpanded)}
+                    <div
                       className={`w-full px-6 py-5 text-left transition-colors ${valueExpanded ? 'bg-[#0c5776]' : 'bg-white hover:bg-[#0c5776] hover:text-white'
                         }`}
                     >
@@ -267,7 +264,7 @@ export function MissionValuesPage() {
                         }`}>
                         Value
                       </h3>
-                    </button>
+                    </div>
 
                     {/* Value Content - Expandable */}
                     {valueExpanded && (
@@ -504,69 +501,7 @@ export function MissionValuesPage() {
         </div>
       </section>
 
-      {/* Gallery Section - Exact Figma Design */}
-      <section className="relative h-64 overflow-hidden">
-        <div className="absolute inset-0 flex">
-          {/* Gallery Images */}
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="Gallery 1"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg2Min}
-              alt="Gallery 2"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg3Min}
-              alt="Gallery 3"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg4Min}
-              alt="Gallery 4"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg55Min}
-              alt="Gallery 5"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="Gallery 6"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-        </div>
-
-        {/* Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <a
-            href="/gallery"
-            className="bg-[#00ade2] hover:bg-[#0096c7] text-white px-7 py-4 rounded-full flex items-center gap-4 transition-colors shadow-2xl uppercase font-medium text-sm"
-          >
-            <span>Discover Campus Life</span>
-            <div className="w-4 h-4 relative">
-              <svg className="absolute inset-0" viewBox="0 0 15 15" fill="none">
-                <circle cx="7.5" cy="7.5" r="1.25" fill="white" />
-              </svg>
-            </div>
-          </a>
-        </div>
-      </section>
+      
 
       <Footer />
 

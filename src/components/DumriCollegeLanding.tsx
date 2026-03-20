@@ -559,7 +559,7 @@ export default function DumriCollegeLanding() {
 
           {/* Notice */}
           <motion.button
-            onClick={() => navigate("/gallery")}
+            onClick={() => navigate("/notices")}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -581,7 +581,80 @@ export default function DumriCollegeLanding() {
               }}
             />
           </motion.button>
+  {/* Vision & Mission */}
+          <motion.button
+            onClick={() => navigate("/mission-values")}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
+          >
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Vision & Mission
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
+          </motion.button>
 
+ {/* Vision & Mission */}
+          <motion.button
+            onClick={() => navigate("/about/principal-message")}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
+          >
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Principal
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
+          </motion.button>
+
+{/* Vision & Mission */}
+          <motion.button
+            onClick={() => navigate("/scholarships")}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            whileHover={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="relative hover:cursor-pointer flex-shrink-0 flex items-center justify-center px-4 md:px-6 transition-colors"
+          >
+            <span className="text-center text-white text-sm md:text-lg font-normal whitespace-nowrap">
+              Scholarships
+            </span>
+            <div
+              className="absolute w-px h-9 right-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 50%, rgba(255, 255, 255, 0) 100%)",
+              }}
+            />
+          </motion.button>
           {/* Contact Us */}
           <motion.button
             onClick={() => navigate("/contact")}
@@ -638,7 +711,7 @@ export default function DumriCollegeLanding() {
                 <span className="text-[#0C4D8B]">Degree</span>
               </h2>
               <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 max-w-md">
-                Dumri College offers rigorous programs, valuable
+                Jharkhand Commerce Inter College offers rigorous programs, valuable
                 resources, and countless opportunities that will
                 enable you to pursue your desired course of
                 study.
@@ -777,13 +850,16 @@ export default function DumriCollegeLanding() {
 
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-6">
             {[
-              { name: "Programs", icon: Briefcase },
+              { name: "Programs", icon: Briefcase, link: "/programs" },
               // { name: "Consulting", icon: UserCheck },
-              { name: "Admissions", icon: GraduationCap },
-              { name: "Administration", icon: Heart },
-              { name: "Contact Us", icon: ClipboardCheck },
-              { name: "Notice", icon: Users },
-              { name: "Tuition & Fee", icon: Building2 },
+              { name: "Admissions", icon: GraduationCap, link: "/apply"},
+              { name: "Administration", icon: Heart , link: '/about/administration'},
+              { name: "Contact Us", icon: ClipboardCheck, link: '/contact'},
+              { name: "Notices", icon: Users, link: '/notices' },
+              
+                { name: "Scholarships", icon: Building2, link: '/scholarships' },
+                 
+                    { name: "Faculties", icon: Building2, link: '/all-faculty' },
             ].map((item, idx) => {
               const IconComponent = item.icon;
               return (
@@ -807,7 +883,7 @@ export default function DumriCollegeLanding() {
                   whileHover={{ scale: 1.08, y: -8 }}
                   className="group cursor-pointer"
                 >
-                  <motion.div
+                  <motion.div onClick={() => navigate(item.link)}
                     className="relative aspect-square bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-white/60 hover:border-amber-300"
                     whileHover={{
                       background:
@@ -815,7 +891,7 @@ export default function DumriCollegeLanding() {
                     }}
                   >
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-4 gap-2">
-                      <motion.div
+                      <motion.div    onClick={() => navigate(item.link)}
                         whileHover={{ scale: 1.2, rotate: 360 }}
                         transition={{ duration: 0.5 }}
                         className="mb-1"
@@ -840,6 +916,7 @@ export default function DumriCollegeLanding() {
                     </div>
                   </motion.div>
                 </motion.div>
+                
               );
             })}
           </div>
@@ -2017,14 +2094,27 @@ export default function DumriCollegeLanding() {
                   </div>
                 </div>
                 {/* View All Button */}
-                <div className="text-center mt-8 md:mt-12">
+                <div className="text-center mt-8">
                   <motion.button
                     onClick={() => navigate("/about/alumni")}
-                    className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    View All
+                    View All Alumni
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
                   </motion.button>
                 </div>
               </>

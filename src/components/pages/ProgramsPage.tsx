@@ -296,13 +296,13 @@ export function ProgramsPage() {
               )}
 
               {/* Load More */}
-              {filteredPrograms.length > 0 && (
+              {/* {filteredPrograms.length > 0 && (
                 <div className="mt-12 text-center">
                   <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                     Load More
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

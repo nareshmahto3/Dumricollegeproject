@@ -104,21 +104,29 @@ export function ProfessorsSection() {
           </motion.div>
 
           {/* View All Button */}
-          <motion.button
-            onClick={() => navigate("/all-faculty")}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2"
-          >
-            <span className="text-sm font-medium text-gray-900">View All Professors</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </motion.button>
+        <div className="text-center mt-8">
+                  <motion.button
+                    onClick={() => navigate("/all-faculty")}
+                    className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    View All Professors
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </motion.button>
+                </div>
         </div>
 
         {/* Professors Carousel */}

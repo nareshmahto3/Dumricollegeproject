@@ -48,7 +48,7 @@ export function AboutOverview() {
 
         {/* Author */}
         <p className="text-gray-900 text-lg font-light font-serif">
-          - Dr. Rajesh Kumar, Principal
+          - Ajay Mahto, Principal
         </p>
       </div>
 
@@ -142,7 +142,7 @@ export function AboutOverview() {
             </div>
             <div>
               <div className="flex items-center gap-1">
-                <span className="text-4xl font-light text-white font-serif">85</span>
+                <span className="text-4xl font-light text-white font-serif">20</span>
                 <span className="text-4xl font-bold text-white font-serif">+</span>
               </div>
               <p className="text-white text-sm">Academic Staff</p>
@@ -159,7 +159,7 @@ export function AboutOverview() {
             </div>
             <div>
               <div className="flex items-center gap-1">
-                <span className="text-4xl font-light text-white font-serif">50</span>
+                <span className="text-4xl font-light text-white font-serif">40</span>
                 <span className="text-4xl font-bold text-white font-serif">+</span>
               </div>
               <p className="text-white text-sm">Years of Excellence</p>

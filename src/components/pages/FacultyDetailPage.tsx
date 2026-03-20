@@ -501,128 +501,18 @@ export function FacultyDetailPage() {
                 </div>
 
                 {/* Featured Image */}
-                <div className="mt-5">
+                {/* <div className="mt-5">
                   <img
                     src={imgCapManMin}
                     alt="Faculty"
                     className="w-full h-auto aspect-[1180/380.55] rounded-xl object-cover"
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 
             {/* Research Excellence Awards Section */}
-            <div className="pt-12 md:pt-16 lg:pt-[80px] min-h-[391.20px] relative">
-              <div className="flex flex-col lg:flex-row gap-8 lg:gap-5 lg:items-end">
-                {/* Left Side - Tilted Badge */}
-                <div className="w-full lg:w-[501.94px] flex flex-col items-start">
-                  <div className="max-w-[496px] px-4 py-[5.90px] pb-[7.10px] bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.06)] rounded-[100px] lg:rotate-[-45deg] lg:origin-top-left">
-                    <h3 className="font-['Bitter',serif] text-xl leading-[30px] text-[#030303]">
-                      Research Excellence Awards
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Right Side - Awards List */}
-                <div className="w-full lg:w-[744px] bg-white rounded-[10px] flex flex-col">
-                  <div className="self-stretch relative flex flex-col">
-                    <div className="self-stretch flex flex-col">
-                      {/* Award 1 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin1Min}
-                              alt="Award"
-                              className="w-[80px] sm:w-[100px] md:w-[70px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif]  text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Research Excellence Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif]  text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2025
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Award 2 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin2Min}
-                              alt="Award"
-                              className="w-[80px] sm:w-[100px] md:w-[70px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif]  text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Excellence in Teaching Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif]  text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2024
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Award 3 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin3Min}
-                              alt="Award"
-                              className="w-[40px] sm:w-[100px] md:w-[70px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif] text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Young Researcher Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif] text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2023
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Award 4 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin4Min}
-                              alt="Award"
-                              className="w-[80px] sm:w-[100px] md:w-[70px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif] text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Lifetime Achievement Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif] text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2022
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>
