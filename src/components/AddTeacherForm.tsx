@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Upload, X, User, Save, RotateCcw } from 'lucide-react';
+import { Upload, User, Save, RotateCcw } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { PortalLayout } from './PortalLayout';
@@ -8,6 +8,8 @@ import { toast } from 'sonner';
 
 export function AddTeacherForm() {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -44,6 +46,7 @@ export function AddTeacherForm() {
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setPhotoFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setPhotoPreview(reader.result as string);
@@ -52,19 +55,43 @@ export function AddTeacherForm() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Teacher form submitted:', formData);
-    
-    // Show success toast
-    toast.success('Teacher Added Successfully!', {
-      description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
-    });
-    
-    // Navigate back to teachers list
-    setTimeout(() => {
-      navigate('/admin/teachers');
-    }, 1000);
+    setIsSubmitting(true);
+
+    try {
+      const payload = new FormData();
+
+      Object.entries(formData).forEach(([key, value]) => {
+        payload.append(key, value);
+      });
+
+      if (photoFile) {
+        payload.append('photo', photoFile);
+      }
+
+      const response = await fetch('http://localhost:5258', {
+        method: 'POST',
+        body: payload,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to add teacher');
+      }
+
+      toast.success('Teacher Added Successfully!', {
+        description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
+      });
+
+      setTimeout(() => navigate('/admin/teachers'), 1000);
+    } catch (error) {
+      toast.error('Failed to add teacher', {
+        description: error instanceof Error ? error.message : 'Something went wrong.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -93,6 +120,7 @@ export function AddTeacherForm() {
       shortBio: '',
     });
     setPhotoPreview(null);
+    setPhotoFile(null);
   };
 
   return (
@@ -104,7 +132,6 @@ export function AddTeacherForm() {
       breadcrumbs={["Home", "Admin", "Teachers", "Add Teacher"]}
     >
       <div className="space-y-6">
-        {/* Main Form Card */}
         <Card className="bg-white border border-slate-200">
           <div className="p-4 sm:p-6 lg:p-8">
             <div className="mb-6 sm:mb-8">
@@ -116,7 +143,7 @@ export function AddTeacherForm() {
               {/* Personal Information Section */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Personal Information</h3>
-                
+
                 {/* Row 1 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">
                   <div>
@@ -254,7 +281,7 @@ export function AddTeacherForm() {
               {/* Professional Information Section */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Professional Information</h3>
-                
+
                 {/* Row 3 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">
                   <div>
@@ -416,7 +443,7 @@ export function AddTeacherForm() {
               {/* Address Information Section */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Address Information</h3>
-                
+
                 {/* Row 5 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                   <div>
@@ -449,7 +476,6 @@ export function AddTeacherForm() {
 
                 {/* Row 6 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
-                 
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">State <span className="text-red-500">*</span></label>
                     <select
@@ -498,7 +524,7 @@ export function AddTeacherForm() {
                       <option value="puducherry">Puducherry</option>
                     </select>
                   </div>
-                   <div>
+                  <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">District <span className="text-red-500">*</span></label>
                     <input
                       type="text"
@@ -582,15 +608,17 @@ export function AddTeacherForm() {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-slate-200">
                 <Button
                   type="submit"
-                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 shadow-lg shadow-blue-500/20"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 shadow-lg shadow-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <Save className="w-4 h-4 mr-2" />
-                  Save Teacher
+                  {isSubmitting ? 'Saving...' : 'Save Teacher'}
                 </Button>
                 <Button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 bg-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 text-slate-700 py-3 border-2 border-slate-300 transition-all duration-200"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 text-slate-700 py-3 border-2 border-slate-300 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Reset Form

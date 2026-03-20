@@ -1,17 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'motion/react';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X, Calendar } from 'lucide-react';
 import { CarouselHeader } from './CarouselHeader';
 import { Footer } from './Footer';
-import imgDivElementorElement from "figma:asset/04d1f575a7ef1739b76204137772fe6c3ad17fe6.png";
-import imgBnrArrow11 from "figma:asset/13bec648740b03b5c9d2c72567cc9f3e05c47165.png";
-import imgGalleryImg55MinJpg from "figma:asset/42eacf93ea3054579ca1fa8f5ce78d9b065e6f8a.png";
-import imgGalleryImg5Jpg from "figma:asset/15c3fd45d7da5342a52535f718dc36e0eb37d0e3.png";
-import imgGalleryImg4MinJpg from "figma:asset/d871d868f1f32cc206ea9d0915fceee73eb84c6e.png";
-import imgGalleryImg3MinJpg from "figma:asset/08575e4e244c4d18de0ef25022dd7a4fd3eddd44.png";
-import imgGalleryImg6Jpg from "figma:asset/5ecc01adcbaf2fb031ee6a927356d1c25871b29d.png";
-import imgGalleryImg2MinJpg from "figma:asset/c9c9ffb636b53266c96e26987f011f92912502c6.png";
+
+const Badge = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={`inline-flex items-center ${className}`}>{children}</div>
+);
+
+const Card = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={className}>{children}</div>
+);
+// Image URLs
+const imgDivElementorElement = 'https://via.placeholder.com/800x600?text=Gallery+Banner';
+const imgBnrArrow11 = 'https://via.placeholder.com/120x120?text=Arrow';
+const imgGalleryImg55MinJpg = 'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=500';
+const imgGalleryImg5Jpg = 'https://images.unsplash.com/photo-1763890763432-17c9a529da20?w=500';
+const imgGalleryImg4MinJpg = 'https://images.unsplash.com/photo-1687866394811-9fe40749c860?w=500';
+const imgGalleryImg3MinJpg = 'https://images.unsplash.com/photo-1604307405707-04f70b3af5d3?w=500';
+const imgGalleryImg6Jpg = 'https://images.unsplash.com/photo-1770844049822-583611b8efb3?w=500';
+const imgGalleryImg2MinJpg = 'https://images.unsplash.com/photo-1502232917128-1aa500764cbd?w=500';
 
 type GalleryCategory = 'all' | 'campus-life' | 'academic' | 'labs' | 'graduation';
 
@@ -98,6 +107,19 @@ const galleryImages: GalleryImage[] = [
   }
 ];
 
+interface EventImage {
+  url: string;
+  title: string;
+  date: string;
+  category: string;
+}
+
+const eventImages: EventImage[] = [
+  { url: 'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=500', title: 'Classroom Session', date: 'Jan 2024', category: 'Academic' },
+  { url: 'https://images.unsplash.com/photo-1763890763432-17c9a529da20?w=500', title: 'Campus Activity', date: 'Feb 2024', category: 'Campus Life' },
+  { url: 'https://images.unsplash.com/photo-1733426509854-10931d84009a?w=500', title: 'Lab Work', date: 'Mar 2024', category: 'Research' }
+];
+
 const categories = [
   { id: 'all' as const, label: 'All' },
   { id: 'campus-life' as const, label: 'Campus Life' },
@@ -113,8 +135,8 @@ export function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Filter images based on active category
-  const filteredImages = activeCategory === 'all' 
-    ? galleryImages 
+  const filteredImages = activeCategory === 'all'
+    ? galleryImages
     : galleryImages.filter(img => img.category.includes(activeCategory));
 
   const openLightbox = (index: number) => {
@@ -145,10 +167,10 @@ export function Gallery() {
         <div className="absolute inset-0">
           <div className="absolute bg-[#0c5776] inset-0" />
           <div className="absolute inset-0 overflow-hidden">
-            <img 
-              alt="" 
-              className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-30" 
-              src={imgDivElementorElement} 
+            <img
+              alt=""
+              className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-30"
+              src={imgDivElementorElement}
             />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -161,120 +183,22 @@ export function Gallery() {
               >
                 {/* <Badge className="bg-blue-500/30 text-blue-100 border-blue-400/50 backdrop-blur-md mb-6 md:mb-8 px-4 md:px-8 py-2 md:py-4 text-sm md:text-lg">
                   <Camera className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
-                  <span className="hidden sm:inline">1000+ Photos • 50+ Events</span>
+                  <span className="hidden sm:inline">1000+ Photos ï¿½ 50+ Events</span>
                   <span className="sm:hidden">Campus Moments</span>
                 </Badge> */}
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-8 leading-tight px-4">
                   Campus Gallery
                 </h1>
                 <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-blue-100 mb-4 md:mb-6 max-w-4xl mx-auto font-light px-4">
-              Explore life at our college through images and memories.
+                  Explore life at our college through images and memories.
                 </p>
                 <p className="text-base md:text-xl text-blue-200 max-w-3xl mx-auto leading-relaxed px-4">
-                     Moments That Define Our Community, Explore the vibrant life, culture, and achievements at  Jharkhand Commerce Inter College
+                  Moments That Define Our Community, Explore the vibrant life, culture, and achievements at  Jharkhand Commerce Inter College
                 </p>
               </motion.div>
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-20 md:h-32 bg-gradient-to-t from-white to-transparent" />
-        </section>
-        </div>
-
-    
-        {/* Recent Events */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <Badge className="bg-blue-100 text-blue-700 border-0 mb-4 px-4 py-2">
-                <Calendar className="w-4 h-4 mr-2" />
-                Latest Updates
-              </Badge>
-              <h2 className="text-5xl lg:text-6xl font-black text-slate-900 mb-6">
-                Recent Events
-              </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Highlights from our latest college events and celebrations
-              </p>
-              <div className="w-24 h-2 bg-blue-600 mx-auto mt-8" />
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {eventImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  whileHover={{ y: -15 }}
-                  className="group cursor-pointer"
-                  onClick={() => openLightbox(index, 'events')}
-                >
-                  <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all rounded-2xl">
-                    <div className="relative h-96 overflow-hidden rounded-2xl">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                        <Badge className="bg-blue-600 text-white border-0 mb-4">
-                          <Calendar className="w-3 h-3 mr-1" />
-                          {image.date}
-                        </Badge>
-                        <h3 className="text-3xl font-black mb-2">{image.title}</h3>
-                        <p className="text-blue-200 font-semibold">{image.category}</p>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00192C]/40 to-transparent"></div>
-
-        {/* Decorative Arrow - Bottom Right */}
-        <div className="absolute bottom-[40px] right-[100px] z-10 hidden lg:block opacity-70">
-          <img 
-            alt="" 
-            className="w-[120px] h-[120px]" 
-            src={imgBnrArrow11} 
-          />
-        </div>
-
-        {/* Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20 pb-8">
-          {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 mb-4">
-            <button
-              onClick={() => navigate('/')}
-              className="text-white text-sm hover:underline"
-            >
-              Home
-            </button>
-            <ChevronRight className="w-4 h-4 text-white" />
-            <span className="text-white text-sm">Gallery</span>
-          </div>
-
-          {/* Title */}
-          <h1 className="text-5xl md:text-6xl font-light text-white mb-6 font-serif">
-            Gallery
-          </h1>
-
-          {/* Description */}
-          <p className="text-white/90 text-base leading-7 max-w-3xl">
-            Education goes beyond textbooks and classrooms. We believe in empowering students
-            <br className="hidden sm:block" />
-            to explore their passions, challenge conventions, and discover their potential.
-          </p>
         </div>
       </section>
 
@@ -297,11 +221,10 @@ export function Gallery() {
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors ${
-                  activeCategory === category.id
-                    ? 'bg-[#00a7b8] text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
+                className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors ${activeCategory === category.id
+                  ? 'bg-[#00a7b8] text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
               >
                 {category.label}
               </button>
@@ -356,67 +279,68 @@ export function Gallery() {
       <Footer />
 
       {/* Lightbox Modal */}
-      {lightboxOpen && (
-        <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
-          {/* Close Button */}
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
-            aria-label="Close lightbox"
-          >
-            <X className="w-6 h-6 text-white" />
-          </button>
+      {
+        lightboxOpen && (
+          <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              aria-label="Close lightbox"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
 
-          {/* Image Counter */}
-          <div className="absolute top-6 left-6 text-white text-base font-medium z-10">
-            {currentImageIndex + 1} / {filteredImages.length}
-          </div>
+            {/* Image Counter */}
+            <div className="absolute top-6 left-6 text-white text-base font-medium z-10">
+              {currentImageIndex + 1} / {filteredImages.length}
+            </div>
 
-          {/* Previous Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToPrev();
-            }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
-            aria-label="Previous image"
-          >
-            <ChevronRight className="w-6 h-6 text-white rotate-180" />
-          </button>
+            {/* Previous Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrev();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              aria-label="Previous image"
+            >
+              <ChevronRight className="w-6 h-6 text-white rotate-180" />
+            </button>
 
-          {/* Next Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToNext();
-            }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
-            aria-label="Next image"
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
+            {/* Next Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
 
-          {/* Image */}
-          <div className="max-w-6xl max-h-[90vh] px-16" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={filteredImages[currentImageIndex]?.src}
-              alt={filteredImages[currentImageIndex]?.alt}
-              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            {/* Image */}
+            <div className="max-w-6xl max-h-[90vh] px-16" onClick={(e) => e.stopPropagation()}>
+              <img
+                src={filteredImages[currentImageIndex]?.src}
+                alt={filteredImages[currentImageIndex]?.alt}
+                className="max-w-full max-h-[90vh] object-contain rounded-lg"
+              />
+            </div>
+
+            {/* Image Title */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-center">
+              <p className="text-lg font-medium">{filteredImages[currentImageIndex]?.alt}</p>
+            </div>
+
+            {/* Background Click to Close */}
+            <div
+              className="absolute inset-0 -z-10"
+              onClick={closeLightbox}
             />
           </div>
-
-          {/* Image Title */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-center">
-            <p className="text-lg font-medium">{filteredImages[currentImageIndex]?.alt}</p>
-          </div>
-
-          {/* Background Click to Close */}
-          <div
-            className="absolute inset-0 -z-10"
-            onClick={closeLightbox}
-          />
-        </div>
-      )}
+        )}
     </div>
   );
 }
