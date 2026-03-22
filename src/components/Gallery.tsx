@@ -208,7 +208,7 @@ export function Gallery() {
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
-              Life at Our University
+              Life at Our College
             </h2>
             <p className="text-gray-600 text-base max-w-2xl mx-auto">
               Explore life at our university through images and memories.

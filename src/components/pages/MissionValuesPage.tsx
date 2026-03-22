@@ -85,7 +85,9 @@ export function MissionValuesPage() {
               <div className="lg:col-span-4">
                 <div className="sticky top-8">
                   {/* Icon */}
-                 
+                  <div className="mb-6">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080" alt="Mission Icon" className="w-16 h-20" />
+                  </div>
 
                   {/* Title */}
                   <h2 className="text-4xl font-light text-gray-900 mb-8 font-serif">
@@ -253,68 +255,61 @@ export function MissionValuesPage() {
                     </div>
                   </div>
 
-                  {/* Value Accordion - Clickable */}
+                <div className="flex flex-col gap-4 max-w-2xl">
+                  {/* Vision Accordion - Always Open */}
                   <div className="bg-transparent rounded-xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)] overflow-hidden">
-                    {/* Value Header - Clickable Button */}
-                    <div
-                      className={`w-full px-6 py-5 text-left transition-colors ${valueExpanded ? 'bg-[#0c5776]' : 'bg-white hover:bg-[#0c5776] hover:text-white'
-                        }`}
-                    >
-                      <h3 className={`text-xl font-medium ${valueExpanded ? 'text-white' : 'text-gray-900'
-                        }`}>
+                    {/* Vision Header */}
+                    <div className="bg-[#0c5776] px-6 py-5">
+                      <h3 className="text-xl font-medium text-white">
                         Value
                       </h3>
                     </div>
 
-                    {/* Value Content - Expandable */}
-                    {valueExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="bg-white overflow-hidden"
-                      >
-                        <div className="flex gap-5 p-6 pt-0">
-                          {/* Vertical Line with Dot */}
-                          <div className="relative pt-3.5">
-                            <div className="w-px h-52 bg-gray-300 relative">
-                              <div className="absolute -left-1.5 -top-2 w-3 h-3 bg-[#003a65] border-2 border-white rounded-full shadow-lg" />
-                            </div>
-                          </div>
-
-                          {/* Content */}
-                          <div className="flex-1">
-                            <p className="text-gray-600 leading-relaxed mb-4">
-                              Our core values guide everything we do. Integrity, Excellence, Innovation, Inclusivity, and Social Responsibility form the ethical foundation that shapes our decisions, actions, and relationships with students, faculty, and the wider community.
-                            </p>
-
-                            {/* Bullet List */}
-                            <ul className="space-y-2">
-                              <li className="flex items-center gap-2 text-gray-600">
-                                <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
-                                  <circle cx="3" cy="3" r="3" />
-                                </svg>
-                                <span>Integrity in all academic and professional endeavors.</span>
-                              </li>
-                              <li className="flex items-center gap-2 text-gray-600">
-                                <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
-                                  <circle cx="3" cy="3" r="3" />
-                                </svg>
-                                <span>Excellence through continuous improvement and innovation.</span>
-                              </li>
-                              <li className="flex items-center gap-2 text-gray-600">
-                                <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
-                                  <circle cx="3" cy="3" r="3" />
-                                </svg>
-                                <span>Social responsibility and community engagement.</span>
-                              </li>
-                            </ul>
+                    {/* Vision Content */}
+                    <div className="bg-white">
+                      <div className="flex gap-5 p-6">
+                        {/* Vertical Line with Dot */}
+                        <div className="relative pt-3.5">
+                          <div className="w-px h-52 bg-gray-300 relative">
+                            <div className="absolute -left-1.5 -top-2 w-3 h-3 bg-[#003a65] border-2 border-white rounded-full shadow-lg" />
                           </div>
                         </div>
-                      </motion.div>
-                    )}
+
+                        {/* Content */}
+                        <div className="flex-1">
+                          <p className="text-gray-600 leading-relaxed mb-4">
+                            Conventions and discover their potential through meaningful Our face<br />
+                            support experiences Our distinguished faculty members are leaders their<br />
+                            and respective fields dedicated to delivering world-class education that<br />
+                            integrates theory with practical support application With.
+                          </p>
+
+                          {/* Bullet List */}
+                          <ul className="space-y-2">
+                            <li className="flex items-center gap-2 text-gray-600">
+                              <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
+                                <circle cx="3" cy="3" r="3" />
+                              </svg>
+                              <span>Completed secondary education (HSC/A-Level/Equivalent).</span>
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-600">
+                              <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
+                                <circle cx="3" cy="3" r="3" />
+                              </svg>
+                              <span>Minimum GPA/grade requirements as set by the College.</span>
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-600">
+                              <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
+                                <circle cx="3" cy="3" r="3" />
+                              </svg>
+                              <span>For graduate programs: a bachelor's degree with required CGPA.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+    </div>
                 </div>
               </div>
             </div>
@@ -501,7 +496,6 @@ export function MissionValuesPage() {
         </div>
       </section>
 
-      
 
       <Footer />
 

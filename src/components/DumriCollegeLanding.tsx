@@ -708,7 +708,7 @@ export default function DumriCollegeLanding() {
                 <span className="text-[#886E53]">
                   Find your{" "}
                 </span>
-                <span className="text-[#0C4D8B]">Degree</span>
+                <span className="text-[#0C4D8B]">Course</span>
               </h2>
               <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 max-w-md">
                 Jharkhand Commerce Inter College offers rigorous programs, valuable

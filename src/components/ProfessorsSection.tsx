@@ -99,7 +99,7 @@ export function ProfessorsSection() {
             
             {/* Title */}
             <h2 className="text-4xl lg:text-5xl font-serif text-gray-900">
-              Dumri College Professors
+              Our College Professors
             </h2>
           </motion.div>
 

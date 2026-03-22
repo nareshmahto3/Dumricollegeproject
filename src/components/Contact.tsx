@@ -68,10 +68,10 @@ export function Contact() {
                 transition={{ duration: 0.8 }}
                 className="text-center text-white"
               >
-                <Badge className="bg-blue-500/30 text-blue-100 border-blue-400/50 backdrop-blur-md mb-8 px-8 py-4 text-lg">
+                {/* <Badge className="bg-blue-500/30 text-blue-100 border-blue-400/50 backdrop-blur-md mb-8 px-8 py-4 text-lg">
                   <Phone className="w-6 h-6 mr-3" />
                   We're Here to Help • 24/7 Support
-                </Badge>
+                </Badge> */}
                 <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
                   Get in Touch
                 </h1>
