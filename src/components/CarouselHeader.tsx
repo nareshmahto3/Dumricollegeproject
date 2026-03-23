@@ -240,12 +240,12 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
 
           {/* College Name */}
           <div 
-            className="absolute font-['Alice',serif] h-[84px] leading-[20px] left-[107px] not-italic text-[25px] text-black top-[17px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
+            className="absolute font-['Alice',serif]  leading-[20px] left-[107px] not-italic text-[20px] text-black top-[25px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <p className="mb-0 ">Jharkhand Commerce </p>
+            <p className="mb-3">Jharkhand Commerce </p>
             <p>
-              <br aria-hidden="true" />
+              {/* <br aria-hidden="true" /> */}
               Inter College
             </p>
           </div>

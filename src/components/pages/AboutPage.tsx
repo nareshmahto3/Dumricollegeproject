@@ -77,7 +77,7 @@ export function AboutPage() {
 
       {/* Main Content Section */}
       <section className="bg-[#F6F4EE] ">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto  sm:px-6 ">
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Left Sidebar */}
             <div className="lg:w-80 flex-shrink-0">
