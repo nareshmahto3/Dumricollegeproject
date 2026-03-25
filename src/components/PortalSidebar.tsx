@@ -211,7 +211,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
                   </div>
                   <div>
                     <h1 className="text-white font-bold text-base leading-tight">
-                      Dumri College
+                    JCI Dumri
                     </h1>
                     <p className="text-[10px] text-amber-100 leading-tight">
                       {role === "admin"

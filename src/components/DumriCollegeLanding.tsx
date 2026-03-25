@@ -403,7 +403,7 @@ export default function DumriCollegeLanding() {
           {[
             { label: "About Us", link: "/about", delay: 0.7 },
             { label: "Programs", link: "/programs", delay: 0.8 },
-            { label: "Admission", link: "/apply", delay: 0.4 },
+            { label: "Admissions", link: "/apply", delay: 0.4 },
             { label: "Notices", link: "/notices", delay: 0.5 },
             { label: "Vision & Mission", link: "/mission-values", delay: 0.5 },
             { label: "Principal", link: "/about/principal-message", delay: 0.5 },
