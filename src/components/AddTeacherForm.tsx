@@ -55,8 +55,64 @@ export function AddTeacherForm() {
     }
   };
 
+  const validateForm = () => {
+    const required = [
+      'firstName',
+      'lastName',
+      'gender',
+      'dateOfBirth',
+      'employeeId',
+      'designation',
+      'department',
+      'qualification',
+      'bloodGroup',
+      'religion',
+      'email',
+      'phone',
+      'joiningDate',
+      'address',
+      'emergencyContact',
+      'state',
+      'city',
+      'zipCode',
+    ];
+
+    for (const key of required) {
+      if (!formData[key as keyof typeof formData].trim()) {
+        return `${key.replace(/([A-Z])/g, ' $1')} is required.`;
+      }
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      return 'Please enter a valid email address.';
+    }
+
+    const phoneRegex = /^\+?[0-9]{7,15}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      return 'Please enter a valid phone number (7-15 digits).';
+    }
+
+    if (!phoneRegex.test(formData.emergencyContact)) {
+      return 'Please enter a valid emergency contact number (7-15 digits).';
+    }
+
+    if (formData.zipCode && !/^[0-9]{4,10}$/.test(formData.zipCode)) {
+      return 'Zip Code must be 4-10 digits.';
+    }
+
+    return null;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const validationError = validateForm();
+    if (validationError) {
+      toast.error('Validation Error', { description: validationError });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
