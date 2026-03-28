@@ -5,10 +5,6 @@ import { motion } from "motion/react";
 // Faculty Achievements Data
 const facultyAchievements = [
     {
-        title: "Distinguished Service Award",
-        description: "Dr. Joseph C C, Vice Chancellor received the Distinguished Service Award during the 55th Annual Family Day 2025 - \"A Day to Reunite, Reflect, and Reignite\""
-    },
-    {
         title: "Excellence in Teaching",
         description: "Faculty members have been recognized for their dedication to quality education and innovative teaching methods that help students achieve strong academic results."
     },
