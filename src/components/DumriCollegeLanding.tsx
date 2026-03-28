@@ -6,6 +6,7 @@ import { CarouselHeader } from "./CarouselHeader";
 import { ProgramsSection } from "./ProgramsSection";
 import { Footer } from "./Footer";
 import { ProfessorsSection } from "./ProfessorsSection";
+import { UniversityAchievements } from "./UniversityAchievements";
 import {
   Briefcase,
   UserCheck,
@@ -238,9 +239,8 @@ export default function DumriCollegeLanding() {
               aria-label={`Go to slide ${index + 1}`}
             >
               <div
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? "bg-[#869791]" : "bg-[#d6d6d6]"
-                }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-[#869791]" : "bg-[#d6d6d6]"
+                  }`}
               />
             </button>
           ))}
@@ -261,13 +261,12 @@ export default function DumriCollegeLanding() {
                 index === noticeIndex
                   ? 0
                   : index < noticeIndex
-                  ? -100
-                  : 100,
+                    ? -100
+                    : 100,
             }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className={`${
-              index === noticeIndex ? "relative" : "absolute inset-0"
-            } bg-gradient-to-r ${notice.bgGradient} py-2.5 md:py-3`}
+            className={`${index === noticeIndex ? "relative" : "absolute inset-0"
+              } bg-gradient-to-r ${notice.bgGradient} py-2.5 md:py-3`}
             style={{
               zIndex: index === noticeIndex ? 1 : 0,
               pointerEvents: index === noticeIndex ? "auto" : "none",
@@ -361,9 +360,8 @@ export default function DumriCollegeLanding() {
               aria-label={`Go to notice ${index + 1}`}
             >
               <div
-                className={`w-1 h-1 rounded-full transition-all duration-300 ${
-                  index === noticeIndex ? "bg-white w-3" : "bg-white/50"
-                }`}
+                className={`w-1 h-1 rounded-full transition-all duration-300 ${index === noticeIndex ? "bg-white w-3" : "bg-white/50"
+                  }`}
               />
             </button>
           ))}
@@ -899,122 +897,7 @@ export default function DumriCollegeLanding() {
       {/* ── University Achievements (tabbed) ─────────────────────────────────
           py-12 md:py-20 → py-8 md:py-14; achievement card image smaller.
       ──────────────────────────────────────────────────────────────────────── */}
-      <section
-        className="py-8 md:py-14 relative"
-        style={{
-          backgroundImage: `url(https://images.unsplash.com/photo-1763275469812-c807e3b4a4af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0JTIwYmVpZ2UlMjBhY2FkZW1pYyUyMHRleHR1cmV8ZW58MXx8fHwxNzcyMzg0MTgxfDA&ixlib=rb-4.1.0&q=80&w=1080)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-white/85" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-6xl relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-4xl mb-5">
-              <span className="text-[#886E53]">College </span>
-              <span className="text-[#0C4D8B]">Achievements</span>
-            </h2>
-          </motion.div>
-
-          {/* Tab Navigation */}
-          <div className="flex justify-center mb-6">
-            <div className="inline-flex rounded-t-lg overflow-hidden shadow-md">
-              {[
-                { key: "faculty" as const, label: "Faculty" },
-                { key: "student" as const, label: "Student" },
-                { key: "university" as const, label: "College" },
-              ].map((tab) => (
-                <motion.button
-                  key={tab.key}
-                  onClick={() => { setAchievementTab(tab.key); setAchievementIndex(0); }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-5 py-2.5 text-sm font-light transition-all duration-300 cursor-pointer ${
-                    achievementTab === tab.key
-                      ? "bg-[#D98600] text-white"
-                      : "bg-[#0C4D8B] text-white hover:bg-[#0C4D8B]/80"
-                  }`}
-                >
-                  {tab.label}
-                </motion.button>
-              ))}
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto">
-            <div className="relative bg-white rounded-lg shadow-xl border-2 border-[#C07E02] p-5 md:p-6 mx-4 md:mx-0">
-              <div className="flex flex-col md:flex-row gap-6 items-center">
-                <motion.div
-                  key={`${achievementTab}-${achievementIndex}`}
-                  initial={{ opacity: 0, x: -50, rotate: -5 }}
-                  animate={{ opacity: 1, x: 0, rotate: 0 }}
-                  transition={{ duration: 0.5, type: "spring" }}
-                  className="w-full md:w-1/3"
-                >
-                  <motion.img
-                    src="https://images.unsplash.com/photo-1770208524687-9ed3dfa80c7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwYXdhcmQlMjBjZXJlbW9ueSUyMGFjaGlldmVtZW50fGVufDF8fHx8MTc3MjM4MDgyNnww&ixlib=rb-4.1.0&q=80&w=1080"
-                    alt="Achievement"
-                    className="w-full h-auto rounded-lg"
-                    whileHover={{ scale: 1.05, rotate: 2 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.div>
-                <motion.div
-                  key={`${achievementTab}-${achievementIndex}-text`}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="flex-1 overflow-y-auto max-h-64"
-                >
-                  {achievementTab === "faculty" && (
-                    <>
-                      <h3 className="text-lg font-medium text-black mb-2">Excellence in Teaching</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm mb-4">Faculty members have been recognized for their dedication to quality education and innovative teaching methods that help students achieve strong academic results.</p>
-                      <h3 className="text-lg font-medium text-black mb-2">Academic Contribution Awards</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm mb-4">Teachers are honored for their contribution to developing effective learning environments and guiding students in commerce, arts, and science streams.</p>
-                      <h3 className="text-lg font-medium text-black mb-2">Student Mentorship Recognition</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm">Faculty members receive appreciation for mentoring students, supporting career guidance, and preparing them for higher education programs.</p>
-                    </>
-                  )}
-                  {achievementTab === "student" && (
-                    <>
-                      <h3 className="text-lg font-medium text-black mb-2">Academic Excellence Award</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm mb-4">Given to students who achieve outstanding marks in Intermediate examinations conducted by the Jharkhand Academic Council.</p>
-                      <h3 className="text-lg font-medium text-black mb-2">Commerce Topper Award</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm mb-4">Presented to students who secure the highest marks in commerce subjects such as Accountancy, Business Studies, and Economics.</p>
-                      <h3 className="text-lg font-medium text-black mb-2">Best All-Rounder Student Award</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm">Awarded to students who excel in academics, leadership, cultural activities, and overall contribution to college life.</p>
-                    </>
-                  )}
-                  {achievementTab === "university" && (
-                    <>
-                      <h3 className="text-lg font-medium text-black mb-2">Academic Excellence Award</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm mb-4">Recognized for maintaining high academic standards and excellent student performance in examinations conducted by the Jharkhand Academic Council.</p>
-                      <h3 className="text-lg font-medium text-black mb-2">Best Commerce Education Award</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm mb-4">Honored for providing quality education in commerce subjects such as Accountancy, Business Studies, and Economics.</p>
-                      <h3 className="text-lg font-medium text-black mb-2">Outstanding Educational Institution Award</h3>
-                      <p className="text-gray-700 leading-relaxed text-sm">Awarded for the college's contribution to higher secondary education and student development in the region.</p>
-                    </>
-                  )}
-                </motion.div>
-              </div>
-
-              <button onClick={() => setAchievementIndex(Math.max(0, achievementIndex - 1))} className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 md:-translate-x-4 bg-[#0C4D8B] text-white px-2 py-4 hover:bg-[#0C4D8B]/80 transition-colors rounded-l" aria-label="Previous">
-                <span className="text-xl font-light">‹</span>
-              </button>
-              <button onClick={() => setAchievementIndex(achievementIndex + 1)} className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 md:translate-x-4 bg-[#0C4D8B] text-white px-2 py-4 hover:bg-[#0C4D8B]/80 transition-colors rounded-r" aria-label="Next">
-                <span className="text-xl font-light">›</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <UniversityAchievements />
 
       {/* ── Recognitions & Accreditations ────────────────────────────────────
           py-12 md:py-20 → py-8 md:py-14; card images shorter.
