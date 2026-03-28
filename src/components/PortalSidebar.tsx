@@ -48,7 +48,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
     { path: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { path: "/admin/students", label: "Students", icon: GraduationCap },
     { path: "/admin/teachers", label: "Teachers", icon: Users },
-    { path: "/admin/admissions", label: "Parents", icon: UserCheck },
+    { path: "/admin/admissions", label: "Admission Management", icon: UserCheck },
     { path: "/admin/account", label: "Account", icon: Calculator },
     { path: "/admin/classes", label: "Class", icon: LayoutGrid },
     { path: "/admin/subjects", label: "Subject", icon: BookOpen },

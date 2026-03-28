@@ -4,7 +4,8 @@ import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { PortalLayout } from './PortalLayout';
 import { useNavigate } from 'react-router';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
+import axios from 'axios';
 
 interface ExamSubject {
   subject: string;
@@ -31,6 +32,10 @@ export function ScheduleExamForm() {
     { subject: '', date: '', startTime: '', endTime: '', maxMarks: '' }
   ]);
 
+  const [loading, setLoading] = useState(false);
+
+  const API_BASE_URL = 'https://localhost:5001/api/Exam'; // Adjust based on your API URL
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -53,17 +58,38 @@ export function ScheduleExamForm() {
     setExamSubjects(newSubjects);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Exam scheduled:', { ...formData, examSubjects });
+    setLoading(true);
+    try {
+      // Map frontend data to backend format
+      const payload = {
+        examName: `${formData.examName} - ${formData.examType} (${formData.class})`,
+        examDate: formData.startDate,
+        startTime: examSubjects[0]?.startTime || '09:00', // Use first subject's time or default
+        endTime: examSubjects[0]?.endTime || '12:00',
+        subjects: examSubjects.map(sub => ({
+          subjectName: sub.subject,
+          subjectCode: sub.subject, // Using subject as code for simplicity
+          marks: parseInt(sub.maxMarks) || 100
+        }))
+      };
 
-    toast.success('Exam Scheduled Successfully!', {
-      description: `${formData.examName} for ${formData.class} has been scheduled.`,
-    });
+      const response = await axios.post(API_BASE_URL, payload);
+      
+      toast.success('Exam Scheduled Successfully!', {
+        description: `${formData.examName} for ${formData.class} has been scheduled.`,
+      });
 
-    setTimeout(() => {
-      navigate('/admin/exams');
-    }, 1000);
+      setTimeout(() => {
+        navigate('/admin/exams');
+      }, 1000);
+    } catch (error) {
+      console.error('Error scheduling exam:', error);
+      toast.error('Failed to schedule exam. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
@@ -360,10 +386,11 @@ export function ScheduleExamForm() {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-slate-200">
                 <Button
                   type="submit"
+                  disabled={loading}
                   className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 shadow-lg shadow-blue-500/20"
                 >
                   <Save className="w-4 h-4 mr-2" />
-                  Schedule Exam
+                  {loading ? 'Scheduling...' : 'Schedule Exam'}
                 </Button>
                 <Button
                   type="button"

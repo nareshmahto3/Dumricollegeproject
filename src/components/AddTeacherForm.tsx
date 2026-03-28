@@ -92,46 +92,86 @@ export function AddTeacherForm() {
     setPhotoFile(null);
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   // Mark every field as touched so all errors surface at once
+  //   const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
+  //   setTouched(allTouched);
+
+  //   if (hasAnyError) {
+  //     toast.error('Please fix the errors before submitting.');
+  //     return;
+  //   }
+
+  //   setIsSubmitting(true);
+  //   try {
+  //     const payload = new FormData();
+  //     Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
+  //     if (photoFile) payload.append('photo', photoFile);
+
+  //     const response = await fetch('http://localhost:5258/api/teacher', {
+  //       method: 'POST',
+  //       body: payload,  
+  //     });
+
+  //     if (!response.ok) {
+  //       const error = await response.json();
+  //       throw new Error(error.message || 'Failed to add teacher');
+  //     }
+
+  //     toast.success('Teacher Added Successfully!', {
+  //       description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
+  //     });
+  //     setTimeout(() => navigate('/admin/teachers'), 1000);
+  //   } catch (error) {
+  //     toast.error('Failed to add teacher', {
+  //       description: error instanceof Error ? error.message : 'Something went wrong.',
+  //     });
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Mark every field as touched so all errors surface at once
-    const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
-    setTouched(allTouched);
+  const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
+  setTouched(allTouched);
 
-    if (hasAnyError) {
-      toast.error('Please fix the errors before submitting.');
-      return;
+  if (hasAnyError) {
+    toast.error('Please fix the errors before submitting.');
+    return;
+  }
+
+  setIsSubmitting(true);
+  try {
+    const payload = new FormData();
+    Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
+    if (photoFile) payload.append('photo', photoFile);
+
+    const response = await fetch('http://localhost:5258/api/teacher/AddWithPhoto', {
+      method: 'POST',
+      body: payload,
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to add teacher');
     }
 
-    setIsSubmitting(true);
-    try {
-      const payload = new FormData();
-      Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
-      if (photoFile) payload.append('photo', photoFile);
-
-      const response = await fetch('http://localhost:5258', {
-        method: 'POST',
-        body: payload,
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to add teacher');
-      }
-
-      toast.success('Teacher Added Successfully!', {
-        description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
-      });
-      setTimeout(() => navigate('/admin/teachers'), 1000);
-    } catch (error) {
-      toast.error('Failed to add teacher', {
-        description: error instanceof Error ? error.message : 'Something went wrong.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    toast.success('Teacher Added Successfully!', {
+      description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
+    });
+    setTimeout(() => navigate('/admin/teachers'), 1000);
+  } catch (error) {
+    toast.error('Failed to add teacher', {
+      description: error instanceof Error ? error.message : 'Something went wrong.',
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   // ── Field helpers ────────────────────────────────────────────────────────────
   const fieldProps = (name: string) => ({
