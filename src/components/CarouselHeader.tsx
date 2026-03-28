@@ -83,7 +83,7 @@ const menuItems: MenuItem[] = [
       { label: 'Gallery', href: '/gallery' },
       { label: 'Events', href: '/events' },
   { label: 'How to Apply', href: '/how-to-apply' },   
-    { label: 'Admission', href: '/apply' },  
+    { label: 'Admissions', href: '/apply' },  
       { label: 'Gallery', href: '/gallery' },
       { label: 'FAQ', href: '/faq' },
        { label: 'Contact Us', href: '/contact' },

@@ -9,35 +9,35 @@ const sidebarMenuItems = [
     id: 'overview',
     label: 'About Jharkhand Commerce Inter College',
     path: '/about',
-    //image: 'https://images.unsplash.com/photo-1718327453695-4d32b94c90a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMGxpYnJhcnl8ZW58MXx8fHwxNzcyNDQ5ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    //bannerImage: 'https://images.unsplash.com/photo-1682161473727-402b497251b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmUlMjBtb2Rlcm58ZW58MXx8fHwxNzczOTM4MzQ0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    // bannerTitle: 'About Dumri College',
-    // bannerDescription: 'Education goes beyond textbooks and classrooms. We believe in empowering students to explore their passions and challenge conventions.'
+    image: 'https://images.unsplash.com/photo-1718327453695-4d32b94c90a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMGxpYnJhcnl8ZW58MXx8fHwxNzcyNDQ5ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerImage: 'https://images.unsplash.com/photo-1682161473727-402b497251b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmUlMjBtb2Rlcm58ZW58MXx8fHwxNzczOTM4MzQ0fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    bannerTitle: 'About Dumri College',
+    bannerDescription: 'Education goes beyond textbooks and classrooms. We believe in empowering students to explore their passions and challenge conventions.'
   },
   {
     id: 'administration',
     label: 'Administration',
     path: '/about/administration',
-    //image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80',
-  //  bannerImage: 'https://images.unsplash.com/photo-1748261595246-5516b94b2dc0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZG1pbmlzdHJhdGlvbiUyMG9mZmljZSUyMHByb2Zlc3Npb25hbHxlbnwxfHx8fDE3NzM5MzgzNDR8MA&ixlib=rb-4.1.0&q=80&w=1080',
-   // bannerTitle: 'Administration',
-    //bannerDescription: 'Meet our dedicated administrative team committed to excellence in education. Our leadership ensures smooth operations and academic excellence across all departments.'
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80',
+   bannerImage: 'https://images.unsplash.com/photo-1748261595246-5516b94b2dc0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZG1pbmlzdHJhdGlvbiUyMG9mZmljZSUyMHByb2Zlc3Npb25hbHxlbnwxfHx8fDE3NzM5MzgzNDR8MA&ixlib=rb-4.1.0&q=80&w=1080',
+   bannerTitle: 'Administration',
+    bannerDescription: 'Meet our dedicated administrative team committed to excellence in education. Our leadership ensures smooth operations and academic excellence across all departments.'
   },
   {
     id: 'founder',
     label: 'Founder',
     path: '/about/founder',
-  //  image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80',
-   // bannerImage: 'https://images.unsplash.com/photo-1769071166862-8cc3a6f2ac5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3VuZGVyJTIwcG9ydHJhaXQlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzczOTM4MzQ1fDA&ixlib=rb-4.1.0&q=80&w=1080',
-   // bannerTitle: 'Founder',
-   // bannerDescription: 'Learn about the visionary founder who established Dumri College with a mission to provide quality education and empower generations of students.'
+   image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80',
+   bannerImage: 'https://images.unsplash.com/photo-1769071166862-8cc3a6f2ac5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb3VuZGVyJTIwcG9ydHJhaXQlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzczOTM4MzQ1fDA&ixlib=rb-4.1.0&q=80&w=1080',
+   bannerTitle: 'Founder',
+   bannerDescription: 'Learn about the visionary founder who established Dumri College with a mission to provide quality education and empower generations of students.'
   },
   {
     id: 'principal-message',
     label: 'Principal Message',
     path: '/about/principal-message',
-   // image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80',
-   // bannerImage: 'https://images.unsplash.com/photo-1765366417030-16d9765d920a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBvZmZpY2UlMjBkZXNrJTIwd29ya3NwYWNlfGVufDF8fHx8MTc3MzkzODM0OXww&ixlib=rb-4.1.0&q=80&w=1080',
+   image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80',
+   bannerImage: 'https://images.unsplash.com/photo-1765366417030-16d9765d920a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBvZmZpY2UlMjBkZXNrJTIwd29ya3NwYWNlfGVufDF8fHx8MTc3MzkzODM0OXww&ixlib=rb-4.1.0&q=80&w=1080',
     bannerTitle: 'Principal Message',
     bannerDescription: 'A message from our Principal, guiding our institution towards academic excellence and holistic development of every student.'
   },
@@ -45,10 +45,10 @@ const sidebarMenuItems = [
     id: 'alumni',
     label: 'Our Alumni',
     path: '/about/alumni',
-    // image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80',
-    //bannerImage: 'https://images.unsplash.com/photo-1765366417030-16d9765d920a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBvZmZpY2UlMjBkZXNrJTIwd29ya3NwYWNlfGVufDF8fHx8MTc3MzkzODM0OXww&ixlib=rb-4.1.0&q=80&w=1080',
-   // bannerTitle: 'Our Alumni',
-    //bannerDescription: 'Celebrating the success stories of our distinguished alumni who have made significant contributions in various fields across the globe.'
+    image: 'https://images.unsplash.com/photo-1754531976838-436a70636c96?w=400&q=80',
+    bannerImage: 'https://images.unsplash.com/photo-1765366417030-16d9765d920a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBvZmZpY2UlMjBkZXNrJTIwd29ya3NwYWNlfGVufDF8fHx8MTc3MzkzODM0OXww&ixlib=rb-4.1.0&q=80&w=1080',
+   bannerTitle: 'Our Alumni',
+    bannerDescription: 'Celebrating the success stories of our distinguished alumni who have made significant contributions in various fields across the globe.'
   },
 ];
 
@@ -119,7 +119,7 @@ export function AboutLayout() {
 
       {/* Main Content Section */}
       <section className="bg-[#F6F4EE] py-20 lg:py-32">
-        <div className="container mx-auto   sm:px-6 ">
+        <div className="px-4 sm:px-6 ">
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Left Sidebar */}
             <div className="lg:w-80 flex-shrink-0">

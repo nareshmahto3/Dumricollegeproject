@@ -127,7 +127,7 @@ export function ProgramsPage() {
 
       {/* Main Content Section */}
       <section className="bg-[#F6F4EE] py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="  px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Left Sidebar - Filters */}
             <div className="lg:w-80 flex-shrink-0">
