@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router';
 import { ChevronDown, X, MessageCircle, Menu, Globe } from 'lucide-react';
 import svgPaths from "../imports/svg-o5h25uox4w";
-import imgImageDumriCollege from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
+
+import jci_logo from "../assets/jci_logo.png"
 
 interface CarouselHeaderProps {
   onMenuClick?: () => void;
@@ -35,7 +36,7 @@ const menuItems: MenuItem[] = [
       { label: 'Faculties', href: '/all-faculty' },
       { label: 'Admission Requirements', href: '/admission-requirements' },
       { label: 'Fee Structure', href: '/fee-structure' },
-       { label: 'Admissions', href: '/apply' },
+      { label: 'Admissions', href: '/apply' },
     ],
   },
   // {
@@ -52,13 +53,13 @@ const menuItems: MenuItem[] = [
   {
     label: 'Student Life',
     submenu: [
-    
+
       { label: 'Notices and Announcements', href: '/notices' },
       { label: 'Holiday List', href: '/holiday' },
       { label: 'How to Apply', href: '/how-to-apply' },
       { label: 'Student Portal', href: '/student/dashboard' },
       { label: 'Scholarships', href: '/scholarships' },
-        { label: 'Admissions', href: '/apply' },
+      { label: 'Admissions', href: '/apply' },
     ],
   },
   // {
@@ -82,11 +83,11 @@ const menuItems: MenuItem[] = [
     submenu: [
       { label: 'Gallery', href: '/gallery' },
       { label: 'Events', href: '/events' },
-  { label: 'How to Apply', href: '/how-to-apply' },   
-    { label: 'Admissions', href: '/apply' },  
+      { label: 'How to Apply', href: '/how-to-apply' },
+      { label: 'Admissions', href: '/apply' },
       { label: 'Gallery', href: '/gallery' },
       { label: 'FAQ', href: '/faq' },
-       { label: 'Contact Us', href: '/contact' },
+      { label: 'Contact Us', href: '/contact' },
     ],
   },
 ];
@@ -172,7 +173,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
   const handleLanguageChange = (lang: 'en' | 'hi') => {
     setCurrentLanguage(lang);
     setShowLanguageMenu(false);
-    
+
     // Using Google Translate to translate the page
     const googleTranslateElementInit = () => {
       // @ts-ignore
@@ -196,7 +197,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
       script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
       script.async = true;
       document.body.appendChild(script);
-      
+
       // @ts-ignore
       window.googleTranslateElementInit = googleTranslateElementInit;
     }
@@ -227,28 +228,18 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
           </div>
 
           {/* College Logo */}
-          <div 
-            className="absolute left-0 size-[90px] top-[11px] pointer-events-auto cursor-pointer"
+          <div
+            className="absolute left-0 w-[300px] h-[300px] pointer-events-auto cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <img 
-              alt="Dumri College Logo" 
-              className="absolute inset-0 max-w-none object-cover size-full" 
-              src={imgImageDumriCollege} 
+            <img
+              alt="Dumri College Logo"
+              className="absolute "
+              src={jci_logo}
             />
           </div>
 
-          {/* College Name */}
-          <div 
-            className="absolute font-['Alice',serif]  leading-[20px] left-[107px] not-italic text-[20px] text-black top-[25px] w-[238px] whitespace-pre-wrap pointer-events-auto cursor-pointer"
-            onClick={() => navigate('/')}
-          >
-            <p className="mb-3">Jharkhand Commerce </p>
-            <p>
-              {/* <br aria-hidden="true" /> */}
-              Inter College
-            </p>
-          </div>
+
 
           {/* Menu Button - Top Right */}
           <div className="absolute right-8 top-[22px] pointer-events-auto">
@@ -281,14 +272,14 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
           >
             <div className="max-w-[1920px] mx-auto px-8 py-3 flex items-center justify-between">
               {/* Logo */}
-              <div 
+              <div
                 className="flex items-center cursor-pointer"
                 onClick={() => navigate('/')}
               >
-                <img 
-                  alt="Dumri College Logo" 
-                  className="w-14 h-14 object-cover" 
-                  src={imgImageDumriCollege} 
+                <img
+                  alt="Dumri College Logo"
+                  className="w-14 h-14 object-cover"
+                  src={jci_logo}
                 />
               </div>
 
@@ -386,7 +377,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                         </motion.button>
                       )}
                     </div>
-                    
+
                     {/* Submenu */}
                     <AnimatePresence>
                       {item.submenu && expandedItem === item.label && (
@@ -430,21 +421,19 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => handleLanguageChange('en')}
-                    className={`py-3 px-4 rounded-lg font-medium text-sm tracking-wide transition-all border-2 ${ 
-                      currentLanguage === 'en' 
-                        ? 'bg-[#2563EB] text-white border-[#2563EB]' 
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-[#2563EB] hover:text-[#2563EB]'
-                    }`}
+                    className={`py-3 px-4 rounded-lg font-medium text-sm tracking-wide transition-all border-2 ${currentLanguage === 'en'
+                      ? 'bg-[#2563EB] text-white border-[#2563EB]'
+                      : 'bg-white text-gray-700 border-gray-300 hover:border-[#2563EB] hover:text-[#2563EB]'
+                      }`}
                   >
                     English
                   </button>
                   <button
                     onClick={() => handleLanguageChange('hi')}
-                    className={`py-3 px-4 rounded-lg font-medium text-sm tracking-wide transition-all border-2 ${ 
-                      currentLanguage === 'hi' 
-                        ? 'bg-[#2563EB] text-white border-[#2563EB]' 
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-[#2563EB] hover:text-[#2563EB]'
-                    }`}
+                    className={`py-3 px-4 rounded-lg font-medium text-sm tracking-wide transition-all border-2 ${currentLanguage === 'hi'
+                      ? 'bg-[#2563EB] text-white border-[#2563EB]'
+                      : 'bg-white text-gray-700 border-gray-300 hover:border-[#2563EB] hover:text-[#2563EB]'
+                      }`}
                   >
                     हिंदी
                   </button>

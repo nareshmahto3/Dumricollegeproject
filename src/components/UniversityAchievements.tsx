@@ -208,7 +208,7 @@ export function UniversityAchievements() {
                     </div>
 
                     {/* View All Button */}
-                    <div className="text-center mt-8">
+                    {/* <div className="text-center mt-8">
                         <motion.button
                             onClick={() => navigate("/achievements")}
                             className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-normal border border-gray-300 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
@@ -217,7 +217,7 @@ export function UniversityAchievements() {
                         >
                             View All
                         </motion.button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>
