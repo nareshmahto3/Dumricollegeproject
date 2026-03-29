@@ -635,7 +635,7 @@ export function FeeManagement() {
             >
               <Card className="p-2">
                 <div className="flex gap-2">
-                  <button
+                  <button style={{ border: '1px solid blueviolet' }}
                     onClick={() => setActiveTab('overview')}
                     className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all cursor-pointer ${
                       activeTab === 'overview'
@@ -646,7 +646,7 @@ export function FeeManagement() {
                     <BarChart3 className="w-4 h-4 inline mr-2" />
                     Overview
                   </button>
-                  <button
+                  <button style={{ border: '1px solid blueviolet' }}
                     onClick={() => setActiveTab('pending')}
                     className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all cursor-pointer ${
                       activeTab === 'pending'
@@ -657,7 +657,7 @@ export function FeeManagement() {
                     <Clock className="w-4 h-4 inline mr-2" />
                     Pending Fees ({pendingFees.length})
                   </button>
-                  <button
+                  <button style={{ border: '1px solid blueviolet' }}
                     onClick={() => setActiveTab('feeDetails')}
                     className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all cursor-pointer ${
                       activeTab === 'feeDetails'
@@ -666,7 +666,7 @@ export function FeeManagement() {
                     }`}
                   >
                     <Settings className="w-4 h-4 inline mr-2" />
-                    Fee Details
+                  Add New Fee Details
                   </button>
                 </div>
               </Card>
@@ -687,7 +687,7 @@ export function FeeManagement() {
                       <h3 className="mb-1">Monthly Fee Collection</h3>
                       <p className="text-sm text-muted-foreground">Last 6 months performance</p>
                     </div>
-                    <Button variant="outline" size="sm" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200 cursor-pointer">
+                    <Button style={{ border: '1px solid blueviolet' }} variant="outline" size="sm" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200 cursor-pointer">
                       <Download className="w-4 h-4 mr-2" />
                       Export Report
                     </Button>
@@ -1018,7 +1018,7 @@ export function FeeManagement() {
                         Manage standardized fee structures for each class
                       </p>
                     </div>
-                    <Button 
+                    <Button style={{ border: '1px solid blueviolet' }}
                       onClick={() => setShowNewClassForm(true)}
                       className="gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 cursor-pointer"
                     >
