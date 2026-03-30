@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet } from "react-router";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { ReapplyAdmission } from "./components/ReapplyAdmission";
+import { RouteChangePreloader } from "./components/shared/RouteChangePreloader";
 
 // ─── Lazy-loaded route components ────────────────────────────────────────────
 // Using .then(m => ({ default: m.ExportName })) to support named exports
@@ -534,6 +535,7 @@ function RootLayout() {
   return (
     <Suspense fallback={<PageLoader />}>
       <ScrollToTop />
+      <RouteChangePreloader />
       <Outlet />
     </Suspense>
   );
