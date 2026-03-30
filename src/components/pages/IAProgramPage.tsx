@@ -1,4 +1,7 @@
 import { IntermediateProgramPage } from './IntermediateProgramPage';
+import imgEBlTeam3MinJpg from "figma:asset/ea5e374afdef5a39657cdb7a5e8b48d51f87804b.png";
+import imgEBlTeam2MinJpg from "figma:asset/fa187de29ccf07a8d4687dde792b50b1204cb82d.png";
+import imgEBlTeam1MinJpg from "figma:asset/a1adb3e4cc61a600187de60fe0db91d01d53e7dc.png";
 
 const iaData = {
     id: 'ia',
@@ -53,9 +56,33 @@ const iaData = {
     professors: {
         intro: 'Our faculty comprises experienced educators passionate about humanities and social sciences.',
         list: [
-            { name: 'Dr. Ramesh Yadav', designation: 'Professor of History', experience: '20 years' },
-            { name: 'Prof. Kavita Singh', designation: 'Associate Professor of Political Science', experience: '14 years' },
-            { name: 'Dr. Priya Kumari', designation: 'Assistant Professor of Economics', experience: '9 years' }
+            {
+                id: '1',
+                name: 'Kathryn Murphy',
+                position: 'Support Teacher',
+                department: 'Commerce',
+                image: imgEBlTeam1MinJpg,
+                email: 'kathryn.murphy@dumricollege.edu',
+                education: 'M.Com, B.Ed'
+            },
+            {
+                id: '2',
+                name: 'Savannah Nguyen',
+                position: 'Academic Advisor',
+                department: 'Science',
+                image: imgEBlTeam2MinJpg,
+                email: 'savannah.nguyen@dumricollege.edu',
+                education: 'M.Sc (Physics), Ph.D'
+            },
+            {
+                id: '3',
+                name: 'Brooklyn Simmons',
+                position: 'Academic Assistant',
+                department: 'Arts',
+                image: imgEBlTeam3MinJpg,
+                email: 'brooklyn.simmons@dumricollege.edu',
+                education: 'M.A (English)'
+            },
         ]
     },
     costAndAid: {

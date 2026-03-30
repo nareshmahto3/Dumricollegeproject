@@ -199,10 +199,7 @@ export function AddTeacherForm() {
       <div className="space-y-6">
         <Card className="bg-white border border-slate-200">
           <div className="p-4 sm:p-6 lg:p-8">
-            <div className="mb-6 sm:mb-8">
-              <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">Teacher Information</h2>
-              <p className="text-sm text-slate-600 mt-1">Fill in the details to add a new teacher</p>
-            </div>
+           
 
             <form onSubmit={handleSubmit} noValidate>
 

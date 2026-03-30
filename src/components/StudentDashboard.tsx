@@ -14,6 +14,8 @@ import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
 import { HolidayCalendar } from "./HolidayCalendar";
 import { motion } from "motion/react";
+import { useNavigate } from 'react-router-dom';
+
 
 const certificates = [
   {
@@ -36,7 +38,10 @@ const certificates = [
   },
 ];
 
+
+
 export function StudentDashboard() {
+  const navigate = useNavigate();
   return (
     <PortalLayout
       role="student"
@@ -201,6 +206,7 @@ export function StudentDashboard() {
               <Button
                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all duration-200"
                 size="sm"
+                onClick={() => navigate('/student/certificates')}
               >
                 <Eye className="w-4 h-4 mr-2" />
                 View All

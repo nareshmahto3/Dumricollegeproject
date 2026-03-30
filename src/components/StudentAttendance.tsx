@@ -4,8 +4,13 @@ import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { PortalLayout } from './PortalLayout';
-import { Calendar, CheckCircle, XCircle, Clock, TrendingUp, Download } from 'lucide-react';
+import {
+  Calendar, CheckCircle, XCircle, Clock, TrendingUp, Download, ChevronDown,
+  FileSpreadsheet,
+  FileDown,
+} from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { toast } from 'sonner';
 
 interface AttendanceRecord {
   date: string;
@@ -62,6 +67,12 @@ const getStatusBadge = (status: string) => {
 
 export function StudentAttendance() {
   const [selectedMonth, setSelectedMonth] = useState('February');
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your ${activePeriod} report will be downloaded shortly.`,
+    });
+  };
 
   return (
     <PortalLayout
@@ -71,7 +82,7 @@ export function StudentAttendance() {
       pageTitle="Attendance"
       breadcrumbs={["Home", "Student", "Attendance"]}
     >
-      <motion.div 
+      <motion.div
         className="space-y-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -228,10 +239,57 @@ export function StudentAttendance() {
                   <option>May</option>
                   <option>June</option>
                 </select>
-                <Button variant="outline" className="border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-[#2F80ED] hover:border-blue-500 font-semibold transition-all duration-200">
-                  <Download className="w-4 h-4 mr-2" />
-                  Export
-                </Button>
+                <div className="relative">
+                  <Button
+                    onClick={() => setShowExportDropdown(!showExportDropdown)}
+                    className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+                  >
+                    <FileDown className="w-4 h-4 " />
+                    Export
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                  {showExportDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                    >
+                      <div className="py-1">
+                        <button
+                          onClick={() => {
+                            handleDownload('pdf');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                          PDF
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDownload('csv');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                          CSV
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDownload('excel');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <Download className="w-4 h-4 mr-2 text-blue-600" />
+                          Excel
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </div>
             <div className="overflow-x-auto">

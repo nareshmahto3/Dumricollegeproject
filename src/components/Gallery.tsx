@@ -162,43 +162,33 @@ export function Gallery() {
       <CarouselHeader />
 
       {/* Hero Banner */}
-      <section className="relative h-[320px] overflow-hidden">
-        {/* Background with texture */}
-        <div className="absolute inset-0">
-          <div className="absolute bg-[#0c5776] inset-0" />
-          <div className="absolute inset-0 overflow-hidden">
-            <img
-              alt=""
-              className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-30"
-              src={imgDivElementorElement}
-            />
+      <section
+        className="relative h-[385px] bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&q=80)',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2F584F]/80 to-[#00192C]/90" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-30 pb-16">
+          <div className="flex items-center gap-2 mb-5">
+            <button
+              onClick={() => window.history.back()}
+              className="text-white text-base hover:underline"
+            >
+              Home
+            </button>
+            <ChevronRight className="w-4 h-4 text-white" />
+            <span className="text-white text-base">Gallery</span>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8 }}
-                className="text-center text-white"
-              >
-                {/* <Badge className="bg-blue-500/30 text-blue-100 border-blue-400/50 backdrop-blur-md mb-6 md:mb-8 px-4 md:px-8 py-2 md:py-4 text-sm md:text-lg">
-                  <Camera className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
-                  <span className="hidden sm:inline">1000+ Photos � 50+ Events</span>
-                  <span className="sm:hidden">Campus Moments</span>
-                </Badge> */}
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-8 leading-tight px-4">
-                  Campus Gallery
-                </h1>
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-blue-100 mb-4 md:mb-6 max-w-4xl mx-auto font-light px-4">
-                  Explore life at our college through images and memories.
-                </p>
-                <p className="text-base md:text-xl text-blue-200 max-w-3xl mx-auto leading-relaxed px-4">
-                  Moments That Define Our Community, Explore the vibrant life, culture, and achievements at  Jharkhand Commerce Inter College
-                </p>
-              </motion.div>
-            </div>
+          <h1 className="text-5xl font-light text-white mb-5 font-serif">
+            Campus Gallery
+          </h1>
+          <div className="relative w-full max-w-[480px] h-[1px] bg-white/15 mb-5">
+            <div className="absolute left-0 top-0 h-full w-[120px] bg-[#FDC72F]" />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-20 md:h-32 bg-gradient-to-t from-white to-transparent" />
+          <p className="text-white/90 text-lg max-w-2xl leading-relaxed">
+            Explore life at Dumri College through moments captured from our vibrant campus
+          </p>
         </div>
       </section>
 

@@ -141,8 +141,8 @@ export function AllFacultyPage() {
 
   const departments = ['all', 'Commerce', 'Science', 'Arts'];
 
-  const filteredFaculty = selectedDepartment === 'all' 
-    ? facultyMembers 
+  const filteredFaculty = selectedDepartment === 'all'
+    ? facultyMembers
     : facultyMembers.filter(member => member.department === selectedDepartment);
 
   return (
@@ -165,24 +165,24 @@ export function AllFacultyPage() {
 
         {/* Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <img 
-            alt="" 
-            className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-10" 
-            src={imgDivElementorElement} 
+          <img
+            alt=""
+            className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-10"
+            src={imgDivElementorElement}
           />
         </div>
 
         {/* Decorative Arrow */}
         <div className="absolute bottom-[40px] right-[100px] z-10 hidden lg:block opacity-50">
-          <img 
-            alt="" 
-            className="w-[100px] h-[100px]" 
-            src={imgBnrArrow11} 
+          <img
+            alt=""
+            className="w-[100px] h-[100px]"
+            src={imgBnrArrow11}
           />
         </div>
 
         {/* Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20 pb-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-35 pb-8">
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 mb-4">
             <button
@@ -217,11 +217,10 @@ export function AllFacultyPage() {
               <button
                 key={dept}
                 onClick={() => setSelectedDepartment(dept)}
-                className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors ${
-                  selectedDepartment === dept
-                    ? 'bg-[#0c5776] text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
+                className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors ${selectedDepartment === dept
+                  ? 'bg-[#0c5776] text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
               >
                 {dept === 'all' ? 'All Departments' : dept}
               </button>
@@ -289,7 +288,7 @@ export function AllFacultyPage() {
                     {member.email && (
                       <div className="flex items-center justify-center gap-2 text-xs text-gray-600">
                         <Mail className="w-3.5 h-3.5 text-blue-600" />
-                        <a 
+                        <a
                           href={`mailto:${member.email}`}
                           className="hover:text-blue-600 transition-colors truncate"
                         >

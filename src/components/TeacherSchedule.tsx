@@ -86,7 +86,7 @@ export function TeacherSchedule() {
   // Get light background color for timetable cells
   const getCellBackgroundColor = (classItem: any) => {
     if (!classItem) return '';
-    
+
     switch (classItem.type) {
       case 'lecture':
         return 'bg-gradient-to-br from-blue-50 to-blue-100/50 border-blue-200';
@@ -172,11 +172,10 @@ export function TeacherSchedule() {
                 <button
                   key={day}
                   onClick={() => setSelectedDay(day)}
-                  className={`px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-colors ${
-                    selectedDay === day
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  className={`px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-colors ${selectedDay === day
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   {day}
                 </button>
@@ -220,10 +219,10 @@ export function TeacherSchedule() {
                   </div>
                 </div>
               )) || (
-                <div className="text-center py-8 text-muted-foreground">
-                  No classes scheduled for this day
-                </div>
-              )}
+                  <div className="text-center py-8 text-muted-foreground">
+                    No classes scheduled for this day
+                  </div>
+                )}
             </div>
           </Card>
 
@@ -259,7 +258,7 @@ export function TeacherSchedule() {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-4">
+            <Button variant="outline" className="w-full mt-4 border-emerald-300 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-500">
               View All Events
             </Button>
           </Card>
@@ -347,39 +346,35 @@ export function TeacherSchedule() {
                         return (
                           <td key={day} className={`p-3 ${dayIndex < days.length - 1 ? 'border-r border-slate-200' : ''}`}>
                             {classItem ? (
-                              <div className={`relative group cursor-pointer rounded-xl p-3 border-2 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
-                                classItem.type === 'lecture' 
-                                  ? 'bg-gradient-to-br from-blue-50 via-blue-100 to-blue-50 border-blue-300 hover:border-blue-500' 
-                                  : classItem.type === 'practical'
+                              <div className={`relative group cursor-pointer rounded-xl p-3 border-2 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${classItem.type === 'lecture'
+                                ? 'bg-gradient-to-br from-blue-50 via-blue-100 to-blue-50 border-blue-300 hover:border-blue-500'
+                                : classItem.type === 'practical'
                                   ? 'bg-gradient-to-br from-green-50 via-green-100 to-green-50 border-green-300 hover:border-green-500'
                                   : 'bg-gradient-to-br from-purple-50 via-purple-100 to-purple-50 border-purple-300 hover:border-purple-500'
-                              }`}>
+                                }`}>
                                 {/* Decorative corner accent */}
-                                <div className={`absolute top-0 right-0 w-8 h-8 rounded-bl-xl rounded-tr-lg ${
-                                  classItem.type === 'lecture' 
-                                    ? 'bg-gradient-to-br from-blue-400 to-blue-600' 
-                                    : classItem.type === 'practical'
+                                <div className={`absolute top-0 right-0 w-8 h-8 rounded-bl-xl rounded-tr-lg ${classItem.type === 'lecture'
+                                  ? 'bg-gradient-to-br from-blue-400 to-blue-600'
+                                  : classItem.type === 'practical'
                                     ? 'bg-gradient-to-br from-green-400 to-green-600'
                                     : 'bg-gradient-to-br from-purple-400 to-purple-600'
-                                }`}></div>
-                                
+                                  }`}></div>
+
                                 <div className="relative z-10">
                                   <div className="flex items-start gap-2 mb-2">
-                                    <BookOpen className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                                      classItem.type === 'lecture' 
-                                        ? 'text-blue-600' 
-                                        : classItem.type === 'practical'
+                                    <BookOpen className={`w-4 h-4 mt-0.5 flex-shrink-0 ${classItem.type === 'lecture'
+                                      ? 'text-blue-600'
+                                      : classItem.type === 'practical'
                                         ? 'text-green-600'
                                         : 'text-purple-600'
-                                    }`} />
+                                      }`} />
                                     <div className="flex-1 min-w-0">
-                                      <p className={`font-bold text-sm leading-tight mb-1 ${
-                                        classItem.type === 'lecture' 
-                                          ? 'text-blue-900' 
-                                          : classItem.type === 'practical'
+                                      <p className={`font-bold text-sm leading-tight mb-1 ${classItem.type === 'lecture'
+                                        ? 'text-blue-900'
+                                        : classItem.type === 'practical'
                                           ? 'text-green-900'
                                           : 'text-purple-900'
-                                      }`}>
+                                        }`}>
                                         {classItem.class}
                                       </p>
                                       <div className="flex items-center gap-1 text-xs text-slate-600 mb-1">
@@ -392,15 +387,14 @@ export function TeacherSchedule() {
                                       </div>
                                     </div>
                                   </div>
-                                  
+
                                   {/* Type badge */}
-                                  <div className={`text-[10px] font-bold uppercase tracking-wide inline-block px-2 py-0.5 rounded-full ${
-                                    classItem.type === 'lecture' 
-                                      ? 'bg-blue-600 text-white' 
-                                      : classItem.type === 'practical'
+                                  <div className={`text-[10px] font-bold uppercase tracking-wide inline-block px-2 py-0.5 rounded-full ${classItem.type === 'lecture'
+                                    ? 'bg-blue-600 text-white'
+                                    : classItem.type === 'practical'
                                       ? 'bg-green-600 text-white'
                                       : 'bg-purple-600 text-white'
-                                  }`}>
+                                    }`}>
                                     {classItem.type}
                                   </div>
                                 </div>
@@ -518,7 +512,7 @@ export function TeacherSchedule() {
                           </thead>
                           <tbody>
                             {weekSchedule[day as keyof typeof weekSchedule]?.map((item, index) => (
-                              <tr 
+                              <tr
                                 key={index}
                                 className={`${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'} border-b border-slate-100 hover:bg-blue-50 transition-colors`}
                               >

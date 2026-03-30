@@ -93,8 +93,8 @@ export function TeacherExams() {
   const [exams, setExams] = useState<Exam[]>(examsData);
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'ongoing' | 'completed'>('all');
 
-  const filteredExams = filter === 'all' 
-    ? exams 
+  const filteredExams = filter === 'all'
+    ? exams
     : exams.filter(exam => exam.status === filter);
 
   const upcomingCount = exams.filter(e => e.status === 'upcoming').length;
@@ -144,7 +144,7 @@ export function TeacherExams() {
             transition={{ delay: 0.1 }}
             whileHover={{ scale: 1.05, y: -5 }}
           >
-            <Card className="bg-gradient-to-br from-amber-500 to-amber-600 border-0 shadow-lg p-6">
+            <Card className="bg-gradient-to-br from-red-500 to-red-600 border-0 shadow-lg p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
                   <FileCheck className="w-6 h-6 text-white" />
@@ -219,7 +219,7 @@ export function TeacherExams() {
                 variant={filter === 'all' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setFilter('all')}
-                className={filter === 'all' ? 'bg-amber-500 hover:bg-amber-600' : 'border-amber-300 text-amber-600 hover:bg-amber-50'}
+                className={filter === 'all' ? 'bg-red-500 hover:bg-red-600' : 'border-red-300 text-red-600 hover:bg-red-50'}
               >
                 All Exams
               </Button>
@@ -227,7 +227,7 @@ export function TeacherExams() {
                 variant={filter === 'upcoming' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setFilter('upcoming')}
-                className={filter === 'upcoming' ? 'bg-blue-500 hover:bg-blue-600' : 'border-blue-300 text-blue-600 hover:bg-blue-50'}
+                className={filter === 'upcoming' ? ' hover:bg-blue-600' : 'border-blue-300 hover:text-blue-800 text-blue-600 hover:bg-blue-50'}
               >
                 Upcoming
               </Button>
@@ -235,7 +235,7 @@ export function TeacherExams() {
                 variant={filter === 'ongoing' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setFilter('ongoing')}
-                className={filter === 'ongoing' ? 'bg-orange-500 hover:bg-orange-600' : 'border-orange-300 text-orange-600 hover:bg-orange-50'}
+                className={filter === 'ongoing' ? 'bg-orange-500 hover:bg-orange-600' : 'border-orange-300 hover:text-orange-700 text-orange-600 hover:bg-orange-50'}
               >
                 Ongoing
               </Button>
@@ -243,12 +243,12 @@ export function TeacherExams() {
                 variant={filter === 'completed' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setFilter('completed')}
-                className={filter === 'completed' ? 'bg-emerald-500 hover:bg-emerald-600' : 'border-emerald-300 text-emerald-600 hover:bg-emerald-50'}
+                className={filter === 'completed' ? 'bg-emerald-500 hover:bg-emerald-600' : 'border-emerald-300  hover:text-emerald-900 text-emerald-600 hover:bg-emerald-50'}
               >
                 Completed
               </Button>
             </div>
-            <Button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white">
+            <Button className="bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white">
               <Plus className="w-4 h-4 mr-2" />
               Create New Exam
             </Button>
@@ -265,19 +265,17 @@ export function TeacherExams() {
               transition={{ delay: index * 0.1 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card className="bg-white border-amber-200 shadow-lg p-6 hover:shadow-xl transition-all">
+              <Card className="bg-white border-blue-200 shadow-lg p-6 hover:shadow-xl transition-all">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div className="flex items-start gap-4 flex-1">
-                    <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                      exam.status === 'upcoming' ? 'bg-blue-100' :
+                    <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${exam.status === 'upcoming' ? 'bg-blue-100' :
                       exam.status === 'ongoing' ? 'bg-orange-100' :
-                      'bg-emerald-100'
-                    }`}>
-                      <FileCheck className={`w-8 h-8 ${
-                        exam.status === 'upcoming' ? 'text-blue-600' :
+                        'bg-emerald-100'
+                      }`}>
+                      <FileCheck className={`w-8 h-8 ${exam.status === 'upcoming' ? 'text-blue-600' :
                         exam.status === 'ongoing' ? 'text-orange-600' :
-                        'text-emerald-600'
-                      }`} />
+                          'text-emerald-600'
+                        }`} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between mb-2">
@@ -300,7 +298,7 @@ export function TeacherExams() {
                         </Badge>
                       </div>
 
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
                         <div>
                           <p className="text-xs text-slate-500 mb-1">Date</p>
                           <p className="text-sm font-semibold text-slate-900 flex items-center gap-1">
@@ -344,7 +342,7 @@ export function TeacherExams() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-blue-300 text-blue-600 hover:bg-blue-50"
+                      className="border-blue-300 text-blue-600 hover:bg-blue-50 hover:text-blue-800"
                     >
                       <Eye className="w-4 h-4 mr-1" />
                       View
@@ -353,7 +351,7 @@ export function TeacherExams() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-amber-300 text-amber-600 hover:bg-amber-50"
+                        className="border-amber-300 text-amber-600 hover:bg-amber-50 hover:text-amber-500"
                       >
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
@@ -363,7 +361,7 @@ export function TeacherExams() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-emerald-300 text-emerald-600 hover:bg-emerald-50"
+                        className="border-emerald-300 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-500"
                       >
                         <Download className="w-4 h-4 mr-1" />
                         Results
@@ -373,7 +371,7 @@ export function TeacherExams() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-red-300 text-red-600 hover:bg-red-50"
+                        className="border-red-300 text-red-600 hover:bg-red-50 hover:text-red-500"
                       >
                         <Trash2 className="w-4 h-4 mr-1" />
                         Delete

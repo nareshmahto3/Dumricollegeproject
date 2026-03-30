@@ -91,7 +91,7 @@ export function StudentClasses() {
       pageTitle="My Classes"
       breadcrumbs={["Home", "Student", "My Classes"]}
     >
-      <motion.div 
+      <motion.div
         className="space-y-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -194,12 +194,12 @@ export function StudentClasses() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-200 flex gap-2">
+                  {/* <div className="pt-4 border-t border-slate-200 flex gap-2">
                     <Button variant="outline" className="w-full bg-blue-50 border-blue-500 text-blue-600 hover:bg-blue-100 hover:border-blue-600 font-semibold transition-all duration-200">
                       <Eye className="w-4 h-4 mr-2" />
                       View Details
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </Card>
             </motion.div>

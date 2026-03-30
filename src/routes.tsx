@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet } from "react-router";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { ReapplyAdmission } from "./components/ReapplyAdmission";
 
 // ─── Lazy-loaded route components ────────────────────────────────────────────
 // Using .then(m => ({ default: m.ExportName })) to support named exports
@@ -499,6 +500,18 @@ const StudentHoliday = lazy(() =>
   }))
 );
 
+const Requestreapply = lazy(() =>
+  import("./components/ReapplyAdmission").then((m) => ({
+    default: m.ReapplyAdmission,
+  }))
+);
+
+const RequestCertificate = lazy(() =>
+  import("./components/RequestCertificate").then((m) => ({
+    default: m.RequestCertificate,
+  }))
+);
+
 // Not Found
 const NotFound = lazy(() =>
   import("./components/NotFound").then((m) => ({ default: m.NotFound }))
@@ -648,6 +661,8 @@ export const router = createBrowserRouter([
       { path: "/student/messages", Component: StudentMessages },
       { path: "/student/fee-receipt", Component: StudentFeeReceipt },
       { path: "/student/holiday", Component: StudentHoliday },
+      { path: "/student/reapply", Component: ReapplyAdmission },
+      { path: "/student/request-certificate", Component: RequestCertificate },
 
       // ── Fallback ─────────────────────────────────────────────────────────
       { path: "*", Component: NotFound },

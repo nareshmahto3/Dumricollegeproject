@@ -238,8 +238,8 @@ export function IntermediateProgramPage({ program }: IntermediateProgramPageProp
                         <button
                             onClick={() => setActiveTab('overview')}
                             className={`px-10 lg:px-14 py-5 text-sm lg:text-base font-semibold whitespace-nowrap transition-all duration-300 border-b-[0.8px] border-l-[0.8px] border-t-[0.8px] ${activeTab === 'overview'
-                                    ? 'bg-[#0c5776] text-white border-[#0c5776]'
-                                    : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
+                                ? 'bg-[#0c5776] text-white border-[#0c5776]'
+                                : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
                                 }`}
                         >
                             Overview
@@ -247,8 +247,8 @@ export function IntermediateProgramPage({ program }: IntermediateProgramPageProp
                         <button
                             onClick={() => setActiveTab('curriculum')}
                             className={`px-10 lg:px-14 py-5 text-sm lg:text-base font-semibold whitespace-nowrap transition-all duration-300 border-b-[0.8px] border-l-[0.8px] border-t-[0.8px] ${activeTab === 'curriculum'
-                                    ? 'bg-[#0c5776] text-white border-[#0c5776]'
-                                    : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
+                                ? 'bg-[#0c5776] text-white border-[#0c5776]'
+                                : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
                                 }`}
                         >
                             Curriculum
@@ -256,8 +256,8 @@ export function IntermediateProgramPage({ program }: IntermediateProgramPageProp
                         <button
                             onClick={() => setActiveTab('professors')}
                             className={`px-10 lg:px-14 py-5 text-sm lg:text-base font-semibold whitespace-nowrap transition-all duration-300 border-b-[0.8px] border-l-[0.8px] border-t-[0.8px] ${activeTab === 'professors'
-                                    ? 'bg-[#0c5776] text-white border-[#0c5776]'
-                                    : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
+                                ? 'bg-[#0c5776] text-white border-[#0c5776]'
+                                : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
                                 }`}
                         >
                             Program Professors
@@ -265,8 +265,8 @@ export function IntermediateProgramPage({ program }: IntermediateProgramPageProp
                         <button
                             onClick={() => setActiveTab('cost')}
                             className={`px-10 lg:px-14 py-5 text-sm lg:text-base font-semibold whitespace-nowrap transition-all duration-300 border-b-[0.8px] border-l-[0.8px] border-t-[0.8px] ${activeTab === 'cost'
-                                    ? 'bg-[#0c5776] text-white border-[#0c5776]'
-                                    : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
+                                ? 'bg-[#0c5776] text-white border-[#0c5776]'
+                                : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
                                 }`}
                         >
                             Cost & Financial Aid
@@ -274,8 +274,8 @@ export function IntermediateProgramPage({ program }: IntermediateProgramPageProp
                         <button
                             onClick={() => setActiveTab('admissions')}
                             className={`px-10 lg:px-14 py-5 text-sm lg:text-base font-semibold whitespace-nowrap transition-all duration-300 border ${activeTab === 'admissions'
-                                    ? 'bg-[#0c5776] text-white border-[#0c5776]'
-                                    : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
+                                ? 'bg-[#0c5776] text-white border-[#0c5776]'
+                                : 'bg-white text-gray-900 border-gray-200 hover:bg-[#0c5776] hover:text-white hover:border-[#0c5776]'
                                 }`}
                         >
                             Admissions

@@ -57,7 +57,7 @@ const menuItems: MenuItem[] = [
       { label: 'Notices and Announcements', href: '/notices' },
       { label: 'Holiday List', href: '/holiday' },
       { label: 'How to Apply', href: '/how-to-apply' },
-      { label: 'Student Portal', href: '/student/dashboard' },
+      { label: 'Student Portal', href: '/studentlogin' },
       { label: 'Scholarships', href: '/scholarships' },
       { label: 'Admissions', href: '/apply' },
     ],
@@ -84,8 +84,6 @@ const menuItems: MenuItem[] = [
       { label: 'Gallery', href: '/gallery' },
       { label: 'Events', href: '/events' },
       { label: 'How to Apply', href: '/how-to-apply' },
-      { label: 'Admissions', href: '/apply' },
-      { label: 'Gallery', href: '/gallery' },
       { label: 'FAQ', href: '/faq' },
       { label: 'Contact Us', href: '/contact' },
     ],
@@ -278,7 +276,7 @@ export function CarouselHeader({ onMenuClick }: CarouselHeaderProps) {
               >
                 <img
                   alt="Dumri College Logo"
-                  className="w-14 h-14 object-cover"
+                  className="w-[200px] object-cover"
                   src={jci_logo}
                 />
               </div>
