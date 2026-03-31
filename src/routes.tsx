@@ -548,10 +548,7 @@ export const router = createBrowserRouter([
     children: [
       // ── Landing / public ──────────────────────────────────────────────────
       { path: "/", Component: DumriCollegeLanding },
-      { path: "/modern", Component: ModernUniversityLanding },
-      { path: "/christ", Component: UniversityLandingPage },
-      { path: "/enhanced", Component: EnhancedLandingPage },
-      { path: "/figma", Component: FigmaLandingPage },
+
 
       // ── Info pages ───────────────────────────────────────────────────────
       {

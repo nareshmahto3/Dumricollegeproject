@@ -136,7 +136,9 @@ export function AddTeacherForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
+    const allTouched = Object.fromEntries(
+      Object.keys(formData).map((k) => [k, true])
+    );
     setTouched(allTouched);
 
     if (hasAnyError) {
@@ -145,29 +147,56 @@ export function AddTeacherForm() {
     }
 
     setIsSubmitting(true);
+    debugger
     try {
       const payload = new FormData();
-      Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
-      if (photoFile) payload.append('photo', photoFile);
 
-      const response = await fetch('http://localhost:5258/api/teacher/AddWithPhoto', {
-        method: 'POST',
-        body: payload,
-      });
+      // Append all fields properly
+      payload.append('firstName', formData.firstName);
+      payload.append('lastName', formData.lastName);
+      payload.append('gender', formData.gender);
+      payload.append('dateOfBirth', formData.dateOfBirth);
+      payload.append('employeeId', formData.employeeId);
+      payload.append('designation', formData.designation);
+      payload.append('department', formData.department);
+      payload.append('qualification', formData.qualification);
+      payload.append('experience', String(formData.experience));
+      payload.append('joiningDate', formData.joiningDate);
+      payload.append('bloodGroup', formData.bloodGroup);
+      payload.append('religion', formData.religion);
+      payload.append('email', formData.email);
+      payload.append('phone', formData.phone);
+      payload.append('address', formData.address);
+      payload.append('city', formData.city);
+      payload.append('state', formData.state);
+      payload.append('zipCode', formData.zipCode);
+      payload.append('emergencyContact', formData.emergencyContact);
+      payload.append('salary', String(formData.salary));
+      payload.append('subjects', formData.subjects); // if string
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to add teacher');
+      payload.append('shortBio', formData.shortBio);
+
+      // Append file
+      if (photoFile) {
+        payload.append('photo', photoFile);
       }
 
-      toast.success('Teacher Added Successfully!', {
-        description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
-      });
-      setTimeout(() => navigate('/admin/teachers'), 1000);
+      const response = await fetch(
+        'https://localhost:44390/api/Teacher/add-teacher',
+        {
+          method: 'POST',
+          body: payload,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
+
+      toast.success('Teacher added successfully!');
     } catch (error) {
-      toast.error('Failed to add teacher', {
-        description: error instanceof Error ? error.message : 'Something went wrong.',
-      });
+      console.error(error);
+      toast.error('Something went wrong');
     } finally {
       setIsSubmitting(false);
     }

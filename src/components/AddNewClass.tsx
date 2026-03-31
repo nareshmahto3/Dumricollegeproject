@@ -281,7 +281,7 @@ export function AddNewClass() {
                 type="button"
                 variant="outline"
                 onClick={() => navigate('/admin/classes')}
-                className="px-6 border-slate-300 text-slate-700 hover:bg-slate-50"
+                className="px-6 border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-950"
                 disabled={isLoading}
               >
                 Cancel

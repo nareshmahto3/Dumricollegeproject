@@ -189,7 +189,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
                 style={{ height: HEADER_HEIGHT }}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10  rounded-full flex items-center justify-center flex-shrink-0">
                     <img src={logo} alt="" />
                   </div>
                   <div className="min-w-0">
