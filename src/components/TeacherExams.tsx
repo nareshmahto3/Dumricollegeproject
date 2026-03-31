@@ -248,10 +248,10 @@ export function TeacherExams() {
                 Completed
               </Button>
             </div>
-            <Button className="bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white">
+            {/* <Button className="bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white">
               <Plus className="w-4 h-4 mr-2" />
               Create New Exam
-            </Button>
+            </Button> */}
           </div>
         </Card>
 
