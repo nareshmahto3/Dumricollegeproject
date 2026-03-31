@@ -134,44 +134,44 @@ export function AddTeacherForm() {
   // };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
-  setTouched(allTouched);
+    const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
+    setTouched(allTouched);
 
-  if (hasAnyError) {
-    toast.error('Please fix the errors before submitting.');
-    return;
-  }
-
-  setIsSubmitting(true);
-  try {
-    const payload = new FormData();
-    Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
-    if (photoFile) payload.append('photo', photoFile);
-
-    const response = await fetch('http://localhost:5258/api/teacher/AddWithPhoto', {
-      method: 'POST',
-      body: payload,
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Failed to add teacher');
+    if (hasAnyError) {
+      toast.error('Please fix the errors before submitting.');
+      return;
     }
 
-    toast.success('Teacher Added Successfully!', {
-      description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
-    });
-    setTimeout(() => navigate('/admin/teachers'), 1000);
-  } catch (error) {
-    toast.error('Failed to add teacher', {
-      description: error instanceof Error ? error.message : 'Something went wrong.',
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    setIsSubmitting(true);
+    try {
+      const payload = new FormData();
+      Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
+      if (photoFile) payload.append('photo', photoFile);
+
+      const response = await fetch('http://localhost:5258/api/teacher/AddWithPhoto', {
+        method: 'POST',
+        body: payload,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to add teacher');
+      }
+
+      toast.success('Teacher Added Successfully!', {
+        description: `${formData.firstName} ${formData.lastName} has been added to the faculty.`,
+      });
+      setTimeout(() => navigate('/admin/teachers'), 1000);
+    } catch (error) {
+      toast.error('Failed to add teacher', {
+        description: error instanceof Error ? error.message : 'Something went wrong.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // ── Field helpers ────────────────────────────────────────────────────────────
   const fieldProps = (name: string) => ({
@@ -199,7 +199,7 @@ export function AddTeacherForm() {
       <div className="space-y-6">
         <Card className="bg-white border border-slate-200">
           <div className="p-4 sm:p-6 lg:p-8">
-           
+
 
             <form onSubmit={handleSubmit} noValidate>
 
@@ -254,7 +254,7 @@ export function AddTeacherForm() {
                     </label>
                     <select {...fieldProps('bloodGroup')}>
                       <option value="">Select Blood Group *</option>
-                      {['A+','A-','B+','B-','O+','O-','AB+','AB-'].map((bg) => (
+                      {['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map((bg) => (
                         <option key={bg} value={bg}>{bg}</option>
                       ))}
                     </select>
@@ -514,7 +514,7 @@ export function AddTeacherForm() {
                     onChange={handleInputChange}
                     onBlur={handleBlur}
                     rows={6}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none text-sm"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm"
                   />
                 </div>
                 <div>

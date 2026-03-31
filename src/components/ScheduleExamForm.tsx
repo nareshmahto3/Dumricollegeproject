@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calendar, Save, RotateCcw, Clock, FileText, Plus, X } from 'lucide-react';
+import { Save, RotateCcw, Plus, X, ArrowLeft } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { PortalLayout } from './PortalLayout';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import axios from 'axios';
 
+// ── Types ────────────────────────────────────────────────────────────────────
 interface ExamSubject {
   subject: string;
   date: string;
@@ -15,27 +16,117 @@ interface ExamSubject {
   maxMarks: string;
 }
 
+// ── Constants ────────────────────────────────────────────────────────────────
+const API_BASE_URL = 'https://localhost:5001/api/Exam';
+
+const REQUIRED_FIELDS = [
+  'examName', 'examType', 'class', 'academicYear', 'startDate', 'endDate', 'venue',
+];
+
+const INITIAL_FORM: Record<string, string> = {
+  examName: '',
+  examType: '',
+  class: '',
+  academicYear: '',
+  startDate: '',
+  endDate: '',
+  venue: '',
+  instructions: '',
+};
+
+const EMPTY_SUBJECT: ExamSubject = {
+  subject: '', date: '', startTime: '', endTime: '', maxMarks: '',
+};
+
+// ── Validation ───────────────────────────────────────────────────────────────
+function getFieldError(name: string, value: string, allValues: Record<string, string>): string | null {
+  if (REQUIRED_FIELDS.includes(name) && !value.trim()) return 'This field is required.';
+
+  if (name === 'endDate' && value && allValues.startDate) {
+    if (new Date(value) < new Date(allValues.startDate))
+      return 'End date cannot be before start date.';
+  }
+
+  return null;
+}
+
+function getSubjectError(field: keyof ExamSubject, value: string, subject: ExamSubject): string | null {
+  const requiredSubjectFields: (keyof ExamSubject)[] = [
+    'subject', 'date', 'startTime', 'endTime', 'maxMarks',
+  ];
+
+  if (requiredSubjectFields.includes(field) && !value.trim()) return 'Required.';
+
+  if (field === 'endTime' && value && subject.startTime) {
+    if (value <= subject.startTime) return 'End time must be after start time.';
+  }
+
+  if (field === 'maxMarks' && value) {
+    const num = parseFloat(value);
+    if (isNaN(num) || num <= 0) return 'Must be greater than 0.';
+  }
+
+  return null;
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function inputCls(error: string | null) {
+  return [
+    'w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border rounded-lg text-slate-900',
+    'placeholder-slate-400 focus:outline-none focus:ring-2 text-sm transition-colors',
+    error
+      ? 'border-red-400 focus:ring-red-400/20 focus:border-red-400'
+      : 'border-slate-300 focus:ring-blue-500/20 focus:border-blue-500',
+  ].join(' ');
+}
+
+function subjectInputCls(error: string | null) {
+  return [
+    'w-full px-3 py-2 bg-white border rounded-lg text-slate-900',
+    'placeholder-slate-400 focus:outline-none focus:ring-2 text-sm transition-colors appearance-none cursor-pointer',
+    error
+      ? 'border-red-400 focus:ring-red-400/20 focus:border-red-400'
+      : 'border-slate-300 focus:ring-blue-500/20 focus:border-blue-500',
+  ].join(' ');
+}
+
+// ── Component ────────────────────────────────────────────────────────────────
 export function ScheduleExamForm() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    examName: '',
-    examType: '',
-    class: '',
-    academicYear: '',
-    startDate: '',
-    endDate: '',
-    venue: '',
-    instructions: '',
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<Record<string, string>>(INITIAL_FORM);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [examSubjects, setExamSubjects] = useState<ExamSubject[]>([{ ...EMPTY_SUBJECT }]);
+  // touchedSubjects[i][field] = true when that cell has been blurred
+  const [touchedSubjects, setTouchedSubjects] = useState<Record<string, boolean>[]>([{}]);
+
+  // ── Derived errors ─────────────────────────────────────────────────────────
+  const errors: Record<string, string | null> = {};
+  for (const key of Object.keys(formData)) {
+    errors[key] = touched[key] ? getFieldError(key, formData[key], formData) : null;
+  }
+
+  const subjectErrors: Record<string, string | null>[] = examSubjects.map((sub, i) => {
+    const result: Record<string, string | null> = {};
+    for (const field of Object.keys(EMPTY_SUBJECT) as (keyof ExamSubject)[]) {
+      result[field] = touchedSubjects[i]?.[field]
+        ? getSubjectError(field, sub[field], sub)
+        : null;
+    }
+    return result;
   });
 
-  const [examSubjects, setExamSubjects] = useState<ExamSubject[]>([
-    { subject: '', date: '', startTime: '', endTime: '', maxMarks: '' }
-  ]);
+  const hasFormError = Object.keys(formData).some(
+    (k) => getFieldError(k, formData[k], formData) !== null
+  );
 
-  const [loading, setLoading] = useState(false);
+  const hasSubjectError = examSubjects.some((sub) =>
+    (Object.keys(EMPTY_SUBJECT) as (keyof ExamSubject)[]).some(
+      (f) => getSubjectError(f, sub[f], sub) !== null
+    )
+  );
 
-  const API_BASE_URL = 'https://localhost:5001/api/Exam'; // Adjust based on your API URL
-
+  // ── Handlers ───────────────────────────────────────────────────────────────
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -43,78 +134,137 @@ export function ScheduleExamForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+  };
+
   const handleSubjectChange = (index: number, field: keyof ExamSubject, value: string) => {
-    const newSubjects = [...examSubjects];
-    newSubjects[index][field] = value;
-    setExamSubjects(newSubjects);
+    setExamSubjects((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      return updated;
+    });
+  };
+
+  const handleSubjectBlur = (index: number, field: keyof ExamSubject) => {
+    setTouchedSubjects((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...(updated[index] || {}), [field]: true };
+      return updated;
+    });
   };
 
   const addSubject = () => {
-    setExamSubjects([...examSubjects, { subject: '', date: '', startTime: '', endTime: '', maxMarks: '' }]);
+    setExamSubjects((prev) => [...prev, { ...EMPTY_SUBJECT }]);
+    setTouchedSubjects((prev) => [...prev, {}]);
   };
 
   const removeSubject = (index: number) => {
-    const newSubjects = examSubjects.filter((_, i) => i !== index);
-    setExamSubjects(newSubjects);
+    setExamSubjects((prev) => prev.filter((_, i) => i !== index));
+    setTouchedSubjects((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleReset = () => {
+    setFormData(INITIAL_FORM);
+    setTouched({});
+    setExamSubjects([{ ...EMPTY_SUBJECT }]);
+    setTouchedSubjects([{}]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+
+    // Mark all form fields as touched
+    setTouched(Object.fromEntries(Object.keys(formData).map((k) => [k, true])));
+
+    // Mark all subject fields as touched
+    const allSubjectFields = Object.keys(EMPTY_SUBJECT);
+    setTouchedSubjects(
+      examSubjects.map(() => Object.fromEntries(allSubjectFields.map((f) => [f, true])))
+    );
+
+    if (hasFormError || hasSubjectError) {
+      toast.error('Please fix the errors before submitting.');
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
-      // Map frontend data to backend format
       const payload = {
         examName: `${formData.examName} - ${formData.examType} (${formData.class})`,
         examDate: formData.startDate,
-        startTime: examSubjects[0]?.startTime || '09:00', // Use first subject's time or default
+        endDate: formData.endDate,
+        academicYear: formData.academicYear,
+        venue: formData.venue,
+        instructions: formData.instructions,
+        startTime: examSubjects[0]?.startTime || '09:00',
         endTime: examSubjects[0]?.endTime || '12:00',
-        subjects: examSubjects.map(sub => ({
+        subjects: examSubjects.map((sub) => ({
           subjectName: sub.subject,
-          subjectCode: sub.subject, // Using subject as code for simplicity
-          marks: parseInt(sub.maxMarks) || 100
-        }))
+          subjectCode: sub.subject,
+          date: sub.date,
+          startTime: sub.startTime,
+          endTime: sub.endTime,
+          marks: parseInt(sub.maxMarks) || 100,
+        })),
       };
 
-      const response = await axios.post(API_BASE_URL, payload);
-      
+      await axios.post(API_BASE_URL, payload);
+
       toast.success('Exam Scheduled Successfully!', {
-        description: `${formData.examName} for ${formData.class} has been scheduled.`,
+        description: `${formData.examName} for Class ${formData.class} has been scheduled.`,
       });
 
-      setTimeout(() => {
-        navigate('/admin/exams');
-      }, 1000);
+      setTimeout(() => navigate('/admin/exams'), 1000);
     } catch (error) {
-      console.error('Error scheduling exam:', error);
-      toast.error('Failed to schedule exam. Please try again.');
+      toast.error('Failed to schedule exam', {
+        description:
+          axios.isAxiosError(error) && error.response?.data?.message
+            ? error.response.data.message
+            : 'Something went wrong. Please try again.',
+      });
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
-  const handleReset = () => {
-    setFormData({
-      examName: '',
-      examType: '',
-      class: '',
-      academicYear: '',
-      startDate: '',
-      endDate: '',
-      venue: '',
-      instructions: '',
-    });
-    setExamSubjects([{ subject: '', date: '', startTime: '', endTime: '', maxMarks: '' }]);
-  };
+  // ── Sub-components ─────────────────────────────────────────────────────────
+  const fieldProps = (name: string) => ({
+    name,
+    value: formData[name],
+    onChange: handleInputChange,
+    onBlur: handleBlur,
+    className: inputCls(errors[name]),
+  });
 
+  const ErrorMsg = ({ name }: { name: string }) =>
+    errors[name] ? <p className="mt-1 text-xs text-red-500">{errors[name]}</p> : null;
+
+  const SubjectErrorMsg = ({ index, field }: { index: number; field: keyof ExamSubject }) =>
+    subjectErrors[index]?.[field] ? (
+      <p className="mt-0.5 text-xs text-red-500">{subjectErrors[index][field]}</p>
+    ) : null;
+
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <PortalLayout
       role="admin"
       userName="Stevie Zone"
       userRole="Admin"
       pageTitle="Schedule New Exam"
-      breadcrumbs={["Home", "Admin", "Exams", "Schedule Exam"]}
+      breadcrumbs={['Home', 'Admin', 'Exams', 'Schedule Exam']}
     >
       <div className="space-y-6">
+        <Button
+          variant="outline"
+          onClick={() => navigate('/admin/exams')}
+          className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Exams
+        </Button>
         <Card className="bg-white border border-slate-200">
           <div className="p-4 sm:p-6 lg:p-8">
             <div className="mb-6 sm:mb-8">
@@ -122,11 +272,14 @@ export function ScheduleExamForm() {
               <p className="text-sm text-slate-600 mt-1">Fill in the details to schedule a new examination</p>
             </div>
 
-            <form onSubmit={handleSubmit}>
-              {/* Basic Information Section */}
+            <form onSubmit={handleSubmit} noValidate>
+
+              {/* ── Basic Information ──────────────────────────────────── */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Basic Information</h3>
-                
+                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                  Basic Information
+                </h3>
+
                 {/* Row 1 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                   <div>
@@ -135,25 +288,16 @@ export function ScheduleExamForm() {
                     </label>
                     <input
                       type="text"
-                      name="examName"
-                      value={formData.examName}
-                      onChange={handleInputChange}
-                      required
                       placeholder="e.g., First Terminal Examination"
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      {...fieldProps('examName')}
                     />
+                    <ErrorMsg name="examName" />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Exam Type <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      name="examType"
-                      value={formData.examType}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
-                    >
+                    <select {...fieldProps('examType')}>
                       <option value="">Select Exam Type *</option>
                       <option value="unit-test">Unit Test</option>
                       <option value="midterm">Mid-Term Exam</option>
@@ -163,6 +307,7 @@ export function ScheduleExamForm() {
                       <option value="internal">Internal Assessment</option>
                       <option value="board">Board Exam</option>
                     </select>
+                    <ErrorMsg name="examType" />
                   </div>
                 </div>
 
@@ -172,45 +317,26 @@ export function ScheduleExamForm() {
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Class <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      name="class"
-                      value={formData.class}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
-                    >
+                    <select {...fieldProps('class')}>
                       <option value="">Select Class *</option>
-                      <option value="1">Class 1</option>
-                      <option value="2">Class 2</option>
-                      <option value="3">Class 3</option>
-                      <option value="4">Class 4</option>
-                      <option value="5">Class 5</option>
-                      <option value="6">Class 6</option>
-                      <option value="7">Class 7</option>
-                      <option value="8">Class 8</option>
-                      <option value="9">Class 9</option>
-                      <option value="10">Class 10</option>
-                      <option value="11">Class 11</option>
-                      <option value="12">Class 12</option>
+                      {Array.from({ length: 12 }, (_, i) => (
+                        <option key={i + 1} value={String(i + 1)}>Class {i + 1}</option>
+                      ))}
                     </select>
+                    <ErrorMsg name="class" />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Academic Year <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      name="academicYear"
-                      value={formData.academicYear}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
-                    >
+                    <select {...fieldProps('academicYear')}>
                       <option value="">Select Academic Year *</option>
                       <option value="2023-2024">2023-2024</option>
                       <option value="2024-2025">2024-2025</option>
                       <option value="2025-2026">2025-2026</option>
                       <option value="2026-2027">2026-2027</option>
                     </select>
+                    <ErrorMsg name="academicYear" />
                   </div>
                 </div>
 
@@ -220,27 +346,15 @@ export function ScheduleExamForm() {
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Start Date <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="date"
-                      name="startDate"
-                      value={formData.startDate}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    />
+                    <input type="date" {...fieldProps('startDate')} />
+                    <ErrorMsg name="startDate" />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       End Date <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="date"
-                      name="endDate"
-                      value={formData.endDate}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    />
+                    <input type="date" {...fieldProps('endDate')} />
+                    <ErrorMsg name="endDate" />
                   </div>
                 </div>
 
@@ -251,20 +365,19 @@ export function ScheduleExamForm() {
                   </label>
                   <input
                     type="text"
-                    name="venue"
-                    value={formData.venue}
-                    onChange={handleInputChange}
-                    required
                     placeholder="e.g., Main Examination Hall"
-                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                    {...fieldProps('venue')}
                   />
+                  <ErrorMsg name="venue" />
                 </div>
               </div>
 
-              {/* Subject Schedule Section */}
+              {/* ── Subject Schedule ───────────────────────────────────── */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Subject Schedule</h3>
-                
+                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                  Subject Schedule
+                </h3>
+
                 <div className="space-y-4">
                   {examSubjects.map((subject, index) => (
                     <Card key={index} className="p-4 bg-slate-50 border border-slate-200">
@@ -281,6 +394,8 @@ export function ScheduleExamForm() {
                         )}
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+
+                        {/* Subject */}
                         <div>
                           <label className="block text-xs font-medium text-slate-700 mb-1">
                             Subject <span className="text-red-500">*</span>
@@ -288,8 +403,8 @@ export function ScheduleExamForm() {
                           <select
                             value={subject.subject}
                             onChange={(e) => handleSubjectChange(index, 'subject', e.target.value)}
-                            required
-                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
+                            onBlur={() => handleSubjectBlur(index, 'subject')}
+                            className={subjectInputCls(subjectErrors[index]?.subject)}
                           >
                             <option value="">Select</option>
                             <option value="mathematics">Mathematics</option>
@@ -302,7 +417,10 @@ export function ScheduleExamForm() {
                             <option value="chemistry">Chemistry</option>
                             <option value="biology">Biology</option>
                           </select>
+                          <SubjectErrorMsg index={index} field="subject" />
                         </div>
+
+                        {/* Date */}
                         <div>
                           <label className="block text-xs font-medium text-slate-700 mb-1">
                             Date <span className="text-red-500">*</span>
@@ -311,10 +429,13 @@ export function ScheduleExamForm() {
                             type="date"
                             value={subject.date}
                             onChange={(e) => handleSubjectChange(index, 'date', e.target.value)}
-                            required
-                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            onBlur={() => handleSubjectBlur(index, 'date')}
+                            className={subjectInputCls(subjectErrors[index]?.date)}
                           />
+                          <SubjectErrorMsg index={index} field="date" />
                         </div>
+
+                        {/* Start Time */}
                         <div>
                           <label className="block text-xs font-medium text-slate-700 mb-1">
                             Start Time <span className="text-red-500">*</span>
@@ -323,10 +444,13 @@ export function ScheduleExamForm() {
                             type="time"
                             value={subject.startTime}
                             onChange={(e) => handleSubjectChange(index, 'startTime', e.target.value)}
-                            required
-                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            onBlur={() => handleSubjectBlur(index, 'startTime')}
+                            className={subjectInputCls(subjectErrors[index]?.startTime)}
                           />
+                          <SubjectErrorMsg index={index} field="startTime" />
                         </div>
+
+                        {/* End Time */}
                         <div>
                           <label className="block text-xs font-medium text-slate-700 mb-1">
                             End Time <span className="text-red-500">*</span>
@@ -335,27 +459,33 @@ export function ScheduleExamForm() {
                             type="time"
                             value={subject.endTime}
                             onChange={(e) => handleSubjectChange(index, 'endTime', e.target.value)}
-                            required
-                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            onBlur={() => handleSubjectBlur(index, 'endTime')}
+                            className={subjectInputCls(subjectErrors[index]?.endTime)}
                           />
+                          <SubjectErrorMsg index={index} field="endTime" />
                         </div>
+
+                        {/* Max Marks */}
                         <div>
                           <label className="block text-xs font-medium text-slate-700 mb-1">
                             Max Marks <span className="text-red-500">*</span>
                           </label>
                           <input
                             type="number"
-                            value={subject.maxMarks}
-                            onChange={(e) => handleSubjectChange(index, 'maxMarks', e.target.value)}
-                            required
                             min="0"
                             placeholder="100"
-                            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                            value={subject.maxMarks}
+                            onChange={(e) => handleSubjectChange(index, 'maxMarks', e.target.value)}
+                            onBlur={() => handleSubjectBlur(index, 'maxMarks')}
+                            className={subjectInputCls(subjectErrors[index]?.maxMarks)}
                           />
+                          <SubjectErrorMsg index={index} field="maxMarks" />
                         </div>
+
                       </div>
                     </Card>
                   ))}
+
                   <Button
                     type="button"
                     onClick={addSubject}
@@ -367,7 +497,7 @@ export function ScheduleExamForm() {
                 </div>
               </div>
 
-              {/* Instructions Section */}
+              {/* ── Instructions ───────────────────────────────────────── */}
               <div className="mb-6 sm:mb-8">
                 <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                   Exam Instructions
@@ -376,31 +506,34 @@ export function ScheduleExamForm() {
                   name="instructions"
                   value={formData.instructions}
                   onChange={handleInputChange}
+                  onBlur={handleBlur}
                   rows={4}
                   placeholder="Enter exam instructions and guidelines for students..."
-                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none text-sm"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500  text-sm transition-colors"
                 />
               </div>
 
-              {/* Action Buttons */}
+              {/* ── Action Buttons ─────────────────────────────────────── */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-slate-200">
                 <Button
                   type="submit"
-                  disabled={loading}
-                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 shadow-lg shadow-blue-500/20"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 shadow-lg shadow-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <Save className="w-4 h-4 mr-2" />
-                  {loading ? 'Scheduling...' : 'Schedule Exam'}
+                  {isSubmitting ? 'Scheduling...' : 'Schedule Exam'}
                 </Button>
                 <Button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 bg-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 text-slate-700 py-3 border-2 border-slate-300 transition-all duration-200"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 text-slate-700 py-3 border-2 border-slate-300 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Reset Form
                 </Button>
               </div>
+
             </form>
           </div>
         </Card>
