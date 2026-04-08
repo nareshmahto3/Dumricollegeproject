@@ -9,6 +9,8 @@ import { Search, Filter, Calendar, Download, UserCheck, UserX, Clock, Plus, Chec
 import { TablePagination } from './ui/table-pagination';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useNavigate } from 'react-router';
+import { FileDown, FileSpreadsheet } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface AttendanceRecord {
   id: string;
@@ -102,6 +104,14 @@ export function AttendanceManagement() {
   const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+
+
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your  report will be downloaded shortly.`,
+    });
+  };
 
   const handleSort = (field: string) => {
     if (sortField === field) {
@@ -165,11 +175,58 @@ export function AttendanceManagement() {
               <p className="text-slate-600">Track and manage student attendance records</p>
             </div>
             <div className="flex gap-3">
-              <Button variant="outline" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200">
-                <Download className="w-4 h-4 mr-2" />
-                Export Report
-              </Button>
-              <Button 
+              <div className="relative">
+                <Button
+                  onClick={() => setShowExportDropdown(!showExportDropdown)}
+                  className="bg-gradient-to-r  from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+                >
+                  <FileDown className="w-4 h-4 " />
+                  Export Data
+                  <ChevronDown className="w-4 h-4 ml-2" />
+                </Button>
+                {showExportDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                  >
+                    <div className="py-1">
+                      <button
+                        onClick={() => {
+                          handleDownload('pdf');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                        PDF
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleDownload('csv');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                        CSV
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleDownload('excel');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <Download className="w-4 h-4 mr-2 text-blue-600" />
+                        Excel
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+              <Button
                 onClick={() => navigate('/admin/mark-attendance')}
                 className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
               >
@@ -201,22 +258,20 @@ export function AttendanceManagement() {
           <div className="flex gap-4 border-b border-amber-200">
             <button
               onClick={() => setActiveTab('records')}
-              className={`pb-4 px-4 font-medium transition-all ${
-                activeTab === 'records'
-                  ? 'text-amber-600 border-b-2 border-amber-500'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`pb-4 px-4 font-medium transition-all ${activeTab === 'records'
+                ? 'text-amber-600 border-b-2 border-amber-500'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               <ClipboardCheck className="w-4 h-4 inline mr-2" />
               Attendance Records
             </button>
             <button
               onClick={() => setActiveTab('reports')}
-              className={`pb-4 px-4 font-medium transition-all ${
-                activeTab === 'reports'
-                  ? 'text-amber-600 border-b-2 border-amber-500'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`pb-4 px-4 font-medium transition-all ${activeTab === 'reports'
+                ? 'text-amber-600 border-b-2 border-amber-500'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               <TrendingUp className="w-4 h-4 inline mr-2" />
               Attendance Reports
@@ -275,7 +330,7 @@ export function AttendanceManagement() {
                 <table className="w-full min-w-max">
                   <thead>
                     <tr className="border-b-2 border-slate-200 bg-slate-100">
-                      <th 
+                      <th
                         className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
                         onClick={() => handleSort('studentId')}
                       >
@@ -286,7 +341,7 @@ export function AttendanceManagement() {
                           )}
                         </div>
                       </th>
-                      <th 
+                      <th
                         className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
                         onClick={() => handleSort('studentName')}
                       >
@@ -297,7 +352,7 @@ export function AttendanceManagement() {
                           )}
                         </div>
                       </th>
-                      <th 
+                      <th
                         className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
                         onClick={() => handleSort('class')}
                       >
@@ -308,7 +363,7 @@ export function AttendanceManagement() {
                           )}
                         </div>
                       </th>
-                      <th 
+                      <th
                         className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
                         onClick={() => handleSort('date')}
                       >
@@ -319,7 +374,7 @@ export function AttendanceManagement() {
                           )}
                         </div>
                       </th>
-                      <th 
+                      <th
                         className="text-left py-4 px-4 xl:px-6 text-xs xl:text-sm font-semibold text-slate-700 uppercase tracking-wide whitespace-nowrap cursor-pointer hover:bg-slate-200"
                         onClick={() => handleSort('status')}
                       >
@@ -342,9 +397,8 @@ export function AttendanceManagement() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: index * 0.05 }}
-                        className={`border-b border-slate-200 hover:bg-blue-50 transition-colors ${
-                          index % 2 === 0 ? 'bg-white' : 'bg-slate-50'
-                        }`}
+                        className={`border-b border-slate-200 hover:bg-blue-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'
+                          }`}
                       >
                         <td className="py-4 px-4 xl:px-6 text-slate-900 font-medium whitespace-nowrap">{record.studentId}</td>
                         <td className="py-4 px-4 xl:px-6 text-slate-900 whitespace-nowrap">{record.studentName}</td>

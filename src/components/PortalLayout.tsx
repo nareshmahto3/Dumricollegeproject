@@ -96,7 +96,7 @@ export function PortalLayout({
       {/* Main Content Area */}
       <div
         className={`transition-all duration-300 ${
-          isCollapsed ? "lg:ml-[70px]" : "lg:ml-[280px]"
+          isCollapsed ? "lg:ml-[70px]" : "lg:ml-[235px]"
         }`}
       >
         {/* Header */}

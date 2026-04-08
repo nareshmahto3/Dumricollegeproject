@@ -1,24 +1,18 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
 import { ChevronRight } from 'lucide-react';
-import svgPathsVision from "../../imports/svg-jriy3wy553";
-import svgPathsApplication from "../../imports/svg-lmbfyu7sd3";
-import svgPathsGallery from "../../imports/svg-u67qz61758";
-import svgPathsButton from "../../imports/svg-syh49kyrn";
 import imgDivElementorElement from "figma:asset/6002cd04081dfc7b58c5ece1c4f0d07c2bcd2bad.png";
 import imgBnrArrow11 from "figma:asset/13bec648740b03b5c9d2c72567cc9f3e05c47165.png";
-import imgInnerCatImg1MinJpg from "figma:asset/e1886cb1a3038b5a3e557c24ffe13af7ce6ba265.png";
-import imgInnerCatImg2MinJpg from "figma:asset/9f26c0743f65c6213fe7564c446e3fc378c07c31.png";
-import imgInnerCatImg3MinJpg from "figma:asset/a21bf85983e046d11ab824973aea9471a85af035.png";
-import imgGalleryImg2Min from "figma:asset/c9c9ffb636b53266c96e26987f011f92912502c6.png";
-import imgGalleryImg3Min from "figma:asset/08575e4e244c4d18de0ef25022dd7a4fd3eddd44.png";
-import imgGalleryImg4Min from "figma:asset/d871d868f1f32cc206ea9d0915fceee73eb84c6e.png";
-import imgGalleryImg55Min from "figma:asset/42eacf93ea3054579ca1fa8f5ce78d9b065e6f8a.png";
+import imgInnerCatImg1Min from "figma:asset/e1886cb1a3038b5a3e557c24ffe13af7ce6ba265.png";
+import imgInnerCatImg2Min from "figma:asset/9f26c0743f65c6213fe7564c446e3fc378c07c31.png";
+import imgInnerCatImg3Min from "figma:asset/a21bf85983e046d11ab824973aea9471a85af035.png";
 
 export function MissionValuesPage() {
   const [valueExpanded, setValueExpanded] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-white">
@@ -86,12 +80,12 @@ export function MissionValuesPage() {
                 <div className="sticky top-8">
                   {/* Icon */}
                   <div className="mb-6">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080" alt="Mission Icon" className="w-16 h-20" />
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080" alt="Mission Icon" className="w-60 h-30" />
                   </div>
 
                   {/* Title */}
                   <h2 className="text-4xl font-light text-gray-900 mb-8 font-serif">
-                    The Univet Mission
+                    The Jharkhand Commerce Inter College Mission
                   </h2>
 
                   {/* Counter */}
@@ -103,7 +97,7 @@ export function MissionValuesPage() {
 
                   {/* Description */}
                   <p className="text-gray-600 leading-relaxed">
-                    of our students successfully graduat<br />
+                    of our students successfully graduate<br />
                     and begin their career development
                   </p>
                 </div>
@@ -126,7 +120,7 @@ export function MissionValuesPage() {
                       Mission
                     </h3>
                     <p className="text-gray-600 leading-relaxed mb-6">
-                      Univet is committed to delivering university-based education that blends academic excellence with<br />
+                      Jharkhand Commerce Inter College is committed to delivering college-based education that blends academic excellence with<br />
                       practical knowledge, and ethical values. Our mission is to empower students with industry-relevant<br />
                       skills, innovative thinking, and global awareness preparing them to become competent responsibility<br />
                       professionals, responsible leaders, and positive contributors to society through research, learning,<br />
@@ -155,7 +149,7 @@ export function MissionValuesPage() {
       </section>
 
       {/* Award Marquee Section */}
-      <section className="bg-white py-16 overflow-hidden">
+      {/* <section className="bg-white py-16 overflow-hidden">
         <div className="relative">
           <div className="flex items-center justify-center gap-8 animate-marquee whitespace-nowrap">
             <div className="flex items-center gap-8">
@@ -170,7 +164,7 @@ export function MissionValuesPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Overview Section - Exact Figma Design */}
       <section className="bg-white py-28">
@@ -182,7 +176,7 @@ export function MissionValuesPage() {
                 Overview
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Our university curriculum is designed to deliver a balanced future-focused learning experience that empowers students with both academic knowledge and practical competencies Each program is structured to combine foundational coursework specialized major subjects hands-on learning and interdisciplinary opportunities By integrating theory research and real-world applications we prepare students to excel in a rapidly evolving global environment Students begin with core courses that build essential skills in communication, critical thinking, digital literacy, and quantitative analysis.
+                Our college curriculum is designed to deliver a balanced future-focused learning experience that empowers students with both academic knowledge and practical competencies Each program is structured to combine foundational coursework specialized major subjects hands-on learning and interdisciplinary opportunities By integrating theory research and real-world applications we prepare students to excel in a rapidly evolving global environment Students begin with core courses that build essential skills in communication, critical thinking, digital literacy, and quantitative analysis.
               </p>
             </div>
 
@@ -241,7 +235,7 @@ export function MissionValuesPage() {
                               <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
                                 <circle cx="3" cy="3" r="3" />
                               </svg>
-                              <span>Minimum GPA/grade requirements as set by the university.</span>
+                              <span>Minimum GPA/grade requirements as set by the College.</span>
                             </li>
                             <li className="flex items-center gap-2 text-gray-600">
                               <svg className="w-1.5 h-1.5 flex-shrink-0" viewBox="0 0 6 6" fill="currentColor">
@@ -255,7 +249,6 @@ export function MissionValuesPage() {
                     </div>
                   </div>
 
-                  {/* Value Accordion - Clickable */}
                   <div className="bg-transparent rounded-xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)] overflow-hidden">
                     {/* Value Header - Clickable Button */}
                     <button
@@ -342,231 +335,82 @@ export function MissionValuesPage() {
             {/* Three Cards - Exact Figma Design */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* I.Com Card */}
-              <div className="relative bg-white rounded-xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)]" style={{ height: '442px' }}>
-                {/* Text Content */}
-                <div className="absolute top-3 left-3 right-3 px-5 py-5 z-10">
-                  <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] text-center mb-2">
-                    Intermediate in Commerce (I.Com)
-                  </h4>
-                  <div className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] text-center">
-                    <p className="mb-0">Begin your academic journey with flexible</p>
-                    <p>entry requirements and application.</p>
-                  </div>
+              <div className="flex bg-white rounded-2xl pb-3 flex-col items-center text-center">
+                <div className="w-full aspect-[1/1] rounded-2xl overflow-hidden mb-6">
+                  <img
+                    src={imgInnerCatImg1Min}
+                    alt="Undergraduate"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+                <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
+                  Intermediate in Commerce (I.Com)
 
-                {/* Image Container */}
-                <div className="absolute top-[234px] left-3 right-3">
-                  <div className="relative -top-12">
-                    <div className="rounded-xl overflow-hidden">
-                      <img
-                        src={imgInnerCatImg1MinJpg}
-                        alt="Intermediate in Commerce"
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Button */}
-                <div className="absolute top-[164px] left-1/2 -translate-x-1/2 z-20">
-                  <button className="bg-[#0c5776] hover:bg-[#094561] transition-colors rounded-[30px] px-[26px] py-4 flex items-center gap-[15px] shadow-lg">
-                    <span className="font-['Inter',sans-serif] font-medium text-[15px] leading-[18px] text-white">
-                      Admission Now
-                    </span>
-                    <div className="relative w-[15px] h-[15px]">
-                      <svg className="absolute inset-[41.67%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p2c002f80} fill="white" />
-                      </svg>
-                      <svg className="absolute bottom-[8.33%] left-[41.67%] right-[41.67%] top-[75%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p17f42480} fill="white" />
-                      </svg>
-                      <svg className="absolute inset-[41.67%_83.33%_41.67%_0]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p7513d90} fill="white" />
-                      </svg>
-                      <svg className="absolute inset-[41.67%_0_41.67%_83.33%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p3a6c0c40} fill="white" />
-                      </svg>
-                      <svg className="absolute bottom-[75%] left-[41.67%] right-[41.67%] top-[8.33%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p25697800} fill="white" />
-                      </svg>
-                    </div>
-                  </button>
-                </div>
+                </h3>
+                <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
+                  Build a strong foundation in commerce and business studies.
+                </p>
+                <button
+                  onClick={() => navigate('/apply')}
+                  className="bg-[#0c5776] text-white px-8 py-3 rounded-full font-['Inter',sans-serif] font-medium text-base hover:bg-[#094561] transition-colors inline-flex items-center gap-2"
+                >
+                  Apply Now
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
 
               {/* I.Sc Card */}
-              <div className="relative bg-white rounded-xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)]" style={{ height: '442px' }}>
-                {/* Text Content */}
-                <div className="absolute top-3 left-3 right-3 px-5 py-5 z-10">
-                  <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] text-center mb-2">
-                    Intermediate in Science (I.Sc)
-                  </h4>
-                  <div className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] text-center">
-                    <p className="mb-0">Advance your career with streamlined</p>
-                    <p>graduate program admissions.</p>
-                  </div>
+              <div className="flex bg-white rounded-2xl pb-3 flex-col items-center text-center">
+                <div className="w-full aspect-[1/1] rounded-2xl overflow-hidden mb-6">
+                  <img
+                    src={imgInnerCatImg2Min}
+                    alt="Graduate"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-
-                {/* Image Container */}
-                <div className="absolute top-[234px] left-3 right-3">
-                  <div className="relative -top-12">
-                    <div className="rounded-xl overflow-hidden">
-                      <img
-                        src={imgInnerCatImg2MinJpg}
-                        alt="Intermediate in Science"
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Button */}
-                <div className="absolute top-[164px] left-1/2 -translate-x-1/2 z-20">
-                  <button className="bg-[#0c5776] hover:bg-[#094561] transition-colors rounded-[30px] px-[26px] py-4 flex items-center gap-[15px] shadow-lg">
-                    <span className="font-['Inter',sans-serif] font-medium text-[15px] leading-[18px] text-white">
-                      Admission Now
-                    </span>
-                    <div className="relative w-[15px] h-[15px]">
-                      <svg className="absolute inset-[41.67%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p2c002f80} fill="white" />
-                      </svg>
-                      <svg className="absolute bottom-[8.33%] left-[41.67%] right-[41.67%] top-[75%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p17f42480} fill="white" />
-                      </svg>
-                      <svg className="absolute inset-[41.67%_83.33%_41.67%_0]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p7513d90} fill="white" />
-                      </svg>
-                      <svg className="absolute inset-[41.67%_0_41.67%_83.33%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p3a6c0c40} fill="white" />
-                      </svg>
-                      <svg className="absolute bottom-[75%] left-[41.67%] right-[41.67%] top-[8.33%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p25697800} fill="white" />
-                      </svg>
-                    </div>
-                  </button>
-                </div>
+                <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
+                  Intermediate in Science (I.Sc)
+                </h3>
+                <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
+                  Explore the world of science with comprehensive laboratory experience.
+                </p>
+                <button
+                  onClick={() => navigate('/apply')}
+                  className="bg-[#0c5776] text-white px-8 py-3 rounded-full font-['Inter',sans-serif] font-medium text-base hover:bg-[#094561] transition-colors inline-flex items-center gap-2"
+                >
+                  Apply Now
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
 
               {/* I.A Card */}
-              <div className="relative bg-white rounded-xl shadow-[0px_4px_30px_0px_rgba(0,0,0,0.06)]" style={{ height: '442px' }}>
-                {/* Text Content */}
-                <div className="absolute top-3 left-3 right-3 px-5 py-5 z-10">
-                  <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] text-center mb-2">
-                    Intermediate in Arts (I.A)
-                  </h4>
-                  <div className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] text-center">
-                    <p className="mb-0">Join a diverse campus community through a</p>
-                    <p>simple application and visa guidance.</p>
-                  </div>
+              <div className="flex flex-col bg-white rounded-2xl pb-3 items-center text-center">
+                <div className="w-full  aspect-[1/1] rounded-2xl overflow-hidden mb-6">
+                  <img
+                    src={imgInnerCatImg3Min}
+                    alt="International Students"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-
-                {/* Image Container */}
-                <div className="absolute top-[234px] left-3 right-3">
-                  <div className="relative -top-12">
-                    <div className="rounded-xl overflow-hidden">
-                      <img
-                        src={imgInnerCatImg3MinJpg}
-                        alt="Intermediate in Arts"
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Button */}
-                <div className="absolute top-[164px] left-1/2 -translate-x-1/2 z-20">
-                  <button className="bg-[#0c5776] hover:bg-[#094561] transition-colors rounded-[30px] px-[26px] py-4 flex items-center gap-[15px] shadow-lg">
-                    <span className="font-['Inter',sans-serif] font-medium text-[15px] leading-[18px] text-white">
-                      Admission Now
-                    </span>
-                    <div className="relative w-[15px] h-[15px]">
-                      <svg className="absolute inset-[41.67%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p2c002f80} fill="white" />
-                      </svg>
-                      <svg className="absolute bottom-[8.33%] left-[41.67%] right-[41.67%] top-[75%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p17f42480} fill="white" />
-                      </svg>
-                      <svg className="absolute inset-[41.67%_83.33%_41.67%_0]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p7513d90} fill="white" />
-                      </svg>
-                      <svg className="absolute inset-[41.67%_0_41.67%_83.33%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p3a6c0c40} fill="white" />
-                      </svg>
-                      <svg className="absolute bottom-[75%] left-[41.67%] right-[41.67%] top-[8.33%]" viewBox="0 0 2.5 2.5" fill="none">
-                        <path d={svgPathsButton.p25697800} fill="white" />
-                      </svg>
-                    </div>
-                  </button>
-                </div>
+                <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
+                  Intermediate in Arts (I.A)
+                </h3>
+                <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
+                  Discover humanities, languages, and social sciences.
+                </p>
+                <button
+                  onClick={() => navigate('/apply')}
+                  className="bg-[#0c5776] text-white px-8 py-3 rounded-full font-['Inter',sans-serif] font-medium text-base hover:bg-[#094561] transition-colors inline-flex items-center gap-2"
+                >
+                  Apply Now
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Gallery Section - Exact Figma Design */}
-      <section className="relative h-64 overflow-hidden">
-        <div className="absolute inset-0 flex">
-          {/* Gallery Images */}
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="Gallery 1"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg2Min}
-              alt="Gallery 2"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg3Min}
-              alt="Gallery 3"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg4Min}
-              alt="Gallery 4"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src={imgGalleryImg55Min}
-              alt="Gallery 5"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-          <div className="w-64 h-64 flex-shrink-0 overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjAwfDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080"
-              alt="Gallery 6"
-              className="w-full h-full object-cover scale-[3.04] origin-center"
-            />
-          </div>
-        </div>
-
-        {/* Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <a
-            href="/gallery"
-            className="bg-[#00ade2] hover:bg-[#0096c7] text-white px-7 py-4 rounded-full flex items-center gap-4 transition-colors shadow-2xl uppercase font-medium text-sm"
-          >
-            <span>Discover Campus Life</span>
-            <div className="w-4 h-4 relative">
-              <svg className="absolute inset-0" viewBox="0 0 15 15" fill="none">
-                <circle cx="7.5" cy="7.5" r="1.25" fill="white" />
-              </svg>
-            </div>
-          </a>
-        </div>
-      </section>
 
       <Footer />
 

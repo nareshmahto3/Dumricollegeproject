@@ -1,39 +1,16 @@
 import { useNavigate, useLocation } from "react-router";
 import {
-  LayoutDashboard,
-  Users,
-  UserCheck,
-  BookOpen,
-  Library,
-  Calculator,
-  Boxes,
-  FileText,
-  Calendar,
-  ClipboardCheck,
-  FileCheck,
-  Bus,
-  Building2,
-  Bell,
-  MessageSquare,
-  ChevronRight,
-  Menu,
-  X,
-  GraduationCap,
-  Award,
-  CreditCard,
-  Upload,
-  CalendarDays,
-  DollarSign,
-  LayoutGrid,
-  IdCard,
-  Image,
-  BarChart3,
-  FileSearch,
+  LayoutDashboard, Users, UserCheck, BookOpen, Library,
+  Calculator, Boxes, FileText, Calendar, ClipboardCheck,
+  FileCheck, Bus, Building2, Bell, MessageSquare, ChevronRight,
+  Menu, X, GraduationCap, Award, CreditCard, Upload,
+  CalendarDays, DollarSign, LayoutGrid, IdCard, Image,
+  BarChart3, FileSearch,
 } from "lucide-react";
 import { useSidebar } from "../contexts/SidebarContext";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
-
+import logo from "../assets/logo.png";
 interface PortalSidebarProps {
   role: "admin" | "student" | "teacher";
 }
@@ -44,12 +21,11 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
   const { isCollapsed, toggleSidebar } = useSidebar();
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
-  // Menu items based on role
   const adminLinks = [
     { path: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { path: "/admin/students", label: "Students", icon: GraduationCap },
     { path: "/admin/teachers", label: "Teachers", icon: Users },
-    { path: "/admin/admissions", label: "Parents", icon: UserCheck },
+    { path: "/admin/admissions", label: "Admission Management", icon: UserCheck },
     { path: "/admin/account", label: "Account", icon: Calculator },
     { path: "/admin/classes", label: "Class", icon: LayoutGrid },
     { path: "/admin/subjects", label: "Subject", icon: BookOpen },
@@ -61,7 +37,6 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
     { path: "/admin/reports", label: "Reports", icon: BarChart3 },
     { path: "/admin/certificates", label: "Certificate", icon: Award },
     { path: "/admin/notices", label: "Notice", icon: Bell },
-    // { path: "/admin/messages", label: "Message", icon: MessageSquare },
   ];
 
   const teacherLinks = [
@@ -72,9 +47,7 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
     { path: "/teacher/holiday", label: "Holiday", icon: CalendarDays },
     { path: "/teacher/attendance", label: "Attendance", icon: ClipboardCheck },
     { path: "/teacher/exams", label: "Exams", icon: FileCheck },
-    { path: "/teacher/assignments", label: "Assignments", icon: FileText },
     { path: "/teacher/notices", label: "Notices", icon: Bell },
-    // { path: "/teacher/messages", label: "Messages", icon: MessageSquare },
   ];
 
   const studentLinks = [
@@ -86,60 +59,60 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
     { path: "/student/attendance", label: "Attendance", icon: ClipboardCheck },
     { path: "/student/exams", label: "Exams", icon: FileCheck },
     { path: "/student/results", label: "Results", icon: Award },
-    // { path: "/student/assignments", label: "Assignments", icon: FileText },
     { path: "/student/fees", label: "Fees", icon: CreditCard },
     { path: "/student/documents", label: "Documents", icon: Upload },
     { path: "/student/certificates", label: "Certificates", icon: Award },
     { path: "/student/id-card", label: "ID Card", icon: IdCard },
-    // { path: "/student/library", label: "Library", icon: Library },
     { path: "/student/gallery", label: "Gallery", icon: Image },
     { path: "/student/notices", label: "Notices", icon: Bell },
-    // { path: "/student/messages", label: "Messages", icon: MessageSquare },
   ];
 
   const links =
-    role === "admin"
-      ? adminLinks
-      : role === "teacher"
-      ? teacherLinks
-      : studentLinks;
+    role === "admin" ? adminLinks : role === "teacher" ? teacherLinks : studentLinks;
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
+  const SIDEBAR_WIDTH = 240;
+  const COLLAPSED_WIDTH = 64;
+  const HEADER_HEIGHT = 52;
 
   return (
     <>
-      {/* Mobile Menu Button - Always visible on mobile */}
+      {/* ── Mobile Menu Button ─────────────────────────────────────────── */}
       <button
         onClick={toggleSidebar}
-        className="lg:hidden fixed top-[14px] left-4 z-50 p-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-lg transition-all"
+        className="lg:hidden fixed top-3 left-3 z-50 p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-lg transition-colors"
         aria-label={isCollapsed ? "Open menu" : "Close menu"}
       >
-        {isCollapsed ? <Menu className="w-5 h-5" /> : <X className="w-5 h-5" />}
+        {isCollapsed ? <Menu className="w-4 h-4" /> : <X className="w-4 h-4" />}
       </button>
 
-      {/* Collapsed Sidebar - Desktop Only (Icons Only) */}
+      {/* ── Collapsed Sidebar — desktop icons only ─────────────────────── */}
       {isCollapsed && (
         <motion.div
-          initial={{ x: -80 }}
+          initial={{ x: -COLLAPSED_WIDTH }}
           animate={{ x: 0 }}
           transition={{ type: "spring", damping: 25 }}
-          className="hidden lg:block fixed left-0 top-0 h-screen w-[70px] bg-[#0d2b4e] z-40 shadow-2xl"
+          className="hidden lg:flex flex-col fixed left-0 top-0 h-screen bg-[#0d2b4e] z-40 shadow-2xl"
+          style={{ width: COLLAPSED_WIDTH }}
         >
-          {/* Collapsed Header with Toggle */}
-          <div className="bg-gradient-to-r from-amber-500 to-amber-600 h-[60px] flex items-center justify-center flex-shrink-0">
+          {/* Header */}
+          <div
+            className="bg-gradient-to-r from-amber-500 to-amber-600 flex items-center justify-center flex-shrink-0"
+            style={{ height: HEADER_HEIGHT }}
+          >
             <button
               onClick={toggleSidebar}
               className="text-white hover:bg-amber-600/50 p-1.5 rounded transition-colors"
               aria-label="Open sidebar"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Navigation Icons */}
-          <nav className="h-[calc(100vh-60px)] flex flex-col py-2">
+          {/* Nav icons */}
+          <nav
+            className="flex flex-col overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-slate-700"
+            style={{ height: `calc(100vh - ${HEADER_HEIGHT}px)` }}
+          >
             {links.map((link) => {
               const isActive = location.pathname === link.path;
               const Icon = link.icon;
@@ -147,23 +120,21 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
               return (
                 <div
                   key={link.path}
-                  className="relative"
+                  className="relative flex-shrink-0"
                   onMouseEnter={() => setHoveredLink(link.path)}
                   onMouseLeave={() => setHoveredLink(null)}
                 >
                   <motion.button
-                    onClick={() => handleNavigation(link.path)}
+                    onClick={() => navigate(link.path)}
                     whileHover={{ scale: 1.05 }}
-                    className={`w-full flex items-center justify-center py-2.5 transition-all flex-shrink-0 border-b border-slate-700/50 ${
-                      isActive
-                        ? "bg-amber-500/10 border-l-4 border-amber-500"
-                        : "hover:bg-slate-800/50 border-l-4 border-transparent"
-                    }`}
+                    className={`w-full flex items-center justify-center py-2.5 transition-all border-b border-slate-700/50 border-l-4 ${isActive
+                      ? "bg-amber-500/10 border-l-amber-500"
+                      : "hover:bg-slate-800/50 border-l-transparent"
+                      }`}
                   >
                     <Icon
-                      className={`w-5 h-5 ${
-                        isActive ? "text-amber-400" : "text-amber-500"
-                      }`}
+                      className={`w-4 h-4 ${isActive ? "text-amber-400" : "text-amber-500"
+                        }`}
                     />
                   </motion.button>
 
@@ -171,15 +142,15 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
                   <AnimatePresence>
                     {hoveredLink === link.path && (
                       <motion.div
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={{ opacity: 0, x: -8 }}
                         animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -10 }}
+                        exit={{ opacity: 0, x: -8 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-3 py-1.5 bg-slate-800 text-white text-sm font-medium rounded-md shadow-lg whitespace-nowrap z-50 pointer-events-none"
+                        className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2.5 py-1 bg-slate-800 text-white text-xs font-medium rounded-md shadow-lg whitespace-nowrap z-50 pointer-events-none"
                       >
                         {link.label}
-                        {/* Arrow pointing left */}
-                        <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[6px] border-r-slate-800" />
+                        {/* Arrow */}
+                        <span className="absolute right-full top-1/2 -translate-y-1/2 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[5px] border-r-slate-800" />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -190,11 +161,11 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
         </motion.div>
       )}
 
-      {/* Expanded Sidebar */}
+      {/* ── Expanded Sidebar ───────────────────────────────────────────── */}
       <AnimatePresence>
         {!isCollapsed && (
           <>
-            {/* Overlay for mobile */}
+            {/* Mobile backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -203,43 +174,49 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
               className="lg:hidden fixed inset-0 bg-black/50 z-40"
             />
 
-            {/* Sidebar Content */}
+            {/* Sidebar panel */}
             <motion.div
-              initial={{ x: -280 }}
+              initial={{ x: -SIDEBAR_WIDTH }}
               animate={{ x: 0 }}
-              exit={{ x: -280 }}
+              exit={{ x: -SIDEBAR_WIDTH }}
               transition={{ type: "spring", damping: 25 }}
-              className="fixed left-0 top-0 h-screen w-[280px] bg-[#0d2b4e] z-50 flex flex-col shadow-2xl lg:z-40"
+              className="fixed left-0 top-0 h-screen bg-[#0d2b4e] z-50 flex flex-col shadow-2xl lg:z-40"
+              style={{ width: SIDEBAR_WIDTH }}
             >
-              {/* Sidebar Header */}
-              <div className="bg-gradient-to-r from-amber-500 to-amber-600 p-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                    <GraduationCap className="w-6 h-6 text-amber-600" />
+              {/* Header */}
+              <div
+                className="bg-gradient-to-r from-amber-500 to-amber-600 flex items-center justify-between px-3 flex-shrink-0"
+                style={{ height: HEADER_HEIGHT }}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-10 h-10  rounded-full flex items-center justify-center flex-shrink-0">
+                    <img src={logo} alt="" />
                   </div>
-                  <div>
-                    <h1 className="text-white font-bold text-lg">Dumri College</h1>
-                    <p className="text-xs text-amber-100">
+                  <div className="min-w-0">
+                    <h1 className="text-white font-bold text-sm leading-tight truncate">
+                      JCIC Dumri
+                    </h1>
+                    <p className="text-[10px] text-amber-100 leading-tight">
                       {role === "admin"
                         ? "Admin Portal"
                         : role === "teacher"
-                        ? "Teacher Portal"
-                        : "Student Portal"}
+                          ? "Teacher Portal"
+                          : "Student Portal"}
                     </p>
                   </div>
                 </div>
-                {/* Close button for both desktop and mobile */}
+
                 <button
                   onClick={toggleSidebar}
-                  className="text-white hover:bg-amber-600/50 p-1.5 rounded transition-colors"
+                  className="text-white hover:bg-amber-600/50 p-1 rounded transition-colors flex-shrink-0 ml-2"
                   aria-label="Close sidebar"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Navigation Links */}
-              <nav className="flex-1 overflow-y-auto py-4 scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-slate-700">
+              {/* Nav links */}
+              <nav className="flex-1 overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-amber-500 scrollbar-track-slate-700">
                 {links.map((link) => {
                   const isActive = location.pathname === link.path;
                   const Icon = link.icon;
@@ -247,28 +224,27 @@ export function PortalSidebar({ role }: PortalSidebarProps) {
                   return (
                     <motion.button
                       key={link.path}
-                      onClick={() => handleNavigation(link.path)}
-                      whileHover={{ x: 4 }}
-                      className={`w-full flex items-center justify-between px-6 py-3 text-left transition-all border-b border-slate-700/50 ${
-                        isActive
-                          ? "bg-amber-500/10 border-l-4 border-amber-500"
-                          : "hover:bg-slate-800/50"
-                      }`}
+                      onClick={() => {
+                        navigate(link.path);
+                        // Close sidebar on mobile after navigation
+                        if (window.innerWidth < 1024) toggleSidebar();
+                      }}
+                      whileHover={{ x: 3 }}
+                      className={`w-full flex items-center gap-2.5 px-4 py-3 text-left transition-all border-b border-slate-700/50 border-l-4 flex-shrink-0 ${isActive
+                        ? "bg-amber-500/10 border-l-amber-500"
+                        : "hover:bg-slate-800/50 border-l-transparent"
+                        }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <Icon
-                          className={`w-5 h-5 ${
-                            isActive ? "text-amber-400" : "text-amber-500"
+                      <Icon
+                        className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-amber-400" : "text-amber-500"
                           }`}
-                        />
-                        <span
-                          className={`text-sm font-medium ${
-                            isActive ? "text-white" : "text-slate-300"
+                      />
+                      <span
+                        className={`text-xs font-medium truncate ${isActive ? "text-white" : "text-slate-300"
                           }`}
-                        >
-                          {link.label}
-                        </span>
-                      </div>
+                      >
+                        {link.label}
+                      </span>
                     </motion.button>
                   );
                 })}

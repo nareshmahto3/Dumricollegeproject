@@ -4,24 +4,74 @@ import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { PortalLayout } from './PortalLayout';
 import { useNavigate } from 'react-router';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
+// ── Constants ────────────────────────────────────────────────────────────────
+const REQUIRED_FIELDS = [
+  'title', 'category', 'priority', 'targetAudience', 'publishDate', 'content',
+];
+
+const INITIAL_FORM: Record<string, string> = {
+  title: '',
+  category: '',
+  priority: '',
+  targetAudience: '',
+  publishDate: '',
+  expiryDate: '',
+  content: '',
+  noticeNumber: '',
+};
+
+const MAX_FILE_SIZE_MB = 5;
+const ALLOWED_TYPES = ['application/pdf', 'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'image/jpeg', 'image/png'];
+
+// ── Validation ───────────────────────────────────────────────────────────────
+function getFieldError(name: string, value: string, allValues: Record<string, string>): string | null {
+  if (REQUIRED_FIELDS.includes(name) && !value.trim()) return 'This field is required.';
+
+  if (name === 'expiryDate' && value && allValues.publishDate) {
+    if (new Date(value) < new Date(allValues.publishDate))
+      return 'Expiry date cannot be before publish date.';
+  }
+
+  if (name === 'content' && value.trim() && value.trim().length < 10)
+    return 'Content must be at least 10 characters.';
+
+  return null;
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function inputCls(error: string | null) {
+  return [
+    'w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border rounded-lg text-slate-900',
+    'placeholder-slate-400 focus:outline-none focus:ring-2 text-sm transition-colors',
+    error
+      ? 'border-red-400 focus:ring-red-400/20 focus:border-red-400'
+      : 'border-slate-300 focus:ring-blue-500/20 focus:border-blue-500',
+  ].join(' ');
+}
+
+// ── Component ────────────────────────────────────────────────────────────────
 export function CreateNoticeForm() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    title: '',
-    category: '',
-    priority: '',
-    targetAudience: '',
-    publishDate: '',
-    expiryDate: '',
-    content: '',
-    noticeNumber: '',
-  });
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<Record<string, string>>(INITIAL_FORM);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [attachments, setAttachments] = useState<File[]>([]);
-  const [attachmentPreviews, setAttachmentPreviews] = useState<string[]>([]);
 
+  // ── Derived errors ─────────────────────────────────────────────────────────
+  const errors: Record<string, string | null> = {};
+  for (const key of Object.keys(formData)) {
+    errors[key] = touched[key] ? getFieldError(key, formData[key], formData) : null;
+  }
+
+  const hasAnyError = Object.keys(formData).some(
+    (k) => getFieldError(k, formData[k], formData) !== null
+  );
+
+  // ── Handlers ───────────────────────────────────────────────────────────────
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -29,57 +79,109 @@ export function CreateNoticeForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+  };
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    if (files.length > 0) {
-      setAttachments([...attachments, ...files]);
-      const previews = files.map(file => file.name);
-      setAttachmentPreviews([...attachmentPreviews, ...previews]);
+    const valid: File[] = [];
+    const rejected: string[] = [];
+
+    for (const file of files) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        rejected.push(`${file.name} — unsupported file type`);
+      } else if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        rejected.push(`${file.name} — exceeds ${MAX_FILE_SIZE_MB}MB`);
+      } else {
+        valid.push(file);
+      }
+    }
+
+    if (rejected.length > 0) {
+      toast.error('Some files were skipped', { description: rejected.join('\n') });
+    }
+
+    if (valid.length > 0) {
+      setAttachments((prev) => [...prev, ...valid]);
+    }
+
+    // Reset input so the same file can be re-selected after removal
+    e.target.value = '';
+  };
+
+  const removeAttachment = (index: number) =>
+    setAttachments((prev) => prev.filter((_, i) => i !== index));
+
+  const handleReset = () => {
+    setFormData(INITIAL_FORM);
+    setTouched({});
+    setAttachments([]);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Mark all fields as touched so every error surfaces at once
+    setTouched(Object.fromEntries(Object.keys(formData).map((k) => [k, true])));
+
+    if (hasAnyError) {
+      toast.error('Please fix the errors before submitting.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const payload = new FormData();
+      Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
+      attachments.forEach((file) => payload.append('attachments', file));
+
+      const response = await fetch('http://localhost:5258/notices', {
+        method: 'POST',
+        body: payload,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to publish notice');
+      }
+
+      toast.success('Notice Published Successfully!', {
+        description: `"${formData.title}" has been published to ${formData.targetAudience}.`,
+      });
+
+      setTimeout(() => navigate('/admin/notices'), 1000);
+    } catch (error) {
+      toast.error('Failed to publish notice', {
+        description: error instanceof Error ? error.message : 'Something went wrong.',
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const removeAttachment = (index: number) => {
-    const newAttachments = attachments.filter((_, i) => i !== index);
-    const newPreviews = attachmentPreviews.filter((_, i) => i !== index);
-    setAttachments(newAttachments);
-    setAttachmentPreviews(newPreviews);
-  };
+  // ── Sub-components ─────────────────────────────────────────────────────────
+  const fieldProps = (name: string) => ({
+    name,
+    value: formData[name],
+    onChange: handleInputChange,
+    onBlur: handleBlur,
+    className: inputCls(errors[name]),
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Notice created:', { ...formData, attachments });
+  const ErrorMsg = ({ name }: { name: string }) =>
+    errors[name] ? <p className="mt-1 text-xs text-red-500">{errors[name]}</p> : null;
 
-    toast.success('Notice Published Successfully!', {
-      description: `${formData.title} has been published and sent to ${formData.targetAudience}.`,
-    });
-
-    setTimeout(() => {
-      navigate('/admin/notices');
-    }, 1000);
-  };
-
-  const handleReset = () => {
-    setFormData({
-      title: '',
-      category: '',
-      priority: '',
-      targetAudience: '',
-      publishDate: '',
-      expiryDate: '',
-      content: '',
-      noticeNumber: '',
-    });
-    setAttachments([]);
-    setAttachmentPreviews([]);
-  };
-
+  // ── Render ─────────────────────────────────────────────────────────────────
   return (
     <PortalLayout
       role="admin"
       userName="Stevie Zone"
       userRole="Admin"
       pageTitle="Create New Notice"
-      breadcrumbs={["Home", "Admin", "Notices", "Create Notice"]}
+      breadcrumbs={['Home', 'Admin', 'Notices', 'Create Notice']}
     >
       <div className="space-y-6">
         <Card className="bg-white border border-slate-200">
@@ -89,11 +191,14 @@ export function CreateNoticeForm() {
               <p className="text-sm text-slate-600 mt-1">Fill in the details to create and publish a new notice</p>
             </div>
 
-            <form onSubmit={handleSubmit}>
-              {/* Basic Information Section */}
+            <form onSubmit={handleSubmit} noValidate>
+
+              {/* ── Basic Information ──────────────────────────────────── */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Basic Information</h3>
-                
+                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                  Basic Information
+                </h3>
+
                 {/* Row 1 */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                   <div>
@@ -102,13 +207,10 @@ export function CreateNoticeForm() {
                     </label>
                     <input
                       type="text"
-                      name="title"
-                      value={formData.title}
-                      onChange={handleInputChange}
-                      required
                       placeholder="e.g., Annual Sports Day Announcement"
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      {...fieldProps('title')}
                     />
+                    <ErrorMsg name="title" />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
@@ -116,12 +218,10 @@ export function CreateNoticeForm() {
                     </label>
                     <input
                       type="text"
-                      name="noticeNumber"
-                      value={formData.noticeNumber}
-                      onChange={handleInputChange}
                       placeholder="e.g., NOT/2026/001"
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      {...fieldProps('noticeNumber')}
                     />
+                    <ErrorMsg name="noticeNumber" />
                   </div>
                 </div>
 
@@ -131,13 +231,7 @@ export function CreateNoticeForm() {
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Category <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      name="category"
-                      value={formData.category}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
-                    >
+                    <select {...fieldProps('category')}>
                       <option value="">Select Category *</option>
                       <option value="academic">Academic</option>
                       <option value="administrative">Administrative</option>
@@ -150,55 +244,37 @@ export function CreateNoticeForm() {
                       <option value="general">General</option>
                       <option value="urgent">Urgent</option>
                     </select>
+                    <ErrorMsg name="category" />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Priority <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      name="priority"
-                      value={formData.priority}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
-                    >
+                    <select {...fieldProps('priority')}>
                       <option value="">Select Priority *</option>
                       <option value="low">Low</option>
                       <option value="medium">Medium</option>
                       <option value="high">High</option>
                       <option value="urgent">Urgent</option>
                     </select>
+                    <ErrorMsg name="priority" />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Target Audience <span className="text-red-500">*</span>
                     </label>
-                    <select
-                      name="targetAudience"
-                      value={formData.targetAudience}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer text-sm"
-                    >
+                    <select {...fieldProps('targetAudience')}>
                       <option value="">Select Audience *</option>
                       <option value="all">All (Students, Teachers & Parents)</option>
                       <option value="students">Students Only</option>
                       <option value="teachers">Teachers Only</option>
                       <option value="parents">Parents Only</option>
                       <option value="staff">Staff Members</option>
-                      <option value="class-1">Class 1</option>
-                      <option value="class-2">Class 2</option>
-                      <option value="class-3">Class 3</option>
-                      <option value="class-4">Class 4</option>
-                      <option value="class-5">Class 5</option>
-                      <option value="class-6">Class 6</option>
-                      <option value="class-7">Class 7</option>
-                      <option value="class-8">Class 8</option>
-                      <option value="class-9">Class 9</option>
-                      <option value="class-10">Class 10</option>
-                      <option value="class-11">Class 11</option>
-                      <option value="class-12">Class 12</option>
+                      {Array.from({ length: 12 }, (_, i) => (
+                        <option key={i + 1} value={`class-${i + 1}`}>Class {i + 1}</option>
+                      ))}
                     </select>
+                    <ErrorMsg name="targetAudience" />
                   </div>
                 </div>
 
@@ -208,35 +284,25 @@ export function CreateNoticeForm() {
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Publish Date <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="date"
-                      name="publishDate"
-                      value={formData.publishDate}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    />
+                    <input type="date" {...fieldProps('publishDate')} />
+                    <ErrorMsg name="publishDate" />
                   </div>
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Expiry Date
                     </label>
-                    <input
-                      type="date"
-                      name="expiryDate"
-                      value={formData.expiryDate}
-                      onChange={handleInputChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
-                    />
+                    <input type="date" {...fieldProps('expiryDate')} />
+                    <ErrorMsg name="expiryDate" />
                   </div>
                 </div>
               </div>
 
-              {/* Notice Content Section */}
+              {/* ── Notice Content ─────────────────────────────────────── */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Notice Content</h3>
-                
-                <div className="mb-4 sm:mb-6">
+                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                  Notice Content
+                </h3>
+                <div>
                   <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                     Notice Content <span className="text-red-500">*</span>
                   </label>
@@ -244,20 +310,28 @@ export function CreateNoticeForm() {
                     name="content"
                     value={formData.content}
                     onChange={handleInputChange}
-                    required
+                    onBlur={handleBlur}
                     rows={8}
                     placeholder="Enter the detailed notice content here..."
-                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none text-sm"
+                    className={[
+                      'w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-white border rounded-lg text-slate-900',
+                      'placeholder-slate-400 focus:outline-none focus:ring-2  text-sm transition-colors',
+                      errors.content
+                        ? 'border-red-400 focus:ring-red-400/20 focus:border-red-400'
+                        : 'border-slate-300 focus:ring-blue-500/20 focus:border-blue-500',
+                    ].join(' ')}
                   />
+                  <ErrorMsg name="content" />
                 </div>
               </div>
 
-              {/* Attachments Section */}
+              {/* ── Attachments ────────────────────────────────────────── */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Attachments</h3>
-                
+                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                  Attachments
+                </h3>
+
                 <div className="space-y-4">
-                  {/* File Upload */}
                   <div>
                     <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-2">
                       Upload Documents (Optional)
@@ -279,28 +353,32 @@ export function CreateNoticeForm() {
                         className="hidden"
                       />
                       <span className="text-xs text-slate-500">
-                        PDF, DOC, DOCX, JPG, PNG (Max 5MB each)
+                        PDF, DOC, DOCX, JPG, PNG (Max {MAX_FILE_SIZE_MB}MB each)
                       </span>
                     </div>
                   </div>
 
-                  {/* Attachment List */}
-                  {attachmentPreviews.length > 0 && (
+                  {attachments.length > 0 && (
                     <div className="space-y-2">
                       <p className="text-sm font-medium text-slate-700">Attached Files:</p>
-                      {attachmentPreviews.map((fileName, index) => (
+                      {attachments.map((file, index) => (
                         <div
                           key={index}
                           className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-lg"
                         >
-                          <div className="flex items-center gap-3">
-                            <FileText className="w-5 h-5 text-blue-600" />
-                            <span className="text-sm text-slate-700">{fileName}</span>
+                          <div className="flex items-center gap-3 min-w-0">
+                            <FileText className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                            <div className="min-w-0">
+                              <p className="text-sm text-slate-700 truncate">{file.name}</p>
+                              <p className="text-xs text-slate-500">
+                                {(file.size / 1024 / 1024).toFixed(2)} MB
+                              </p>
+                            </div>
                           </div>
                           <Button
                             type="button"
                             onClick={() => removeAttachment(index)}
-                            className="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-2 py-1 h-auto"
+                            className="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-2 py-1 h-auto flex-shrink-0 ml-3"
                           >
                             <X className="w-4 h-4" />
                           </Button>
@@ -311,31 +389,32 @@ export function CreateNoticeForm() {
                 </div>
               </div>
 
-              {/* Preview Section */}
+              {/* ── Notice Preview ─────────────────────────────────────── */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">Notice Preview</h3>
-                
+                <h3 className="text-lg font-semibold text-slate-900 mb-4 pb-2 border-b border-slate-200">
+                  Notice Preview
+                </h3>
+
                 <Card className="p-6 bg-gradient-to-br from-blue-50 to-slate-50 border-2 border-blue-200">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
                       <Bell className="w-6 h-6 text-white" />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between mb-2 gap-2">
                         <h4 className="text-lg font-bold text-slate-900">
                           {formData.title || 'Notice Title Will Appear Here'}
                         </h4>
                         {formData.priority && (
                           <span
-                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                              formData.priority === 'urgent'
-                                ? 'bg-red-100 text-red-700'
-                                : formData.priority === 'high'
+                            className={`px-3 py-1 rounded-full text-xs font-semibold flex-shrink-0 ${formData.priority === 'urgent'
+                              ? 'bg-red-100 text-red-700'
+                              : formData.priority === 'high'
                                 ? 'bg-orange-100 text-orange-700'
                                 : formData.priority === 'medium'
-                                ? 'bg-yellow-100 text-yellow-700'
-                                : 'bg-green-100 text-green-700'
-                            }`}
+                                  ? 'bg-yellow-100 text-yellow-700'
+                                  : 'bg-green-100 text-green-700'
+                              }`}
                           >
                             {formData.priority.toUpperCase()}
                           </span>
@@ -361,10 +440,10 @@ export function CreateNoticeForm() {
                       <p className="text-sm text-slate-700 whitespace-pre-wrap">
                         {formData.content || 'Notice content will appear here...'}
                       </p>
-                      {attachmentPreviews.length > 0 && (
+                      {attachments.length > 0 && (
                         <div className="mt-3 pt-3 border-t border-slate-200">
-                          <p className="text-xs text-slate-600 mb-1">
-                            📎 {attachmentPreviews.length} file(s) attached
+                          <p className="text-xs text-slate-600">
+                            📎 {attachments.length} file(s) attached
                           </p>
                         </div>
                       )}
@@ -373,24 +452,27 @@ export function CreateNoticeForm() {
                 </Card>
               </div>
 
-              {/* Action Buttons */}
+              {/* ── Action Buttons ─────────────────────────────────────── */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-slate-200">
                 <Button
                   type="submit"
-                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 shadow-lg shadow-blue-500/20"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 shadow-lg shadow-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <Save className="w-4 h-4 mr-2" />
-                  Publish Notice
+                  {isSubmitting ? 'Publishing...' : 'Publish Notice'}
                 </Button>
                 <Button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 bg-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 text-slate-700 py-3 border-2 border-slate-300 transition-all duration-200"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 text-slate-700 py-3 border-2 border-slate-300 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Reset Form
                 </Button>
               </div>
+
             </form>
           </div>
         </Card>

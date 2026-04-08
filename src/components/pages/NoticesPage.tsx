@@ -163,7 +163,7 @@ export function NoticesPage() {
         </div>
 
         {/* Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20 pb-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-30 pb-8">
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 mb-4">
             <button
@@ -293,12 +293,12 @@ export function NoticesPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6 + index * 0.1 }}
                     >
-                      <Card className="bg-blue-50 border-blue-300 border-l-4 shadow-md hover:shadow-xl transition-all duration-200">
+                      <Card className="bg-red-50 border-red-500 border-l-4 shadow-md hover:shadow-xl transition-all duration-200">
                         <div className="p-6">
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1">
                               <div className="flex items-center gap-3 mb-2">
-                                <Pin className="w-5 h-5 text-blue-600" />
+                                <Pin className="w-5 h-5 text-red-600" />
                                 <h4 className="text-xl font-bold text-slate-900">{notice.title}</h4>
                               </div>
                               <p className="text-slate-700 leading-relaxed">{notice.description}</p>
@@ -319,7 +319,7 @@ export function NoticesPage() {
                               {getCategoryBadge(notice.category)}
                             </div>
                             {notice.hasAttachment && (
-                              <Button className="bg-[#2563EB] text-white hover:bg-[#1d4ed8] font-semibold">
+                              <Button className="bg-red-500 text-white hover:bg-[#1d4ed8] font-semibold">
                                 <Download className="w-4 h-4 mr-2" />
                                 Download Attachment
                               </Button>

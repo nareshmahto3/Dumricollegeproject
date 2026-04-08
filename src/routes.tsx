@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet } from "react-router";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { ReapplyAdmission } from "./components/ReapplyAdmission";
+import { RouteChangePreloader } from "./components/shared/RouteChangePreloader";
 
 // ─── Lazy-loaded route components ────────────────────────────────────────────
 // Using .then(m => ({ default: m.ExportName })) to support named exports
@@ -165,6 +167,21 @@ const FacultyDetailPage = lazy(() =>
 const AdmissionRequirementsPage = lazy(() =>
   import("./components/pages/AdmissionRequirementsPage").then((m) => ({
     default: m.AdmissionRequirementsPage,
+  }))
+);
+const IComProgramPage = lazy(() =>
+  import("./components/pages/IComProgramPage").then((m) => ({
+    default: m.IComProgramPage,
+  }))
+);
+const IScProgramPage = lazy(() =>
+  import("./components/pages/IScProgramPage").then((m) => ({
+    default: m.IScProgramPage,
+  }))
+);
+const IAProgramPage = lazy(() =>
+  import("./components/pages/IAProgramPage").then((m) => ({
+    default: m.IAProgramPage,
   }))
 );
 const NoticesPage = lazy(() =>
@@ -484,6 +501,18 @@ const StudentHoliday = lazy(() =>
   }))
 );
 
+const Requestreapply = lazy(() =>
+  import("./components/ReapplyAdmission").then((m) => ({
+    default: m.ReapplyAdmission,
+  }))
+);
+
+const RequestCertificate = lazy(() =>
+  import("./components/RequestCertificate").then((m) => ({
+    default: m.RequestCertificate,
+  }))
+);
+
 // Not Found
 const NotFound = lazy(() =>
   import("./components/NotFound").then((m) => ({ default: m.NotFound }))
@@ -506,6 +535,7 @@ function RootLayout() {
   return (
     <Suspense fallback={<PageLoader />}>
       <ScrollToTop />
+      <RouteChangePreloader />
       <Outlet />
     </Suspense>
   );
@@ -518,10 +548,7 @@ export const router = createBrowserRouter([
     children: [
       // ── Landing / public ──────────────────────────────────────────────────
       { path: "/", Component: DumriCollegeLanding },
-      { path: "/modern", Component: ModernUniversityLanding },
-      { path: "/christ", Component: UniversityLandingPage },
-      { path: "/enhanced", Component: EnhancedLandingPage },
-      { path: "/figma", Component: FigmaLandingPage },
+
 
       // ── Info pages ───────────────────────────────────────────────────────
       {
@@ -550,6 +577,9 @@ export const router = createBrowserRouter([
       { path: "/course-catalog", Component: CourseCatalogPage },
       { path: "/how-to-apply", Component: HowToApplyPage },
       { path: "/programs", Component: ProgramsPage },
+      { path: "/programs/icom", Component: IComProgramPage },
+      { path: "/programs/isc", Component: IScProgramPage },
+      { path: "/programs/ia", Component: IAProgramPage },
       { path: "/programs/:programId", Component: ProgramDetailPage },
       { path: "/events", Component: EventsPage },
       { path: "/fee-structure", Component: FeeStructurePage },
@@ -630,6 +660,8 @@ export const router = createBrowserRouter([
       { path: "/student/messages", Component: StudentMessages },
       { path: "/student/fee-receipt", Component: StudentFeeReceipt },
       { path: "/student/holiday", Component: StudentHoliday },
+      { path: "/student/reapply", Component: ReapplyAdmission },
+      { path: "/student/request-certificate", Component: RequestCertificate },
 
       // ── Fallback ─────────────────────────────────────────────────────────
       { path: "*", Component: NotFound },

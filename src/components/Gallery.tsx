@@ -1,17 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'motion/react';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X, Calendar } from 'lucide-react';
 import { CarouselHeader } from './CarouselHeader';
 import { Footer } from './Footer';
-import imgDivElementorElement from "figma:asset/04d1f575a7ef1739b76204137772fe6c3ad17fe6.png";
-import imgBnrArrow11 from "figma:asset/13bec648740b03b5c9d2c72567cc9f3e05c47165.png";
-import imgGalleryImg55MinJpg from "figma:asset/42eacf93ea3054579ca1fa8f5ce78d9b065e6f8a.png";
-import imgGalleryImg5Jpg from "figma:asset/15c3fd45d7da5342a52535f718dc36e0eb37d0e3.png";
-import imgGalleryImg4MinJpg from "figma:asset/d871d868f1f32cc206ea9d0915fceee73eb84c6e.png";
-import imgGalleryImg3MinJpg from "figma:asset/08575e4e244c4d18de0ef25022dd7a4fd3eddd44.png";
-import imgGalleryImg6Jpg from "figma:asset/5ecc01adcbaf2fb031ee6a927356d1c25871b29d.png";
-import imgGalleryImg2MinJpg from "figma:asset/c9c9ffb636b53266c96e26987f011f92912502c6.png";
+
+const Badge = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={`inline-flex items-center ${className}`}>{children}</div>
+);
+
+const Card = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className={className}>{children}</div>
+);
+// Image URLs
+const imgDivElementorElement = 'https://via.placeholder.com/800x600?text=Gallery+Banner';
+const imgBnrArrow11 = 'https://via.placeholder.com/120x120?text=Arrow';
+const imgGalleryImg55MinJpg = 'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=500';
+const imgGalleryImg5Jpg = 'https://images.unsplash.com/photo-1763890763432-17c9a529da20?w=500';
+const imgGalleryImg4MinJpg = 'https://images.unsplash.com/photo-1687866394811-9fe40749c860?w=500';
+const imgGalleryImg3MinJpg = 'https://images.unsplash.com/photo-1604307405707-04f70b3af5d3?w=500';
+const imgGalleryImg6Jpg = 'https://images.unsplash.com/photo-1770844049822-583611b8efb3?w=500';
+const imgGalleryImg2MinJpg = 'https://images.unsplash.com/photo-1502232917128-1aa500764cbd?w=500';
 
 type GalleryCategory = 'all' | 'campus-life' | 'academic' | 'labs' | 'graduation';
 
@@ -98,6 +107,19 @@ const galleryImages: GalleryImage[] = [
   }
 ];
 
+interface EventImage {
+  url: string;
+  title: string;
+  date: string;
+  category: string;
+}
+
+const eventImages: EventImage[] = [
+  { url: 'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=500', title: 'Classroom Session', date: 'Jan 2024', category: 'Academic' },
+  { url: 'https://images.unsplash.com/photo-1763890763432-17c9a529da20?w=500', title: 'Campus Activity', date: 'Feb 2024', category: 'Campus Life' },
+  { url: 'https://images.unsplash.com/photo-1733426509854-10931d84009a?w=500', title: 'Lab Work', date: 'Mar 2024', category: 'Research' }
+];
+
 const categories = [
   { id: 'all' as const, label: 'All' },
   { id: 'campus-life' as const, label: 'Campus Life' },
@@ -113,8 +135,8 @@ export function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Filter images based on active category
-  const filteredImages = activeCategory === 'all' 
-    ? galleryImages 
+  const filteredImages = activeCategory === 'all'
+    ? galleryImages
     : galleryImages.filter(img => img.category.includes(activeCategory));
 
   const openLightbox = (index: number) => {
@@ -140,55 +162,32 @@ export function Gallery() {
       <CarouselHeader />
 
       {/* Hero Banner */}
-      <section className="relative h-[320px] overflow-hidden">
-        {/* Background with texture */}
-        <div className="absolute inset-0">
-          <div className="absolute bg-[#0c5776] inset-0" />
-          <div className="absolute inset-0 overflow-hidden">
-            <img 
-              alt="" 
-              className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-30" 
-              src={imgDivElementorElement} 
-            />
-          </div>
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00192C]/40 to-transparent"></div>
-
-        {/* Decorative Arrow - Bottom Right */}
-        <div className="absolute bottom-[40px] right-[100px] z-10 hidden lg:block opacity-70">
-          <img 
-            alt="" 
-            className="w-[120px] h-[120px]" 
-            src={imgBnrArrow11} 
-          />
-        </div>
-
-        {/* Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20 pb-8">
-          {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 mb-4">
+      <section
+        className="relative h-[385px] bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&q=80)',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2F584F]/80 to-[#00192C]/90" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-30 pb-16">
+          <div className="flex items-center gap-2 mb-5">
             <button
-              onClick={() => navigate('/')}
-              className="text-white text-sm hover:underline"
+              onClick={() => window.history.back()}
+              className="text-white text-base hover:underline"
             >
               Home
             </button>
             <ChevronRight className="w-4 h-4 text-white" />
-            <span className="text-white text-sm">Gallery</span>
+            <span className="text-white text-base">Gallery</span>
           </div>
-
-          {/* Title */}
-          <h1 className="text-5xl md:text-6xl font-light text-white mb-6 font-serif">
-            Gallery
+          <h1 className="text-5xl font-light text-white mb-5 font-serif">
+            Campus Gallery
           </h1>
-
-          {/* Description */}
-          <p className="text-white/90 text-base leading-7 max-w-3xl">
-            Education goes beyond textbooks and classrooms. We believe in empowering students
-            <br className="hidden sm:block" />
-            to explore their passions, challenge conventions, and discover their potential.
+          <div className="relative w-full max-w-[480px] h-[1px] bg-white/15 mb-5">
+            <div className="absolute left-0 top-0 h-full w-[120px] bg-[#FDC72F]" />
+          </div>
+          <p className="text-white/90 text-lg max-w-2xl leading-relaxed">
+            Explore life at Dumri College through moments captured from our vibrant campus
           </p>
         </div>
       </section>
@@ -199,7 +198,7 @@ export function Gallery() {
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">
-              Life at Our University
+              Life at Our College
             </h2>
             <p className="text-gray-600 text-base max-w-2xl mx-auto">
               Explore life at our university through images and memories.
@@ -212,11 +211,10 @@ export function Gallery() {
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors ${
-                  activeCategory === category.id
-                    ? 'bg-[#00a7b8] text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
+                className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors ${activeCategory === category.id
+                  ? 'bg-[#00a7b8] text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
               >
                 {category.label}
               </button>
@@ -271,67 +269,68 @@ export function Gallery() {
       <Footer />
 
       {/* Lightbox Modal */}
-      {lightboxOpen && (
-        <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
-          {/* Close Button */}
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
-            aria-label="Close lightbox"
-          >
-            <X className="w-6 h-6 text-white" />
-          </button>
+      {
+        lightboxOpen && (
+          <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center">
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              aria-label="Close lightbox"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
 
-          {/* Image Counter */}
-          <div className="absolute top-6 left-6 text-white text-base font-medium z-10">
-            {currentImageIndex + 1} / {filteredImages.length}
-          </div>
+            {/* Image Counter */}
+            <div className="absolute top-6 left-6 text-white text-base font-medium z-10">
+              {currentImageIndex + 1} / {filteredImages.length}
+            </div>
 
-          {/* Previous Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToPrev();
-            }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
-            aria-label="Previous image"
-          >
-            <ChevronRight className="w-6 h-6 text-white rotate-180" />
-          </button>
+            {/* Previous Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrev();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              aria-label="Previous image"
+            >
+              <ChevronRight className="w-6 h-6 text-white rotate-180" />
+            </button>
 
-          {/* Next Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToNext();
-            }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
-            aria-label="Next image"
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
+            {/* Next Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
 
-          {/* Image */}
-          <div className="max-w-6xl max-h-[90vh] px-16" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={filteredImages[currentImageIndex]?.src}
-              alt={filteredImages[currentImageIndex]?.alt}
-              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            {/* Image */}
+            <div className="max-w-6xl max-h-[90vh] px-16" onClick={(e) => e.stopPropagation()}>
+              <img
+                src={filteredImages[currentImageIndex]?.src}
+                alt={filteredImages[currentImageIndex]?.alt}
+                className="max-w-full max-h-[90vh] object-contain rounded-lg"
+              />
+            </div>
+
+            {/* Image Title */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-center">
+              <p className="text-lg font-medium">{filteredImages[currentImageIndex]?.alt}</p>
+            </div>
+
+            {/* Background Click to Close */}
+            <div
+              className="absolute inset-0 -z-10"
+              onClick={closeLightbox}
             />
           </div>
-
-          {/* Image Title */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-center">
-            <p className="text-lg font-medium">{filteredImages[currentImageIndex]?.alt}</p>
-          </div>
-
-          {/* Background Click to Close */}
-          <div
-            className="absolute inset-0 -z-10"
-            onClick={closeLightbox}
-          />
-        </div>
-      )}
+        )}
     </div>
   );
 }

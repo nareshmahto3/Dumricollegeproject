@@ -1,4 +1,4 @@
-import * as react from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
@@ -22,7 +22,7 @@ const sidebarMenuItems = [
 
 export function AboutPage() {
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = react.useState('who-we-are');
+  const [activeSection, setActiveSection] = useState('who-we-are');
 
   return (
     <div className="min-h-screen bg-white">
@@ -31,7 +31,7 @@ export function AboutPage() {
 
       {/* Hero Banner Section */}
       <section
-        className="relative h-[385px] bg-cover bg-center"
+        className="relative  bg-cover bg-center"
         style={{
           backgroundImage: 'url(https://images.unsplash.com/photo-1673609218895-bb331f054e7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwY2FtcHVzJTIwYnVpbGRpbmclMjBhcmNoaXRlY3R1cmV8ZW58MXx8fHwxNzcyNDk3NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080)',
         }}
@@ -76,8 +76,8 @@ export function AboutPage() {
       </section>
 
       {/* Main Content Section */}
-      <section className="bg-[#F6F4EE] py-20 lg:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#F6F4EE] ">
+        <div className="container mx-auto  sm:px-6 ">
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Left Sidebar */}
             <div className="lg:w-80 flex-shrink-0">
@@ -98,11 +98,10 @@ export function AboutPage() {
                     <button
                       key={item.id}
                       onClick={() => setActiveSection(item.id)}
-                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all ${
-                        activeSection === item.id
+                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-lg transition-all ${activeSection === item.id
                           ? 'bg-[#2F584F] text-white'
                           : 'bg-[#F6F4EE] text-gray-900 hover:bg-gray-100'
-                      }`}
+                        }`}
                     >
                       <span className="font-medium">{item.label}</span>
                       <ChevronRight className="w-4 h-4" />
@@ -167,7 +166,7 @@ export function AboutPage() {
 
                 {/* Author */}
                 <p className="text-gray-900 text-lg font-light font-serif">
-                  - Dr. Rajesh Kumar, Principal
+                  - Ajay Mahto, Principal
                 </p>
               </div>
 
@@ -261,7 +260,7 @@ export function AboutPage() {
                     </div>
                     <div>
                       <div className="flex items-center gap-1">
-                        <span className="text-4xl font-light text-white font-serif">85</span>
+                        <span className="text-4xl font-light text-white font-serif">20</span>
                         <span className="text-4xl font-bold text-white font-serif">+</span>
                       </div>
                       <p className="text-white text-sm">Academic Staff</p>
@@ -278,7 +277,7 @@ export function AboutPage() {
                     </div>
                     <div>
                       <div className="flex items-center gap-1">
-                        <span className="text-4xl font-light text-white font-serif">50</span>
+                        <span className="text-4xl font-light text-white font-serif">40</span>
                         <span className="text-4xl font-bold text-white font-serif">+</span>
                       </div>
                       <p className="text-white text-sm">Years of Excellence</p>

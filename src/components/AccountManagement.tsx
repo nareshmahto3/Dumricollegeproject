@@ -24,6 +24,7 @@ import {
   ChevronDown,
   FileSpreadsheet,
   File,
+  FileDown
 } from 'lucide-react';
 import { PortalLayout } from './PortalLayout';
 import { Card } from './ui/card';
@@ -44,6 +45,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
+import { toast } from 'sonner';
 
 interface Transaction {
   id: string;
@@ -141,6 +143,14 @@ export function AccountManagement() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+
+
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your  report will be downloaded shortly.`,
+    });
+  };
 
   const handleSort = (field: string) => {
     if (sortField === field) {
@@ -159,13 +169,13 @@ export function AccountManagement() {
   // Sort transactions
   const sortedTransactions = [...mockTransactions].sort((a, b) => {
     if (!sortField) return 0;
-    
+
     let aValue = a[sortField as keyof typeof a];
     let bValue = b[sortField as keyof typeof b];
-    
+
     if (typeof aValue === 'string') aValue = aValue.toLowerCase();
     if (typeof bValue === 'string') bValue = bValue.toLowerCase();
-    
+
     if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
     if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
     return 0;
@@ -209,10 +219,57 @@ export function AccountManagement() {
             <div>
               <p className="text-amber-600 text-sm">Financial Overview</p>
             </div>
-            <Button className="gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/20">
-              <Download className="w-4 h-4" />
-              Export Report
-            </Button>
+            <div className="relative">
+              <Button
+                onClick={() => setShowExportDropdown(!showExportDropdown)}
+                className="bg-gradient-to-r  from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+              >
+                <FileDown className="w-4 h-4 " />
+                Export Data
+                <ChevronDown className="w-4 h-4 ml-2" />
+              </Button>
+              {showExportDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                >
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        handleDownload('pdf');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                      PDF
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('csv');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                      CSV
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('excel');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <Download className="w-4 h-4 mr-2 text-blue-600" />
+                      Excel
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </motion.div>
 
@@ -244,22 +301,20 @@ export function AccountManagement() {
           <div className="flex gap-4 border-b border-amber-200">
             <button
               onClick={() => setActiveTab('transactions')}
-              className={`pb-4 px-4 font-medium transition-all ${
-                activeTab === 'transactions'
-                  ? 'text-amber-600 border-b-2 border-amber-500'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`pb-4 px-4 font-medium transition-all ${activeTab === 'transactions'
+                ? 'text-amber-600 border-b-2 border-amber-500'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               <Receipt className="w-4 h-4 inline mr-2" />
               Transactions
             </button>
             <button
               onClick={() => setActiveTab('reports')}
-              className={`pb-4 px-4 font-medium transition-all ${
-                activeTab === 'reports'
-                  ? 'text-amber-600 border-b-2 border-amber-500'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`pb-4 px-4 font-medium transition-all ${activeTab === 'reports'
+                ? 'text-amber-600 border-b-2 border-amber-500'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               <BarChart3 className="w-4 h-4 inline mr-2" />
               Financial Reports
@@ -481,9 +536,8 @@ export function AccountManagement() {
                   {Array.from({ length: totalPages }, (_, index) => (
                     <Button
                       key={index + 1}
-                      className={`${
-                        currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200'
-                      } font-semibold text-sm px-3 sm:px-4`}
+                      className={`${currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200'
+                        } font-semibold text-sm px-3 sm:px-4`}
                       onClick={() => setCurrentPage(index + 1)}
                     >
                       {index + 1}

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { 
-  CreditCard, 
-  Download, 
-  CheckCircle2, 
-  Calendar, 
+import {
+  CreditCard,
+  Download,
+  CheckCircle2,
+  Calendar,
   IndianRupee,
   XCircle,
   Clock,
@@ -189,7 +189,7 @@ export function FeePayment() {
     // In a real app, this would redirect to Razorpay/Stripe/PayU etc.
     console.log('Redirecting to payment gateway...');
     alert(`Redirecting to payment gateway for ₹${selectedTotal.toLocaleString()}\nPayment Method: ${paymentMethod}`);
-    
+
     // Simulate payment success (in real app, this would happen after payment gateway callback)
     // For demo purposes only:
     // setTimeout(() => {
@@ -248,7 +248,7 @@ export function FeePayment() {
   // Payment Details View
   if (view === 'payment-details' && selectedMonths.length > 0) {
     const isMultipleMonths = selectedMonths.length > 1;
-    
+
     return (
       <PortalLayout
         role="student"
@@ -276,8 +276,8 @@ export function FeePayment() {
             <div className="flex items-start justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                  {isMultipleMonths 
-                    ? `Payment for ${selectedMonths.length} Months` 
+                  {isMultipleMonths
+                    ? `Payment for ${selectedMonths.length} Months`
                     : `${selectedFeesData[0]?.month} 2026 Fee Payment`}
                 </h2>
                 <p className="text-slate-600 font-medium">Complete your payment to confirm</p>
@@ -402,7 +402,7 @@ export function FeePayment() {
                   <div>
                     <p className="text-sm font-medium text-red-900 mb-1">Overdue Payment</p>
                     <p className="text-sm text-red-700">
-                      {isMultipleMonths 
+                      {isMultipleMonths
                         ? `${selectedFeesData.filter(f => f.status === 'overdue').length} month(s) in your selection are overdue. Late fees have been added.`
                         : 'This payment is overdue. A late fee of ₹500 has been added.'}
                     </p>
@@ -419,19 +419,16 @@ export function FeePayment() {
                 <motion.div
                   whileHover={{ scale: 1.03 }}
                   onClick={() => setPaymentMethod('upi')}
-                  className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                    paymentMethod === 'upi'
+                  className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all ${paymentMethod === 'upi'
                       ? 'border-amber-500 bg-amber-50 shadow-lg'
                       : 'border-gray-200 hover:border-amber-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      paymentMethod === 'upi' ? 'bg-amber-100' : 'bg-green-100'
-                    }`}>
-                      <IndianRupee className={`w-5 h-5 ${
-                        paymentMethod === 'upi' ? 'text-amber-600' : 'text-green-600'
-                      }`} />
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${paymentMethod === 'upi' ? 'bg-amber-100' : 'bg-green-100'
+                      }`}>
+                      <IndianRupee className={`w-5 h-5 ${paymentMethod === 'upi' ? 'text-amber-600' : 'text-green-600'
+                        }`} />
                     </div>
                     {paymentMethod === 'upi' && (
                       <CheckCircle2 className="w-5 h-5 text-amber-600" />
@@ -445,19 +442,16 @@ export function FeePayment() {
                 <motion.div
                   whileHover={{ scale: 1.03 }}
                   onClick={() => setPaymentMethod('cash')}
-                  className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                    paymentMethod === 'cash'
+                  className={`flex-1 p-4 border-2 rounded-xl cursor-pointer transition-all ${paymentMethod === 'cash'
                       ? 'border-amber-500 bg-amber-50 shadow-lg'
                       : 'border-gray-200 hover:border-amber-300'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      paymentMethod === 'cash' ? 'bg-amber-100' : 'bg-gray-100'
-                    }`}>
-                      <Wallet className={`w-5 h-5 ${
-                        paymentMethod === 'cash' ? 'text-amber-600' : 'text-gray-600'
-                      }`} />
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${paymentMethod === 'cash' ? 'bg-amber-100' : 'bg-gray-100'
+                      }`}>
+                      <Wallet className={`w-5 h-5 ${paymentMethod === 'cash' ? 'text-amber-600' : 'text-gray-600'
+                        }`} />
                     </div>
                     {paymentMethod === 'cash' && (
                       <CheckCircle2 className="w-5 h-5 text-amber-600" />
@@ -517,7 +511,7 @@ export function FeePayment() {
       pageTitle="Fee Payment"
       breadcrumbs={["Home", "Student", "Fees"]}
     >
-      <motion.div 
+      <motion.div
         className="space-y-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -606,22 +600,20 @@ export function FeePayment() {
         <div className="flex flex-col sm:flex-row gap-4">
           <Button
             onClick={() => setView('unpaid')}
-            className={`flex-1 py-6 text-lg font-semibold transition-all duration-200 ${
-              view === 'unpaid'
+            className={`flex-1 py-6 text-lg font-semibold transition-all duration-200 ${view === 'unpaid'
                 ? 'bg-blue-600 hover:bg-blue-700 text-white'
                 : 'bg-white border-2 border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-[#2F80ED] hover:border-blue-500'
-            }`}
+              }`}
           >
             <Clock className="w-5 h-5 mr-2" />
             Unpaid Fees ({unpaidFees.length})
           </Button>
           <Button
             onClick={() => setView('paid')}
-            className={`flex-1 py-6 text-lg font-semibold transition-all duration-200 ${
-              view === 'paid'
+            className={`flex-1 py-6 text-lg font-semibold transition-all duration-200 ${view === 'paid'
                 ? 'bg-blue-600 hover:bg-blue-700 text-white'
                 : 'bg-white border-2 border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-[#2F80ED] hover:border-blue-500'
-            }`}
+              }`}
           >
             <History className="w-5 h-5 mr-2" />
             Payment History ({paidFees.length})
@@ -703,21 +695,19 @@ export function FeePayment() {
                         transition={{ delay: index * 0.05 }}
                         whileHover={{ scale: 1.05, y: -5 }}
                         onClick={() => handleMonthToggle(fee.monthNumber)}
-                        className={`p-5 border-2 rounded-xl cursor-pointer transition-all shadow-md hover:shadow-xl relative ${
-                          isSelected
+                        className={`p-5 border-2 rounded-xl cursor-pointer transition-all shadow-md hover:shadow-xl relative ${isSelected
                             ? 'border-amber-500 bg-amber-50 shadow-lg ring-2 ring-amber-300'
                             : fee.status === 'overdue'
-                            ? 'border-red-300 bg-red-50 hover:border-red-400'
-                            : 'border-blue-300 bg-blue-50 hover:border-blue-400'
-                        }`}
+                              ? 'border-red-300 bg-red-50 hover:border-red-400'
+                              : 'border-blue-300 bg-blue-50 hover:border-blue-400'
+                          }`}
                       >
                         {/* Selection Checkbox */}
                         <div className="absolute top-3 left-3">
-                          <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${
-                            isSelected 
-                              ? 'bg-amber-500 border-amber-500' 
+                          <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all ${isSelected
+                              ? 'bg-amber-500 border-amber-500'
                               : 'bg-white border-slate-300'
-                          }`}>
+                            }`}>
                             {isSelected && (
                               <CheckCircle2 className="w-5 h-5 text-white" />
                             )}
@@ -837,7 +827,7 @@ export function FeePayment() {
                               </p>
                             </div>
                           </div>
-                          
+
                           <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
                             <div>
                               <p className="text-slate-500 text-xs mb-1">Payment Date</p>
@@ -886,7 +876,7 @@ export function FeePayment() {
                     </div>
                     <Button
                       variant="outline"
-                      className="border-green-300 text-green-600 hover:bg-green-50"
+                      className="border-green-300 text-green-600 hover:bg-green-50 hover:text-green-900"
                     >
                       <Receipt className="w-4 h-4 mr-2" />
                       Download All Receipts

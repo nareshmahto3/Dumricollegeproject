@@ -178,19 +178,19 @@ export function FacultyDetailPage() {
 
         {/* Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <img 
-            alt="" 
-            className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-10" 
-            src={imgDivElementorElement} 
+          <img
+            alt=""
+            className="absolute h-full left-0 max-w-none top-0 w-[115.51%] object-cover opacity-10"
+            src={imgDivElementorElement}
           />
         </div>
 
         {/* Decorative Arrow */}
         <div className="absolute bottom-[40px] right-[100px] z-10 hidden lg:block opacity-50">
-          <img 
-            alt="" 
-            className="w-[100px] h-[100px]" 
-            src={imgBnrArrow11} 
+          <img
+            alt=""
+            className="w-[100px] h-[100px]"
+            src={imgBnrArrow11}
           />
         </div>
 
@@ -224,7 +224,7 @@ export function FacultyDetailPage() {
 
       {/* Faculty Profile Content - Responsive Design */}
       <section className="bg-[#f6f4ee]">
-        <div className="w-full px-4 sm:px-6 md:px-12 lg:px-[128.8px] py-12 md:py-16 lg:py-[110px] flex justify-center">
+        <div className="w-full  sm:px-6   py-12 md:py-16 lg:py-[110px] flex justify-center">
           <div className="w-full max-w-[1260px] flex flex-col gap-5 md:gap-8 lg:gap-5">
             {/* Main Profile Section */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-[50px] lg:h-[532.74px] lg:items-end shrink-0 w-full">
@@ -242,7 +242,7 @@ export function FacultyDetailPage() {
 
                   {/* Profile Info */}
                   <div className="text-center pb-3 pt-1.5">
-                    <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-0.5">
+                    <h4 className="font-['Bitter',serif] text-2xl leading-[34px] text-[#030303] mb-0.5">
                       {faculty.name}
                     </h4>
                     <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
@@ -255,10 +255,10 @@ export function FacultyDetailPage() {
               {/* Right Column - Content */}
               <div className="flex-1 flex flex-col gap-5 lg:h-[533.34px]">
                 {/* About: Introduction Section */}
-                <div className="flex flex-col gap-[15px] w-full lg:min-w-[819.4px]">
+                <div className="flex flex-col gap-[15px] w-full lg:min-w-[700.4px] h-full">
                   {/* About Heading */}
                   <div className="pb-[0.6px]">
-                    <h3 className="font-['Bitter',serif] font-thin text-3xl md:text-[36px] leading-[46px] text-[#030303]">
+                    <h3 className="font-['Bitter',serif] text-3xl md:text-[36px] leading-[46px] text-[#030303]">
                       About: Introduction
                     </h3>
                   </div>
@@ -277,7 +277,7 @@ export function FacultyDetailPage() {
                     {/* Academic Qualifications */}
                     <div className="flex-1 flex flex-col gap-5 w-full">
                       <div className="h-[29px]">
-                        <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                        <h4 className="font-['Bitter',serif] text-2xl leading-[34px] text-[#030303]">
                           Academic Qualifications
                         </h4>
                       </div>
@@ -306,7 +306,7 @@ export function FacultyDetailPage() {
                     {/* Research Interests */}
                     <div className="flex-1 flex flex-col gap-5 w-full">
                       <div className="h-[29px]">
-                        <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                        <h4 className="font-['Bitter',serif] text-2xl leading-[34px] text-[#030303]">
                           Research Interests
                         </h4>
                       </div>
@@ -337,7 +337,7 @@ export function FacultyDetailPage() {
                   <div className="pt-[10px] border-t-[0.8px] border-[#e4e4e4] flex flex-col gap-5">
                     {/* Contact Title */}
                     <div className="pt-[26px] pb-[5px] w-full">
-                      <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                      <h4 className="font-['Bitter',serif] text-2xl leading-[34px] text-[#030303]">
                         Contact Information's
                       </h4>
                     </div>
@@ -421,7 +421,7 @@ export function FacultyDetailPage() {
                     <div className="flex items-start self-stretch flex-1">
                       <div className="w-full lg:min-w-[528.95px] lg:h-[146px]">
                         <div className="flex flex-col gap-[10px] items-start">
-                          <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                          <h4 className="font-['Bitter',serif] text-2xl leading-[34px] text-[#030303]">
                             Professional Experience
                           </h4>
                           <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c]">
@@ -444,7 +444,7 @@ export function FacultyDetailPage() {
                   {/* Right Side - Courses */}
                   <div className="w-full lg:w-[570px] lg:pl-5 flex flex-col gap-5 items-start">
                     <div className="lg:pl-2">
-                      <h4 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303]">
+                      <h4 className="font-['Bitter',serif] text-2xl leading-[34px] text-[#030303]">
                         Courses
                       </h4>
                     </div>
@@ -501,128 +501,18 @@ export function FacultyDetailPage() {
                 </div>
 
                 {/* Featured Image */}
-                <div className="mt-5">
+                {/* <div className="mt-5">
                   <img
                     src={imgCapManMin}
                     alt="Faculty"
                     className="w-full h-auto aspect-[1180/380.55] rounded-xl object-cover"
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 
             {/* Research Excellence Awards Section */}
-            <div className="pt-12 md:pt-16 lg:pt-[80px] min-h-[391.20px] relative">
-              <div className="flex flex-col lg:flex-row gap-8 lg:gap-5 lg:items-end">
-                {/* Left Side - Tilted Badge */}
-                <div className="w-full lg:w-[501.94px] flex flex-col items-start">
-                  <div className="max-w-[496px] px-4 py-[5.90px] pb-[7.10px] bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.06)] rounded-[100px] lg:rotate-[-45deg] lg:origin-top-left">
-                    <h3 className="font-['Bitter',serif] font-thin text-xl leading-[30px] text-[#030303]">
-                      Research Excellence Awards
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Right Side - Awards List */}
-                <div className="w-full lg:w-[744px] bg-white rounded-[10px] flex flex-col">
-                  <div className="self-stretch relative flex flex-col">
-                    <div className="self-stretch flex flex-col">
-                      {/* Award 1 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin1Min}
-                              alt="Award"
-                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Research Excellence Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2025
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Award 2 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin2Min}
-                              alt="Award"
-                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Excellence in Teaching Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2024
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Award 3 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0.06)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin3Min}
-                              alt="Award"
-                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Young Researcher Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2023
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Award 4 */}
-                      <div className="self-stretch p-4 md:p-6 border-b-[0.8px] border-[rgba(2,1,1,0)] flex flex-col sm:flex-row justify-between gap-4 sm:items-center hover:bg-gray-50 transition-colors">
-                        <div className="flex gap-4 sm:gap-5 items-center">
-                          <div className="w-[80px] sm:w-[120px] md:w-[200px] h-[30px] flex items-center shrink-0">
-                            <img
-                              src={imgAwardWin4Min}
-                              alt="Award"
-                              className="w-[80px] sm:w-[100px] md:w-[117px] h-auto object-contain"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <h4 className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                              Lifetime Achievement Award
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="overflow-hidden flex flex-col shrink-0">
-                          <span className="font-['Bitter',serif] font-thin text-lg md:text-xl leading-[34px] text-[#030303]">
-                            2022
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>

@@ -9,7 +9,7 @@ export function Founder() {
           Our Founder
         </h2>
         <p className="text-gray-600 text-base leading-7">
-          The visionary behind Dumri College's establishment and continued legacy of excellence.
+          The visionary behind Jharkhand Commerce Inter College's establishment and continued legacy of excellence.
         </p>
       </div>
 
@@ -28,9 +28,9 @@ export function Founder() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#2F584F] via-[#2F584F]/50 to-transparent"></div>
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-            <h3 className="text-4xl font-bold mb-2">Late Shri Ram Prasad Sharma</h3>
+            <h3 className="text-4xl font-bold mb-2">Late Shiva Mahto</h3>
             <p className="text-[#FDC72F] font-semibold text-xl">Founder & Visionary</p>
-            <p className="text-white/90 mt-2">1930 - 2005</p>
+            <p className="text-white/90 mt-2">1914 – 2022</p>
           </div>
         </div>
 
@@ -42,16 +42,36 @@ export function Founder() {
               "Education is not just about acquiring knowledge; it is about building character, 
               fostering values, and empowering individuals to make a positive difference in society."
             </p>
-            <p className="text-gray-700 font-semibold mt-4">- Late Shri Ram Prasad Sharma</p>
+            <p className="text-gray-700 font-semibold mt-4">- Late Shiva Mahto</p>
           </div>
 
           {/* Biography */}
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Late Shri Ram Prasad Sharma, a visionary educator and social reformer, established Jharkhand Commerce 
-              Inter College (Dumri College) in 1976 with a dream to provide quality education to the youth of the region. 
-              Born in a small village, he understood the transformative power of education firsthand.
+             Shiva Mahto (1914–2022) was an Indian politician, social reformer, and educationist from Jharkhand. A founding member of the Jharkhand Mukti Morcha (JMM), he played a central role in the Jharkhand statehood movement and served multiple terms as a legislator from the Dumri constituency. Revered as a pioneer of education and tribal rights, he was widely known as “Shiva Da” in his region.
             </p>
+            <p>
+Key facts
+Born: 1914, Sijua village, Bokaro district, Jharkhand
+
+Died: February 28, 2022, Dumri, Jharkhand
+
+Political party: Jharkhand Mukti Morcha (Binod Bihari Mahato group)
+
+Legislative terms: MLA, Dumri (1980, 1985, 1995)
+
+Major focus: Education, displacement rehabilitation, social justice
+
+Political life and Jharkhand movement
+Mahto was among the earliest leaders to mobilize coalfield workers, peasants, and tribal communities for a separate Jharkhand state. Working alongside Binod Bihari Mahato, Shibu Soren, and other regional activists, he became a respected figure in grassroots politics. He also helped form a faction of the JMM in the 1990s, emphasizing self-determination and ethical governance. 
+
+Contributions to education and society
+After his first election in 1980, Mahto prioritized educational access in rural Giridih. He founded the Jharkhand Commerce Inter College at Ghutuwali and supported the establishment of additional schools and colleges in Dumri. Despite limited formal schooling himself, he viewed education as the foundation for empowerment of marginalized groups. 
+
+Social reform and legacy
+Beyond politics, Mahto led campaigns against moneylenders and dowry practices through organizations such as the Shivaji Samaj. </p>
+           <p>He secured employment for displaced villagers in industrial projects like the Bokaro coalfields and championed land and labor rights. Remembered for his humility and “clean image,” Mahto was mentor to leaders including former education minister Jagarnath Mahto. His death at age 108 marked the passing of one of Jharkhand’s last generation of statehood-era visionaries. </p>  
+           
             <p>
               Despite facing numerous challenges, he persevered with unwavering determination to create an institution 
               that would not only impart academic knowledge but also instill strong moral values and social responsibility 
@@ -63,6 +83,7 @@ export function Founder() {
               most respected educational institutions in the state. His emphasis on holistic education, combining academic 
               excellence with character development, continues to be the cornerstone of our institution's philosophy.
             </p>
+            
           </div>
         </div>
       </motion.div>

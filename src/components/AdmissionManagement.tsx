@@ -1,10 +1,18 @@
 import { useState } from "react";
-import { Search, Filter, Eye, Check, X, ChevronDown, Mail, Phone, MapPin, Calendar, User, GraduationCap, FileText, Download, MoreVertical, ChevronUp } from "lucide-react";
+import {
+  ChevronDown,
+  FileSpreadsheet,
+  FileDown, Mail, Phone, MapPin, Calendar, User, GraduationCap, FileText, Eye, Filter, Download, Search, MoreVertical, ChevronUp
+} from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
 import { PortalLayout } from "./PortalLayout";
+import { toast } from "sonner";
+import { motion } from 'motion/react';
+
+type ExportFormat = 'pdf' | 'csv' | 'excel';
 
 const admissions = [
   { id: 1, name: 'Aarav Sharma', class: 'Grade 10', status: 'Under Review', date: '2026-02-10', phone: '+91 98765 43210' },
@@ -26,6 +34,14 @@ export function AdmissionManagement() {
   const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+
+
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your  report will be downloaded shortly.`,
+    });
+  };
 
   const handleSort = (field: string) => {
     if (sortField === field) {
@@ -50,13 +66,13 @@ export function AdmissionManagement() {
   // Sort filtered admissions
   const sortedAdmissions = [...filteredAdmissions].sort((a, b) => {
     if (!sortField) return 0;
-    
+
     let aValue = a[sortField as keyof typeof a];
     let bValue = b[sortField as keyof typeof b];
-    
+
     if (typeof aValue === 'string') aValue = aValue.toLowerCase();
     if (typeof bValue === 'string') bValue = bValue.toLowerCase();
-    
+
     if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
     if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
     return 0;
@@ -92,24 +108,24 @@ export function AdmissionManagement() {
       breadcrumbs={["Home", "Admin", "Admissions"]}
     >
       {/* Summary Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <Card className="p-4 bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-purple-700 mb-1 font-medium">Total Applications</p>
-            <h3 className="text-purple-900">{admissions.length}</h3>
-          </Card>
-          <Card className="p-4 bg-gradient-to-br from-blue-100 to-cyan-200 border-2 border-blue-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-blue-700 mb-1 font-medium">Applied</p>
-            <h3 className="text-blue-900">{admissions.filter(a => a.status === 'Applied').length}</h3>
-          </Card>
-          <Card className="p-4 bg-gradient-to-br from-yellow-100 to-amber-200 border-2 border-yellow-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-yellow-700 mb-1 font-medium">Under Review</p>
-            <h3 className="text-yellow-900">{admissions.filter(a => a.status === 'Under Review').length}</h3>
-          </Card>
-          <Card className="p-4 bg-gradient-to-br from-green-100 to-emerald-200 border-2 border-green-300 shadow-lg hover:shadow-xl transition-all">
-            <p className="text-sm text-green-700 mb-1 font-medium">Selected</p>
-            <h3 className="text-green-900">{admissions.filter(a => a.status === 'Selected').length}</h3>
-          </Card>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <Card className="p-4 bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-300 shadow-lg hover:shadow-xl transition-all">
+          <p className="text-sm text-purple-700 mb-1 font-medium">Total Applications</p>
+          <h3 className="text-purple-900">{admissions.length}</h3>
+        </Card>
+        <Card className="p-4 bg-gradient-to-br from-blue-100 to-cyan-200 border-2 border-blue-300 shadow-lg hover:shadow-xl transition-all">
+          <p className="text-sm text-blue-700 mb-1 font-medium">Applied</p>
+          <h3 className="text-blue-900">{admissions.filter(a => a.status === 'Applied').length}</h3>
+        </Card>
+        <Card className="p-4 bg-gradient-to-br from-yellow-100 to-amber-200 border-2 border-yellow-300 shadow-lg hover:shadow-xl transition-all">
+          <p className="text-sm text-yellow-700 mb-1 font-medium">Under Review</p>
+          <h3 className="text-yellow-900">{admissions.filter(a => a.status === 'Under Review').length}</h3>
+        </Card>
+        <Card className="p-4 bg-gradient-to-br from-green-100 to-emerald-200 border-2 border-green-300 shadow-lg hover:shadow-xl transition-all">
+          <p className="text-sm text-green-700 mb-1 font-medium">Selected</p>
+          <h3 className="text-green-900">{admissions.filter(a => a.status === 'Selected').length}</h3>
+        </Card>
+      </div>
       <div className="space-y-6">
         {/* Filters */}
         <Card className="bg-white border-slate-200 p-6 shadow-sm">
@@ -140,14 +156,61 @@ export function AdmissionManagement() {
               </select>
             </div>
 
-            <Button className="gap-2 bg-blue-600 hover:bg-blue-700 text-white">
-              <Download className="w-4 h-4" />
-              Export Data
-            </Button>
+            <div className="relative">
+              <Button
+                onClick={() => setShowExportDropdown(!showExportDropdown)}
+                className="bg-gradient-to-r w-[300px] from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+              >
+                <FileDown className="w-4 h-4 " />
+                Export Data
+                <ChevronDown className="w-4 h-4 ml-2" />
+              </Button>
+              {showExportDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                >
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        handleDownload('pdf');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                      PDF
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('csv');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                      CSV
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('excel');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <Download className="w-4 h-4 mr-2 text-blue-600" />
+                      Excel
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </Card>
 
-        
+
 
         {/* Admissions Table */}
         <Card className="bg-white border-slate-200 overflow-hidden shadow-sm">
@@ -298,9 +361,8 @@ export function AdmissionManagement() {
                 <Button
                   key={index + 1}
                   variant={currentPage === index + 1 ? "default" : "outline"}
-                  className={`${
-                    currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200'
-                  } text-sm px-3 sm:px-4`}
+                  className={`${currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200'
+                    } text-sm px-3 sm:px-4`}
                   onClick={() => setCurrentPage(index + 1)}
                 >
                   {index + 1}

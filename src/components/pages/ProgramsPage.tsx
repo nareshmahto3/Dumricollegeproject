@@ -127,7 +127,7 @@ export function ProgramsPage() {
 
       {/* Main Content Section */}
       <section className="bg-[#F6F4EE] py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="  px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Left Sidebar - Filters */}
             <div className="lg:w-80 flex-shrink-0">
@@ -296,13 +296,13 @@ export function ProgramsPage() {
               )}
 
               {/* Load More */}
-              {filteredPrograms.length > 0 && (
+              {/* {filteredPrograms.length > 0 && (
                 <div className="mt-12 text-center">
                   <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                     Load More
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

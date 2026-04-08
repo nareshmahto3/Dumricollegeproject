@@ -16,75 +16,75 @@ interface Holiday {
 }
 
 const holidays: Holiday[] = [
-  { 
-    date: '2026-03-14', 
-    name: 'Holi', 
+  {
+    date: '2026-03-14',
+    name: 'Holi',
     type: 'Public Holiday',
     description: 'Festival of colors celebrating the arrival of spring'
   },
-  { 
-    date: '2026-04-03', 
-    name: 'Good Friday', 
+  {
+    date: '2026-04-03',
+    name: 'Good Friday',
     type: 'Public Holiday',
     description: 'Christian holy day commemorating the crucifixion of Jesus'
   },
-  { 
-    date: '2026-04-21', 
-    name: 'Eid ul-Fitr', 
+  {
+    date: '2026-04-21',
+    name: 'Eid ul-Fitr',
     type: 'Public Holiday',
     description: 'Islamic festival marking the end of Ramadan'
   },
-  { 
-    date: '2026-05-01', 
-    name: 'May Day', 
+  {
+    date: '2026-05-01',
+    name: 'May Day',
     type: 'Public Holiday',
     description: 'International Workers\' Day'
   },
-  { 
-    date: '2026-05-15', 
-    name: 'Summer Break Begins', 
+  {
+    date: '2026-05-15',
+    name: 'Summer Break Begins',
     type: 'School Holiday',
     description: 'Start of summer vacation for all students'
   },
-  { 
-    date: '2026-06-01', 
-    name: 'Summer Break', 
+  {
+    date: '2026-06-01',
+    name: 'Summer Break',
     type: 'School Holiday',
     description: 'Ongoing summer vacation'
   },
-  { 
-    date: '2026-06-15', 
-    name: 'Summer Break', 
+  {
+    date: '2026-06-15',
+    name: 'Summer Break',
     type: 'School Holiday',
     description: 'Ongoing summer vacation'
   },
-  { 
-    date: '2026-07-01', 
-    name: 'Summer Break Ends', 
+  {
+    date: '2026-07-01',
+    name: 'Summer Break Ends',
     type: 'School Holiday',
     description: 'End of summer vacation, classes resume'
   },
-  { 
-    date: '2026-08-15', 
-    name: 'Independence Day', 
+  {
+    date: '2026-08-15',
+    name: 'Independence Day',
     type: 'Public Holiday',
     description: 'Celebrating India\'s independence from British rule'
   },
-  { 
-    date: '2026-10-02', 
-    name: 'Gandhi Jayanti', 
+  {
+    date: '2026-10-02',
+    name: 'Gandhi Jayanti',
     type: 'Public Holiday',
     description: 'Birth anniversary of Mahatma Gandhi'
   },
-  { 
-    date: '2026-10-24', 
-    name: 'Diwali', 
+  {
+    date: '2026-10-24',
+    name: 'Diwali',
     type: 'Public Holiday',
     description: 'Festival of lights celebrating the victory of light over darkness'
   },
-  { 
-    date: '2026-12-25', 
-    name: 'Christmas', 
+  {
+    date: '2026-12-25',
+    name: 'Christmas',
     type: 'Public Holiday',
     description: 'Christian festival celebrating the birth of Jesus Christ'
   },
@@ -143,9 +143,8 @@ export function HolidayPage() {
       days.push(
         <div
           key={day}
-          className={`aspect-square p-2 border border-gray-200 rounded-lg relative transition-all ${
-            holiday ? 'bg-amber-50 border-amber-300 hover:bg-amber-100' : 'bg-white hover:bg-gray-50'
-          } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
+          className={`aspect-square p-2 border border-gray-200 rounded-lg relative transition-all ${holiday ? 'bg-amber-50 border-amber-300 hover:bg-amber-100' : 'bg-white hover:bg-gray-50'
+            } ${isToday ? 'ring-2 ring-blue-500' : ''}`}
         >
           <div className={`text-sm font-medium ${isToday ? 'text-blue-600' : 'text-slate-900'}`}>
             {day}
@@ -155,13 +154,12 @@ export function HolidayPage() {
               <div className="text-[10px] font-semibold text-amber-700 leading-tight line-clamp-2">
                 {holiday.name}
               </div>
-              <Badge 
-                variant="outline" 
-                className={`mt-1 text-[8px] px-1 py-0 h-auto ${
-                  holiday.type === 'Public Holiday' 
-                    ? 'bg-green-100 text-green-700 border-green-300'
-                    : 'bg-orange-100 text-orange-700 border-orange-300'
-                }`}
+              <Badge
+                variant="outline"
+                className={`mt-1 text-[8px] px-1 py-0 h-auto ${holiday.type === 'Public Holiday'
+                  ? 'bg-green-100 text-green-700 border-green-300'
+                  : 'bg-orange-100 text-orange-700 border-orange-300'
+                  }`}
               >
                 {holiday.type === 'Public Holiday' ? 'Public' : 'School'}
               </Badge>
@@ -178,7 +176,7 @@ export function HolidayPage() {
     .filter(h => new Date(h.date) >= new Date())
     .slice(0, 6);
 
-  const holidaysByMonth = holidays.filter(h => 
+  const holidaysByMonth = holidays.filter(h =>
     new Date(h.date).getMonth() === selectedMonth
   );
 
@@ -204,7 +202,7 @@ export function HolidayPage() {
         </div>
 
         {/* Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20 pb-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-30 pb-8">
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 mb-4">
             <button
@@ -224,7 +222,7 @@ export function HolidayPage() {
 
           {/* Description */}
           <p className="text-white/90 text-base leading-7 max-w-3xl">
-            Plan ahead with our comprehensive holiday calendar for the academic year 2025-2026.
+            Plan ahead with our comprehensive holiday calendar for the academic year 2026-2027.
             <br className="hidden sm:block" />
             View all public holidays and school breaks throughout the year.
           </p>
@@ -300,14 +298,14 @@ export function HolidayPage() {
             <div className="lg:col-span-2">
               <Card className="p-6 shadow-lg">
                 {/* Month Navigation */}
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-6 ">
                   <Button
                     onClick={previousMonth}
                     variant="outline"
                     size="sm"
-                    className="border-gray-300"
+                    className="text-black"
                   >
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-4 h-4 text-slate-900" />
                   </Button>
                   <h3 className="text-2xl font-bold text-slate-900">
                     {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
@@ -318,7 +316,7 @@ export function HolidayPage() {
                     size="sm"
                     className="border-gray-300"
                   >
-                    <ChevronRightIcon className="w-4 h-4" />
+                    <ChevronRightIcon className="w-4 h-4 text-slate-900" />
                   </Button>
                 </div>
 
@@ -380,13 +378,12 @@ export function HolidayPage() {
                           {holiday.description && (
                             <p className="text-xs text-slate-600 mb-2">{holiday.description}</p>
                           )}
-                          <Badge 
-                            variant="outline" 
-                            className={`text-xs ${
-                              holiday.type === 'Public Holiday'
-                                ? 'bg-green-100 text-green-700 border-green-200'
-                                : 'bg-orange-100 text-orange-700 border-orange-200'
-                            }`}
+                          <Badge
+                            variant="outline"
+                            className={`text-xs ${holiday.type === 'Public Holiday'
+                              ? 'bg-green-100 text-green-700 border-green-200'
+                              : 'bg-orange-100 text-orange-700 border-orange-200'
+                              }`}
                           >
                             {holiday.type}
                           </Badge>
@@ -437,13 +434,12 @@ export function HolidayPage() {
                       {holiday.description && (
                         <p className="text-sm text-slate-600 mb-3">{holiday.description}</p>
                       )}
-                      <Badge 
-                        variant="outline" 
-                        className={`text-xs ${
-                          holiday.type === 'Public Holiday'
-                            ? 'bg-green-100 text-green-700 border-green-200'
-                            : 'bg-orange-100 text-orange-700 border-orange-200'
-                        }`}
+                      <Badge
+                        variant="outline"
+                        className={`text-xs ${holiday.type === 'Public Holiday'
+                          ? 'bg-green-100 text-green-700 border-green-200'
+                          : 'bg-orange-100 text-orange-700 border-orange-200'
+                          }`}
                       >
                         {holiday.type}
                       </Badge>
