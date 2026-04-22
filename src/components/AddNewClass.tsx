@@ -61,56 +61,87 @@ export function AddNewClass() {
     setTouched((prev) => ({ ...prev, [e.target.name]: true }));
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+
+  //   e.preventDefault();
+
+  //   // Mark all fields as touched to surface all errors at once
+  //   const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
+  //   setTouched(allTouched);
+
+  //   if (hasAnyError) {
+  //     toast.error('Please fix the errors before submitting.');
+  //     return;
+  //   }
+
+  //   setIsLoading(true);
+  //   try {
+  //     const apiData = {
+  //       className: formData.className,
+  //       section: formData.section,
+  //       classTeacherId: parseInt(formData.classTeacher),
+  //       roomNumber: formData.roomNumber,
+  //       capacity: parseInt(formData.capacity),
+  //       academicYear: formData.academicYear,
+  //       startDate: new Date(formData.startDate),
+  //     };
+
+  //     const response = await fetch('https://localhost:5258/api/Class', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+  //       },
+  //       body: JSON.stringify(apiData),
+  //     });
+
+  //     if (response.ok) {
+  //       toast.success('Class Added Successfully!', {
+  //         description: `${formData.className} - Section ${formData.section} has been added to the system.`,
+  //       });
+  //       setTimeout(() => navigate('/admin/classes'), 1000);
+  //     } else {
+  //       const error = await response.json();
+  //       toast.error('Failed to add class', {
+  //         description: error.message || 'An error occurred while adding the class.',
+  //       });
+  //     }
+  //   } catch (error) {
+  //     toast.error('Failed to add class', {
+  //       description: 'Network error occurred. Please try again.',
+  //     });
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Mark all fields as touched to surface all errors at once
-    const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
-    setTouched(allTouched);
-
-    if (hasAnyError) {
-      toast.error('Please fix the errors before submitting.');
-      return;
-    }
-
-    setIsLoading(true);
+    const apiData = {
+      className: formData.className,
+      section: formData.section,
+      classTeacherId: Number(formData.classTeacher),
+      roomNumber: formData.roomNumber,
+      capacity: Number(formData.capacity),
+      academicYear: formData.academicYear,
+      startDate: new Date(formData.startDate).toISOString(),
+    };
+    debugger
     try {
-      const apiData = {
-        className: formData.className,
-        section: formData.section,
-        classTeacherId: parseInt(formData.classTeacher),
-        roomNumber: formData.roomNumber,
-        capacity: parseInt(formData.capacity),
-        academicYear: formData.academicYear,
-        startDate: new Date(formData.startDate),
-      };
-
-      const response = await fetch('https://localhost:5258/api/Class', {
+      const response = await fetch('https://localhost:44390/api/Class', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify(apiData),
       });
 
-      if (response.ok) {
-        toast.success('Class Added Successfully!', {
-          description: `${formData.className} - Section ${formData.section} has been added to the system.`,
-        });
-        setTimeout(() => navigate('/admin/classes'), 1000);
-      } else {
-        const error = await response.json();
-        toast.error('Failed to add class', {
-          description: error.message || 'An error occurred while adding the class.',
-        });
-      }
-    } catch (error) {
-      toast.error('Failed to add class', {
-        description: 'Network error occurred. Please try again.',
-      });
-    } finally {
-      setIsLoading(false);
+      if (!response.ok) throw new Error("Failed");
+
+      console.log("Class added successfully");
+    } catch (err) {
+      console.error(err);
     }
   };
 
