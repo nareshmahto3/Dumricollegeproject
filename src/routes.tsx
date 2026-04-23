@@ -3,6 +3,8 @@ import { createBrowserRouter, Outlet } from "react-router";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { ReapplyAdmission } from "./components/ReapplyAdmission";
 import { RouteChangePreloader } from "./components/shared/RouteChangePreloader";
+import { StudentView } from "./components/StudentView";
+import { Approved } from "./components/pages/Approved";
 
 // ─── Lazy-loaded route components ────────────────────────────────────────────
 // Using .then(m => ({ default: m.ExportName })) to support named exports
@@ -614,6 +616,15 @@ export const router = createBrowserRouter([
       { path: "/admin/exams", Component: ExamManagement },
       { path: "/admin/students", Component: AllStudentsData },
       { path: "/admin/add-student", Component: AddStudentForm },
+      {
+    path: "/admin/students/:studentId",
+    Component: StudentView,
+  },
+  {
+    path: "/admin/students/:applicationId/approved",
+    Component: Approved,
+  },
+
       { path: "/admin/add-teacher", Component: AddTeacherForm },
       { path: "/admin/account", Component: AccountManagement },
       { path: "/admin/classes", Component: ClassManagement },

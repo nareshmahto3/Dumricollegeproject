@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router';
 import {
@@ -9,7 +9,7 @@ import {
   Download,
   Printer,
   Mail,
-  Phone,
+  CheckCircle2,
   Edit,
   Trash2,
   Eye,
@@ -20,134 +20,31 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { PortalLayout } from './PortalLayout';
 import { ExportDropdown } from './ExportDropdown';
+import { deleteStudentById, getStudentApplications } from '../api/studentApi';
+import type { StudentApplication } from '../types/studentTypes';
 
-const studentsData = [
-  {
-    id: '#0021',
-    roll: '#0021',
-    name: 'Mark Willy',
-    gender: 'Male',
-    class: '2',
-    section: 'A',
-    parents: 'Jack Sparrow',
-    address: 'TA-107 Newyork',
-    dob: '02/05/2001',
-    phone: '+ 123 9988568',
-    email: 'kazifalm93@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&q=80',
-    color: 'bg-green-500',
-  },
-  {
-    id: '#0022',
-    roll: '#0022',
-    name: 'Jessia Rose',
-    gender: 'Female',
-    class: '1',
-    section: 'A',
-    parents: 'Maria Jamans',
-    address: '59 Australia, Sydney',
-    dob: '02/05/2001',
-    phone: '+ 123 9988568',
-    email: 'kazifialm93@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80',
-    color: 'bg-cyan-500',
-  },
-  {
-    id: '#0023',
-    roll: '#0023',
-    name: 'Mark Willy',
-    gender: 'Male',
-    class: '2',
-    section: 'A',
-    parents: 'Jack Sparrow',
-    address: 'TA-107 Newyork',
-    dob: '02/05/2001',
-    phone: '+ 123 9988568',
-    email: 'kazifialm93@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&q=80',
-    color: 'bg-red-500',
-  },
-  {
-    id: '#0024',
-    roll: '#0024',
-    name: 'Jessia Rose',
-    gender: 'Female',
-    class: '1',
-    section: 'A',
-    parents: 'Maria Jamans',
-    address: '59 Australia, Sydney',
-    dob: '02/05/2001',
-    phone: '+ 123 9988568',
-    email: 'kazifialm93@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80',
-    color: 'bg-yellow-500',
-  },
-  {
-    id: '#0025',
-    roll: '#0025',
-    name: 'Arjun Mehta',
-    gender: 'Male',
-    class: '3',
-    section: 'B',
-    parents: 'Rajesh Mehta',
-    address: 'MG Road, Mumbai',
-    dob: '15/08/2000',
-    phone: '+ 123 9988569',
-    email: 'arjun.mehta@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80',
-    color: 'bg-purple-500',
-  },
-  {
-    id: '#0026',
-    roll: '#0026',
-    name: 'Priya Sharma',
-    gender: 'Female',
-    class: '2',
-    section: 'B',
-    parents: 'Amit Sharma',
-    address: 'Sector 5, Delhi',
-    dob: '22/11/2001',
-    phone: '+ 123 9988570',
-    email: 'priya.sharma@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80',
-    color: 'bg-pink-500',
-  },
-  {
-    id: '#0027',
-    roll: '#0027',
-    name: 'Rohan Singh',
-    gender: 'Male',
-    class: '1',
-    section: 'C',
-    parents: 'Vikram Singh',
-    address: 'Park Street, Kolkata',
-    dob: '10/03/2002',
-    phone: '+ 123 9988571',
-    email: 'rohan.singh@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80',
-    color: 'bg-blue-500',
-  },
-  {
-    id: '#0028',
-    roll: '#0028',
-    name: 'Ananya Reddy',
-    gender: 'Female',
-    class: '3',
-    section: 'A',
-    parents: 'Srinivas Reddy',
-    address: 'Hi-Tech City, Hyderabad',
-    dob: '05/07/2000',
-    phone: '+ 123 9988572',
-    email: 'ananya.reddy@gmail.com',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80',
-    color: 'bg-indigo-500',
-  },
-];
+type StudentTableRow = {
+  id: string;
+  studentId: string;
+  roll: string;
+  applicationNo: string;
+  registrationNo: string | null;
+  name: string;
+  className: string;
+  gender: string;
+  mobileNumber: string;
+  applicationStatus: string;
+  status: string;
+  createdDateRaw: string;
+};
 
 export function AllStudentsData() {
   const navigate = useNavigate();
-  const [searchRoll, setSearchRoll] = useState('');
-  const [searchName, setSearchName] = useState('');
+  const [studentsData, setStudentsData] = useState<StudentTableRow[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState('');
+  const [searchApplicationNo, setSearchApplicationNo] = useState('');
+  const [searchRegistrationNo, setSearchRegistrationNo] = useState('');
   const [searchClass, setSearchClass] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -155,8 +52,69 @@ export function AllStudentsData() {
   const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [openActionMenu, setOpenActionMenu] = useState<string | null>(null);
+  const [deletingStudentId, setDeletingStudentId] = useState<string | null>(null);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadStudents = async () => {
+      try {
+        setIsLoading(true);
+        setFetchError('');
+
+        const applications = await getStudentApplications();
+        if (!mounted) return;
+
+        const mappedStudents: StudentTableRow[] = (applications as StudentApplication[]).map((student, index) => {
+          const applicationId = student.applicationId;
+          const registrationNo = student.registrationNo;
+          const applicationNo = student.applicationNo;
+          const studentName = student.studentName;
+          const mobileNumber = student.mobileNumber;
+          const gender = student.gender;
+          const className = student.className;
+          const applicationStatus = student.applicationStatus;
+          const status = student.status;
+          const createdDate = student.createdDate;
+          const createdDateRaw = student.createdDateRaw;
+          const studentId = student.studentId;
+
+          return {
+            id: String(applicationId ?? index),
+            studentId: String(studentId ?? applicationId ?? index),
+            roll: String(registrationNo || applicationNo || 'Pending'),
+            applicationNo: String(applicationNo || '-'),
+            registrationNo: registrationNo ? String(registrationNo) : null,
+            name: String(studentName || '-'),
+            className: String(className || '-'),
+            gender: String(gender || '-'),
+            mobileNumber: String(mobileNumber || '-'),
+            applicationStatus: String(applicationStatus || 'Pending'),
+            status: String(status || applicationStatus || 'Pending'),
+            createdDateRaw: createdDateRaw || '',
+          };
+        });
+
+        setStudentsData(mappedStudents);
+      } catch (error) {
+        if (!mounted) return;
+        setFetchError(error instanceof Error ? error.message : 'Failed to fetch student applications');
+        setStudentsData([]);
+      } finally {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadStudents();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -183,22 +141,43 @@ export function AllStudentsData() {
     }
   };
 
+  const handleDeleteStudent = async (student: StudentTableRow) => {
+    const isConfirmed = window.confirm(`Are you sure you want to delete ${student.name}?`);
+    if (!isConfirmed) {
+      return;
+    }
+
+    try {
+      setDeletingStudentId(student.id);
+      setFetchError('');
+      await deleteStudentById(student.studentId);
+
+      setStudentsData((prev) => prev.filter((item) => item.id !== student.id));
+      setSelectedStudents((prev) => prev.filter((selectedId) => selectedId !== student.id));
+      setOpenActionMenu(null);
+    } catch (error) {
+      setFetchError(error instanceof Error ? error.message : 'Failed to delete student');
+    } finally {
+      setDeletingStudentId(null);
+    }
+  };
+
   const filteredStudents = studentsData.filter((student) => {
-    const matchRoll = student.roll.toLowerCase().includes(searchRoll.toLowerCase());
-    const matchName = student.name.toLowerCase().includes(searchName.toLowerCase());
-    const matchClass = student.class.toLowerCase().includes(searchClass.toLowerCase());
-    return matchRoll && matchName && matchClass;
+    const matchApplicationNo = student.applicationNo.toLowerCase().includes(searchApplicationNo.toLowerCase());
+    const matchRegistrationNo = (student.registrationNo ?? '').toLowerCase().includes(searchRegistrationNo.toLowerCase());
+    const matchClass = student.className.toLowerCase().includes(searchClass.toLowerCase());
+    const createdDateValue = student.createdDateRaw ? new Date(student.createdDateRaw).getTime() : NaN;
+    const matchFromDate = !fromDate || (!Number.isNaN(createdDateValue) && createdDateValue >= new Date(fromDate).getTime());
+    const matchToDate = !toDate || (!Number.isNaN(createdDateValue) && createdDateValue <= new Date(toDate).getTime());
+    return matchApplicationNo && matchRegistrationNo && matchClass && matchFromDate && matchToDate;
   });
 
   // Sort filtered students
   const sortedStudents = [...filteredStudents].sort((a, b) => {
     if (!sortField) return 0;
     
-    let aValue = a[sortField as keyof typeof a];
-    let bValue = b[sortField as keyof typeof b];
-    
-    if (typeof aValue === 'string') aValue = aValue.toLowerCase();
-    if (typeof bValue === 'string') bValue = bValue.toLowerCase();
+    const aValue = String(a[sortField as keyof typeof a] ?? '').toLowerCase();
+    const bValue = String(b[sortField as keyof typeof b] ?? '').toLowerCase();
     
     if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
     if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
@@ -243,22 +222,22 @@ export function AllStudentsData() {
               <div className="p-4 sm:p-6 border-b border-slate-200">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div className="w-full">
-                    <label className="text-sm text-slate-700 mb-2 block font-medium">Search by Roll</label>
+                    <label className="text-sm text-slate-700 mb-2 block font-medium">Search by Application No</label>
                     <input
                       type="text"
-                      placeholder="Search by Roll..."
-                      value={searchRoll}
-                      onChange={(e) => setSearchRoll(e.target.value)}
+                      placeholder="Search by Application No..."
+                      value={searchApplicationNo}
+                      onChange={(e) => setSearchApplicationNo(e.target.value)}
                       className="w-full px-4 py-2.5 bg-white border-2 border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     />
                   </div>
                   <div className="w-full">
-                    <label className="text-sm text-slate-700 mb-2 block font-medium">Search by Name</label>
+                    <label className="text-sm text-slate-700 mb-2 block font-medium">Search by Registration No</label>
                     <input
                       type="text"
-                      placeholder="Search by Name..."
-                      value={searchName}
-                      onChange={(e) => setSearchName(e.target.value)}
+                      placeholder="Search by Registration No..."
+                      value={searchRegistrationNo}
+                      onChange={(e) => setSearchRegistrationNo(e.target.value)}
                       className="w-full px-4 py-2.5 bg-white border-2 border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     />
                   </div>
@@ -335,8 +314,16 @@ export function AllStudentsData() {
                 </div>
               </div>
 
+              {isLoading && (
+                <div className="p-4 sm:p-6 border-b border-slate-200 text-sm text-slate-600">Loading students...</div>
+              )}
+
+              {!isLoading && fetchError && (
+                <div className="p-4 sm:p-6 border-b border-slate-200 text-sm text-red-600">{fetchError}</div>
+              )}
+
               {/* Table - Desktop View */}
-              <div className="hidden lg:block overflow-x-auto table-scroll has-checkbox">
+              <div className="hidden lg:block overflow-x-auto table-scroll no-sticky-shadow">
                 <div className="w-full">
                   <table className="w-full">
                     <thead>
@@ -351,14 +338,27 @@ export function AllStudentsData() {
                         </th>
                         <th
                           className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
-                          onClick={() => handleSort('roll')}
+                          onClick={() => handleSort('registrationNo')}
                         >
                           <div className="flex items-center gap-2">
-                            Roll
-                            {sortField === 'roll' ? (
+                            Registration No
+                            {sortField === 'registrationNo' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
+                              <ChevronUp className="w-4 h-4 opacity-0" />
+                            )}
+                          </div>
+                        </th>
+                        <th
+                          className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
+                          onClick={() => handleSort('applicationNo')}
+                        >
+                          <div className="flex items-center gap-2">
+                            Application No
+                            {sortField === 'applicationNo' ? (
+                              sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                            ) : (
+                              <ChevronUp className="w-4 h-4 opacity-0" />
                             )}
                           </div>
                         </th>
@@ -367,11 +367,24 @@ export function AllStudentsData() {
                           onClick={() => handleSort('name')}
                         >
                           <div className="flex items-center gap-2">
-                            Name
+                            Student Name
                             {sortField === 'name' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
+                              <ChevronUp className="w-4 h-4 opacity-0" />
+                            )}
+                          </div>
+                        </th>
+                        <th
+                          className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
+                          onClick={() => handleSort('className')}
+                        >
+                          <div className="flex items-center gap-2">
+                            Class
+                            {sortField === 'className' ? (
+                              sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                            ) : (
+                              <ChevronUp className="w-4 h-4 opacity-0" />
                             )}
                           </div>
                         </th>
@@ -384,88 +397,46 @@ export function AllStudentsData() {
                             {sortField === 'gender' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
+                              <ChevronUp className="w-4 h-4 opacity-0" />
                             )}
                           </div>
                         </th>
                         <th
                           className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
-                          onClick={() => handleSort('class')}
+                          onClick={() => handleSort('applicationStatus')}
                         >
                           <div className="flex items-center gap-2">
-                            Class
-                            {sortField === 'class' ? (
+                            Application Status
+                            {sortField === 'applicationStatus' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
+                              <ChevronUp className="w-4 h-4 opacity-0" />
                             )}
                           </div>
                         </th>
                         <th
                           className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
-                          onClick={() => handleSort('section')}
+                          onClick={() => handleSort('status')}
                         >
                           <div className="flex items-center gap-2">
-                            Section
-                            {sortField === 'section' ? (
+                            Status
+                            {sortField === 'status' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
-                            )}
-                          </div>
-                        </th>
-                        <th className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                          Status
-                        </th>
-                        <th
-                          className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
-                          onClick={() => handleSort('address')}
-                        >
-                          <div className="flex items-center gap-2">
-                            Address
-                            {sortField === 'address' ? (
-                              sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                            ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
+                              <ChevronUp className="w-4 h-4 opacity-0" />
                             )}
                           </div>
                         </th>
                         <th
                           className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
-                          onClick={() => handleSort('dob')}
+                          onClick={() => handleSort('mobileNumber')}
                         >
                           <div className="flex items-center gap-2">
-                            Date Of Birth
-                            {sortField === 'dob' ? (
+                            Mobile Number
+                            {sortField === 'mobileNumber' ? (
                               sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
                             ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
-                            )}
-                          </div>
-                        </th>
-                        <th
-                          className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
-                          onClick={() => handleSort('phone')}
-                        >
-                          <div className="flex items-center gap-2">
-                            Phone
-                            {sortField === 'phone' ? (
-                              sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                            ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
-                            )}
-                          </div>
-                        </th>
-                        <th
-                          className="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider cursor-pointer hover:text-slate-900"
-                          onClick={() => handleSort('email')}
-                        >
-                          <div className="flex items-center gap-2">
-                            E-mail
-                            {sortField === 'email' ? (
-                              sortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
-                            ) : (
-                              <ChevronUp className="w-4 h-4 opacity-30" />
+                              <ChevronUp className="w-4 h-4 opacity-0" />
                             )}
                           </div>
                         </th>
@@ -492,34 +463,38 @@ export function AllStudentsData() {
                             />
                           </td>
                           <td className="px-4 xl:px-6 py-3">
-                            <span className="text-slate-900 font-semibold text-sm">{student.roll}</span>
+                            <span className="text-slate-900 font-semibold text-sm">{student.registrationNo || '-'}</span>
+                          </td>
+                          <td className="px-4 xl:px-6 py-3">
+                            <span className="text-slate-900 font-semibold text-sm">{student.applicationNo}</span>
                           </td>
                           <td className="px-4 xl:px-6 py-3">
                             <span className="text-slate-900 font-semibold text-sm">{student.name}</span>
                           </td>
                           <td className="px-4 xl:px-6 py-3">
+                            <span className="text-slate-700 text-sm">{student.className}</span>
+                          </td>
+                          <td className="px-4 xl:px-6 py-3">
                             <span className="text-slate-700 text-sm">{student.gender}</span>
                           </td>
                           <td className="px-4 xl:px-6 py-3">
-                            <span className="text-slate-900 font-semibold text-sm">{student.class}</span>
+                            <Badge
+                              className={`border-0 ${
+                                student.applicationStatus.toLowerCase() === 'approved'
+                                  ? 'bg-green-100 text-green-700 hover:bg-green-100'
+                                  : student.applicationStatus.toLowerCase() === 'rejected'
+                                    ? 'bg-red-100 text-red-700 hover:bg-red-100'
+                                    : 'bg-amber-100 text-amber-700 hover:bg-amber-100'
+                              }`}
+                            >
+                              {student.applicationStatus}
+                            </Badge>
                           </td>
                           <td className="px-4 xl:px-6 py-3">
-                            <span className="text-slate-900 font-semibold text-sm">{student.section}</span>
+                            <span className="text-slate-700 text-sm">{student.status}</span>
                           </td>
                           <td className="px-4 xl:px-6 py-3">
-                            <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-0">Active</Badge>
-                          </td>
-                          <td className="px-4 xl:px-6 py-3">
-                            <span className="text-slate-700 text-sm">{student.address}</span>
-                          </td>
-                          <td className="px-4 xl:px-6 py-3">
-                            <span className="text-slate-700 text-sm">{student.dob}</span>
-                          </td>
-                          <td className="px-4 xl:px-6 py-3">
-                            <span className="text-slate-700 text-sm">{student.phone}</span>
-                          </td>
-                          <td className="px-4 xl:px-6 py-3">
-                            <span className="text-slate-700 text-sm">{student.email}</span>
+                            <span className="text-slate-700 text-sm">{student.mobileNumber}</span>
                           </td>
                           <td className="px-4 xl:px-6 py-3">
                             <div className="relative">
@@ -538,26 +513,45 @@ export function AllStudentsData() {
                                   className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-lg shadow-xl z-10"
                                 >
                                   <div className="py-2">
-                                    <button className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 transition-colors">
+                                    <button 
+                                      onClick={() => navigate(`/admin/students/${student.id}`)}
+                                      className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 transition-colors"
+                                    >
                                       <Eye className="w-4 h-4" />
                                       View Details
                                     </button>
-                                    <button className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 transition-colors">
+                                    <button 
+                                      onClick={() => {
+                                        navigate(`/admin/edit-student/${student.id}`);
+                                        setOpenActionMenu(null);
+                                      }}
+                                      className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 transition-colors"
+                                    >
                                       <Edit className="w-4 h-4" />
                                       Edit Student
                                     </button>
-                                    <button className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 transition-colors">
-                                      <Phone className="w-4 h-4" />
-                                      Call Parent
+                                    <button
+                                      onClick={() => {
+                                        navigate(`/admin/students/${student.id}/approved`);
+                                        setOpenActionMenu(null);
+                                      }}
+                                      className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 transition-colors"
+                                    >
+                                      <CheckCircle2 className="w-4 h-4" />
+                                      Approved
                                     </button>
                                     <button className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3 transition-colors">
                                       <Mail className="w-4 h-4" />
                                       Send Email
                                     </button>
                                     <hr className="border-slate-200 my-2" />
-                                    <button className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors">
+                                    <button
+                                      onClick={() => void handleDeleteStudent(student)}
+                                      disabled={deletingStudentId === student.id}
+                                      className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                                    >
                                       <Trash2 className="w-4 h-4" />
-                                      Delete Student
+                                      {deletingStudentId === student.id ? 'Deleting...' : 'Delete Student'}
                                     </button>
                                   </div>
                                 </motion.div>
@@ -610,7 +604,10 @@ export function AllStudentsData() {
                                 className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-lg shadow-xl z-10"
                               >
                                 <div className="py-2">
-                                  <button className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3">
+                                  <button 
+                                    onClick={() => navigate(`/admin/students/${student.id}`)}
+                                    className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3"
+                                  >
                                     <Eye className="w-4 h-4" />
                                     View Details
                                   </button>
@@ -618,18 +615,28 @@ export function AllStudentsData() {
                                     <Edit className="w-4 h-4" />
                                     Edit Student
                                   </button>
-                                  <button className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3">
-                                    <Phone className="w-4 h-4" />
-                                    Call Parent
+                                  <button
+                                    onClick={() => {
+                                      navigate(`/admin/students/${student.id}/approved`);
+                                      setOpenActionMenu(null);
+                                    }}
+                                    className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3"
+                                  >
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    Approved
                                   </button>
                                   <button className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-3">
                                     <Mail className="w-4 h-4" />
                                     Send Email
                                   </button>
                                   <hr className="border-slate-200 my-2" />
-                                  <button className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3">
+                                  <button
+                                    onClick={() => void handleDeleteStudent(student)}
+                                    disabled={deletingStudentId === student.id}
+                                    className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
+                                  >
                                     <Trash2 className="w-4 h-4" />
-                                    Delete Student
+                                    {deletingStudentId === student.id ? 'Deleting...' : 'Delete Student'}
                                   </button>
                                 </div>
                               </motion.div>
@@ -638,32 +645,50 @@ export function AllStudentsData() {
                         </div>
                         <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                           <div>
+                            <span className="text-slate-500">Registration No:</span>
+                            <span className="text-slate-700 ml-2">{student.registrationNo || '-'}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-500">Roll:</span>
+                            <span className="text-slate-700 ml-2">{student.roll}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-500">Application No:</span>
+                            <span className="text-slate-700 ml-2">{student.applicationNo}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-500">Name:</span>
+                            <span className="text-slate-700 ml-2">{student.name}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-500">Class:</span>
+                            <span className="text-slate-700 ml-2">{student.className}</span>
+                          </div>
+                          <div>
                             <span className="text-slate-500">Gender:</span>
                             <span className="text-slate-700 ml-2">{student.gender}</span>
                           </div>
                           <div>
-                            <span className="text-slate-500">Class:</span>
-                            <span className="text-slate-700 ml-2">{student.class} - {student.section}</span>
+                            <span className="text-slate-500">Application Status:</span>
+                            <Badge
+                              className={`border-0 ml-2 ${
+                                student.applicationStatus.toLowerCase() === 'approved'
+                                  ? 'bg-green-100 text-green-700 hover:bg-green-100'
+                                  : student.applicationStatus.toLowerCase() === 'rejected'
+                                    ? 'bg-red-100 text-red-700 hover:bg-red-100'
+                                    : 'bg-amber-100 text-amber-700 hover:bg-amber-100'
+                              }`}
+                            >
+                              {student.applicationStatus}
+                            </Badge>
                           </div>
                           <div>
                             <span className="text-slate-500">Status:</span>
-                            <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-0 ml-2">Active</Badge>
-                          </div>
-                          <div>
-                            <span className="text-slate-500">DOB:</span>
-                            <span className="text-slate-700 ml-2">{student.dob}</span>
+                            <span className="text-slate-700 ml-2">{student.status}</span>
                           </div>
                           <div className="col-span-2">
-                            <span className="text-slate-500">Phone:</span>
-                            <span className="text-slate-700 ml-2">{student.phone}</span>
-                          </div>
-                          <div className="col-span-2">
-                            <span className="text-slate-500">Email:</span>
-                            <span className="text-slate-700 ml-2 truncate block">{student.email}</span>
-                          </div>
-                          <div className="col-span-2">
-                            <span className="text-slate-500">Address:</span>
-                            <span className="text-slate-700 ml-2">{student.address}</span>
+                            <span className="text-slate-500">Mobile Number:</span>
+                            <span className="text-slate-700 ml-2">{student.mobileNumber}</span>
                           </div>
                         </div>
                       </div>
