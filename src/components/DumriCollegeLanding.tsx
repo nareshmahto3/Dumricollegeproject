@@ -19,6 +19,10 @@ import {
 import svgPaths from "../imports/svg-x8yhpltdsp";
 import imgImg from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
 import img23714285420260224035427Jpg from "figma:asset/9411083632a695a2b9b96381c339905746b585c3.png";
+import { HeroCarousel1 } from "../assets/HeroCarousel1.jpeg";
+import HeroCarousel2 from "../assets/HeroCarousel2.jpeg";
+import HeroCarousel3 from "../assets/HeroCarousel3.jpeg";
+import HeroCarousel4 from "../assets/HeroCarousel4.jpeg";
 import imgSectionFindYourDegree from "figma:asset/6fb5ca094257a7b3948a4b9db380c9b28814680c.png";
 import imgSectionCampusAdventures from "figma:asset/ced9d5d7f3ce34f807e9b277d17d57c96268b8b3.png";
 import imgPlacements from "figma:asset/02236aa8f5034cb5dd3d0f6afd80b83e07638b54.png";
@@ -79,6 +83,7 @@ import imgCollegeBuilding from "figma:asset/5e1bebd644aff64baf3354389c6dde569166
 import { imgTellATale } from "../imports/svg-pduv6";
 import Frame from "../imports/Frame-206-1785";
 
+
 // News Item Component for Ticker
 function NewsItem({ text }: { text: string }) {
   return (
@@ -92,28 +97,28 @@ function NewsItem({ text }: { text: string }) {
 // Carousel images with high-quality images and metadata
 const carouselImages = [
   {
-    url: imgCollegeBuilding,
+    url: HeroCarousel1,
     title: "Jharkhand College Dumri",
     subtitle: "Excellence in Education Since 1950",
     cta: "Explore Campus",
     ctaLink: "/about",
   },
   {
-    url: img23714285420260224035427Jpg,
+    url: HeroCarousel2,
     title: "Welcome to Dumri College",
     subtitle: "Shaping Minds, Building Futures",
     cta: "Explore Programs",
     ctaLink: "/academics",
   },
   {
-    url: "https://images.unsplash.com/photo-1722248540590-ba8b7af1d7b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwbGlicmFyeSUyMHN0dWRlbnRzJTIwc3R1ZHlpbmd8ZW58MXx8fHwxNzcyMzU5MjQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    url: HeroCarousel3,
     title: "State-of-the-Art Facilities",
     subtitle: "Modern Libraries & Research Centers",
     cta: "View Gallery",
     ctaLink: "/gallery",
   },
   {
-    url: "https://images.unsplash.com/photo-1667564790635-0f560121359e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwZ3JhZHVhdGlvbiUyMGNlcmVtb255JTIwaW5kaWF8ZW58MXx8fHwxNzcyMzU5MjQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    url: HeroCarousel4,
     title: "Shape Your Future",
     subtitle: "Join Our Legacy of Success",
     cta: "Apply Now",
