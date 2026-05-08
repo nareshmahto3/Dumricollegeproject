@@ -6,12 +6,13 @@ import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
 import imgDivElementorElement from "figma:asset/c967933b88d4d4c78469e452688858c361871614.png";
 import imgBnrArrow11 from "figma:asset/13bec648740b03b5c9d2c72567cc9f3e05c47165.png";
-import imgEBlTeam6MinJpg from "figma:asset/832a564969d97ad9368108a4bf17401f3a6a3dde.png";
-import imgEBlTeam5MinJpg from "figma:asset/6a19a7b5276ff89a91342cda34f8b9bd14837b3c.png";
-import imgEBlTeam4MinJpg from "figma:asset/b7ea4e98b4ed4e693ac9a4930e33a56bfa859a17.png";
-import imgEBlTeam3MinJpg from "figma:asset/ea5e374afdef5a39657cdb7a5e8b48d51f87804b.png";
-import imgEBlTeam2MinJpg from "figma:asset/fa187de29ccf07a8d4687dde792b50b1204cb82d.png";
-import imgEBlTeam1MinJpg from "figma:asset/a1adb3e4cc61a600187de60fe0db91d01d53e7dc.png";
+import SanjayKumar from "../../assets/Faculty/SanjayKumar.jpeg";
+import Sharmila from "../../assets/Faculty/Sharmila.jpeg";
+import Surendra from "../../assets/Faculty/Surendra.jpeg";
+import Baijnath from "../../assets/Faculty/Baijnath.jpeg";
+import Dutendrakumar from "../../assets/Faculty/Dutendrakumar.jpeg";
+import Sanjaymahto from "../../assets/Faculty/Sanjaymahto.jpeg";
+
 
 interface FacultyMember {
   id: string;
@@ -27,57 +28,57 @@ interface FacultyMember {
 const facultyMembers: FacultyMember[] = [
   {
     id: '1',
-    name: 'Kathryn Murphy',
-    position: 'Support Teacher',
-    department: 'Commerce',
-    image: imgEBlTeam1MinJpg,
+    name: 'Sanjay Kumar',
+    position: 'Teacher',
+    department: 'Head clerk cum accountant',
+    image: SanjayKumar,
     email: 'kathryn.murphy@dumricollege.edu',
-    education: 'M.Com, B.Ed'
+    education: 'B.A., B.ED '
   },
   {
     id: '2',
-    name: 'Savannah Nguyen',
-    position: 'Academic Advisor',
-    department: 'Science',
-    image: imgEBlTeam2MinJpg,
+    name: 'Dutendra Kumar Dutesh',
+    position: 'Assistant Librarian',
+    department: 'Library',
+    image: Dutendrakumar,
     email: 'savannah.nguyen@dumricollege.edu',
-    education: 'M.Sc (Physics), Ph.D'
+    education: 'B.A., B. Lib'
   },
   {
     id: '3',
-    name: 'Brooklyn Simmons',
-    position: 'Academic Assistant',
-    department: 'Arts',
-    image: imgEBlTeam3MinJpg,
+    name: 'Baijnath Kumar',
+    position: 'Teacher',
+    department: 'Economics',
+    image: Baijnath,
     email: 'brooklyn.simmons@dumricollege.edu',
-    education: 'M.A (English)'
+    education: 'M.A, B.ED'
   },
   {
     id: '4',
-    name: 'Darlene Robertson',
-    position: 'Academic Advisor',
-    department: 'Commerce',
-    image: imgEBlTeam4MinJpg,
+    name: 'Surendra Kumar Pandey',
+    position: 'Teacher',
+    department: 'Political Science',
+    image: Surendra,
     email: 'darlene.robertson@dumricollege.edu',
-    education: 'M.Com, MBA'
+    education: 'M.A., B.ED'
   },
   {
     id: '5',
-    name: 'Cameron Williamson',
+    name: 'Sharmila Kumari',
     position: 'Research Assistant',
-    department: 'Science',
-    image: imgEBlTeam5MinJpg,
+    department: 'Typing Clerk',
+    image: Sharmila,
     email: 'cameron.williamson@dumricollege.edu',
-    education: 'M.Sc (Chemistry)'
+    education: 'B.A., M.A.'
   },
   {
     id: '6',
-    name: 'Leslie Alexander',
+    name: 'Sanjay kumar Mahto',
     position: 'Teaching Assistant (TA)',
-    department: 'Arts',
-    image: imgEBlTeam6MinJpg,
+    department: 'Cashier',
+    image: Sanjaymahto,
     email: 'leslie.alexander@dumricollege.edu',
-    education: 'M.A (History)'
+    education: 'B.Com, B.Ped, M.Ped'
   },
   {
     id: '7',

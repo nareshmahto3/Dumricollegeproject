@@ -19,7 +19,7 @@ import {
 import svgPaths from "../imports/svg-x8yhpltdsp";
 import imgImg from "figma:asset/233f90283b695bb1a0a35b62804867616ecd9a87.png";
 import img23714285420260224035427Jpg from "figma:asset/9411083632a695a2b9b96381c339905746b585c3.png";
-import { HeroCarousel1 } from "../assets/HeroCarousel1.jpeg";
+import HeroCarousel1 from "../assets/HeroCarousel1.jpeg";
 import HeroCarousel2 from "../assets/HeroCarousel2.jpeg";
 import HeroCarousel3 from "../assets/HeroCarousel3.jpeg";
 import HeroCarousel4 from "../assets/HeroCarousel4.jpeg";
