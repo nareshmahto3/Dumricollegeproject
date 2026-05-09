@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, Save, BookOpen, Users, Calendar, MapPin } from 'lucide-react';
 import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
@@ -40,7 +40,37 @@ export function AddNewClass() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Record<string, string>>(INITIAL_FORM);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [academicYears, setAcademicYears] = useState<Array<{ id: string, name: string }>>([]);
+  const [teachers, setTeachers] = useState<Array<{ id: string, name: string }>>([]);
+  const [isLoadingData, setIsLoadingData] = useState(true);
+  // ── Fetch data on mount ──────────────────────────────────────────────────────
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [academicYearsRes, teachersRes] = await Promise.all([
+          fetch('https://localhost:44390/api/Master/AcademicYear'),
+          fetch('https://localhost:44390/api/Master/TeacherDetails')
+        ]);
 
+        if (academicYearsRes.ok) {
+          const academicYearsData = await academicYearsRes.json();
+          setAcademicYears(academicYearsData);
+        }
+
+        if (teachersRes.ok) {
+          const teachersData = await teachersRes.json();
+          setTeachers(teachersData);
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+        toast.error('Failed to load form data. Please refresh the page.');
+      } finally {
+        setIsLoadingData(false);
+      }
+    };
+
+    fetchData();
+  }, []);
   // Derived per-field errors (only shown when touched)
   const errors: Record<string, string | null> = {};
   for (const key of Object.keys(formData)) {
@@ -73,7 +103,7 @@ export function AddNewClass() {
     const apiData = {
       className: formData.className,
       section: formData.section,
-      classTeacher: formData.classTeacher,
+      classTeacherId: Number(formData.classTeacher),
       roomNumber: formData.roomNumber,
       capacity: Number(formData.capacity),
       academicYear: formData.academicYear,
@@ -183,13 +213,15 @@ export function AddNewClass() {
                   <label className="block text-sm font-semibold text-slate-900 mb-2">
                     Class Teacher <span className="text-red-500">*</span>
                   </label>
-                  <select {...fieldProps('classTeacher')}>
-                    <option value="">Select Teacher</option>
-                    <option value="1">Prof. Rajesh Kumar</option>
-                    <option value="2">Dr. Priya Sharma</option>
-                    <option value="3">Mr. Anil Verma</option>
-                    <option value="4">Ms. Meera Patel</option>
-                    <option value="5">Dr. Suresh Reddy</option>
+                  <select {...fieldProps('classTeacher')} disabled={isLoadingData}>
+                    <option value="">
+                      {isLoadingData ? 'Loading teachers...' : 'Select Teacher'}
+                    </option>
+                    {teachers.map((teacher) => (
+                      <option key={teacher.id} value={teacher.id}>
+                        {teacher.name}
+                      </option>
+                    ))}
                   </select>
                   <ErrorMsg name="classTeacher" />
                 </div>
@@ -198,11 +230,15 @@ export function AddNewClass() {
                   <label className="block text-sm font-semibold text-slate-900 mb-2">
                     Academic Year <span className="text-red-500">*</span>
                   </label>
-                  <select {...fieldProps('academicYear')}>
-                    <option value="">Select Academic Year</option>
-                    <option value="2025-2026">2025-2026</option>
-                    <option value="2026-2027">2026-2027</option>
-                    <option value="2027-2028">2027-2028</option>
+                  <select {...fieldProps('academicYear')} disabled={isLoadingData}>
+                    <option value="">
+                      {isLoadingData ? 'Loading academic years...' : 'Select Academic Year'}
+                    </option>
+                    {academicYears.map((year) => (
+                      <option key={year.id} value={year.id}>
+                        {year.name}
+                      </option>
+                    ))}
                   </select>
                   <ErrorMsg name="academicYear" />
                 </div>
@@ -279,10 +315,12 @@ export function AddNewClass() {
               <Button
                 type="submit"
                 className="px-8 bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-400"
-                disabled={isLoading}
+                disabled={isLoading || isLoadingData}
               >
                 {isLoading ? (
                   'Saving...'
+                ) : isLoadingData ? (
+                  'Loading data...'
                 ) : (
                   <>
                     <Save className="w-4 h-4 mr-2" />
