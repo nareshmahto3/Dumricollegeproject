@@ -61,75 +61,27 @@ export function AddNewClass() {
     setTouched((prev) => ({ ...prev, [e.target.name]: true }));
   };
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-
-  //   e.preventDefault();
-
-  //   // Mark all fields as touched to surface all errors at once
-  //   const allTouched = Object.fromEntries(Object.keys(formData).map((k) => [k, true]));
-  //   setTouched(allTouched);
-
-  //   if (hasAnyError) {
-  //     toast.error('Please fix the errors before submitting.');
-  //     return;
-  //   }
-
-  //   setIsLoading(true);
-  //   try {
-  //     const apiData = {
-  //       className: formData.className,
-  //       section: formData.section,
-  //       classTeacherId: parseInt(formData.classTeacher),
-  //       roomNumber: formData.roomNumber,
-  //       capacity: parseInt(formData.capacity),
-  //       academicYear: formData.academicYear,
-  //       startDate: new Date(formData.startDate),
-  //     };
-
-  //     const response = await fetch('https://localhost:5258/api/Class', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-  //       },
-  //       body: JSON.stringify(apiData),
-  //     });
-
-  //     if (response.ok) {
-  //       toast.success('Class Added Successfully!', {
-  //         description: `${formData.className} - Section ${formData.section} has been added to the system.`,
-  //       });
-  //       setTimeout(() => navigate('/admin/classes'), 1000);
-  //     } else {
-  //       const error = await response.json();
-  //       toast.error('Failed to add class', {
-  //         description: error.message || 'An error occurred while adding the class.',
-  //       });
-  //     }
-  //   } catch (error) {
-  //     toast.error('Failed to add class', {
-  //       description: 'Network error occurred. Please try again.',
-  //     });
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTouched(Object.keys(formData).reduce((acc, key) => ({ ...acc, [key]: true }), {}));
+
+    if (hasAnyError) return;
+
+    setIsLoading(true);
 
     const apiData = {
       className: formData.className,
       section: formData.section,
-      classTeacherId: Number(formData.classTeacher),
+      classTeacher: formData.classTeacher,
       roomNumber: formData.roomNumber,
       capacity: Number(formData.capacity),
       academicYear: formData.academicYear,
-      startDate: new Date(formData.startDate).toISOString(),
+      startDate: formData.startDate,
     };
-    debugger
+
     try {
-      const response = await fetch('https://localhost:44390/api/Class', {
+      const response = await fetch('https://localhost:44390/api/ClassInfo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -137,11 +89,18 @@ export function AddNewClass() {
         body: JSON.stringify(apiData),
       });
 
-      if (!response.ok) throw new Error("Failed");
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Failed to save class');
+      }
 
-      console.log("Class added successfully");
+      toast.success('Class saved successfully.');
+      navigate('/admin/classes');
     } catch (err) {
       console.error(err);
+      toast.error('Unable to save class. Please check the backend connection.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
