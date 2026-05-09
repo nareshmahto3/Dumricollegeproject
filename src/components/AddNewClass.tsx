@@ -231,7 +231,7 @@ export function AddNewClass() {
                     Academic Year <span className="text-red-500">*</span>
                   </label>
                   <select {...fieldProps('academicYear')} disabled={isLoadingData}>
-                    <option value="">
+                    <option value="" className='text-black'>
                       {isLoadingData ? 'Loading academic years...' : 'Select Academic Year'}
                     </option>
                     {academicYears.map((year) => (
