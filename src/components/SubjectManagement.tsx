@@ -6,6 +6,8 @@ import { PortalLayout } from './PortalLayout';
 import { motion } from 'motion/react';
 import { Plus, Search, Edit, Eye, BookOpen, Clock, Download, GraduationCap, FileText, Users } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { FileDown, FileSpreadsheet, ChevronDown } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Subject {
   id: string;
@@ -101,6 +103,14 @@ export function SubjectManagement() {
   const [filterDepartment, setFilterDepartment] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+
+
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your  report will be downloaded shortly.`,
+    });
+  };
 
   const types = ['All', 'Core', 'Elective', 'Lab'];
   const grades = ['All', '6', '7', '8', '9', '10', '11', '12'];
@@ -152,7 +162,7 @@ export function SubjectManagement() {
             <div>
               <p className="text-blue-600 text-sm">Manage subjects, syllabus, and teacher assignments</p>
             </div>
-            <Button 
+            <Button
               onClick={() => navigate('/admin/add-subject')}
               className="gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/20"
             >
@@ -213,10 +223,57 @@ export function SubjectManagement() {
                 </option>
               ))}
             </select>
-            <Button variant="outline" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200 shadow-sm">
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </Button>
+            <div className="relative">
+              <Button
+                onClick={() => setShowExportDropdown(!showExportDropdown)}
+                className="bg-gradient-to-r  from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+              >
+                <FileDown className="w-4 h-4 " />
+                Export Data
+                <ChevronDown className="w-4 h-4 ml-2" />
+              </Button>
+              {showExportDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                >
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        handleDownload('pdf');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                      PDF
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('csv');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                      CSV
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('excel');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <Download className="w-4 h-4 mr-2 text-blue-600" />
+                      Excel
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </Card>
 

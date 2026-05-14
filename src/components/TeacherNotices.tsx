@@ -248,8 +248,8 @@ export function TeacherNotices() {
                 {notices.filter(n => {
                   const noticeDate = new Date(n.date);
                   const now = new Date();
-                  return noticeDate.getMonth() === now.getMonth() && 
-                         noticeDate.getFullYear() === now.getFullYear();
+                  return noticeDate.getMonth() === now.getMonth() &&
+                    noticeDate.getFullYear() === now.getFullYear();
                 }).length}
               </h3>
             </Card>
@@ -301,10 +301,10 @@ export function TeacherNotices() {
                 Holidays
               </Button>
             </div>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white">
+            {/* <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white">
               <Plus className="w-4 h-4 mr-2" />
               Create Notice
-            </Button>
+            </Button> */}
           </div>
         </Card>
 
@@ -325,13 +325,12 @@ export function TeacherNotices() {
               >
                 <Card className="bg-gradient-to-r from-amber-50 to-yellow-50 border-2 border-amber-300 shadow-lg p-6 hover:shadow-xl transition-all">
                   <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                      notice.category === 'urgent' ? 'bg-red-100' :
-                      notice.category === 'exam' ? 'bg-blue-100' :
-                      notice.category === 'event' ? 'bg-purple-100' :
-                      notice.category === 'holiday' ? 'bg-green-100' :
-                      'bg-amber-100'
-                    }`}>
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${notice.category === 'urgent' ? 'bg-red-100' :
+                        notice.category === 'exam' ? 'bg-blue-100' :
+                          notice.category === 'event' ? 'bg-purple-100' :
+                            notice.category === 'holiday' ? 'bg-green-100' :
+                              'bg-amber-100'
+                      }`}>
                       {getCategoryIcon(notice.category)}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -405,13 +404,12 @@ export function TeacherNotices() {
               >
                 <Card className="bg-white border-amber-200 shadow-lg p-6 hover:shadow-xl transition-all">
                   <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                      notice.category === 'urgent' ? 'bg-red-100' :
-                      notice.category === 'exam' ? 'bg-blue-100' :
-                      notice.category === 'event' ? 'bg-purple-100' :
-                      notice.category === 'holiday' ? 'bg-green-100' :
-                      'bg-amber-100'
-                    }`}>
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${notice.category === 'urgent' ? 'bg-red-100' :
+                        notice.category === 'exam' ? 'bg-blue-100' :
+                          notice.category === 'event' ? 'bg-purple-100' :
+                            notice.category === 'holiday' ? 'bg-green-100' :
+                              'bg-amber-100'
+                      }`}>
                       {getCategoryIcon(notice.category)}
                     </div>
                     <div className="flex-1 min-w-0">

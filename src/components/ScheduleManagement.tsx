@@ -26,7 +26,7 @@ import { Label } from './ui/label';
 import { Badge } from './ui/badge';
 import { PortalLayout } from './PortalLayout';
 import { motion, AnimatePresence } from 'motion/react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface Schedule {
   id: string;
@@ -219,6 +219,7 @@ export function ScheduleManagement() {
       room: newSchedule.room,
     };
 
+    console.log('Add schedule data:', schedule);
     setSchedules([...schedules, schedule]);
     setShowAddModal(false);
     setNewSchedule({

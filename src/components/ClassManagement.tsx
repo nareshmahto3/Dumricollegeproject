@@ -6,6 +6,8 @@ import { Input } from './ui/input';
 import { Badge } from './ui/badge';
 import { PortalLayout } from './PortalLayout';
 import { motion } from 'motion/react';
+import { FileDown, FileSpreadsheet } from 'lucide-react';
+import { toast } from 'sonner';
 import { Plus, Search, Filter, Edit, Trash2, Eye, Users, BookOpen, User as UserIcon, Calendar, MoreVertical, LayoutGrid, GraduationCap, User, Download, MapPin, Clock, ChevronUp, ChevronDown } from 'lucide-react';
 
 interface Class {
@@ -99,6 +101,14 @@ export function ClassManagement() {
   const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+
+
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your  report will be downloaded shortly.`,
+    });
+  };
 
   const grades = ['All', '6', '7', '8', '9', '10', '11', '12'];
 
@@ -119,7 +129,7 @@ export function ClassManagement() {
   const getCapacityBadge = (current: number, capacity: number) => {
     const percentage = (current / capacity) * 100;
     let color = 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
-    
+
     if (percentage >= 90) {
       color = 'bg-red-500/10 text-red-500 border-red-500/20';
     } else if (percentage >= 75) {
@@ -142,13 +152,13 @@ export function ClassManagement() {
   // Sort filtered classes
   const sortedClasses = [...filteredClasses].sort((a, b) => {
     if (!sortField) return 0;
-    
+
     let aValue = a[sortField as keyof Class];
     let bValue = b[sortField as keyof Class];
-    
+
     if (typeof aValue === 'string') aValue = aValue.toLowerCase();
     if (typeof bValue === 'string') bValue = bValue.toLowerCase();
-    
+
     if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
     if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
     return 0;
@@ -179,7 +189,7 @@ export function ClassManagement() {
               <h1 className="text-3xl font-bold text-black mb-2">Class Management</h1>
               <p className="text-slate-600">Manage classes, sections, and student assignments</p>
             </div>
-            <Button 
+            <Button
               onClick={() => navigate('/admin/add-class')}
               className="gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/20"
             >
@@ -228,10 +238,57 @@ export function ClassManagement() {
                   <option key={grade} value={grade.toLowerCase()}>{grade === 'All' ? 'All Grades' : `Grade ${grade}`}</option>
                 ))}
               </select>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                <Download className="w-4 h-4 mr-2" />
-                Export
-              </Button>
+              <div className="relative">
+                <Button
+                  onClick={() => setShowExportDropdown(!showExportDropdown)}
+                  className="bg-gradient-to-r  from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+                >
+                  <FileDown className="w-4 h-4 " />
+                  Export Data
+                  <ChevronDown className="w-4 h-4 ml-2" />
+                </Button>
+                {showExportDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                  >
+                    <div className="py-1">
+                      <button
+                        onClick={() => {
+                          handleDownload('pdf');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                        PDF
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleDownload('csv');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                        CSV
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleDownload('excel');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <Download className="w-4 h-4 mr-2 text-blue-600" />
+                        Excel
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
             </div>
           </div>
         </Card>
@@ -494,9 +551,8 @@ export function ClassManagement() {
                 <Button
                   key={index + 1}
                   variant={currentPage === index + 1 ? "default" : "outline"}
-                  className={`${
-                    currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
-                  } text-sm px-3 sm:px-4`}
+                  className={`${currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                    } text-sm px-3 sm:px-4`}
                   onClick={() => setCurrentPage(index + 1)}
                 >
                   {index + 1}

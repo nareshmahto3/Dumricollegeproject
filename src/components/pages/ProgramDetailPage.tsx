@@ -316,7 +316,7 @@ export function ProgramDetailPage() {
         style={{ backgroundImage: `url(${program.bannerImage})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-blue-950/90 to-blue-900/80"></div>
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col justify-center pt-20">
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 mb-4 text-sm">
@@ -353,11 +353,10 @@ export function ProgramDetailPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${
-                  activeTab === tab.id
+                className={`flex items-center gap-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${activeTab === tab.id
                     ? 'border-blue-600 text-blue-600 bg-blue-50'
                     : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                }`}
+                  }`}
               >
                 <tab.icon className="w-4 h-4" />
                 {tab.label}

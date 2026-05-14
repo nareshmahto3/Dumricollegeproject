@@ -410,6 +410,14 @@ html {
   display: none;
 }
 
+/* Optional: remove sticky separator shadow on specific tables */
+.table-scroll.no-sticky-shadow table th:nth-child(2)::after,
+.table-scroll.no-sticky-shadow table td:nth-child(2)::after,
+.table-scroll.no-sticky-shadow table th:nth-child(3)::after,
+.table-scroll.no-sticky-shadow table td:nth-child(3)::after {
+  display: none;
+}
+
 /* Ensure header cells maintain their background */
 .table-scroll table thead th:nth-child(1),
 .table-scroll table thead th:nth-child(2),

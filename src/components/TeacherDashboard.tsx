@@ -323,13 +323,12 @@ export function TeacherDashboard() {
             {todaySchedule.map((schedule) => (
               <div
                 key={schedule.id}
-                className={`p-3 border rounded-lg transition-all ${
-                  schedule.status === "current"
-                    ? "border-blue-300 bg-blue-50 shadow-sm"
-                    : schedule.status === "completed"
-                      ? "border-slate-200 bg-slate-50 opacity-70"
-                      : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
-                }`}
+                className={`p-3 border rounded-lg transition-all ${schedule.status === "current"
+                  ? "border-blue-300 bg-blue-50 shadow-sm"
+                  : schedule.status === "completed"
+                    ? "border-slate-200 bg-slate-50 opacity-70"
+                    : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
+                  }`}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
@@ -398,13 +397,12 @@ export function TeacherDashboard() {
                     </div>
                     <Badge
                       variant="outline"
-                      className={`text-xs ${
-                        assignment.status === "completed"
-                          ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                          : assignment.status === "grading"
-                            ? "bg-blue-50 text-blue-700 border-blue-200"
-                            : "bg-orange-50 text-orange-700 border-orange-200"
-                      }`}
+                      className={`text-xs ${assignment.status === "completed"
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                        : assignment.status === "grading"
+                          ? "bg-blue-50 text-blue-700 border-blue-200"
+                          : "bg-orange-50 text-orange-700 border-orange-200"
+                        }`}
                     >
                       {assignment.status}
                     </Badge>
@@ -419,7 +417,7 @@ export function TeacherDashboard() {
                         {Math.round(
                           (assignment.submitted /
                             assignment.total) *
-                            100,
+                          100,
                         )}
                         %
                       </span>
@@ -529,7 +527,7 @@ export function TeacherDashboard() {
                 />
                 <XAxis dataKey="day" stroke="#64748b" style={{ fontSize: '13px' }} />
                 <YAxis stroke="#64748b" style={{ fontSize: '13px' }} />
-                <Tooltip 
+                <Tooltip
                   contentStyle={{
                     backgroundColor: 'white',
                     border: '1px solid #e2e8f0',
@@ -588,10 +586,11 @@ export function TeacherDashboard() {
             </div>
             <Button
               variant="outline"
-              className="w-full mt-4 text-blue-600 hover:bg-blue-50 border-slate-300"
+              className="w-full mt-4 text-blue-600 hover:bg-blue-50 hover:text-blue-500 border-slate-300"
               size="sm"
+
             >
-              View All Announcements
+              <a href="/teacher/notices">View All Announcements</a>
             </Button>
           </Card>
         </div>

@@ -1,8 +1,9 @@
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { RouterProvider } from "react-router";
 import { router } from "./routes";
 import { SidebarProvider } from "./contexts/SidebarContext";
 import { Toaster } from "./components/ui/sonner";
+import { Preloader } from "./components/shared/Preloader";
 
 function GlobalLoader() {
   return (
@@ -18,8 +19,23 @@ function GlobalLoader() {
 }
 
 export default function App() {
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  useEffect(() => {
+    // Hide preloader after initial load
+    const timer = setTimeout(() => {
+      setShowPreloader(false);
+    }, 2000); // Adjust duration as needed (2000ms = 2 seconds)
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <SidebarProvider>
+      {/* Initial Page Load Preloader */}
+      {showPreloader && <Preloader />}
+
+      {/* Main App Content */}
       <Suspense fallback={<GlobalLoader />}>
         <RouterProvider router={router} />
         <Toaster />

@@ -151,11 +151,10 @@ export function DocumentUpload() {
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors ${
-                  dragActive
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-blue-300 bg-blue-50/50 hover:border-blue-500"
-                }`}
+                className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors ${dragActive
+                  ? "border-blue-500 bg-blue-50"
+                  : "border-blue-300 bg-blue-50/50 hover:border-blue-500"
+                  }`}
               >
                 <div className="flex flex-col items-center">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
@@ -178,7 +177,7 @@ export function DocumentUpload() {
                   <label htmlFor="file-upload">
                     <Button
                       variant="outline"
-                      className="cursor-pointer border-blue-300 text-blue-600 hover:bg-blue-100"
+                      className="cursor-pointer border-blue-300 text-blue-600 hover:bg-blue-100 hover:text-blue-700"
                       asChild
                     >
                       <span>Browse Files</span>
@@ -212,11 +211,10 @@ export function DocumentUpload() {
                     >
                       <div className="flex items-center gap-3">
                         <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            uploaded
-                              ? "bg-emerald-100"
-                              : "bg-gray-100"
-                          }`}
+                          className={`w-8 h-8 rounded-full flex items-center justify-center ${uploaded
+                            ? "bg-emerald-100"
+                            : "bg-gray-100"
+                            }`}
                         >
                           {uploaded ? (
                             <CheckCircle2 className="w-5 h-5 text-emerald-600" />
@@ -312,7 +310,7 @@ export function DocumentUpload() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full text-emerald-600 hover:bg-emerald-50 border-emerald-300"
+                      className="w-full text-emerald-600 hover:bg-emerald-50 border-emerald-300 hover:text-green-700"
                       onClick={() =>
                         console.log(
                           "Downloading",

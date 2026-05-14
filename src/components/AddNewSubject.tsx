@@ -18,20 +18,60 @@ export function AddNewSubject() {
     description: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    
-    // Show success toast
-    toast.success('Subject Added Successfully!', {
-      description: `${formData.subjectName} (${formData.subjectCode}) has been added to the curriculum.`,
-    });
-    
-    // Navigate back to subjects page
-    setTimeout(() => {
-      navigate('/admin/subjects');
-    }, 1000);
+    setIsLoading(true);
+
+    try {
+      // Prepare data for API
+      const apiData = {
+        subjectName: formData.subjectName,
+        subjectCode: formData.subjectCode,
+        classId: parseInt(formData.class),
+        teacherId: parseInt(formData.teacher),
+        credits: parseInt(formData.credits),
+        type: formData.type,
+        description: formData.description || null,
+      };
+
+      // Make API call
+      const response = await fetch('https://localhost:5258/api/Subject', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+        },
+        body: JSON.stringify(apiData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+
+        // Show success toast
+        toast.success('Subject Added Successfully!', {
+          description: `${formData.subjectName} (${formData.subjectCode}) has been added to the curriculum.`,
+        });
+
+        // Navigate back to subjects page
+        setTimeout(() => {
+          navigate('/admin/subjects');
+        }, 1000);
+      } else {
+        const error = await response.json();
+        toast.error('Failed to add subject', {
+          description: error.message || 'An error occurred while adding the subject.',
+        });
+      }
+    } catch (error) {
+      console.error('Error adding subject:', error);
+      toast.error('Failed to add subject', {
+        description: 'Network error occurred. Please try again.',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -218,15 +258,23 @@ export function AddNewSubject() {
                 variant="outline"
                 onClick={() => navigate('/admin/subjects')}
                 className="px-6 border-slate-300 text-slate-700 hover:bg-slate-50"
+                disabled={isLoading}
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
-                className="px-8 bg-blue-600 text-white hover:bg-blue-700"
+                className="px-8 bg-blue-600 text-white hover:bg-blue-700 disabled:bg-blue-400"
+                disabled={isLoading}
               >
-                <Save className="w-4 h-4 mr-2" />
-                Save Subject
+                {isLoading ? (
+                  <>Saving...</>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Subject
+                  </>
+                )}
               </Button>
             </div>
           </form>

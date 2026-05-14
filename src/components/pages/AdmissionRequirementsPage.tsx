@@ -126,36 +126,36 @@ export function AdmissionRequirementsPage() {
           {/* Hero Images with Center Logo */}
           <div className="relative flex justify-between gap-4 items-start mb-8">
             {/* Left Image */}
-            <div className="flex-1 max-w-[632.5px]">
+            {/* <div className="flex-1 max-w-[632.5px]">
               <img
                 src={imgBlueInnerImg12Min}
                 alt="Students"
                 className="w-full aspect-[632.5/383.54] rounded-2xl object-cover"
               />
-            </div>
+            </div> */}
 
             {/* Right Image */}
-            <div className="flex-1 max-w-[632.5px]">
+            {/* <div className="flex-1 max-w-[632.5px]">
               <img
                 src={imgBlueInnerImg11Min}
                 alt="Campus"
                 className="w-full aspect-[632.5/383.54] rounded-2xl object-cover"
               />
-            </div>
+            </div> */}
 
             {/* Center Logo */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0c5776] p-5 rounded-full">
+            {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0c5776] p-5 rounded-full">
               <img
                 src={imgCyanMLogo1Png}
                 alt="Logo"
                 className="w-[90px] h-[88.5px]"
               />
-            </div>
+            </div> */}
           </div>
 
           {/* Section Title */}
           <h2 className="font-['Bitter',serif]  text-[36px] leading-[46px] text-[#030303] mb-6">
-            Requirements and Deadlines
+          Admission Requirements and Deadlines
           </h2>
 
           {/* Description */}
@@ -239,7 +239,7 @@ export function AdmissionRequirementsPage() {
               </div>
 
               {/* 7. Visa Requirements (International Students) */}
-              <div>
+              {/* <div>
                 <h3 className="font-['Bitter',serif]  text-base leading-[26px] text-[#0c5776] mb-3">
                   7. Visa Requirements (International Students
                 </h3>
@@ -257,7 +257,7 @@ export function AdmissionRequirementsPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </div>
 
             {/* Right Column */}
@@ -405,10 +405,11 @@ export function AdmissionRequirementsPage() {
                 />
               </div>
               <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
-                Undergraduate
+                Intermediate in Commerce (I.Com)
+
               </h3>
               <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
-                Begin your academic journey into flexible entry requirements with supportive faculty.
+                Build a strong foundation in commerce and business studies.
               </p>
               <button
                 onClick={() => navigate('/apply')}
@@ -429,10 +430,10 @@ export function AdmissionRequirementsPage() {
                 />
               </div>
               <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
-                Graduate
+                Intermediate in Science (I.Sc)
               </h3>
               <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
-                Advance your career with streamlined graduate program admissions.
+               Explore the world of science with comprehensive laboratory experience.
               </p>
               <button
                 onClick={() => navigate('/apply')}
@@ -453,10 +454,10 @@ export function AdmissionRequirementsPage() {
                 />
               </div>
               <h3 className="font-['Bitter',serif] font-thin text-2xl leading-[34px] text-[#030303] mb-3">
-                International Students
+                Intermediate in Arts (I.A)
               </h3>
               <p className="font-['Inter',sans-serif] font-normal text-base leading-7 text-[#4c4c4c] mb-6">
-                Join a diverse campus community through a global world-class admissions.
+                Discover humanities, languages, and social sciences.
               </p>
               <button
                 onClick={() => navigate('/apply')}

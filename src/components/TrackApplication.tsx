@@ -22,6 +22,7 @@ import { Card } from './ui/card';
 import { PortalLayout } from './PortalLayout';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
+import { useNavigate } from 'react-router';
 
 type ApplicationStatus = 'pending' | 'under-review' | 'approved' | 'rejected';
 
@@ -112,6 +113,8 @@ export function TrackApplication() {
   });
   const [selectedFiles, setSelectedFiles] = useState<{ [key: string]: File | null }>({});
 
+  const navigate = useNavigate()
+
   const getStatusColor = (status: ApplicationStatus) => {
     switch (status) {
       case 'approved':
@@ -162,14 +165,14 @@ export function TrackApplication() {
         line: 'bg-slate-200',
       };
     }
-    
+
     const colors = [
       { bg: 'bg-emerald-600', line: 'bg-emerald-600' },      // Step 1 - Green
       { bg: 'bg-blue-600', line: 'bg-blue-600' },            // Step 2 - Blue
       { bg: 'bg-indigo-600', line: 'bg-indigo-600' },        // Step 3 - Indigo
       { bg: 'bg-purple-600', line: 'bg-purple-600' },        // Step 4 - Purple
     ];
-    
+
     return colors[index] || colors[0];
   };
 
@@ -332,10 +335,10 @@ export function TrackApplication() {
                     ))}
                   </div>
                   <Button
-                    onClick={() => setShowReapplyForm(true)}
+                    onClick={() => navigate('/student/reapply')}
                     className="bg-red-600 hover:bg-red-700 text-white font-bold"
                   >
-                    <RefreshCw className="w-4 h-4 mr-2" />
+
                     Reapply Now
                   </Button>
                 </div>
@@ -352,11 +355,10 @@ export function TrackApplication() {
               <div key={index} className="flex gap-4">
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                      item.completed
-                        ? getTimelineColor(index, item.completed).bg
-                        : 'bg-slate-200'
-                    }`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center ${item.completed
+                      ? getTimelineColor(index, item.completed).bg
+                      : 'bg-slate-200'
+                      }`}
                   >
                     {item.completed ? (
                       <CheckCircle2 className="w-5 h-5 text-white" />
@@ -366,9 +368,8 @@ export function TrackApplication() {
                   </div>
                   {index < application.timeline.length - 1 && (
                     <div
-                      className={`w-0.5 h-16 ${
-                        item.completed ? getTimelineColor(index, item.completed).line : 'bg-slate-200'
-                      }`}
+                      className={`w-0.5 h-16 ${item.completed ? getTimelineColor(index, item.completed).line : 'bg-slate-200'
+                        }`}
                     />
                   )}
                 </div>
@@ -408,23 +409,21 @@ export function TrackApplication() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className={`p-4 rounded-xl border-2 ${
-                  doc.status === 'rejected'
-                    ? 'bg-red-50 border-red-200'
-                    : doc.status === 'approved'
+                className={`p-4 rounded-xl border-2 ${doc.status === 'rejected'
+                  ? 'bg-red-50 border-red-200'
+                  : doc.status === 'approved'
                     ? 'bg-emerald-50 border-emerald-200'
                     : 'bg-amber-50 border-amber-200'
-                }`}
+                  }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3 flex-1">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                      doc.status === 'rejected'
-                        ? 'bg-red-100'
-                        : doc.status === 'approved'
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${doc.status === 'rejected'
+                      ? 'bg-red-100'
+                      : doc.status === 'approved'
                         ? 'bg-emerald-100'
                         : 'bg-amber-100'
-                    }`}>
+                      }`}>
                       {doc.status === 'approved' ? (
                         <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                       ) : doc.status === 'rejected' ? (
@@ -505,162 +504,7 @@ export function TrackApplication() {
         </Card>
 
         {/* Reapplication Form */}
-        {showReapplyForm && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto"
-            onClick={() => setShowReapplyForm(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto my-8"
-            >
-              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 rounded-t-2xl">
-                <h2 className="text-2xl font-bold mb-2">Reapply for Admission</h2>
-                <p className="text-blue-100">
-                  Please correct the rejected documents and update your information if needed
-                </p>
-              </div>
 
-              <div className="p-6 space-y-6">
-                {/* Update Contact Information */}
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <Edit className="w-5 h-5 text-blue-600" />
-                    Update Contact Information (Optional)
-                  </h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        value={reapplicationData.email}
-                        onChange={(e) => setReapplicationData(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-2">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        value={reapplicationData.phone}
-                        onChange={(e) => setReapplicationData(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-2">
-                        Address
-                      </label>
-                      <textarea
-                        value={reapplicationData.address}
-                        onChange={(e) => setReapplicationData(prev => ({ ...prev, address: e.target.value }))}
-                        rows={3}
-                        className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors resize-none"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Upload Corrected Documents */}
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                    <Upload className="w-5 h-5 text-blue-600" />
-                    Upload Corrected Documents
-                  </h3>
-                  <div className="space-y-3">
-                    {application.documents
-                      .filter(doc => doc.status === 'rejected')
-                      .map((doc, index) => (
-                        <div key={index} className="p-4 bg-red-50 border-2 border-red-200 rounded-xl">
-                          <div className="flex items-start justify-between gap-4 mb-3">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2 mb-2">
-                                <h4 className="font-bold text-slate-900">{doc.name}</h4>
-                                <Badge variant="outline" className="bg-red-100 text-red-700 border-red-200 text-xs">
-                                  Rejected
-                                </Badge>
-                              </div>
-                              <p className="text-sm text-red-700 font-medium mb-3">
-                                <span className="font-bold">Reason:</span> {doc.rejectionReason}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <input
-                              type="file"
-                              id={`file-${index}`}
-                              onChange={(e) => handleFileSelect(doc.name, e)}
-                              className="hidden"
-                              accept=".pdf,.jpg,.jpeg,.png"
-                            />
-                            <label
-                              htmlFor={`file-${index}`}
-                              className="flex-1 px-4 py-3 bg-white border-2 border-slate-300 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all font-medium text-slate-700 flex items-center justify-center gap-2"
-                            >
-                              <Upload className="w-4 h-4" />
-                              {selectedFiles[doc.name]
-                                ? selectedFiles[doc.name]!.name
-                                : 'Choose corrected file'}
-                            </label>
-                            {selectedFiles[doc.name] && (
-                              <CheckCircle2 className="w-6 h-6 text-emerald-600 flex-shrink-0" />
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-
-                {/* Important Note */}
-                <Card className="p-4 bg-blue-50 border-2 border-blue-200">
-                  <div className="flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm text-blue-900 font-semibold mb-2">Important Notes:</p>
-                      <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-                        <li>Please ensure all documents are clear and readable</li>
-                        <li>Documents should be in PDF, JPG, or PNG format</li>
-                        <li>Maximum file size is 5MB per document</li>
-                        <li>You will receive a confirmation email once submitted</li>
-                      </ul>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3 pt-4">
-                  <Button
-                    onClick={() => setShowReapplyForm(false)}
-                    variant="outline"
-                    className="flex-1 py-3 border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={handleReapply}
-                    className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold"
-                    disabled={
-                      application.documents
-                        .filter(doc => doc.status === 'rejected')
-                        .some(doc => !selectedFiles[doc.name])
-                    }
-                  >
-                    <ArrowRight className="w-4 h-4 mr-2" />
-                    Submit Reapplication
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
 
         {/* Call-to-Action for Reapplication (Bottom) */}
         {application.status === 'rejected' && !showReapplyForm && (

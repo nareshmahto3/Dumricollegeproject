@@ -23,10 +23,10 @@ interface PortalHeaderProps {
   userAvatar?: string;
 }
 
-export function PortalHeader({ 
-  userName = "User", 
-  userRole = "Role", 
-  userAvatar 
+export function PortalHeader({
+  userName = "User",
+  userRole = "Role",
+  userAvatar
 }: PortalHeaderProps) {
   const navigate = useNavigate();
   const { isCollapsed } = useSidebar();
@@ -52,7 +52,7 @@ export function PortalHeader({
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
     const startingDayOfWeek = firstDay.getDay();
-    
+
     return { daysInMonth, startingDayOfWeek };
   };
 
@@ -84,9 +84,9 @@ export function PortalHeader({
 
   const isToday = (day: number) => {
     const today = new Date();
-    return day === today.getDate() && 
-           currentMonth.getMonth() === today.getMonth() && 
-           currentMonth.getFullYear() === today.getFullYear();
+    return day === today.getDate() &&
+      currentMonth.getMonth() === today.getMonth() &&
+      currentMonth.getFullYear() === today.getFullYear();
   };
 
   const notifications = [
@@ -160,9 +160,8 @@ export function PortalHeader({
                       {notifications.map((notification) => (
                         <div
                           key={notification.id}
-                          className={`p-3 sm:p-4 hover:bg-slate-50 cursor-pointer border-b border-slate-100 ${
-                            notification.unread ? "bg-amber-50" : ""
-                          }`}
+                          className={`p-3 sm:p-4 hover:bg-slate-50 cursor-pointer border-b border-slate-100 ${notification.unread ? "bg-amber-50" : ""
+                            }`}
                         >
                           <div className="flex justify-between items-start mb-1">
                             <p className="text-xs sm:text-sm text-slate-900">
@@ -251,19 +250,19 @@ export function PortalHeader({
                         {(() => {
                           const { daysInMonth, startingDayOfWeek } = getDaysInMonth(currentMonth);
                           const days = [];
-                          
+
                           // Empty cells for days before month starts
                           for (let i = 0; i < startingDayOfWeek; i++) {
                             days.push(
                               <div key={`empty-${i}`} className="aspect-square"></div>
                             );
                           }
-                          
+
                           // Actual days
                           for (let day = 1; day <= daysInMonth; day++) {
                             const event = isEventDay(day);
                             const today = isToday(day);
-                            
+
                             days.push(
                               <div
                                 key={day}
@@ -284,7 +283,7 @@ export function PortalHeader({
                               </div>
                             );
                           }
-                          
+
                           return days;
                         })()}
                       </div>
@@ -318,56 +317,7 @@ export function PortalHeader({
             </AnimatePresence>
           </div>
 
-          {/* Languages */}
-          <div className="relative">
-            <button
-              onClick={() => setShowLanguages(!showLanguages)}
-              className="relative p-1.5 sm:p-2 hover:bg-slate-50 rounded-lg transition-colors"
-            >
-              <Languages className="w-4 h-4 sm:w-5 sm:h-5 text-slate-600" />
-            </button>
 
-            {/* Languages Dropdown */}
-            <AnimatePresence>
-              {showLanguages && (
-                <>
-                  <div
-                    className="fixed inset-0 z-10"
-                    onClick={() => setShowLanguages(false)}
-                  />
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 top-12 sm:top-14 w-48 sm:w-56 bg-white rounded-lg shadow-xl border border-slate-200 z-20"
-                  >
-                    <div className="p-3 sm:p-4 border-b border-slate-200">
-                      <h3 className="font-semibold text-sm sm:text-base text-slate-900">Languages</h3>
-                    </div>
-                    <div className="py-2 max-h-64 overflow-y-auto">
-                      {["English", "Hindi"].map((lang) => (
-                        <button
-                          key={lang}
-                          onClick={() => {
-                            setCurrentLanguage(lang);
-                            setShowLanguages(false);
-                          }}
-                          className={`w-full flex items-center justify-between px-3 sm:px-4 py-2 hover:bg-slate-50 text-slate-700 transition-colors ${
-                            currentLanguage === lang ? "bg-blue-50 border-l-4 border-blue-600" : ""
-                          }`}
-                        >
-                          <span className="text-xs sm:text-sm">{lang}</span>
-                          {currentLanguage === lang && (
-                            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                </>
-              )}
-            </AnimatePresence>
-          </div>
 
           {/* User Profile */}
           <div className="relative">

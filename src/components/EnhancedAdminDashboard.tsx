@@ -143,8 +143,8 @@ export function EnhancedAdminDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className={`p-6 bg-gradient-to-br ${stat.color} text-white border-0 shadow-xl hover:shadow-2xl transition-all`}>
-                  <div className="flex items-center justify-between mb-4">
+                <Card className={`p-4 bg-gradient-to-br ${stat.color} text-white border-0 shadow-xl hover:shadow-2xl transition-all`}>
+                  <div className="flex items-center justify-between">
                     <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
@@ -153,7 +153,7 @@ export function EnhancedAdminDashboard() {
                       <span>{stat.change}</span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-1">{stat.value}</h3>
+                  <h3 className="text-2xl font-bold text-white">{stat.value}</h3>
                   <p className="text-white/90 text-sm">{stat.title}</p>
                 </Card>
               </motion.div>

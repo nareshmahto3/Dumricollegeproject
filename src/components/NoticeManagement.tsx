@@ -17,6 +17,8 @@ import {
   Pin,
   Send,
 } from 'lucide-react';
+import { FileDown, FileSpreadsheet, ChevronDown } from 'lucide-react';
+import { toast } from 'sonner';
 import { PortalLayout } from './PortalLayout';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -126,6 +128,15 @@ export function NoticeManagement() {
   const categories = ['All', 'General', 'Academic', 'Event', 'Holiday', 'Urgent'];
   const statuses = ['All', 'Active', 'Expired', 'Draft'];
 
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+
+
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your  report will be downloaded shortly.`,
+    });
+  };
+
   const getStatusBadge = (status: string) => {
     const statusColors: Record<string, string> = {
       Active: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
@@ -193,7 +204,7 @@ export function NoticeManagement() {
               <h1 className="text-3xl font-bold text-black mb-2">Notice Management</h1>
               <p className="text-slate-600">Create and manage school notices and announcements</p>
             </div>
-            <Button 
+            <Button
               onClick={() => navigate('/admin/create-notice')}
               className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
             >
@@ -238,10 +249,57 @@ export function NoticeManagement() {
                 </option>
               ))}
             </select>
-            <Button variant="outline" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200">
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </Button>
+            <div className="relative">
+              <Button
+                onClick={() => setShowExportDropdown(!showExportDropdown)}
+                className="bg-gradient-to-r h-[45px]  from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+              >
+                <FileDown className="w-4 h-4 " />
+                Export Result
+                <ChevronDown className="w-4 h-4 ml-2" />
+              </Button>
+              {showExportDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                >
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        handleDownload('pdf');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                      PDF
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('csv');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                      CSV
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownload('excel');
+                        setShowExportDropdown(false);
+                      }}
+                      className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                    >
+                      <Download className="w-4 h-4 mr-2 text-blue-600" />
+                      Excel
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </Card>
 
@@ -267,7 +325,7 @@ export function NoticeManagement() {
                         {getAudienceBadge(notice.targetAudience)}
                       </div>
                       <p className="text-slate-500 mb-4">{notice.content}</p>
-                      
+
                       <div className="flex flex-wrap gap-4 text-sm text-slate-400">
                         <div className="flex items-center gap-2">
                           <Users className="w-4 h-4" />
@@ -287,7 +345,7 @@ export function NoticeManagement() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex flex-col items-end gap-3">
                       {getStatusBadge(notice.status)}
                       <div className="flex gap-2">

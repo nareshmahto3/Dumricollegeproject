@@ -11,17 +11,17 @@ export function AboutOverview() {
         </h2>
         <p className="text-gray-600 text-base leading-7">
           At Jharkhand Commerce Inter College (Dumri College), education goes beyond textbooks and classrooms. We believe in empowering
-          <br className="hidden lg:block" />
+          
           students to explore their passions, challenge conventions, and discover their potential through
-          <br className="hidden lg:block" />
+          
           meaningful experiences. Our distinguished faculty members are leaders in their respective fields,
-          <br className="hidden lg:block" />
+          
           dedicated to delivering world-class education that integrates theory with practical support and
-          <br className="hidden lg:block" />
+          
           application. With cutting-edge facilities, modern laboratories, and a vibrant learning
-          <br className="hidden lg:block" />
+          
           environment, we ensure that every student has the tools and support to excel academically
-          <br className="hidden lg:block" />
+          
           and personally.
         </p>
       </div>
@@ -36,19 +36,19 @@ export function AboutOverview() {
         {/* Quote Text */}
         <p className="text-gray-900 text-lg italic leading-8 mb-5">
           "Our diverse community welcomes students from across the globe, fostering
-          <br className="hidden lg:block" />
+          
           cultural exchange and mutual understanding. Through international
-          <br className="hidden lg:block" />
+         
           collaborations, research initiatives, and innovation hubs, we provide
-          <br className="hidden lg:block" />
+         
           opportunities for students to engage with global challenges and contribute to
-          <br className="hidden lg:block" />
+          
           sustainable solutions."
         </p>
 
         {/* Author */}
         <p className="text-gray-900 text-lg font-light font-serif">
-          - Dr. Rajesh Kumar, Principal
+          - Ajay Mahto, Principal
         </p>
       </div>
 
@@ -142,7 +142,7 @@ export function AboutOverview() {
             </div>
             <div>
               <div className="flex items-center gap-1">
-                <span className="text-4xl font-light text-white font-serif">85</span>
+                <span className="text-4xl font-light text-white font-serif">20</span>
                 <span className="text-4xl font-bold text-white font-serif">+</span>
               </div>
               <p className="text-white text-sm">Academic Staff</p>
@@ -159,7 +159,7 @@ export function AboutOverview() {
             </div>
             <div>
               <div className="flex items-center gap-1">
-                <span className="text-4xl font-light text-white font-serif">50</span>
+                <span className="text-4xl font-light text-white font-serif">40</span>
                 <span className="text-4xl font-bold text-white font-serif">+</span>
               </div>
               <p className="text-white text-sm">Years of Excellence</p>

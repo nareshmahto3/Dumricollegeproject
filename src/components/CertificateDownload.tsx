@@ -134,10 +134,10 @@ export function CertificateDownload() {
               <p className="text-slate-600">
                 Request additional certificates or duplicates from the admin office
               </p>
-            </div>
-            <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white">
-              Request Certificate
-            </Button>
+            </div><a href="/student/request-certificate" className='no-underline hover:decoration-white'>
+              <Button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white" >
+                Request Certificate
+              </Button></a>
           </div>
         </Card>
 

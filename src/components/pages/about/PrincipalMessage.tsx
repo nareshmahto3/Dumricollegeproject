@@ -9,7 +9,7 @@ export function PrincipalMessage() {
           Principal's Message
         </h2>
         <p className="text-gray-600 text-base leading-7">
-          A message from our Principal, Dr. Rajesh Kumar, to the Dumri College community.
+          A message from our Principal, Ajay Mahto, to the Jharkhand Commerce Inter College community.
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export function PrincipalMessage() {
           {/* Content Section */}
           <div className="md:w-2/3 p-8">
             <div className="mb-6">
-              <h3 className="text-3xl font-bold text-gray-900 mb-2">Dr. Rajesh Kumar</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-2">Ajay Mahto</h3>
               <p className="text-[#2F584F] font-semibold text-xl mb-1">Principal</p>
               <p className="text-gray-600">Ph.D. in Education | 15+ Years in Educational Leadership</p>
             </div>
@@ -68,7 +68,7 @@ export function PrincipalMessage() {
         <div className="bg-[#F6F4EE] rounded-lg p-8">
           <Quote className="w-12 h-12 text-[#FDC72F] fill-[#FDC72F] mb-4" />
           <p className="text-gray-900 text-xl italic leading-9">
-            "Welcome to Dumri College, where we don't just educate minds; we shape futures, build character, 
+            "Welcome to Jharkhand Commerce Inter College, where we don't just educate minds; we shape futures, build character, 
             and nurture the leaders of tomorrow."
           </p>
         </div>
@@ -86,7 +86,7 @@ export function PrincipalMessage() {
             </p>
 
             <p>
-              At Dumri College, we believe that education is not merely about acquiring knowledge but about 
+              At Jharkhand Commerce Inter College, we believe that education is not merely about acquiring knowledge but about 
               developing well-rounded individuals who possess strong values, critical thinking abilities, and 
               a sense of social responsibility. Our dedicated faculty members work tirelessly to create an 
               environment where students can explore their potential, discover their passions, and prepare 
@@ -124,9 +124,9 @@ export function PrincipalMessage() {
               With warm regards and best wishes,
             </p>
             <div className="mt-4">
-              <p className="font-bold text-gray-900 text-lg">Dr. Rajesh Kumar</p>
+              <p className="font-bold text-gray-900 text-lg">Ajay Mahto</p>
               <p className="text-[#2F584F] font-semibold">Principal</p>
-              <p className="text-gray-600 text-sm">Jharkhand Commerce Inter College (Dumri College)</p>
+              <p className="text-gray-600 text-sm">Jharkhand Commerce Inter College (Dumri)</p>
             </div>
           </div>
         </div>

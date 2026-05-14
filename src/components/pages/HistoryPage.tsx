@@ -12,7 +12,7 @@ import { CarouselHeader } from '../CarouselHeader';
 import { Footer } from '../Footer';
 
 const sidebarMenuItems = [
-  { id: 'who-we-are', label: 'Who We Are', active: false },
+  { id: 'who-we-are', label: 'About Us', active: false },
   { id: 'history', label: 'History', active: true },
   { id: 'administration', label: 'Administration', active: false },
   { id: 'campus-map', label: 'Campus Map', active: false },

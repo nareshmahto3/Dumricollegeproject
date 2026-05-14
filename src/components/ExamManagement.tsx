@@ -7,6 +7,8 @@ import { PortalLayout } from './PortalLayout';
 import { motion } from 'motion/react';
 import { Plus, Search, Filter, Download, Edit, Trash2, Eye, Calendar, FileText, Award, TrendingUp, ClipboardList, CheckCircle, FileUp, ChevronUp, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { FileDown, FileSpreadsheet } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Exam {
   id: string;
@@ -153,6 +155,14 @@ export function ExamManagement() {
   const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+
+
+  const handleDownload = (format: 'pdf' | 'csv' | 'excel') => {
+    toast.success(`Downloading report as ${format.toUpperCase()}...`, {
+      description: `Your  report will be downloaded shortly.`,
+    });
+  };
 
   const examTypes = ['All', 'Mid-term', 'Final', 'Unit Test', 'Practical'];
 
@@ -277,11 +287,58 @@ export function ExamManagement() {
               <p className="text-slate-600">Schedule and manage examinations</p>
             </div>
             <div className="flex gap-3">
-              <Button variant="outline" className="border-slate-300 bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-500 transition-all duration-200">
-                <Download className="w-4 h-4 mr-2" />
-                Export
-              </Button>
-              <Button 
+              <div className="relative">
+                <Button
+                  onClick={() => setShowExportDropdown(!showExportDropdown)}
+                  className="bg-gradient-to-r  from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+                >
+                  <FileDown className="w-4 h-4 " />
+                  Export Data
+                  <ChevronDown className="w-4 h-4 ml-2" />
+                </Button>
+                {showExportDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                  >
+                    <div className="py-1">
+                      <button
+                        onClick={() => {
+                          handleDownload('pdf');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                        PDF
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleDownload('csv');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                        CSV
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleDownload('excel');
+                          setShowExportDropdown(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                      >
+                        <Download className="w-4 h-4 mr-2 text-blue-600" />
+                        Excel
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+              <Button
                 onClick={() => navigate('/admin/schedule-exam')}
                 className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
               >
@@ -320,22 +377,20 @@ export function ExamManagement() {
           <div className="flex gap-4 border-b border-slate-200">
             <button
               onClick={() => { setActiveTab('exams'); setCurrentPage(1); setSortField(''); }}
-              className={`pb-4 px-4 font-medium transition-all ${
-                activeTab === 'exams'
-                  ? 'text-blue-600 border-b-2 border-blue-500'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`pb-4 px-4 font-medium transition-all ${activeTab === 'exams'
+                ? 'text-blue-600 border-b-2 border-blue-500'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               <FileText className="w-4 h-4 inline mr-2" />
               All Exams
             </button>
             <button
               onClick={() => { setActiveTab('results'); setCurrentPage(1); setSortField(''); }}
-              className={`pb-4 px-4 font-medium transition-all ${
-                activeTab === 'results'
-                  ? 'text-blue-600 border-b-2 border-blue-500'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`pb-4 px-4 font-medium transition-all ${activeTab === 'results'
+                ? 'text-blue-600 border-b-2 border-blue-500'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               <Award className="w-4 h-4 inline mr-2" />
               Exam Results
@@ -370,10 +425,57 @@ export function ExamManagement() {
                     </option>
                   ))}
                 </select>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                  <Download className="w-4 h-4 mr-2" />
-                  Export
-                </Button>
+                <div className="relative">
+                  <Button
+                    onClick={() => setShowExportDropdown(!showExportDropdown)}
+                    className="bg-gradient-to-r h-[45px] from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+                  >
+                    <FileDown className="w-4 h-4 " />
+                    Export Data
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                  {showExportDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                    >
+                      <div className="py-1">
+                        <button
+                          onClick={() => {
+                            handleDownload('pdf');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                          PDF
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDownload('csv');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                          CSV
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDownload('excel');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <Download className="w-4 h-4 mr-2 text-blue-600" />
+                          Excel
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </Card>
 
@@ -580,9 +682,8 @@ export function ExamManagement() {
                     <Button
                       key={index + 1}
                       variant={currentPage === index + 1 ? "default" : "outline"}
-                      className={`${
-                        currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
-                      } text-sm px-3 sm:px-4`}
+                      className={`${currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                        } text-sm px-3 sm:px-4`}
                       onClick={() => setCurrentPage(index + 1)}
                     >
                       {index + 1}
@@ -618,10 +719,57 @@ export function ExamManagement() {
                     className="w-full bg-white border-2 border-slate-300 rounded-lg pl-10 pr-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                   />
                 </div>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                  <Download className="w-4 h-4 mr-2" />
-                  Export Results
-                </Button>
+                <div className="relative">
+                  <Button
+                    onClick={() => setShowExportDropdown(!showExportDropdown)}
+                    className="bg-gradient-to-r h-[45px]  from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 hover:shadow-lg hover:scale-105 text-white transition-all duration-200"
+                  >
+                    <FileDown className="w-4 h-4 " />
+                    Export Result
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                  {showExportDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute right-0 top-full mt-2 bg-white border border-slate-200 shadow-lg rounded-lg z-50 min-w-[140px]"
+                    >
+                      <div className="py-1">
+                        <button
+                          onClick={() => {
+                            handleDownload('pdf');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <FileDown className="w-4 h-4 mr-2 text-red-600" />
+                          PDF
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDownload('csv');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <FileSpreadsheet className="w-4 h-4 mr-2 text-green-600" />
+                          CSV
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDownload('excel');
+                            setShowExportDropdown(false);
+                          }}
+                          className="w-full flex items-center px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-100 transition-colors"
+                        >
+                          <Download className="w-4 h-4 mr-2 text-blue-600" />
+                          Excel
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </Card>
 
@@ -817,9 +965,8 @@ export function ExamManagement() {
                     <Button
                       key={index + 1}
                       variant={currentPage === index + 1 ? "default" : "outline"}
-                      className={`${
-                        currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
-                      } text-sm px-3 sm:px-4`}
+                      className={`${currentPage === index + 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                        } text-sm px-3 sm:px-4`}
                       onClick={() => setCurrentPage(index + 1)}
                     >
                       {index + 1}
