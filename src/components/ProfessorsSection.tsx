@@ -2,6 +2,14 @@ import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight, GraduationCap, Linkedin, Instagram, Share2, Facebook } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import SanjayKumar from "../assets/Faculty/SanjayKumar.jpeg";
+import Dutendrakumar from "../assets/Faculty/Dutendrakumar.jpeg";
+import Baijnath from "../assets/Faculty/Baijnath.jpeg";
+import Surendra from "../assets/Faculty/Surendra.jpeg";
+import Sharmila from "../assets/Faculty/Sharmila.jpeg";
+import Sanjaymahto from "../assets/Faculty/Sanjaymahto.jpeg";
+
+
 
 interface Professor {
   name: string;
@@ -11,34 +19,34 @@ interface Professor {
 
 const professors: Professor[] = [
   {
-    name: "Dr. Rajesh Kumar",
-    position: "Head of Computer Science",
-    image: "https://images.unsplash.com/photo-1758685734511-4f49ce9a382b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwcm9mZXNzb3IlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzI0ODk2MDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    name: "Sanjay Kumar",
+    position: "Head clerk cum accountant",
+    image: SanjayKumar,
   },
   {
-    name: "Dr. Priya Sharma",
-    position: "Professor of Mathematics",
-    image: "https://images.unsplash.com/photo-1758270704587-43339a801396?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZW1hbGUlMjBwcm9mZXNzb3IlMjBhY2FkZW1pY3xlbnwxfHx8fDE3NzI0ODk2MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    name: 'Dutendra Kumar Dutesh',
+    position: 'Assistant Librarian',
+    image: Dutendrakumar,
   },
   {
-    name: "Dr. Amit Patel",
-    position: "Associate Professor of Physics",
-    image: "https://images.unsplash.com/photo-1758270704925-fa59d93119c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWxlJTIwcHJvZmVzc29yJTIwdGVhY2hpbmd8ZW58MXx8fHwxNzcyNDI2NDU0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    name: 'Baijnath Kumar',
+    position: 'Teacher',
+    image: Baijnath,
   },
   {
-    name: "Dr. Sunita Verma",
-    position: "Dean of Arts & Humanities",
-    image: "https://images.unsplash.com/photo-1758270704587-43339a801396?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZW1hbGUlMjBwcm9mZXNzb3IlMjBhY2FkZW1pY3xlbnwxfHx8fDE3NzI0ODk2MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    name: 'Surendra Kumar Pandey',
+    position: 'Teacher',
+    image: Surendra,
   },
   {
-    name: "Dr. Anil Singh",
-    position: "Professor of Chemistry",
-    image: "https://images.unsplash.com/photo-1758685734511-4f49ce9a382b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZW5pb3IlMjBhY2FkZW1pYyUyMHByb2Zlc3NvcnxlbnwxfHx8fDE3NzI0ODk2MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    name: 'Sharmila Kumari',
+    position: 'Research Assistant',
+    image: Sharmila,
   },
   {
-    name: "Dr. Meera Reddy",
-    position: "Assistant Professor of Biology",
-    image: "https://images.unsplash.com/photo-1758270704587-43339a801396?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZW1hbGUlMjBwcm9mZXNzb3IlMjBhY2FkZW1pY3xlbnwxfHx8fDE3NzI0ODk2MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    name: 'Sanjay kumar Mahto',
+    position: 'Teaching Assistant (TA)',
+    image: Sanjaymahto,
   }
 ];
 
@@ -96,7 +104,7 @@ export function ProfessorsSection() {
                 OUR PROFESSORS
               </span>
             </div>
-            
+
             {/* Title */}
             <h2 className="text-4xl lg:text-5xl font-serif text-gray-900">
               Our College Professors
@@ -104,29 +112,29 @@ export function ProfessorsSection() {
           </motion.div>
 
           {/* View All Button */}
-        <div className="text-center mt-8">
-                  <motion.button
-                    onClick={() => navigate("/all-faculty")}
-                    className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    View All Professors
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </motion.button>
-                </div>
+          <div className="text-center mt-8">
+            <motion.button
+              onClick={() => navigate("/all-faculty")}
+              className="inline-flex items-center gap-2 bg-white text-[#0C4D8B] px-6 py-3 rounded-lg font-medium border-2 border-[#0C4D8B] hover:bg-[#0C4D8B] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View All Professors
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </motion.button>
+          </div>
         </div>
 
         {/* Professors Carousel */}
@@ -151,13 +159,13 @@ export function ProfessorsSection() {
             {visibleProfessors.map((professor, idx) => {
               const isCenterCard = idx === centerIndex;
               const isHovered = hoveredCard === idx;
-              
+
               return (
                 <motion.div
                   key={`${professor.originalIndex}-${idx}`}
                   initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ 
-                    opacity: 1, 
+                  animate={{
+                    opacity: 1,
                     scale: isCenterCard ? 1.05 : 1,
                     y: isCenterCard ? -8 : 0
                   }}
@@ -167,11 +175,10 @@ export function ProfessorsSection() {
                   onMouseLeave={() => setHoveredCard(null)}
                 >
                   <div
-                    className={`rounded-xl overflow-hidden shadow-lg transition-all duration-500 ${
-                      isHovered
-                        ? 'bg-[#1a7a8f]'
-                        : 'bg-white'
-                    }`}
+                    className={`rounded-xl overflow-hidden shadow-lg transition-all duration-500 ${isHovered
+                      ? 'bg-[#1a7a8f]'
+                      : 'bg-white'
+                      }`}
                   >
                     {/* Image Container */}
                     <div className="relative">
@@ -183,12 +190,11 @@ export function ProfessorsSection() {
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.5 }}
                         />
-                        
+
                         {/* Dark overlay on hover */}
-                        <div 
-                          className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${
-                            isHovered ? 'opacity-100' : 'opacity-0'
-                          }`}
+                        <div
+                          className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'
+                            }`}
                         />
                       </div>
 
@@ -258,15 +264,13 @@ export function ProfessorsSection() {
                     </div>
 
                     {/* Professor Info */}
-                    <div className={`p-3 pt-6 h-30 text-center transition-colors duration-500 ${
-                      isHovered ? 'text-white' : 'text-gray-900'
-                    }`}>
+                    <div className={`p-3 pt-6 h-30 text-center transition-colors duration-500 ${isHovered ? 'text-white' : 'text-gray-900'
+                      }`}>
                       <h3 className="text-base font-serif mb-0.5">
                         {professor.name}
                       </h3>
-                      <p className={`text-xs transition-colors duration-500 ${
-                        isHovered ? 'text-white/80' : 'text-gray-600'
-                      }`}>
+                      <p className={`text-xs transition-colors duration-500 ${isHovered ? 'text-white/80' : 'text-gray-600'
+                        }`}>
                         {professor.position}
                       </p>
                     </div>
@@ -282,11 +286,10 @@ export function ProfessorsSection() {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  idx === currentIndex
-                    ? "bg-[#00ADE2] w-8"
-                    : "bg-gray-300 w-2.5 hover:bg-gray-400"
-                }`}
+                className={`h-2.5 rounded-full transition-all duration-300 ${idx === currentIndex
+                  ? "bg-[#00ADE2] w-8"
+                  : "bg-gray-300 w-2.5 hover:bg-gray-400"
+                  }`}
               />
             ))}
           </div>

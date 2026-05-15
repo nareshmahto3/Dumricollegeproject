@@ -82,6 +82,12 @@ import img631838878180987385819173877110310279382797744NJpg from "figma:asset/08
 import imgCollegeBuilding from "figma:asset/5e1bebd644aff64baf3354389c6dde5691668810.png";
 import { imgTellATale } from "../imports/svg-pduv6";
 import Frame from "../imports/Frame-206-1785";
+import img1 from "../assets/Gallery/img1.jpeg";
+import img2 from "../assets/Gallery/img2.jpeg";
+import img3 from "../assets/Gallery/img3.jpeg";
+import img4 from "../assets/Gallery/img4.jpeg";
+import img5 from "../assets/Gallery/img5.jpeg";
+import img6 from "../assets/Gallery/img6.jpeg";
 
 
 // News Item Component for Ticker
@@ -103,6 +109,14 @@ const carouselImages = [
     cta: "Explore Campus",
     ctaLink: "/about",
   },
+  {
+    url: img1,
+    title: "Jharkhand College Dumri",
+    subtitle: "Excellence in Education Since 1950",
+    cta: "Explore Campus",
+    ctaLink: "/about",
+  },
+
   {
     url: HeroCarousel2,
     title: "Welcome to Dumri College",
@@ -661,8 +675,7 @@ export default function DumriCollegeLanding() {
                 time: "09:00 AM - 05:00 PM",
                 location: "Main Auditorium",
                 dateLabel: "Mar 15 2026",
-                image:
-                  "https://images.unsplash.com/photo-1762497403897-c105a5bc61e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwc2VtaW5hciUyMGNvbmZlcmVuY2UlMjBoYWxsfGVufDF8fHx8MTc3MjM4MDQ2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+                image: img1
               },
               {
                 title: "Career Development Workshop",
@@ -670,8 +683,7 @@ export default function DumriCollegeLanding() {
                 time: "10:00 AM - 04:00 PM",
                 location: "Seminar Hall",
                 dateLabel: "Mar 20 2026",
-                image:
-                  "https://images.unsplash.com/photo-1762158007836-25d13ab34c1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwd29ya3Nob3AlMjBzdHVkZW50c3xlbnwxfHx8fDE3NzIzODA0NjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+                image: img2
               },
               {
                 title: "Guest Lecture on Innovation",
@@ -679,8 +691,7 @@ export default function DumriCollegeLanding() {
                 time: "02:00 PM - 04:00 PM",
                 location: "Conference Room",
                 dateLabel: "Mar 25 2026",
-                image:
-                  "https://images.unsplash.com/photo-1759922378100-89dca9fe3c98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2FkZW1pYyUyMGV2ZW50JTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc3MjM4MDQ2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+                image: img3
               },
               {
                 title: "Cultural Fest 2026",
@@ -688,8 +699,7 @@ export default function DumriCollegeLanding() {
                 time: "All Day",
                 location: "College Campus",
                 dateLabel: "Mar 28 2026",
-                image:
-                  "https://images.unsplash.com/photo-1762497403897-c105a5bc61e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWdlJTIwc2VtaW5hciUyMGNvbmZlcmVuY2UlMjBoYWxsfGVufDF8fHx8MTc3MjM4MDQ2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+                image: img4
               },
             ];
 
@@ -1228,27 +1238,27 @@ export default function DumriCollegeLanding() {
           {(() => {
             const galleryImages = [
               {
-                src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+                src: img1,
                 alt: "Classroom Learning",
               },
               {
-                src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&q=80",
+                src: img2,
                 alt: "Students Celebrating",
               },
               {
-                src: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80",
+                src: img3,
                 alt: "Campus Building",
               },
               {
-                src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+                src: img4,
                 alt: "Students Studying",
               },
               {
-                src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=80",
+                src: img5,
                 alt: "Sports Activities",
               },
               {
-                src: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80",
+                src: img6,
                 alt: "Campus Event",
               },
             ];

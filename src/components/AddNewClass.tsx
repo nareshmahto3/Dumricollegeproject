@@ -109,7 +109,7 @@ export function AddNewClass() {
       academicYear: formData.academicYear,
       startDate: formData.startDate,
     };
-
+    debugger
     try {
       const response = await fetch('https://localhost:44390/api/ClassInfo', {
         method: 'POST',
